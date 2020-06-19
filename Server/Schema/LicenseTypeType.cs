@@ -2,15 +2,16 @@ using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Server.Schema
 {
-	public class LicenseTypeType : ObjectType<Server.Models.LicenseType>
+	public class LicenseTypeType : ObjectType<Models.LicenseType>
 	{
-		protected override void Configure(IObjectTypeDescriptor<Server.Models.LicenseType> descriptor)
+		protected override void Configure(IObjectTypeDescriptor<Models.LicenseType> descriptor)
 		{
 			base.Configure(descriptor);
 			descriptor.Field(a => a.Id)

@@ -25,6 +25,7 @@ namespace Server
 				.AddGraphQL(sp => SchemaBuilder
 					.New()
 					.AddQueryType<QueryType>()
+					.AddMutationType<MutationType>()
 					.AddType<TimeType>()
 					.Create()
 				);

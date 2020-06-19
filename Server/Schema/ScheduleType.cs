@@ -29,7 +29,7 @@ namespace Server.Schema
 				.Type<NonNullType<StringType>>();
 
 			descriptor.Field<ScheduleType>(a => ResolveEmployee(default, default))
-				.Name("schedule")
+				.Name("employee")
 				.Type<NonNullType<EmployeeType>>();
 
 			descriptor.Field<ScheduleType>(a => ResolveScheduleDetail(default, default))
