@@ -26,6 +26,26 @@ namespace Server
 			modelBuilder.Entity<Employee>()
 				.Property(e => e.State)
 				.HasDefaultValue(true);
+
+			modelBuilder.Entity<Justification>()
+				.Property(j => j.State)
+				.HasDefaultValue(true);
+
+			modelBuilder.Entity<License>()
+				.Property(l => l.State)
+				.HasDefaultValue(false);
+
+			modelBuilder.Entity<Permission>()
+				.Property(p => p.State)
+				.HasDefaultValue(false);
+
+			modelBuilder.Entity<Schedule>()
+				.Property(s => s.State)
+				.HasDefaultValue(true);
+
+			modelBuilder.Entity<User>()
+				.Property(u => u.State)
+				.HasDefaultValue(true);
 		}
 
 		public DbSet<Attendance> Attendance { get; set; }

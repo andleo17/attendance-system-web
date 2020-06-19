@@ -31,8 +31,10 @@ namespace Server.Models
 		[Required, EmailAddress]
 		public string Email { get; set; }
 
+		[FileExtensions]
 		public byte[] Photo { get; set; }
 
+		[MaxLength(60)]
 		public string PhotoName { get; set; }
 
 		[Required]

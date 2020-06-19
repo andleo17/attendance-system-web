@@ -6,7 +6,7 @@ namespace Server.Models
 {
 	public class Contract
 	{
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 
 		[Required]

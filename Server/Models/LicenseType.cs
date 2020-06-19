@@ -1,15 +1,18 @@
-using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Models
 {
 	public class LicenseType
 	{
-		public int Id { get; set; }
+		[Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public byte Id { get; set; }
 
+		[Required, MaxLength(50)]
 		public string Description { get; set; }
 
-		public int MaximumDays { get; set; }
+		public short MaximumDays { get; set; }
 
 		public List<License> License { get; set; }
 	}
