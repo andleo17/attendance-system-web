@@ -11,7 +11,7 @@ namespace Server.Schema
 
 			descriptor.Field(m => m.AddAttendance(default, default))
 				.Type<AttendanceType>()
-				.Argument("employeeCardId", a => a.Type<NonNullType<StringType>>());
+				.Argument("employeeCardId", a => a.Type<NonNullType<IdType>>());
 
 			descriptor.Field(m => m.OutAttendance(default, default))
 				.Type<AttendanceType>()
@@ -20,6 +20,14 @@ namespace Server.Schema
 			descriptor.Field(m => m.AddContract(default, default))
 				.Type<ContractType>()
 				.Argument("input", a => a.Type<NonNullType<AddContractInputType>>());
+
+			descriptor.Field(m => m.ModifyContract(default, default))
+				.Type<ContractType>()
+				.Argument("input", a => a.Type<NonNullType<ModifyContractInputType>>());
+
+			descriptor.Field(m => m.AddContract(default, default))
+				.Type<ContractType>()
+				.Argument("contractId", a => a.Type<NonNullType<IdType>>());
 
 			descriptor.Field(m => m.AddLicenseType(default, default))
 				.Type<LicenseTypeType>()

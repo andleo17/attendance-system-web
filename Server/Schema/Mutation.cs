@@ -92,6 +92,54 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<Contract> ModifyContract([Service] DBAttendanceContext dBAttendanceContext, ModifyContractInput input)
+		{
+			try
+			{
+				var contract = await dBAttendanceContext.Contract.FindAsync(input.Id);
+				if (contract != null)
+				{
+					contract.StartDate = input.StartDate;
+					contract.FinishDate = input.FinishDate;
+					contract.Mount = input.Mount;
+					contract.State = input.State;
+					contract.ExtraHours = input.ExtraHours;
+					await dBAttendanceContext.SaveChangesAsync();
+					return contract;
+				}
+				else
+				{
+					throw new QueryException("Contrato no encontrado.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Contract> DownContract([Service] DBAttendanceContext dBAttendanceContext, int contractId)
+		{
+			try
+			{
+				var contract = await dBAttendanceContext.Contract.FindAsync(contractId);
+				if (contract != null)
+				{
+					contract.State = false;
+					await dBAttendanceContext.SaveChangesAsync();
+					return contract;
+				}
+				else
+				{
+					throw new QueryException("Contrato no encontrado.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<Models.LicenseType> AddLicenseType([Service] DBAttendanceContext dBAttendanceContext, AddLicenseTypeInput input)
 		{
 			try

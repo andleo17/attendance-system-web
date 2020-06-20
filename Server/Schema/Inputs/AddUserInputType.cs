@@ -16,6 +16,7 @@ namespace Server.Schema.Inputs
 
 			descriptor.Field(i => i.EmployeeCardId)
 				.Type<NonNullType<StringType>>();
+
 		}
 	}
 }
