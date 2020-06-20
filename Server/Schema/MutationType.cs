@@ -41,6 +41,30 @@ namespace Server.Schema
 				.Type<JustificationType>()
 				.Argument("justificationId", a => a.Type<NonNullType<IdType>>());
 
+			descriptor.Field(m => m.AddLicense(default, default))
+				.Type<LicenseType>()
+				.Argument("input", a => a.Type<NonNullType<AddLicenseInputType>>());
+
+			descriptor.Field(m => m.ModifyLicense(default, default))
+				.Type<LicenseType>()
+				.Argument("input", a => a.Type<NonNullType<ModifyLicenseInputType>>());
+
+			descriptor.Field(m => m.DeleteLicense(default, default))
+				.Type<LicenseType>()
+				.Argument("licenseId", a => a.Type<NonNullType<IdType>>());
+
+			descriptor.Field(m => m.AddPermission(default, default))
+				.Type<PermissionType>()
+				.Argument("input", a => a.Type<NonNullType<AddPermissionInputType>>());
+
+			descriptor.Field(m => m.ModifyPermission(default, default))
+				.Type<PermissionType>()
+				.Argument("input", a => a.Type<NonNullType<ModifyPermissionInputType>>());
+
+			descriptor.Field(m => m.DeletePermission(default, default))
+				.Type<PermissionType>()
+				.Argument("permissionId", a => a.Type<NonNullType<IdType>>());
+
 			descriptor.Field(m => m.AddLicenseType(default, default))
 				.Type<LicenseTypeType>()
 				.Argument("input", a => a.Type<NonNullType<AddLicenseTypeInputType>>());

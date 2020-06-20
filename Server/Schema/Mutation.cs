@@ -289,6 +289,72 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<Permission> AddPermission([Service] DBAttendanceContext dBAttendanceContext, AddPermissionInput input)
+		{
+			try
+			{
+				var permission = new Permission
+				{
+					Date = input.Date,
+					Motive = input.Motive,
+					EmployeeCardId = input.EmployeeCardId
+				};
+				dBAttendanceContext.Permission.Add(permission);
+				await dBAttendanceContext.SaveChangesAsync();
+				return permission;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Permission> ModifyPermission([Service] DBAttendanceContext dBAttendanceContext, ModifyPermissionInput input)
+		{
+			try
+			{
+				var permission = await dBAttendanceContext.Permission.FindAsync(input.Id);
+				if (permission != null)
+				{
+					permission.Date = input.Date;
+					permission.Motive = input.Motive;
+					permission.State = input.State;
+					await dBAttendanceContext.SaveChangesAsync();
+					return permission;
+				}
+				else
+				{
+					throw new QueryException("No se encontró el permiso.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Permission> DeletePermission([Service] DBAttendanceContext dBAttendanceContext, int permissionId)
+		{
+			try
+			{
+				var permission = await dBAttendanceContext.Permission.FindAsync(permissionId);
+				if (permission != null)
+				{
+					dBAttendanceContext.Permission.Remove(permission);
+					await dBAttendanceContext.SaveChangesAsync();
+					return permission;
+				}
+				else
+				{
+					throw new QueryException("No se encontró el permiso.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<User> AddUser([Service] DBAttendanceContext dBAttendanceContext, AddUserInput input)
 		{
 			try

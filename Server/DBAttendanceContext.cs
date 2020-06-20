@@ -48,6 +48,10 @@ namespace Server
 				.HasDefaultValue(false);
 
 			modelBuilder.Entity<Permission>()
+				.Property(p => p.PresentationDate)
+				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+			modelBuilder.Entity<Permission>()
 				.Property(p => p.State)
 				.HasDefaultValue(false);
 
