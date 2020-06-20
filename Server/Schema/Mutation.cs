@@ -140,6 +140,72 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<Justification> AddJustification([Service] DBAttendanceContext dBAttendanceContext, AddJustificationInput input)
+		{
+			try
+			{
+				var justification = new Justification
+				{
+					Date = input.Date,
+					Motive = input.Motive,
+					AttendanceId = input.AttendanceId
+				};
+				dBAttendanceContext.Justification.Add(justification);
+				await dBAttendanceContext.SaveChangesAsync();
+				return justification;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Justification> ModifyJustification([Service] DBAttendanceContext dBAttendanceContext, ModifyJustificationInput input)
+		{
+			try
+			{
+				var justification = await dBAttendanceContext.Justification.FindAsync(input);
+				if (justification != null)
+				{
+					justification.Date = input.Date;
+					justification.Motive = input.Motive;
+					justification.State = input.State;
+					await dBAttendanceContext.SaveChangesAsync();
+					return justification;
+				}
+				else
+				{
+					throw new QueryException("No se encontró la justificación.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Justification> DeleteJustification([Service] DBAttendanceContext dBAttendanceContext, int justificationId)
+		{
+			try
+			{
+				var justification = await dBAttendanceContext.Justification.FindAsync(justificationId);
+				if (justification != null)
+				{
+					dBAttendanceContext.Justification.Remove(justification);
+					await dBAttendanceContext.SaveChangesAsync();
+					return justification;
+				}
+				else
+				{
+					throw new QueryException("No se encontró la justificación.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<Models.LicenseType> AddLicenseType([Service] DBAttendanceContext dBAttendanceContext, AddLicenseTypeInput input)
 		{
 			try

@@ -29,6 +29,18 @@ namespace Server.Schema
 				.Type<ContractType>()
 				.Argument("contractId", a => a.Type<NonNullType<IdType>>());
 
+			descriptor.Field(m => m.AddJustification(default, default))
+				.Type<JustificationType>()
+				.Argument("input", a => a.Type<NonNullType<AddJustificationInputType>>());
+
+			descriptor.Field(m => m.ModifyJustification(default, default))
+				.Type<JustificationType>()
+				.Argument("input", a => a.Type<NonNullType<ModifyContractInputType>>());
+
+			descriptor.Field(m => m.DeleteJustification(default, default))
+				.Type<JustificationType>()
+				.Argument("justificationId", a => a.Type<NonNullType<IdType>>());
+
 			descriptor.Field(m => m.AddLicenseType(default, default))
 				.Type<LicenseTypeType>()
 				.Argument("input", a => a.Type<NonNullType<AddLicenseTypeInputType>>());
