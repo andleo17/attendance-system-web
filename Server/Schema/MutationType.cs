@@ -53,6 +53,10 @@ namespace Server.Schema
 				.Type<LicenseType>()
 				.Argument("licenseId", a => a.Type<NonNullType<IdType>>());
 
+			descriptor.Field(m => m.AddLicenseType(default, default))
+				.Type<LicenseTypeType>()
+				.Argument("input", a => a.Type<NonNullType<AddLicenseTypeInputType>>());
+
 			descriptor.Field(m => m.AddPermission(default, default))
 				.Type<PermissionType>()
 				.Argument("input", a => a.Type<NonNullType<AddPermissionInputType>>());
@@ -61,13 +65,21 @@ namespace Server.Schema
 				.Type<PermissionType>()
 				.Argument("input", a => a.Type<NonNullType<ModifyPermissionInputType>>());
 
+			descriptor.Field(m => m.AddSchedule(default, default))
+				.Type<ScheduleType>()
+				.Argument("input", a => a.Type<NonNullType<AddScheduleInputType>>());
+
+			descriptor.Field(m => m.ModifySchedule(default, default))
+				.Type<ScheduleType>()
+				.Argument("input", a => a.Type<NonNullType<ModifyScheduleInputType>>());
+
+			descriptor.Field(m => m.DownSchedule(default, default))
+				.Type<ScheduleType>()
+				.Argument("scheduleId", a => a.Type<NonNullType<IdType>>());
+
 			descriptor.Field(m => m.DeletePermission(default, default))
 				.Type<PermissionType>()
 				.Argument("permissionId", a => a.Type<NonNullType<IdType>>());
-
-			descriptor.Field(m => m.AddLicenseType(default, default))
-				.Type<LicenseTypeType>()
-				.Argument("input", a => a.Type<NonNullType<AddLicenseTypeInputType>>());
 
 			descriptor.Field(m => m.AddUser(default, default))
 				.Type<UserType>()

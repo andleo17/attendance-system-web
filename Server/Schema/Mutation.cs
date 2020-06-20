@@ -355,6 +355,100 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<Schedule> AddSchedule([Service] DBAttendanceContext dBAttendanceContext, AddScheduleInput input)
+		{
+			try
+			{
+				var schedule = new Schedule
+				{
+					StartDate = input.StartDate,
+					FinishDate = input.FinishDate,
+					EmployeeCardId = input.EmployeeCardId
+				};
+				input.ScheduleDetail.ForEach(sd =>
+				{
+					var scheduleDetail = new ScheduleDetail
+					{
+						Day = sd.Day,
+						InHour = sd.InHour,
+						OutHour = sd.OutHour
+					};
+					schedule.ScheduleDetail.Add(scheduleDetail);
+				});
+				dBAttendanceContext.Schedule.Add(schedule);
+				await dBAttendanceContext.SaveChangesAsync();
+				return schedule;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Schedule> ModifySchedule([Service] DBAttendanceContext dBAttendanceContext, ModifyScheduleInput input)
+		{
+			try
+			{
+				var schedule = await dBAttendanceContext.Schedule.FindAsync(input.Id);
+				if (schedule != null)
+				{
+					schedule.StartDate = input.StartDate;
+					schedule.FinishDate = input.FinishDate;
+					schedule.State = input.State;
+					input.ScheduleDetail.ForEach(sd =>
+					{
+						switch (sd.Action)
+						{
+							case 0:
+								var scheduleDetail = new ScheduleDetail
+								{
+									Day = sd.Day,
+									InHour = sd.InHour,
+									OutHour = sd.OutHour
+								};
+								schedule.ScheduleDetail.Add(scheduleDetail);
+								break;
+							case 1:
+								var scheduleDetail1 = schedule.ScheduleDetail.Find(sd.Id);
+								scheduleDetail1.Day = sd.Day;
+								scheduleDetail1.InHour = sd.InHour;
+								scheduleDetail1.OutHour = sd.OutHour;
+								break;
+							case 2:
+								var scheduleDetail2 = schedule.ScheduleDetail.Find(sd.Id);
+								schedule.ScheduleDetail.Remove(scheduleDetail2);
+								break;
+						}
+					});
+					await dBAttendanceContext.SaveChangesAsync();
+					return schedule;
+				}
+				else
+				{
+					throw new QueryException("No se encontró el horario.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Schedule> DownSchedule([Service] DBAttendanceContext dBAttendanceContext, int scheduleId)
+		{
+			try
+			{
+				var schedule = await dBAttendanceContext.Schedule.FindAsync(scheduleId);
+				schedule.State = false;
+				await dBAttendanceContext.SaveChangesAsync();
+				return schedule;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<User> AddUser([Service] DBAttendanceContext dBAttendanceContext, AddUserInput input)
 		{
 			try
