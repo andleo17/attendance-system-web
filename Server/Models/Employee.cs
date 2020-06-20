@@ -1,7 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Models
 {
@@ -40,17 +39,17 @@ namespace Server.Models
 		[Required]
 		public bool State { get; set; }
 
-		public List<Attendance> Attendance { get; set; }
+		public DbSet<Attendance> Attendance { get; set; }
 
-		public List<Contract> Contract { get; set; }
+		public DbSet<Contract> Contract { get; set; }
 
-		public List<License> License { get; set; }
+		public DbSet<License> License { get; set; }
 
-		public List<Permission> Permission { get; set; }
+		public DbSet<Permission> Permission { get; set; }
 
-		public List<Schedule> Schedule { get; set; }
+		public DbSet<Schedule> Schedule { get; set; }
 
-		public List<User> User { get; set; }
+		public DbSet<User> User { get; set; }
 
 	}
 }
