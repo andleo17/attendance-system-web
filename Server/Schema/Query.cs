@@ -1,6 +1,7 @@
 using Server;
 using Server.Models;
 using HotChocolate;
+using HotChocolate.Execution;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,26 @@ namespace Server.Schema
 			else
 			{
 				return await dBAttendanceContext.User.ToListAsync();
+			}
+		}
+
+		public async Task<Employee> Login([Service] DBAttendanceContext dBAttendanceContext, string username, string password)
+		{
+			var user = await (from u in dBAttendanceContext.User where u.Name == username && u.Password == password select u).FirstOrDefaultAsync();
+			if (user != null)
+			{
+				if (user.State)
+				{
+					return user.Employee;
+				}
+				else
+				{
+					throw new QueryException("Usuario no vigente");
+				}
+			}
+			else
+			{
+				throw new QueryException("Usuario no encontrado");
 			}
 		}
 	}

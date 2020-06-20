@@ -31,6 +31,10 @@ namespace Server.Schema
 
 			descriptor.Field(q => q.GetUsers(default, default))
 				.Type<NonNullType<ListType<NonNullType<UserType>>>>();
+
+			descriptor.Field(q => q.Login(default, default, default))
+				.Argument("username", a => a.Type<NonNullType<StringType>>())
+				.Argument("password", a => a.Type<NonNullType<StringType>>());
 		}
 	}
 }
