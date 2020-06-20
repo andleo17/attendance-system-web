@@ -21,11 +21,8 @@ namespace Server.Schema
 					var currentDay = await currentSchedule.ScheduleDetail.FirstOrDefaultAsync(sd => DateTime.Today.DayOfWeek.Equals(sd.Day));
 					if (currentDay != null)
 					{
-						var today = DateTime.Today;
 						var attendance = new Attendance
 						{
-							Date = today,
-							InHour = today.TimeOfDay,
 							EmployeeCardId = employeeCardId
 						};
 						dBAttendanceContext.Attendance.Add(attendance);
@@ -199,6 +196,71 @@ namespace Server.Schema
 				{
 					throw new QueryException("No se encontró la justificación.");
 				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<License> AddLicense([Service] DBAttendanceContext dBAttendanceContext, AddLicenseInput input)
+		{
+			try
+			{
+				var license = new License
+				{
+					StartDate = input.StartDate,
+					FinishDate = input.FinishDate,
+					Document = input.Document,
+					DocumentName = input.DocumentName,
+					EmployeeCardId = input.EmployeeCardId,
+					LicenseTypeId = input.LicenseTypeId
+				};
+				dBAttendanceContext.License.Add(license);
+				await dBAttendanceContext.SaveChangesAsync();
+				return license;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<License> ModifyLicense([Service] DBAttendanceContext dBAttendanceContext, ModifyLicenseInput input)
+		{
+			try
+			{
+				var license = await dBAttendanceContext.License.FindAsync(input.Id);
+				if (license != null)
+				{
+					license.StartDate = input.StartDate;
+					license.FinishDate = input.FinishDate;
+					license.Document = input.Document;
+					license.DocumentName = input.DocumentName;
+					license.LicenseTypeId = input.LicenseTypeId;
+					license.State = input.State;
+					await dBAttendanceContext.SaveChangesAsync();
+					return license;
+				}
+				else
+				{
+					throw new QueryException("No se encontró la licencia.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<License> DeleteLicense([Service] DBAttendanceContext dBAttendanceContext, int licenseId)
+		{
+			try
+			{
+				var license = await dBAttendanceContext.License.FindAsync(licenseId);
+				dBAttendanceContext.License.Remove(license);
+				await dBAttendanceContext.SaveChangesAsync();
+				return license;
 			}
 			catch (System.Exception e)
 			{

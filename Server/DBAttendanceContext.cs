@@ -19,6 +19,14 @@ namespace Server
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<Attendance>()
+				.Property(c => c.Date)
+				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+			modelBuilder.Entity<Attendance>()
+				.Property(c => c.InHour)
+				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+
 			modelBuilder.Entity<Contract>()
 				.Property(c => c.State)
 				.HasDefaultValue(true);
@@ -30,6 +38,10 @@ namespace Server
 			modelBuilder.Entity<Justification>()
 				.Property(j => j.State)
 				.HasDefaultValue(true);
+
+			modelBuilder.Entity<License>()
+				.Property(l => l.PresentationDate)
+				.HasDefaultValueSql("CURRENT_TIMESTAMP");
 
 			modelBuilder.Entity<License>()
 				.Property(l => l.State)
