@@ -17,6 +17,10 @@ namespace Server.Schema
 				.Type<AttendanceType>()
 				.Argument("attendanceId", a => a.Type<NonNullType<IdType>>());
 
+			descriptor.Field(m => m.AddContract(default, default))
+				.Type<ContractType>()
+				.Argument("input", a => a.Type<NonNullType<AddContractInputType>>());
+
 			descriptor.Field(m => m.AddLicenseType(default, default))
 				.Type<LicenseTypeType>()
 				.Argument("input", a => a.Type<NonNullType<AddLicenseTypeInputType>>());

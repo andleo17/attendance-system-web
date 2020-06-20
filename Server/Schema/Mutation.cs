@@ -21,24 +21,16 @@ namespace Server.Schema
 					var currentDay = await currentSchedule.ScheduleDetail.FirstOrDefaultAsync(sd => DateTime.Today.DayOfWeek.Equals(sd.Day));
 					if (currentDay != null)
 					{
-						var now = DateTime.Now.TimeOfDay;
-						var tolerance = TimeSpan.FromMinutes(10);
-						if (now.Subtract(tolerance) <= now)
+						var today = DateTime.Today;
+						var attendance = new Attendance
 						{
-							var attendance = new Attendance
-							{
-								Date = DateTime.Today,
-								InHour = now,
-								EmployeeCardId = employeeCardId
-							};
-							dBAttendanceContext.Attendance.Add(attendance);
-							await dBAttendanceContext.SaveChangesAsync();
-							return attendance;
-						}
-						else
-						{
-							throw new QueryException("Aún no le toca marcar asistencia.");
-						}
+							Date = today,
+							InHour = today.TimeOfDay,
+							EmployeeCardId = employeeCardId
+						};
+						dBAttendanceContext.Attendance.Add(attendance);
+						await dBAttendanceContext.SaveChangesAsync();
+						return attendance;
 					}
 					else
 					{
@@ -71,6 +63,28 @@ namespace Server.Schema
 				{
 					throw new QueryException("Asistencia no encontrada.");
 				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Contract> AddContract([Service] DBAttendanceContext dBAttendanceContext, AddContractInput input)
+		{
+			try
+			{
+				var contract = new Contract
+				{
+					StartDate = input.StartDate,
+					FinishDate = input.FinishDate,
+					Mount = input.Mount,
+					ExtraHours = input.ExtraHours,
+					EmployeeCardId = input.EmployeeCardId
+				};
+				dBAttendanceContext.Contract.Add(contract);
+				await dBAttendanceContext.SaveChangesAsync();
+				return contract;
 			}
 			catch (System.Exception e)
 			{
