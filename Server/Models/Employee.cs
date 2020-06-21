@@ -15,8 +15,8 @@ namespace Server.Models
 		[Required, MaxLength(60)]
 		public string Lastname { get; set; }
 
-		[Required]
-		public char Genre { get; set; }
+		[Required, StringLength(1)]
+		public string Genre { get; set; }
 
 		[Required]
 		public DateTime Birthdate { get; set; }

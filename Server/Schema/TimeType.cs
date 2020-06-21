@@ -25,7 +25,7 @@ namespace Server.Schema
 			if (value == null)
 				return new NullValueNode(null);
 			var time = (TimeSpan)value;
-			return new StringValueNode(DateTime.Now.Add(time).ToString("T"));
+			return new StringValueNode(time.ToString());
 		}
 
 		public override object Serialize(object value)
@@ -37,7 +37,7 @@ namespace Server.Schema
 
 			if (value is TimeSpan timeSpan)
 			{
-				return DateTime.Now.Add(timeSpan).ToString("T");
+				return timeSpan.ToString();
 			}
 			throw new ArgumentException("The specified value cannot be serialized by the StringType.");
 		}
