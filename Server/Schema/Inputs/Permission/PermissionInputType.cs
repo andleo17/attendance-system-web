@@ -2,14 +2,14 @@ using HotChocolate.Types;
 
 namespace Server.Schema.Inputs
 {
-	public class ModifyJustificationInputType : InputObjectType<ModifyJustificationInput>
+	public class PermissionInputType : InputObjectType<PermissionInput>
 	{
-		protected override void Configure(IInputObjectTypeDescriptor<ModifyJustificationInput> descriptor)
+		protected override void Configure(IInputObjectTypeDescriptor<PermissionInput> descriptor)
 		{
 			base.Configure(descriptor);
 
 			descriptor.Field(a => a.Id)
-				.Type<NonNullType<IdType>>();
+				.Type<IdType>();
 
 			descriptor.Field(a => a.Date)
 				.Type<NonNullType<DateType>>();
@@ -18,7 +18,10 @@ namespace Server.Schema.Inputs
 				.Type<NonNullType<StringType>>();
 
 			descriptor.Field(a => a.State)
-				.Type<NonNullType<BooleanType>>();
+				.Type<BooleanType>();
+
+			descriptor.Field(a => a.EmployeeCardId)
+				.Type<IdType>();
 		}
 	}
 }
