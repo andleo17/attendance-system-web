@@ -34,9 +34,9 @@ namespace Server.Models
 		public byte LicenseTypeId { get; set; }
 
 		[ForeignKey("EmployeeCardId")]
-		public Employee Employee { get; set; }
+		public virtual Employee Employee { get; set; }
 
 		[ForeignKey("LicenseTypeId")]
-		public LicenseType LicenseType { get; set; }
+		public virtual LicenseType LicenseType { get; set; }
 	}
 }

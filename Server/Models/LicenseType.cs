@@ -14,6 +14,6 @@ namespace Server.Models
 
 		public short MaximumDays { get; set; }
 
-		public DbSet<License> License { get; set; }
+		public virtual DbSet<License> License { get; set; }
 	}
 }

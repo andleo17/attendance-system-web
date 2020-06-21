@@ -21,9 +21,9 @@ namespace Server.Models
 		public string EmployeeCardId { get; set; }
 
 		[ForeignKey("EmployeeCardId")]
-		public Employee Employee { get; set; }
+		public virtual Employee Employee { get; set; }
 
-		public Justification Justification { get; set; }
+		public virtual Justification Justification { get; set; }
 
 	}
 }

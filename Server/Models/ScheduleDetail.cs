@@ -22,6 +22,6 @@ namespace Server.Models
 		public int ScheduleId { get; set; }
 
 		[ForeignKey("ScheduleId")]
-		public Schedule Schedule { get; set; }
+		public virtual Schedule Schedule { get; set; }
 	}
 }

@@ -23,8 +23,8 @@ namespace Server.Models
 		public string EmployeeCardId { get; set; }
 
 		[ForeignKey("EmployeeCardId")]
-		public Employee Employee { get; set; }
+		public virtual Employee Employee { get; set; }
 
-		public DbSet<ScheduleDetail> ScheduleDetail { get; set; }
+		public virtual DbSet<ScheduleDetail> ScheduleDetail { get; set; }
 	}
 }

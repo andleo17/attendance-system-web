@@ -22,6 +22,6 @@ namespace Server.Models
 		public int AttendanceId { get; set; }
 
 		[ForeignKey("AttendanceId")]
-		public Attendance Attendance { get; set; }
+		public virtual Attendance Attendance { get; set; }
 	}
 }

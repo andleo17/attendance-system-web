@@ -14,6 +14,7 @@ namespace Server
 				.AddJsonFile("appsettings.json")
 				.Build();
 			optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBAttendance"));
+			optionsBuilder.UseLazyLoadingProxies();
 			base.OnConfiguring(optionsBuilder);
 		}
 
