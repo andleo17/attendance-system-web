@@ -137,6 +137,142 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<Employee> AddEmployee([Service] DBAttendanceContext dBAttendanceContext, EmployeeInput input)
+		{
+			try
+			{
+				var employee = new Employee
+				{
+					CardId = input.CardId,
+					Name = input.Name,
+					Lastname = input.Lastname,
+					Genre = input.Genre,
+					Birthdate = input.BirthDate,
+					Address = input.Address,
+					Phone = input.Phone,
+					Email = input.Email,
+					Photo = input.Photo,
+					PhotoName = input.PhotoName
+				};
+				var contractInput = input.Contract;
+				employee.Contract.Add(new Contract
+				{
+					StartDate = contractInput.StartDate,
+					FinishDate = contractInput.FinishDate,
+					Mount = contractInput.Mount,
+					ExtraHours = contractInput.ExtraHours
+				});
+				var scheduleInput = input.Schedule;
+				var schedule = new Schedule
+				{
+					StartDate = scheduleInput.StartDate,
+					FinishDate = scheduleInput.FinishDate
+				};
+				scheduleInput.ScheduleDetail.ForEach(sd =>
+				{
+					var scheduleDetail = new ScheduleDetail
+					{
+						Day = sd.Day,
+						InHour = sd.InHour,
+						OutHour = sd.OutHour
+					};
+					schedule.ScheduleDetail.Add(scheduleDetail);
+				});
+				employee.Schedule.Add(schedule);
+				await dBAttendanceContext.SaveChangesAsync();
+				return employee;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Employee> ModifyEmployee([Service] DBAttendanceContext dBAttendanceContext, EmployeeInput input)
+		{
+			try
+			{
+				var employee = await dBAttendanceContext.Employee.FindAsync(input.CardId);
+				if (employee != null)
+				{
+					employee.Name = input.Name;
+					employee.Lastname = input.Lastname;
+					employee.Genre = input.Genre;
+					employee.Birthdate = input.BirthDate;
+					employee.Address = input.Address;
+					employee.Phone = input.Phone;
+					employee.Email = input.Email;
+					employee.Photo = input.Photo;
+					employee.PhotoName = input.PhotoName;
+					employee.State = input.State;
+					await dBAttendanceContext.SaveChangesAsync();
+					return employee;
+				}
+				else
+				{
+					throw new QueryException("No se encontró al empleado.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Employee> DownEmployee([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
+		{
+			try
+			{
+				var employee = await dBAttendanceContext.Employee.FindAsync(employeeCardId);
+				if (employee != null)
+				{
+					employee.State = false;
+					var contract = await employee.Contract.FirstOrDefaultAsync(c => c.State);
+					if (contract != null)
+					{
+						contract.State = false;
+					}
+					var schedule = await employee.Schedule.FirstOrDefaultAsync(s => s.State);
+					if (schedule != null)
+					{
+						contract.State = false;
+					}
+					await dBAttendanceContext.SaveChangesAsync();
+					return employee;
+				}
+				else
+				{
+					throw new QueryException("No se encontró al empleado.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+		public async Task<Employee> DeleteEmployee([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
+		{
+			try
+			{
+				var employee = await dBAttendanceContext.Employee.FindAsync(employeeCardId);
+				if (employee != null)
+				{
+					dBAttendanceContext.Employee.Remove(employee);
+					await dBAttendanceContext.SaveChangesAsync();
+					return employee;
+				}
+				else
+				{
+					throw new QueryException("No se encontró al empleado.");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<Justification> AddJustification([Service] DBAttendanceContext dBAttendanceContext, JustificationInput input)
 		{
 			try
