@@ -2,11 +2,14 @@ using HotChocolate.Types;
 
 namespace Server.Schema.Inputs
 {
-	public class AddLicenseTypeInputType : InputObjectType<AddLicenseTypeInput>
+	public class LicenseTypeInputType : InputObjectType<LicenseTypeInput>
 	{
-		protected override void Configure(IInputObjectTypeDescriptor<AddLicenseTypeInput> descriptor)
+		protected override void Configure(IInputObjectTypeDescriptor<LicenseTypeInput> descriptor)
 		{
 			base.Configure(descriptor);
+
+			descriptor.Field(i => i.Id)
+				.Type<IdType>();
 
 			descriptor.Field(i => i.Description)
 				.Type<NonNullType<StringType>>();
