@@ -13,7 +13,7 @@ namespace Server
 				.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
 				.AddJsonFile("appsettings.json")
 				.Build();
-			optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBAttendance"));
+			optionsBuilder.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DBAttendance"));
 			base.OnConfiguring(optionsBuilder);
 		}
 
@@ -21,11 +21,11 @@ namespace Server
 		{
 			modelBuilder.Entity<Attendance>()
 				.Property(c => c.Date)
-				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+				.HasDefaultValue(DateTime.Today);
 
 			modelBuilder.Entity<Attendance>()
 				.Property(c => c.InHour)
-				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+				.HasDefaultValue(DateTime.Now.TimeOfDay);
 
 			modelBuilder.Entity<Contract>()
 				.Property(c => c.State)
@@ -41,7 +41,7 @@ namespace Server
 
 			modelBuilder.Entity<License>()
 				.Property(l => l.PresentationDate)
-				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+				.HasDefaultValue(DateTime.Today);
 
 			modelBuilder.Entity<License>()
 				.Property(l => l.State)
@@ -49,7 +49,7 @@ namespace Server
 
 			modelBuilder.Entity<Permission>()
 				.Property(p => p.PresentationDate)
-				.HasDefaultValueSql("CURRENT_TIMESTAMP");
+				.HasDefaultValue(DateTime.Today);
 
 			modelBuilder.Entity<Permission>()
 				.Property(p => p.State)

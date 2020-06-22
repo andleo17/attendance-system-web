@@ -18,16 +18,24 @@ namespace Server.Schema
 				var currentSchedule = await dBAttendanceContext.Schedule.SingleOrDefaultAsync(s => s.EmployeeCardId == employeeCardId && s.State);
 				if (currentSchedule != null)
 				{
-					var currentDay = await currentSchedule.ScheduleDetail.FirstOrDefaultAsync(sd => DateTime.Today.DayOfWeek.Equals(sd.Day));
+					var currentDay = currentSchedule.ScheduleDetail.FirstOrDefault(sd => ((byte)DateTime.Today.DayOfWeek == 0 ? 7 : (byte)DateTime.Today.DayOfWeek) == sd.Day);
 					if (currentDay != null)
 					{
-						var attendance = new Attendance
+						var existingAttendance = await dBAttendanceContext.Attendance.FirstAsync(a => a.Date == DateTime.Today && a.EmployeeCardId == employeeCardId);
+						if (existingAttendance == null)
 						{
-							EmployeeCardId = employeeCardId
-						};
-						dBAttendanceContext.Attendance.Add(attendance);
-						await dBAttendanceContext.SaveChangesAsync();
-						return attendance;
+							var attendance = new Attendance
+							{
+								EmployeeCardId = employeeCardId
+							};
+							dBAttendanceContext.Attendance.Add(attendance);
+							await dBAttendanceContext.SaveChangesAsync();
+							return attendance;
+						}
+						else
+						{
+							throw new QueryException("Ya marcó asistencia");
+						}
 					}
 					else
 					{
@@ -52,9 +60,16 @@ namespace Server.Schema
 				var attendance = await dBAttendanceContext.Attendance.FindAsync(attendanceId);
 				if (attendance != null)
 				{
-					attendance.OutHour = DateTime.Now.TimeOfDay;
-					await dBAttendanceContext.SaveChangesAsync();
-					return attendance;
+					if (attendance.OutHour == null)
+					{
+						attendance.OutHour = DateTime.Now.TimeOfDay;
+						await dBAttendanceContext.SaveChangesAsync();
+						return attendance;
+					}
+					else
+					{
+						throw new QueryException("Ya marcó salida.");
+					}
 				}
 				else
 				{
@@ -227,12 +242,12 @@ namespace Server.Schema
 				if (employee != null)
 				{
 					employee.State = false;
-					var contract = await employee.Contract.FirstOrDefaultAsync(c => c.State);
+					var contract = employee.Contract.FirstOrDefault(c => c.State);
 					if (contract != null)
 					{
 						contract.State = false;
 					}
-					var schedule = await employee.Schedule.FirstOrDefaultAsync(s => s.State);
+					var schedule = employee.Schedule.FirstOrDefault(s => s.State);
 					if (schedule != null)
 					{
 						contract.State = false;
@@ -583,13 +598,13 @@ namespace Server.Schema
 								schedule.ScheduleDetail.Add(scheduleDetail);
 								break;
 							case 1:
-								var scheduleDetail1 = schedule.ScheduleDetail.Find(sd.Id);
+								var scheduleDetail1 = schedule.ScheduleDetail.SingleOrDefault(sd1 => sd1.Id == sd.Id);
 								scheduleDetail1.Day = sd.Day;
 								scheduleDetail1.InHour = sd.InHour;
 								scheduleDetail1.OutHour = sd.OutHour;
 								break;
 							case 2:
-								var scheduleDetail2 = schedule.ScheduleDetail.Find(sd.Id);
+								var scheduleDetail2 = schedule.ScheduleDetail.SingleOrDefault(sd1 => sd1.Id == sd.Id);
 								schedule.ScheduleDetail.Remove(scheduleDetail2);
 								break;
 						}

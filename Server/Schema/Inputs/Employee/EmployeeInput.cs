@@ -7,7 +7,7 @@ namespace Server.Schema.Inputs
 		public string CardId { get; set; }
 		public string Name { get; set; }
 		public string Lastname { get; set; }
-		public char Genre { get; set; }
+		public string Genre { get; set; }
 		public DateTime BirthDate { get; set; }
 		public string Address { get; set; }
 		public string Phone { get; set; }

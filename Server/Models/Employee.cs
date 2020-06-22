@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Server.Models
@@ -15,8 +15,8 @@ namespace Server.Models
 		[Required, MaxLength(60)]
 		public string Lastname { get; set; }
 
-		[Required]
-		public char Genre { get; set; }
+		[Required, StringLength(1)]
+		public string Genre { get; set; }
 
 		[Required]
 		public DateTime Birthdate { get; set; }
@@ -39,17 +39,17 @@ namespace Server.Models
 		[Required]
 		public bool State { get; set; }
 
-		public DbSet<Attendance> Attendance { get; set; }
+		public virtual ICollection<Attendance> Attendance { get; set; }
 
-		public DbSet<Contract> Contract { get; set; }
+		public virtual ICollection<Contract> Contract { get; set; }
 
-		public DbSet<License> License { get; set; }
+		public virtual ICollection<License> License { get; set; }
 
-		public DbSet<Permission> Permission { get; set; }
+		public virtual ICollection<Permission> Permission { get; set; }
 
-		public DbSet<Schedule> Schedule { get; set; }
+		public virtual ICollection<Schedule> Schedule { get; set; }
 
-		public DbSet<User> User { get; set; }
+		public virtual ICollection<User> User { get; set; }
 
 	}
 }

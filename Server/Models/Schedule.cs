@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,8 +23,8 @@ namespace Server.Models
 		public string EmployeeCardId { get; set; }
 
 		[ForeignKey("EmployeeCardId")]
-		public Employee Employee { get; set; }
+		public virtual Employee Employee { get; set; }
 
-		public DbSet<ScheduleDetail> ScheduleDetail { get; set; }
+		public virtual ICollection<ScheduleDetail> ScheduleDetail { get; set; }
 	}
 }

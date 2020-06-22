@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,6 +14,6 @@ namespace Server.Models
 
 		public short MaximumDays { get; set; }
 
-		public DbSet<License> License { get; set; }
+		public virtual ICollection<License> License { get; set; }
 	}
 }
