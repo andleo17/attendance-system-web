@@ -10,10 +10,10 @@ import LicenseType from './LicenseType'
 function App() {
   return (
     <div  >
-      
-      {/* <Header /> */}
-      <LicenseType />
       <NavLateral />
+      {/* <Header /> */}
+      {/* <LicenseType /> */}
+      <Employeed />
       <Footer />
     </div>
   );
@@ -21,7 +21,3 @@ function App() {
 
 
 export default App;
-
-
-// <div >
-//       </div>
