@@ -6,12 +6,13 @@ import foto1 from '../recursos/fallecimiento.jpg'
 
 export default function LicenseType() {
     return (
+
         <div className=' row container-fluid'>
             <div className='col-lg-2'>
                 <span></span>
             </div>
             <div className='col-lg-10 '>
-                <div className=' mt-3 conteinerGeneral pt-2 pr-4 pl-4 pb-4'>
+                <div className=' m-5 mt-3 conteinerGeneral pt-2 pr-4 pl-4 pb-4'>
                     <div className="hit-the-floor  ">Tipo de licencias</div>
                     <form action=""
                         className='row form-inline d-flex mt-2 justify-content-sm-start m-2 md-form form-sm active-pink-2 mt-2'>
@@ -73,37 +74,36 @@ export default function LicenseType() {
                     </form>
                     <br />
                     <div className=' row '>
-                        <div className='col-lg-4 '>
+                        <div className='col-lg-3 '>
                             <div className=' m-3  card-licensetype text-lg-center '>
-                                <div className='row p-3 ' style={{background: '#D5691E'}} >
-                                    <center>
-                                    <h3 className='text-center text-white'>LICENCIA</h3>
-
-                                    </center>
+                                <div className='row p-1 ' style={{ background: '#D5691E' }} >
+                                        <h3 className='text-center text-white'>LICENCIA</h3>
                                 </div>
                                 <img src={foto} alt="" className='w-50 h-50' />
 
-                                <div className='row p-4'>
-                                    <div className='col-ms-2 '>
-                                        <label className='text-black'> <b>Nombre:</b>  <span >Licencia por embarazo</span> </label>
+                                <div className='row p-2'>
+                                    <div className=' align-content-start'>
+                                        <label className='text-black '> <b>Nombre:</b> </label>
+                                        <label htmlFor="">Licencia por embarazo</label>
                                     </div>
-                                    <div className='col-ms-2 '>
+                                    <div className=' '>
                                         <label htmlFor="" className='text-black'> <b>Tiempo:</b>  <span >90 días</span></label> <br />
                                     </div>
                                 </div>
-                                <div className=' row p-3 text-center  border border-darken-1 border-bottom-0 border-right-0'>
+                                <div className=' row p-1 text-center  border border-darken-1 border-bottom-0 border-right-0'>
                                     <button className='col-sm-4 degradado border border-whit' data-toggle="modal"
                                         data-target="#nuevoTipoLicencia">Modificar</button>
                                     <button className='col-sm-4 degradado border border-black '>Dar baja</button>
                                     <button className='col-sm-4 degradado border border-white '>Eliminar</button>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                    <br />
 
                 </div>
+                <br />
+
             </div>
         </div>
 

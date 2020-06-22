@@ -12,7 +12,7 @@ function App() {
     <div  >
       <NavLateral />
       {/* <Header /> */}
-      {/* <LicenseType /> */}
+      <LicenseType />
       <Employeed />
       <Footer />
     </div>
