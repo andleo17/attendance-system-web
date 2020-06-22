@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Server.Models
@@ -39,17 +39,17 @@ namespace Server.Models
 		[Required]
 		public bool State { get; set; }
 
-		public virtual DbSet<Attendance> Attendance { get; set; }
+		public virtual ICollection<Attendance> Attendance { get; set; }
 
-		public virtual DbSet<Contract> Contract { get; set; }
+		public virtual ICollection<Contract> Contract { get; set; }
 
-		public virtual DbSet<License> License { get; set; }
+		public virtual ICollection<License> License { get; set; }
 
-		public virtual DbSet<Permission> Permission { get; set; }
+		public virtual ICollection<Permission> Permission { get; set; }
 
-		public virtual DbSet<Schedule> Schedule { get; set; }
+		public virtual ICollection<Schedule> Schedule { get; set; }
 
-		public virtual DbSet<User> User { get; set; }
+		public virtual ICollection<User> User { get; set; }
 
 	}
 }
