@@ -3,10 +3,11 @@ import '../style/App.css';
 import '../style/bootstrap.css'
 import foto from '../recursos/perfil.jpg'
 
+
 export default function Employeed() {
     return (
 
-        <div className=' row container-fluid' >
+        <div className='row  container-fluid' >
             <div className='col-lg-2'>
                 <span></span>
             </div>
@@ -27,20 +28,43 @@ export default function Employeed() {
                         </div>
                         <div className='col-lg-7'>
                             <h3 className='m-3'>Paola Cieza Bances</h3>
+                            
                             <div className='row'>
-                                <div className='col-ms-2 ml-5'>
-                                    <label htmlFor="" className='text-danger'> Dni:</label> <br />
-                                    <label htmlFor="" className='text-danger'>Sexo:</label> <br />
-                                    <label htmlFor="" className='text-danger'>Correo:</label> <br />
-                                    <label htmlFor="" className='text-danger'>Estado:</label> <br />
+                                <div className='col-sm-2 pl-3'>
+                                    <label htmlFor="" className='text-danger'> Dni:</label>
                                 </div>
-                                <div className='col-ms-8 ml-2'>
-                                    <label htmlFor=""> 75756219</label> <br />
-                                    <label htmlFor=""> Femenino</label> <br />
-                                    <label htmlFor=""> paolacieza8@gmail.com</label> <br />
-                                    <label htmlFor=""> Vigente</label>
+                                <div className='col-sm-8 pl-3'>
+                                    <label htmlFor=""> 75756219</label>
                                 </div>
                             </div>
+
+                            <div className='row'>
+                                <div className='col-sm-2 pl-3'>
+                                    <label htmlFor="" className='text-danger'> Sexo:</label> 
+                                </div>
+                                <div className='col-sm-8 pl-3'>
+                                    <label htmlFor=""> Femenino</label> 
+                                </div>
+                            </div>
+
+                            <div className='row'>
+                                <div className='col-sm-2 pl-3'>
+                                    <label htmlFor="" className='text-danger'> Correo:</label> 
+                                </div>
+                                <div className='col-sm-8 pl-3'>
+                                    <label htmlFor=""> paolacieza8@gmail.com</label> 
+                                </div>
+                            </div>
+
+                            <div className='row'>
+                                <div className='col-sm-2 pl-3'>
+                                    <label htmlFor="" className='text-danger'> Estado:</label> 
+                                </div>
+                                <div className='col-sm-8 pl-3'>
+                                    <label htmlFor=""> Vigente</label> 
+                                </div>
+                            </div>
+                           
 
                         </div>
                         <div className='col-lg-2 text-center border border-darken-1 border-bottom-0 border-top-0 border-right-0'>
