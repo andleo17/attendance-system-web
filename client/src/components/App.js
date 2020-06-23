@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import '../style/App.css';
 import '../style/bootstrap.css';
@@ -15,14 +15,16 @@ function App() {
 			<Route exact path='/login'>
 				<Login />
 			</Route>
-			<NavLateral />
-			<Footer />
-			<Route exact path='/tipo-licencia'>
-				<LicenseType />
-			</Route>
-			<Route exact path='/empleado'>
-				<Employeed />
-			</Route>
+			<Fragment>
+				<NavLateral />
+				<Footer />
+				<Route exact path='/tipo-licencia'>
+					<LicenseType />
+				</Route>
+				<Route exact path='/empleado'>
+					<Employeed />
+				</Route>
+			</Fragment>
 		</Switch>
 	);
 }
