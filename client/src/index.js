@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/App';
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { BrowserRouter } from 'react-router-dom';
+
+const client = new ApolloClient({
+	uri: 'http://andleo-001-site1.dtempurl.com/attendance-usat-server/',
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<BrowserRouter>
+		<ApolloProvider client={client}>
+			<React.StrictMode>
+				<App />
+			</React.StrictMode>
+		</ApolloProvider>
+	</BrowserRouter>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
