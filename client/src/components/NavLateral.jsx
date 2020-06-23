@@ -6,110 +6,6 @@ import foto from '../recursos/perfil.jpg'
 
 export default function NavLateral() {
     return (
-        // <div classNameName='container-fluid'  >
-        // <div classNameName="nav ladito fixed-top  row p-3 col-2 " style={{ background: "#212529" }}>
-        //     <div classNameName='text-center' style={{ color: "#D5691E" }}>
-        //             <h5 >SISTEMA DE ASISTENCIA</h5>
-        //     </div>
-        //     <div classNameName='border m-0  border-right-0 border-left-0 p-2' style={{ color: "white" }}>
-        //         <div classNameName='text-center'>
-        //             <img src={foto} classNameName='w-50 rounded-circle m-2' />
-        //         </div>
-        //         <div classNameName="text-center">
-        //             <span classNameName="user-name ">
-        //                 <strong > Paola Cieza</strong>
-        //             </span>
-        //             {/* <span className="user-role">Administrator</span> */}
-        //         </div>
-        //     </div>
-        //     <div classNameName='m-0 p-0'>
-        //         <ul classNameName="navbar-nav m-0 ">
-        //             <li classNameName="sidebar-dropdown nav-item nav-a">
-        //                 <a href="#" classNameName='nav-link nav-a  p-2' >
-        //                     <span>Mantenimiento</span>
-        //                 </a>
-        //                 <div classNameName="sidebar-submenu nav-a" style={{ background: "#3a3f48" }}>
-        //                     <ul>
-        //                         <a href="#" classNameName='nav-a' >Tipo de licencia </a>
-        //                     </ul>
-        //                 </div>
-        //             </li>
-        //             <li classNameName="sidebar-dropdown  active nav-item nav-a">
-        //                 <a href="#" classNameName='nav-link nav-a p-2'>
-        //                     <span>Empleado</span>
-        //                 </a>
-        //                 <div classNameName="sidebar-submenu " style={{ background: "#3a3f48" }}>
-        //                     <ul>
-        //                         <a href="#" classNameName='nav-a'>Gestionar </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Contratos </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Horarios </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Usuarios</a>
-        //                     </ul>
-        //                 </div>
-        //             </li>
-        //             <li classNameName="sidebar-dropdown">
-        //                 <a href="#" classNameName='nav-link nav-a p-2'>
-        //                     <i classNameName="fa fa-tachometer-alt"></i>
-        //                     <span>Operaciones</span>
-        //                 </a>
-        //                 <div classNameName="sidebar-submenu" style={{ background: "#3a3f48" }}>
-        //                     <ul>
-        //                         <a href="#" classNameName='nav-a'>Asistencia </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Registrar asistencias </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Justificaciones </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Permisos</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Licencias</a>
-        //                     </ul>
-        //                 </div>
-        //             </li>
-        //             <li classNameName="sidebar-dropdown">
-        //                 <a href="#" classNameName='nav-link nav-a p-2'>
-        //                     <span>Consultas</span>
-        //                 </a>
-        //                 <div classNameName="sidebar-submenu" style={{ background: "#3a3f48" }}>
-        //                     <ul>
-        //                         <a href="#" classNameName='nav-a'>Asistencias </a>
-        //                     </ul>
-        //                 </div>
-        //             </li>
-        //             <li classNameName="sidebar-dropdown">
-        //                 <a href="#" classNameName='nav-link nav-a p-2'>
-        //                     {/* <i classNameName="fa fa-tachometer-alt"></i> */}
-        //                     <span>Reportes</span>
-        //                 </a>
-        //                 <div classNameName="sidebar-submenu" style={{ background: "#3a3f48" }}>
-        //                     <ul>
-        //                         <a href="#" classNameName='nav-a'>Tardanzas </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Asistencias </a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Inacistencias por empleado</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Licencias</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Licencias por tipo</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Inacistencias</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a'>Estadísticas tardanzas</a>
-        //                         <br />
-        //                         <a href="#" classNameName='nav-a '>Estadísticas inasistencias</a>
-        //                     </ul>
-        //                 </div>
-        //             </li>
-
-        //         </ul>
-        //     </div>
-
-        // </div>
-        // </div>
 
 
         <div className="fixed-top page-wrapper chiller-theme toggled">
@@ -132,7 +28,8 @@ export default function NavLateral() {
                             <span className="user-name"> Paola Cieza </span>
                             <span className="user-role">Administrator</span> </div>
                     </div>
-                    {/* <!-- sidebar-header  --> */}
+
+
                     <div className="sidebar-search">
                         <div>
                             <div className="input-group">
@@ -145,7 +42,10 @@ export default function NavLateral() {
                             </div>
                         </div>
                     </div>
-                    {/* <!-- sidebar-search  --> */}
+
+
+
+
                     <div className="sidebar-menu">
                         <ul>
                             <li className="header-menu">
@@ -180,7 +80,9 @@ export default function NavLateral() {
                             <li className="sidebar-dropdown">
                                 <a href="#">
                                     <i className="fa fa-laptop"></i>
-                                    {/* <!-- <i className="far fa-gem"></i> --> */}
+                                    
+
+
                                     <span>Operaciones</span>
                                 </a>
                                 <div className="sidebar-submenu">
@@ -225,9 +127,7 @@ export default function NavLateral() {
 
                         </ul>
                     </div>
-                    {/* <!-- sidebar-menu  --> */}
                 </div>
-                {/* <!-- sidebar-content  --> */}
 
             </nav>
             
