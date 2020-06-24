@@ -26,7 +26,7 @@ export default function Login() {
 	return (
 		<div className='row justify-content-center pt-5 mb-5 '>
 			<div className='row mb-5'> </div>
-			<form className='border-0 rounded  '>
+			<form className='border-0 rounded  pt-5'>
 				
 				<h1 className='h1Inicio mt-5'>
 					<em>I</em>
@@ -37,11 +37,10 @@ export default function Login() {
 					<em>O</em>
 				</h1>
 
-				{/* <h1 className='text-center'>Inicio de sesión</h1> */}
 				<div className='form-group mt-5'>
 					<label htmlFor='username' className='text-white'>Usuario</label>
 					<input
-						className='form-control'
+						className='form-control inputInicio'
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						type='text'
@@ -52,7 +51,7 @@ export default function Login() {
 				<div className='form-group'>
 					<label htmlFor='password' className='text-white'>Contraseña</label>
 					<input
-						className='form-control'
+						className='form-control border border-top-0 bg-transparent  border-danger active-pink-2'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						type='password'
@@ -60,9 +59,10 @@ export default function Login() {
 						id='password'
 					/>
 				</div>
+				<div className='flex-end'>
 				<button
 					type='button'
-					className='btn btn-success'
+					className='btn degradado text-white '
 					onClick={() =>
 						login({
 							variables: { username, password },
@@ -71,6 +71,8 @@ export default function Login() {
 				>
 					Ingresar
 			</button>
+				</div>
+				
 			</form>
 
 		</div>

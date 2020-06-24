@@ -890,11 +890,10 @@ body::after {
 
 .h1Inicio {
   margin: 0;
-  /* height: 12vmin;
-  width: 120vmin; */
   display: flex;
   justify-content: center;
   position: relative;
+  color: #c7490f;
 }
 
 .h1Inicio::before {
@@ -902,20 +901,19 @@ body::after {
   display: block;
   position: absolute;
   z-index: -1;
-  /* top: -26vmin; */
   left: 12.5vmin;
   top: -2vmin;
   width: 10vmin;
   height: 10vmin;
   border-radius: 50%;
-  border: 0.75vmin solid currentColor;
+  border: 0.5vmin solid currentColor;
   box-sizing: border-box;
+  color: rgb(104, 96, 96);
 }
 
 em {
   font-family: 'Josefin Sans', sans-serif;
   color: currentColor;
-  /* font-size: 15vmin; */
   font-size: 5vmin;
   position: relative;
   font-style: normal;
@@ -934,27 +932,27 @@ em.planet::before {
   position: absolute;
   top: -.5vmin;
   left: 1vmin;
-  /* left: 3.5vmin; */
   z-index: -1;
-  width: 5vmin;
-  height: 5vmin;
   border-radius: 50%;
   background: black;
 }
 
 em.planet.left {
-  /* -webkit-transform-origin: 40vmin 5vmin; */
-  -webkit-transform-origin: 15vmin 5vmin;
-  transform-origin: 15vmin 5vmin;
-  /* transform-origin: 40vmin 5vmin; */
+  -webkit-transform-origin: 7.5vmin 3vmin;
+  transform-origin: 7.5vmin 3vmin;
 }
 
 em.planet.right {
-  /* -webkit-transform-origin: -20vmin 5vmin;
-  transform-origin: -20vmin 5vmin; */
-  -webkit-transform-origin: -5vmin 5vmin;
-  transform-origin: -5vmin 5vmin;
+  -webkit-transform-origin: -2.5vmin 3vmin;
+  transform-origin: -2.5vmin 3vmin;
+  
 }
+/* em.planet.right {
+  -webkit-transform-origin: -2.5vmin 3vmin;
+  transform-origin: -3vmin 3.5vmin;
+  left: 0vmin;
+  top: -1.2vmin;
+} */
 
 @-webkit-keyframes planet-rotate {
   to {
@@ -967,3 +965,6 @@ em.planet.right {
     transform: rotate(1turn);
   }
 }
+
+
+/* --------------------------------------- */

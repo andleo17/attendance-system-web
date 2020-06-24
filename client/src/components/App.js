@@ -8,18 +8,23 @@ import Footer from './Footer';
 import Employeed from './Employeed';
 import LicenseType from '../pages/LicenseType';
 import Login from '../pages/Login';
+import EmployeedForm from '../pages/EmployeedForm';
 
 function App() {
 	return (
-		<Switch>
-			<Route exact path='/login' component={Login} />
-			<Fragment>
-				<NavLateral />
-				<Footer />
-				<Route exact path='/tipo-licencia' component={LicenseType} />
-				<Route exact path='/empleado' component={Employeed} />
-			</Fragment>
-		</Switch>
+		<Fragment>
+			<Footer />
+			<Switch>
+				<Route exact path='/login' component={Login} />
+				<Fragment>
+					{/* <NavLateral /> */}
+					<Route exact path='/tipo-licencia' component={LicenseType} />
+					<Route exact path='/empleado' component={Employeed} />
+					<Route exact path='/empleado-formulario' component={EmployeedForm} />
+				</Fragment>
+			</Switch>
+		</Fragment>
+
 	);
 }
 
