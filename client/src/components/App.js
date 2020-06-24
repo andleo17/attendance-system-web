@@ -12,7 +12,11 @@ import Login from '../pages/Login';
 function App() {
 	return (
 		<Switch>
+			<Fragment>
+			<Footer />
 			<Route exact path='/login' component={Login} />
+			</Fragment>
+
 			<Fragment>
 				<NavLateral />
 				<Footer />
