@@ -11,19 +11,21 @@ import Login from '../pages/Login';
 
 function App() {
 	return (
-		<Switch>
-			<Fragment>
+		<Fragment>
 			<Footer />
-			<Route exact path='/login' component={Login} />
-			</Fragment>
-
-			<Fragment>
-				<NavLateral />
-				<Footer />
-				<Route exact path='/tipo-licencia' component={LicenseType} />
-				<Route exact path='/empleado' component={Employeed} />
-			</Fragment>
-		</Switch>
+			<Switch>
+				<Route exact path='/login' component={Login} />
+				<Fragment>
+					<NavLateral />
+					<Route
+						exact
+						path='/tipo-licencia'
+						component={LicenseType}
+					/>
+					<Route exact path='/empleado' component={Employeed} />
+				</Fragment>
+			</Switch>
+		</Fragment>
 	);
 }
 
