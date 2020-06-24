@@ -25,41 +25,56 @@ export default function Login() {
 		history.push('/');
 	}
 	return (
-		<form className='border border-gray rounded p-4'>
-			<h1 className='text-center'>Inicio de sesión</h1>
-			<div className='form-group'>
-				<label htmlFor='username'>Usuario</label>
-				<input
-					className='form-control'
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					type='text'
-					name='username'
-					id='username'
-				/>
-			</div>
-			<div className='form-group'>
-				<label htmlFor='password'>Contraseña</label>
-				<input
-					className='form-control'
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					type='password'
-					name='password'
-					id='password'
-				/>
-			</div>
-			<button
-				type='button'
-				className='btn btn-success'
-				onClick={() =>
-					login({
-						variables: { username, password },
-					})
-				}
-			>
-				Ingresar
+		<div className='row justify-content-center pt-5 mb-5 '>
+			<div className='row mb-5'> </div>
+			<form className='border-0 rounded  '>
+				
+				<h1 className='h1Inicio mt-5'>
+					<em>I</em>
+					<em>N</em>
+					<em class="planet left">I</em>
+					<em>C</em>
+					<em class="planet right">I</em>
+					<em>O</em>
+				</h1>
+
+				{/* <h1 className='text-center'>Inicio de sesión</h1> */}
+				<div className='form-group mt-5'>
+					<label htmlFor='username' className='text-white'>Usuario</label>
+					<input
+						className='form-control'
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						type='text'
+						name='username'
+						id='username'
+					/>
+				</div>
+				<div className='form-group'>
+					<label htmlFor='password' className='text-white'>Contraseña</label>
+					<input
+						className='form-control'
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						type='password'
+						name='password'
+						id='password'
+					/>
+				</div>
+				<button
+					type='button'
+					className='btn btn-success'
+					onClick={() =>
+						login({
+							variables: { username, password },
+						})
+					}
+				>
+					Ingresar
 			</button>
-		</form>
+			</form>
+
+		</div>
+
 	);
 }

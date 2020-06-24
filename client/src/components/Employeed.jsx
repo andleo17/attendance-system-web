@@ -7,7 +7,7 @@ import foto from '../recursos/perfil.jpg'
 export default function Employeed() {
     return (
 
-        <div className='row  container-fluid' >
+        <div className='row fixed-top  container-fluid' >
             <div className='col-lg-2'>
                 <span></span>
             </div>

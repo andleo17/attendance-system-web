@@ -14,6 +14,7 @@ function App() {
 		<Switch>
 			<Route exact path='/login'>
 				<Login />
+				<Footer />
 			</Route>
 			<Fragment>
 				<NavLateral />

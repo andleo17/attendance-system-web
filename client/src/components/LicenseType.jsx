@@ -137,10 +137,10 @@ export default function LicenseType() {
 					</form>
 					<br />
 					<div className=' row '>
-						<div className='col-lg-3 '>
-							<div className=' m-3  card-licensetype text-lg-center '>
+						<div className='col-lg-3  '>
+							<div className=' m-1  card-licensetype text-lg-center '>
 								<div
-									className='row p-1 '
+									className='row pl-4 '
 									style={{ background: '#D5691E' }}
 								>
 									<h3 className='text-center text-white'>
@@ -149,9 +149,9 @@ export default function LicenseType() {
 								</div>
 								<img src={foto} alt='' className='w-50 h-50' />
 
-								<div className='row p-2'>
-									<div className=' align-content-start'>
-										<label className='text-black '>
+								<div className='row p-3'>
+									<div className=' align-content-start p-1'>
+										<label className=' text-sm-left text-black mr-1'>
 											{' '}
 											<b>Nombre:</b>{' '}
 										</label>
@@ -159,34 +159,44 @@ export default function LicenseType() {
 											Licencia por embarazo
 										</label>
 									</div>
-									<div className=' '>
-										<label
-											htmlFor=''
-											className='text-black'
-										>
+									<div className='align-content-start p-1 '>
+										<label	className='text-black mr-1'	>
 											{' '}
-											<b>Tiempo:</b> <span>90 días</span>
-										</label>{' '}
+											<b>Tiempo:</b> {' '}
+										</label>
+										<label htmlFor=''>
+										90 días
+										</label>
+
+
 										<br />
 									</div>
 								</div>
-								<div className=' row p-1 text-center  border border-darken-1 border-bottom-0 border-right-0'>
+								<div className=' row pb-1 pt-1 pl-4 pr-4  justify-content-lg-around  border border-darken-1 border-bottom-0 border-right-0'>
 									<button
-										className='col-sm-4 degradado border border-whit'
+										className='col-lg-2 degradado border-0  m-1 p-0 '
 										data-toggle='modal'
 										data-target='#nuevoTipoLicencia'
 									>
-										Modificar
+										<i className='fa fa-pencil-alt'></i>
+										{/* Modificar */}
 									</button>
-									<button className='col-sm-4 degradado border border-black '>
-										Dar baja
+
+									<button className='col-lg-2 degradado border-0 m-1 p-0'>
+									<i className='fas fa-ban'></i>
+										{/* Dar baja */}
 									</button>
-									<button className='col-sm-4 degradado border border-white '>
-										Eliminar
+									<button className='col-lg-2 degradado border-0 m-1 p-0 '>
+									<i
+											className='fa fa-trash-alt'
+											aria-hidden='true'
+										></i>
+										{/* Eliminar */}
 									</button>
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<br />
