@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Employeed from './Employeed';
 import LicenseType from './LicenseType';
 import Login from '../pages/Login';
+import EmployeedForm from '../pages/EmployeedForm';
 
 function App() {
 	return (
@@ -16,16 +17,14 @@ function App() {
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Fragment>
-					<NavLateral />
-					<Route
-						exact
-						path='/tipo-licencia'
-						component={LicenseType}
-					/>
+					{/* <NavLateral /> */}
+					<Route exact path='/tipo-licencia' component={LicenseType} />
 					<Route exact path='/empleado' component={Employeed} />
+					<Route exact path='/empleado-formulario' component={EmployeedForm} />
 				</Fragment>
 			</Switch>
 		</Fragment>
+
 	);
 }
 
