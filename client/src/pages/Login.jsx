@@ -14,15 +14,14 @@ const LOGIN_QUERY = gql`
 `;
 
 export default function Login() {
-	const history = useHistory();
-
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
-	const [login, { loading, data }] = useLazyQuery(LOGIN_QUERY);
+	const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY);
 	if (loading) return <h1>Loading...</h1>;
+	if (error) return <h1>{error.message}</h1>;
 	if (data && data.login) {
-		history.push('/');
+		return <Redirect to='/' />;
 	}
 	return (
 		<div className='row justify-content-center pt-5 mb-5 '>

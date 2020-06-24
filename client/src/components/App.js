@@ -12,19 +12,12 @@ import Login from '../pages/Login';
 function App() {
 	return (
 		<Switch>
-			<Route exact path='/login'>
-				<Login />
-				<Footer />
-			</Route>
+			<Route exact path='/login' component={Login} />
 			<Fragment>
 				<NavLateral />
 				<Footer />
-				<Route exact path='/tipo-licencia'>
-					<LicenseType />
-				</Route>
-				<Route exact path='/empleado'>
-					<Employeed />
-				</Route>
+				<Route exact path='/tipo-licencia' component={LicenseType} />
+				<Route exact path='/empleado' component={Employeed} />
 			</Fragment>
 		</Switch>
 	);
