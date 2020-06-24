@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+import { Redirect, useHistory } from 'react-router';
+import LicenseTypeCard from '../components/LicenseTypeCard'
 import foto from '../recursos/embarazada.jpg';
 import foto1 from '../recursos/fallecimiento.jpg';
 
+const LIST_LICENSETYPE = gql`
+	query ListLicenseType {
+		licenseTypes{
+			description
+			maximumDays
+		}
+	}
+`;
+
+
 export default function LicenseType() {
+	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
+	if (loading) return <h1>Loading...</h1>;
+	if (error) return <h1>{error.message}</h1>;
 	return (
 		<div className=' row container-fluid'>
 			<div className='col-lg-2'>
@@ -137,66 +154,14 @@ export default function LicenseType() {
 					</form>
 					<br />
 					<div className=' row '>
-						<div className='col-lg-3  '>
-							<div className=' m-1  card-licensetype text-lg-center '>
-								<div
-									className='row pl-4 '
-									style={{ background: '#D5691E' }}
-								>
-									<h3 className='text-center text-white'>
-										LICENCIA
-									</h3>
-								</div>
-								<img src={foto} alt='' className='w-50 h-50' />
-
-								<div className='row p-3'>
-									<div className=' align-content-start p-1'>
-										<label className=' text-sm-left text-black mr-1'>
-											{' '}
-											<b>Nombre:</b>{' '}
-										</label>
-										<label htmlFor=''>
-											Licencia por embarazo
-										</label>
-									</div>
-									<div className='align-content-start p-1 '>
-										<label	className='text-black mr-1'	>
-											{' '}
-											<b>Tiempo:</b> {' '}
-										</label>
-										<label htmlFor=''>
-										90 días
-										</label>
-
-
-										<br />
-									</div>
-								</div>
-								<div className=' row pb-1 pt-1 pl-4 pr-4  justify-content-lg-around  border border-darken-1 border-bottom-0 border-right-0'>
-									<button
-										className='col-lg-2 degradado border-0  m-1 p-0 '
-										data-toggle='modal'
-										data-target='#nuevoTipoLicencia'
-									>
-										<i className='fa fa-pencil-alt'></i>
-										{/* Modificar */}
-									</button>
-
-									<button className='col-lg-2 degradado border-0 m-1 p-0'>
-									<i className='fas fa-ban'></i>
-										{/* Dar baja */}
-									</button>
-									<button className='col-lg-2 degradado border-0 m-1 p-0 '>
-									<i
-											className='fa fa-trash-alt'
-											aria-hidden='true'
-										></i>
-										{/* Eliminar */}
-									</button>
-								</div>
-							</div>
-						</div>
-
+					{			
+							data.licenseTypes.map((lt) =>
+								{return <LicenseTypeCard 
+									description ={lt.description}
+									duration = {lt.maximumDays}
+								/>}
+							)	
+					}
 					</div>
 				</div>
 				<br />

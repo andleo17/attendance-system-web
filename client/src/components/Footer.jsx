@@ -11,7 +11,7 @@ export default function Footer() {
 					<a
 						target='_blank'
 						rel='noopener noreferrer'
-						href='#'
+						href='https://www.facebook.com/paola.cieza'
 						className='text-danger'
 					>
 						Tercermundistas

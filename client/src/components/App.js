@@ -6,7 +6,7 @@ import Header from './Header';
 import NavLateral from './NavLateral';
 import Footer from './Footer';
 import Employeed from './Employeed';
-import LicenseType from './LicenseType';
+import LicenseType from '../pages/LicenseType';
 import Login from '../pages/Login';
 
 function App() {
