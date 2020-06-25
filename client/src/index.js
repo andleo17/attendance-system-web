@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 
-import ApolloClient from 'apollo-boost';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter } from 'react-router-dom';
 
 const client = new ApolloClient({
 	uri: 'http://andleo-001-site1.dtempurl.com/attendance-usat-server/',
+	cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

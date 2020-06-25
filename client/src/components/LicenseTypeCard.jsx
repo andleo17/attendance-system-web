@@ -1,74 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import foto from '../recursos/embarazada.jpg';
-import LicenseTypeModal from '../components/LicenseTypeModal'
 
-export default function LicenseTypeCard(props){
-    const { showModal } = props;
-    let {licenceType} =props;
-    return( 
-        <div className='col-lg-3  '>
-                <div className=' m-1  card-licensetype text-lg-center '>
-                    <div
-                        className='row pl-4 '
-                        style={{ background: '#D5691E' }}
-                    >
-                        <h3 className='text-center text-white'>
-                            LICENCIA
-                        </h3>
-                    </div>
-                    <img src={foto} alt='' className='w-50 h-50' />
-
-                    <div className='row p-3'>
-                        <div className=' align-content-start p-1'>
-                            <label className=' text-sm-left text-black mr-1'>
-                                {' '}
-                                <b>Nombre:</b>{' '}
-                            </label>
-                            <label htmlFor=''>
-                                {licenceType.description}
-                            </label>
-                        </div>
-                        <div className='align-content-start p-1 '>
-                            <label	className='text-black mr-1'	>
-                                {' '}
-                                <b>Tiempo:</b> {' '}
-                            </label>
-                            <label htmlFor=''>
-                                {licenceType.maximumDays} dias
-                            </label>
-                            <br />
-                        </div>
-                    </div>
-                    <div className=' row pb-1 pt-1 pl-4 pr-4  justify-content-lg-around  border border-darken-1 border-bottom-0 border-right-0'>
-                        <button
-                            className='col-lg-2 degradado border-0  m-1 p-0 '
-                            data-toggle='modal'
-                            data-target= {
-                                '#modal' + licenceType.id
-                            }
-                            //onClick={() => showModal(licenceType)}
-                        >
-                            <i className='fa fa-pencil-alt'></i>
-                            {/* Modificar */}
-                        </button>
-
-                        <button className='col-lg-2 degradado border-0 m-1 p-0'>
-                        <i className='fas fa-ban'></i>
-                            {/* Dar baja */}
-                        </button>
-                        <button className='col-lg-2 degradado border-0 m-1 p-0 '>
-                        <i
-                                className='fa fa-trash-alt'
-                                aria-hidden='true'
-                            ></i>
-                            {/* Eliminar */}
-                        </button>
-                    </div>
-                </div>
-                <LicenseTypeModal licenceType= {licenceType}/>	
-        </div>
-        
-    );
+export default function LicenseTypeCard(props) {
+	const { data, setData } = props;
+	return (
+		<div className='col-sm-3 p-3'>
+			<div className='card'>
+				<div className='card-title text-lg-center'>
+					<h3
+						className='text-white'
+						style={{ background: '#D5691E' }}
+					>
+						LICENCIA
+					</h3>
+				</div>
+				<div className='text-center'>
+					<img src={foto} alt='' className='h-50 w-50' />
+				</div>
+				<div className='card-body '>
+					<div className='mb-2'>
+						<b>Nombre</b>
+						<div>{data.description}</div>
+					</div>
+					<div className='mb-1'>
+						<b>Tiempo</b>
+						<div>{data.maximumDays} días</div>
+					</div>
+				</div>
+				<div className='card-footer d-flex justify-content-between'>
+					<button
+						className='degradado btn'
+						data-toggle='modal'
+						data-target='#frmLicenseType'
+						onClick={() => setData(data)}
+					>
+						<i className='fa fa-pencil-alt text-white'></i>
+					</button>
+					<button className='degradado btn'>
+						<i className='fas fa-ban text-white'></i>
+					</button>
+					<button className='degradado btn'>
+						<i className='fa fa-trash-alt text-white'></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	);
 }
