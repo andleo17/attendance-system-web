@@ -4,7 +4,7 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import NavLateral from './NavLateral';
 import Footer from './Footer';
-import Employeed from './Employeed';
+import Employee from '../pages/Employee';
 import LicenseType from './LicenseType';
 import Login from '../pages/Login';
 import EmployeedForm from '../pages/EmployeedForm';
@@ -28,7 +28,7 @@ function App() {
 							path='/tipo-licencia'
 							component={LicenseType}
 						/>
-						<Route exact path='/empleados' component={Employeed} />
+						<Route exact path='/empleados' component={Employee} />
 						<Route
 							exact
 							path='/empleado-formulario'
