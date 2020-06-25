@@ -9,7 +9,7 @@ namespace Server.Schema.Inputs
 			base.Configure(descriptor);
 
 			descriptor.Field(i => i.Id)
-				.Type<IdType>();
+				.Type<ByteType>();
 
 			descriptor.Field(i => i.Description)
 				.Type<NonNullType<StringType>>();
