@@ -17,7 +17,12 @@ const LIST_LICENSETYPE = gql`
 `;
 
 export default function LicenseType() {
-	const [selectedItem, setSelectedItem] = useState({});
+	const [selectedItem, setSelectedItem] = useState({
+		__typename: 'LicenseType',
+		description: '',
+		id: '',
+		maximumDays: 0,
+	});
 
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
 	if (loading) return <h1>Loading...</h1>;

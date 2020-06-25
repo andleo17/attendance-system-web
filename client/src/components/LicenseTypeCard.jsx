@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import foto from '../recursos/embarazada.jpg';

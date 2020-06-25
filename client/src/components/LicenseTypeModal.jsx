@@ -3,7 +3,7 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 
 export default function LicenseTypeModal(props) {
-	const { licenseType, changeData } = props;
+	const { licenseType } = props;
 	return (
 		<div id='frmLicenseType' className='modal fade' tabIndex='-1'>
 			<div className='modal-dialog modal-sm modal-dialog-centered'>
@@ -26,14 +26,7 @@ export default function LicenseTypeModal(props) {
 									id='txtName'
 									type='text'
 									className='form-control'
-									onChange={(e) =>
-										changeData(
-											Object.assign(licenseType, {
-												description: e.target.value,
-											})
-										)
-									}
-									value={licenseType.description}
+									defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
@@ -42,14 +35,7 @@ export default function LicenseTypeModal(props) {
 									id='txtTiempo'
 									type='number'
 									className='form-control'
-									onChange={(e) =>
-										changeData(
-											Object.assign(licenseType, {
-												maximumDays: e.target.value,
-											})
-										)
-									}
-									value={licenseType.maximumDays}
+									defaultValue={licenseType.maximumDays}
 								/>
 							</div>
 						</form>
