@@ -79,7 +79,7 @@ namespace Server.Schema
 
 			descriptor.Field(m => m.DeleteLicenseType(default, default))
 				.Type<LicenseTypeType>()
-				.Argument("licenseTypeId", a => a.Type<NonNullType<IdType>>());
+				.Argument("licenseTypeId", a => a.Type<NonNullType<ByteType>>());
 
 			descriptor.Field(m => m.AddPermission(default, default))
 				.Type<PermissionType>()
