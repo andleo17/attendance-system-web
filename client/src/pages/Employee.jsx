@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
+import { NavLink } from 'react-router-dom';
 
 export default function Employee() {
 	return (
@@ -14,20 +15,26 @@ export default function Employee() {
 					Empleado
 				</h1>
 			</div>
-			<div className='bg-dark p-3 form-group ml-3 mr-3'>
-				<form
-					action=''
-					className='row buscar form-group d-flex mt-2 justify-content-sm-start m-2 md-form form-sm active-pink-2 mt-2'
-				>
-					<input
-						type='text'
-						className=' form-control-sm m-1 mr-3 col-sm-10 '
-						placeholder='Buscar'
-					/>
-					<button className=' degradado border-0 col-sm-1'>
-						<i className='fa fa-user-plus'></i>
-						{/* NUEVO */}
-					</button>
+			<div className='bg-dark p-3'>
+				<form className='buscar justify-content-sm-start'>
+					<div className='form-row'>
+						<div className='col'>
+							<input
+								type='text'
+								className='form-control'
+								placeholder='Buscar'
+							/>
+						</div>
+						<div className='col-1'>
+							<NavLink
+								to='/empleado-formulario'
+								className='degradado d-flex h-100 align-items-center justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-user-plus mr-1'></i>
+								NUEVO
+							</NavLink>
+						</div>
+					</div>
 				</form>
 				<br />
 				<div className=' row card-employeed'>

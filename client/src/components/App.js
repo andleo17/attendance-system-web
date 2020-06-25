@@ -5,7 +5,7 @@ import '../style/bootstrap.css';
 import NavLateral from './NavLateral';
 import Footer from './Footer';
 import Employee from '../pages/Employee';
-import LicenseType from './LicenseType';
+import LicenseType from '../pages/LicenseType';
 import Login from '../pages/Login';
 import EmployeedForm from '../pages/EmployeedForm';
 
