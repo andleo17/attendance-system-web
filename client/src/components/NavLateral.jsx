@@ -5,7 +5,7 @@ import foto from '../recursos/perfil.jpg';
 
 export default function NavLateral() {
 	return (
-		<div className='page-wrapper chiller-theme toggled'>
+		<div className='fixed-top page-wrapper chiller-theme toggled'>
 			<a id='show-sidebar' className='btn btn-sm btn-dark' href='#'>
 				<i className='fas fa-bars'></i>
 			</a>

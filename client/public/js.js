@@ -22,6 +22,7 @@ jQuery(function ($) {
   }
 });
 
+
 $("#close-sidebar").click(function() {
   $(".page-wrapper").removeClass("toggled");
 });

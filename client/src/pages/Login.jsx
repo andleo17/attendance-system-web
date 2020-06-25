@@ -24,9 +24,9 @@ export default function Login() {
 		return <Redirect to='/' />;
 	}
 	return (
-		<div className='row justify-content-center pt-5 mb-5 '>
+		<div className='row justify-content-center inputEmpleado pt-5 mb-5 '>
 			<div className='row mb-5'> </div>
-			<form className='border-0 rounded  pt-5'>
+			<form className='border-0 rounded inputLogin pt-5'>
 				
 				<h1 className='h1Inicio mt-5'>
 					<em>I</em>
@@ -40,7 +40,7 @@ export default function Login() {
 				<div className='form-group mt-5'>
 					<label htmlFor='username' className='text-white'>Usuario</label>
 					<input
-						className='form-control inputInicio'
+						className='form-control '
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						type='text'
@@ -51,10 +51,11 @@ export default function Login() {
 				<div className='form-group'>
 					<label htmlFor='password' className='text-white'>Contraseña</label>
 					<input
-						className='form-control border border-top-0 bg-transparent  border-danger active-pink-2'
+						className='form-control '
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						type='password'
+						// type='text'
 						name='password'
 						id='password'
 					/>
