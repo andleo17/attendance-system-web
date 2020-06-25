@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
+import { NavLink } from 'react-router-dom';
+import DropDownMenu from './DropDownMenu';
+import MenuItem from './MenuItem';
 
-export default function NavLateral() {
+export default function NavLateral(props) {
 	return (
-		<div className='page-wrapper chiller-theme toggled'>
-			<a id='show-sidebar' className='btn btn-sm btn-dark' href='#'>
+		<Fragment>
+			<span
+				id='show-sidebar'
+				className='btn btn-sm btn-dark'
+				onClick={() => props.setShow(!props.show)}
+			>
 				<i className='fas fa-bars'></i>
-			</a>
-			<nav id='sidebar' className='sidebar-wrapper'>
+			</span>
+			<nav id='sidebar' className='sidebar-wrapper '>
 				<div className='sidebar-content'>
 					<div className='sidebar-brand'>
-						<a href='#'>SISTEMA DE ASISTENCIA</a>
-						<div id='close-sidebar'>
+						<NavLink to='/'>SISTEMA DE ASISTENCIA</NavLink>
+						<div
+							id='close-sidebar'
+							onClick={() => props.setShow(!props.show)}
+						>
 							<i className='fas fa-times'></i>
 						</div>
 					</div>
@@ -22,14 +32,12 @@ export default function NavLateral() {
 							<img
 								src={foto}
 								className='img-responsive img-rounded'
-								alt='User picture'
+								alt='User'
 							/>
 						</div>
 						<div className='user-info'>
 							<span className='user-name'> Paola Cieza </span>
-							<span className='user-role'>
-								Administrator
-							</span>{' '}
+							<span className='user-role'>Administrator</span>
 						</div>
 					</div>
 					<div className='sidebar-search'>
@@ -56,146 +64,76 @@ export default function NavLateral() {
 							<li className='header-menu'>
 								<span>General</span>
 							</li>
-
-							<li className='sidebar-dropdown'>
-								<a href='#'>
-									<i className='fa fa-cogs'></i>
-									<span>Mantenimiento</span>
-								</a>
-								<div className='sidebar-submenu'>
-									<ul>
-										<li>
-											{' '}
-											<a href='#'>Tipo de licencia </a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li className='sidebar-dropdown'>
-								<a href='#'>
-									<i className='fa fa-child xd'></i>
-									<span>Empleado</span>
-								</a>
-								<div className='sidebar-submenu'>
-									<ul>
-										<li>
-											{' '}
-											<a href='#'>Gestionar </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Contratos </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Horarios </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Usuarios </a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li className='sidebar-dropdown'>
-								<a href='#'>
-									<i className='fa fa-laptop'></i>
-									{/* <!-- <i className="far fa-gem"></i> --> */}
-									<span>Operaciones</span>
-								</a>
-								<div className='sidebar-submenu'>
-									<ul>
-										<li>
-											{' '}
-											<a href='#'>Asistencia </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>
-												Registrar Asistencia{' '}
-											</a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Justificaciones </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Permisos </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Licencias </a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li className='sidebar-dropdown'>
-								<a href='#'>
-									<i className='fa fa-question'></i>
-									<span>Consultas</span>
-								</a>
-								<div className='sidebar-submenu'>
-									<ul>
-										<li>
-											{' '}
-											<a href='#'>Asistencias </a>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li className='sidebar-dropdown'>
-								<a href='#'>
-									<i className='fa fa-folder'></i>
-									<span>Reportes</span>
-								</a>
-								<div className='sidebar-submenu'>
-									<ul>
-										<li>
-											{' '}
-											<a href='#'>Tardanzas </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Asistencias </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>
-												Inacistencias por empleado{' '}
-											</a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Licencias </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Licencias por tipo </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>Inacistencias </a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>
-												Estadísticas tardanzas{' '}
-											</a>
-										</li>
-										<li>
-											{' '}
-											<a href='#'>
-												Estadísticas inasistencias{' '}
-											</a>
-										</li>
-									</ul>
-								</div>
-							</li>
+							<DropDownMenu
+								title='Mantenimiento'
+								icon='fa fa-cogs'
+							>
+								<MenuItem
+									path='/tipo-licencia'
+									title='Tipo de licencia'
+								/>
+								<MenuItem />
+								<MenuItem />
+							</DropDownMenu>
+							<DropDownMenu title='Empleado' icon='fa fa-child'>
+								<MenuItem path='/empleados' title='Gestionar' />
+								<MenuItem path='/contratos' title='Contratos' />
+								<MenuItem path='/horarios' title='Horarios' />
+								<MenuItem path='/usuarios' title='Usuario' />
+							</DropDownMenu>
+							<DropDownMenu
+								title='Operaciones'
+								icon='fa fa-laptop'
+							>
+								<MenuItem
+									path='/asistencias'
+									title='Asistencia'
+								/>
+								<MenuItem
+									path='/justificaciones'
+									title='Justificaciones'
+								/>
+								<MenuItem path='/permisos' title='Permisos' />
+								<MenuItem path='/licencias' title='Licencias' />
+							</DropDownMenu>
+							<DropDownMenu title='Reportes' icon='fa fa-folder'>
+								<MenuItem
+									path='/reportes/tardanzas'
+									title='Tardanzas'
+								/>
+								<MenuItem
+									path='/reportes/asistencias'
+									title='Asistencias'
+								/>
+								<MenuItem
+									path='/reportes/inasistencias'
+									title='Inasistencias'
+								/>
+								<MenuItem
+									path='/reportes/inasistencias-empleado'
+									title='Inasistencias por empleado'
+								/>
+								<MenuItem
+									path='/reportes/licencias'
+									title='Licencias'
+								/>
+								<MenuItem
+									path='/reportes/licencias-tipo'
+									title='Licencias por tipo'
+								/>
+								<MenuItem
+									path='/reportes/estadisticas-inasistencias'
+									title='Estadísticas de inasistencias'
+								/>
+								<MenuItem
+									path='/reportes/estadisticas-asistencias'
+									title='Estadísticas de asistencias'
+								/>
+							</DropDownMenu>
 						</ul>
 					</div>
 				</div>
 			</nav>
-		</div>
+		</Fragment>
 	);
 }

@@ -26,6 +26,7 @@
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
+  --sistema: #D5691E;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -2877,6 +2878,100 @@ fieldset:disabled a.btn {
 .show > .btn-dark.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
 }
+
+/* ---------------------------------------- color del sisteme-------------------------------------- */
+.text-sistema {
+  color: #D5691E !important;
+}
+
+a.text-sistema:hover, a.text-dark:focus {
+  color: #c7763c !important;
+}
+
+.btn-sistema {
+  color: #fff;
+  background-color: #D5691E;
+  border-color: #D5691E;
+}
+
+.btn-sistema:hover {
+  color: #fff;
+  background-color: #ad581c;
+  border-color: #b95107;
+}
+
+.btn-sistema:focus, .btn-sistema.focus {
+  color: #fff;
+  background-color: #ad581c;
+  border-color: #b95107;
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+
+.btn-sistema.disabled, .btn-sistema:disabled {
+  color: #fff;
+  background-color: #D5691E;
+  border-color: #D5691E;
+}
+
+.btn-sistema:not(:disabled):not(.disabled):active, .btn-sistema:not(:disabled):not(.disabled).active,
+.show > .btn-dark.dropdown-toggle {
+  color: #fff;
+  background-color: #b95107;
+  border-color: #a75012;
+}
+
+.btn-sistema:not(:disabled):not(.disabled):active:focus, .btn-sistema:not(:disabled):not(.disabled).active:focus,
+.show > .btn-sistema.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #b95107;
+}
+
+.btn-outline-sistema {
+  color: #D5691E;
+  border-color: #D5691E;
+}
+
+.btn-outline-sistema:hover {
+  color: #fff;
+  background-color: #D5691E;
+  border-color: #D5691E;
+}
+
+.btn-outline-sistema:focus, .btn-outline-sistema.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-outline-sistema.disabled, .btn-outline-sistema:disabled {
+  color: #D5691E;
+  background-color: transparent;
+}
+
+.btn-outline-sistema:not(:disabled):not(.disabled):active, .btn-outline-sistema:not(:disabled):not(.disabled).active,
+.show > .btn-outline-sistema.dropdown-toggle {
+  color: #fff;
+  background-color: #D5691E;
+  border-color: #D5691E;
+}
+
+.btn-outline-sistema:not(:disabled):not(.disabled):active:focus, .btn-outline-sistema:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-sistema.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.bg-primary {
+  background-color: #D5691E !important;
+}
+
+a.bg-primary:hover, a.bg-primary:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #b66023 !important;
+}
+
+.border-danger {
+  border-color: #D5691E !important;
+}
+/* ---------------------------------------- color del sisteme-------------------------------------- */
+
 
 .btn-outline-primary {
   color: #007bff;
