@@ -2,10 +2,13 @@ import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import foto from '../recursos/embarazada.jpg';
+import LicenseTypeModal from '../components/LicenseTypeModal'
 
 export default function LicenseTypeCard(props){
-    return(
-            <div className='col-lg-3  '>
+    const { showModal } = props;
+    let {licenceType} =props;
+    return( 
+        <div className='col-lg-3  '>
                 <div className=' m-1  card-licensetype text-lg-center '>
                     <div
                         className='row pl-4 '
@@ -24,7 +27,7 @@ export default function LicenseTypeCard(props){
                                 <b>Nombre:</b>{' '}
                             </label>
                             <label htmlFor=''>
-                                {props.description}
+                                {licenceType.description}
                             </label>
                         </div>
                         <div className='align-content-start p-1 '>
@@ -33,7 +36,7 @@ export default function LicenseTypeCard(props){
                                 <b>Tiempo:</b> {' '}
                             </label>
                             <label htmlFor=''>
-                                {props.duration} dias
+                                {licenceType.maximumDays} dias
                             </label>
                             <br />
                         </div>
@@ -42,7 +45,10 @@ export default function LicenseTypeCard(props){
                         <button
                             className='col-lg-2 degradado border-0  m-1 p-0 '
                             data-toggle='modal'
-                            data-target='#nuevoTipoLicencia'
+                            data-target= {
+                                '#modal' + licenceType.id
+                            }
+                            //onClick={() => showModal(licenceType)}
                         >
                             <i className='fa fa-pencil-alt'></i>
                             {/* Modificar */}
@@ -61,6 +67,8 @@ export default function LicenseTypeCard(props){
                         </button>
                     </div>
                 </div>
+                <LicenseTypeModal licenceType= {licenceType}/>	
         </div>
+        
     );
 }
