@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import '../style/App.css';
 import '../style/bootstrap.css';
-import Header from './Header';
 import NavLateral from './NavLateral';
 import Footer from './Footer';
 import Employeed from './Employeed';
@@ -11,20 +10,34 @@ import Login from '../pages/Login';
 import EmployeedForm from '../pages/EmployeedForm';
 
 function App() {
+	const [show, setShow] = useState(true);
 	return (
 		<Fragment>
 			<Footer />
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Fragment>
-					{/* <NavLateral /> */}
-					<Route exact path='/tipo-licencia' component={LicenseType} />
-					<Route exact path='/empleado' component={Employeed} />
-					<Route exact path='/empleado-formulario' component={EmployeedForm} />
+					<div
+						className={`page-wrapper chiller-theme ${
+							show ? 'toggled' : ''
+						}`}
+					>
+						<NavLateral setShow={setShow} show={show} />
+						<Route
+							exact
+							path='/tipo-licencia'
+							component={LicenseType}
+						/>
+						<Route exact path='/empleados' component={Employeed} />
+						<Route
+							exact
+							path='/empleado-formulario'
+							component={EmployeedForm}
+						/>
+					</div>
 				</Fragment>
 			</Switch>
 		</Fragment>
-
 	);
 }
 
