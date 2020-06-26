@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
 
-const LIST_LICENSETYPE = gql`
+export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
 		licenseTypes {
 			description
@@ -17,12 +17,14 @@ const LIST_LICENSETYPE = gql`
 `;
 
 export default function LicenseType() {
-	const [selectedItem, setSelectedItem] = useState({
+	const initialState = {
 		__typename: 'LicenseType',
-		description: '',
-		id: '',
-		maximumDays: 0,
-	});
+		description: null,
+		id: null,
+		maximumDays: null,
+		mode: 0,
+	};
+	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
 	if (loading) return <h1>Loading...</h1>;
@@ -44,6 +46,7 @@ export default function LicenseType() {
 					className='degradado border-0 ml-3'
 					data-toggle='modal'
 					data-target='#frmLicenseType'
+					onClick={() => setSelectedItem(initialState)}
 				>
 					NUEVO
 				</button>
