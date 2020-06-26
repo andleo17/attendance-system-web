@@ -130,11 +130,13 @@ export default function NavLateral(props) {
 							</DropDownMenu>
 						</ul>
 					</div>
-					<div className='sidebar-footer'>
-						<button type='button'>
-							<i className='fa fa-power-off'> Cerrar sesión</i>
-						</button>
-					</div>
+					<button
+						type='button'
+						className='btn text-white sidebar-footer'
+					>
+						<i className='fa fa-power-off' />
+						<span className='ml-3'>Cerrar sesión</span>
+					</button>
 				</div>
 			</nav>
 		</Fragment>
