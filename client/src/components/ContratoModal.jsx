@@ -34,10 +34,10 @@ export default function LicenseTypeModal(props) {
 	const [execute] = useMutation(mutation);
 	return (
 		<div id='frmLicenseType' className='modal fade inputEmpleado' tabIndex='-1'>
-			<div className='modal-dialog modal-sm modal-dialog-centered'>
+			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
-						<h5 className='modal-title'>Nuevo tipo de licencia</h5>
+						<h5 className='modal-title'>Nuevo contrato</h5>
 						<button
 							type='button'
 							className='close text-white'
@@ -46,14 +46,14 @@ export default function LicenseTypeModal(props) {
 							<span>&times;</span>
 						</button>
 					</div>
-					<div className='modal-body'>
+					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-								<label htmlFor='txtName'>Nombre:</label>
+								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
 									type='text'
-									className='form-control'
+									className='form-control '
 									onChange={(e) =>
 										(licenseType.description =
 											e.target.value)
@@ -62,7 +62,47 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-								<label htmlFor='txtTiempo'>Tiempo:</label>
+								<label htmlFor='txtTiempo'>Nombre:</label>
+								<input
+									id='txtTiempo'
+									type='text'
+									className='form-control'
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									defaultValue={licenseType.maximumDays}
+								/>
+							</div>
+                            <div className='form-group'>
+								<label htmlFor='txtTiempo'>Fecha inicio:</label>
+								<input
+									id='txtTiempo'
+									type='date'
+									className='form-control'
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									defaultValue={licenseType.maximumDays}
+								/>
+							</div>
+                            <div className='form-group'>
+								<label htmlFor='txtTiempo'>Fecha fin:</label>
+								<input
+									id='txtTiempo'
+									type='date'
+									className='form-control'
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									defaultValue={licenseType.maximumDays}
+								/>
+                                
+							</div>
+                            <div className='form-group'>
+								<label htmlFor='txtTiempo'>Monto:</label>
 								<input
 									id='txtTiempo'
 									type='number'
@@ -73,6 +113,19 @@ export default function LicenseTypeModal(props) {
 									}
 									defaultValue={licenseType.maximumDays}
 								/>
+							</div>
+                            <div className='form-group'>
+								<label htmlFor='txtTiempo'>Estado:</label> <br/>
+								<input
+									id='txtTiempo'
+									type='checkbox'
+									className=''
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									defaultValue={licenseType.maximumDays}
+								/> <label htmlFor="">Vigente</label>
 							</div>
 						</form>
 					</div>

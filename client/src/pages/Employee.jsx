@@ -15,7 +15,8 @@ export default function Employee() {
 					Empleado
 				</h1>
 			</div>
-			<div className='bg-dark p-3'>
+			{/* bg-dark p-3  */}
+			<div className='  bg-dark p-3 ml-3 mr-3'>
 				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
@@ -25,7 +26,7 @@ export default function Employee() {
 								placeholder='Buscar'
 							/>
 						</div>
-						<div className='col-1'>
+						<div className=''>
 							<NavLink
 								to='/empleado-formulario'
 								className='degradado d-flex h-100 align-items-center justify-content-center text-decoration-none'
@@ -36,16 +37,21 @@ export default function Employee() {
 						</div>
 					</div>
 				</form>
+
+				
+				
+			
 				<br />
-				<div className=' row card-employeed'>
-					<div className='col-lg-3   text-lg-center fondito'>
+				<div className=' row card-employeed  '>
+
+					<div className='col-lg-3  card-header  text-center align-items-center fondito'>
 						<img
 							src={foto}
 							alt=''
-							className='w-50 rounded-circle mt-4 '
+							className=' rounded-circle  '
 						/>
 					</div>
-					<div className='col-lg-7'>
+					<div className='col-lg-7 p-2'>
 						<h3 className='ml-3'>Paola Cieza Bances</h3>
 
 						<div className='row'>
@@ -97,52 +103,54 @@ export default function Employee() {
 							</div>
 						</div>
 					</div>
-					<div className='col-lg-2 text-center border border-darken-1 border-bottom-0 border-top-0 border-right-0'>
-						<br />
-						<button className='degradado  border-0 w-75 m-1'>
-							<i className='col-sm-2 fa fa-eye '></i>
+					{/* <div className='col-lg-2 d-flex flex-column text-center align-items-center border border-bottom-0 border-top-0 border-right-0'> */}
+					<div className='col-lg-2 p-2 espaciado border border-bottom-0 border-top-0 border-right-0 text-center'>
+						
+						<button className='degradado border-0' style={{width:'100%'}} >
+							<i className='col-2 fa fa-eye '></i>
 							<label
 								htmlFor=''
-								className='col-sm-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+								className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
 							>
 								{' '}
 								Ver
 							</label>
 						</button>{' '}
 						<br />
-						<button className='degradado  border-0 w-75 m-1'>
-							<i className='col-sm-2 fa fa-pencil-alt '></i>
+						<button className='degradado  border-0' style={{width:'100%'}}>
+							<i className='col-2 fa fa-pencil-alt '></i>
 							<label
 								htmlFor=''
-								className='col-sm-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+								className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+								style={{width: ''}}
 							>
 								{' '}
 								Modificar
 							</label>
 						</button>{' '}
 						<br />
-						<button className='degradado  border-0 w-75 m-1'>
-							<i className='col-sm-2 fas fa-ban '></i>
+						<button className='degradado  border-0 ' style={{width:'100%'}}>
+							<i className='col-2 fas fa-ban '></i>
 							<label
 								htmlFor=''
-								className='col-sm-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+								className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
 							>
 								{' '}
 								Dar baja
 							</label>
 						</button>{' '}
 						<br />
-						<button className='degradado  border-0 w-75 m-1'>
-							<i className='col-sm-2 fa fa-trash-alt '></i>
+						<button className='degradado  border-0' style={{width:'100%'}}>
+							<i className='col-2 fa fa-trash-alt '></i>
 							<label
 								htmlFor=''
-								className='col-sm-9 m-0 ml-2  border border-right-0 border-top-0 border-bottom-0'
+								className='col-9 m-0 ml-2  border border-right-0 border-top-0 border-bottom-0'
 							>
 								{' '}
 								Eliminar
 							</label>
 						</button>{' '}
-						<br />
+
 					</div>
 				</div>
 				<br />

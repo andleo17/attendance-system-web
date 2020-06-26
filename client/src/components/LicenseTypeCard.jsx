@@ -23,10 +23,10 @@ export default function LicenseTypeCard(props) {
 
 	return (
 		<div className='col-sm-3 p-3'>
-			<div className='card'>
+			<div className='card card-licensetype'>
 				<div className='card-title text-lg-center'>
 					<h3
-						className='text-white'
+						className='text-white pl-2'
 						style={{ background: '#D5691E' }}
 					>
 						LICENCIA
@@ -37,12 +37,14 @@ export default function LicenseTypeCard(props) {
 				</div>
 				<div className='card-body '>
 					<div className='mb-2'>
+                        <i className='fa fa-tag pr-4 pl-2'></i>
 						<b>Nombre</b>
-						<div>{data.description}</div>
+						<div className='ml-5'>{data.description}</div>
 					</div>
 					<div className='mb-1'>
+                        <i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Tiempo</b>
-						<div>{data.maximumDays} días</div>
+						<div className='ml-5'>{data.maximumDays} días</div>
 					</div>
 				</div>
 				<div className='card-footer d-flex justify-content-between'>
@@ -59,7 +61,7 @@ export default function LicenseTypeCard(props) {
 					</button>
 					<button
 						type='button'
-						className='degradado btn'
+						className='degradado btn ' 
 						onClick={() =>
 							mutation({
 								variables: { licenseTypeId: parseInt(data.id) },

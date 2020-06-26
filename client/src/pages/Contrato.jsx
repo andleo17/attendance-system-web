@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
+import ContratoCard from '../components/ContratoCard';
+import ContratoModal from '../components/ContratoModal';
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -19,7 +21,7 @@ export const LIST_LICENSETYPE = gql`
 
 export default function LicenseType() {
 	const initialState = {
-		__typename: 'LicenseType',
+		__typename: 'Contract',
 		description: null,
 		id: null,
 		maximumDays: null,
@@ -38,7 +40,7 @@ export default function LicenseType() {
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Tipo de licencia
+					Contrato
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -65,7 +67,7 @@ export default function LicenseType() {
 			<div className='row'>
 				{data.licenseTypes.map((lt) => {
 					return (
-						<LicenseTypeCard
+						<ContratoCard
 							key={lt.id}
 							data={lt}
 							setData={setSelectedItem}
@@ -73,7 +75,7 @@ export default function LicenseType() {
 					);
 				})}
 			</div>
-			<LicenseTypeModal licenseType={selectedItem} />
+			<ContratoModal licenseType={selectedItem} />
 		</div>
 		</div>
 	);

@@ -8,12 +8,13 @@ import Employee from '../pages/Employee';
 import LicenseType from '../pages/LicenseType';
 import Login from '../pages/Login';
 import EmployeedForm from '../pages/EmployeedForm';
+import Contratos from '../pages/Contrato'
 
 function App() {
 	const [show, setShow] = useState(true);
 	return (
 		<Fragment>
-			<Footer />
+			{/* <Footer /> */}
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Fragment>
@@ -33,6 +34,11 @@ function App() {
 							exact
 							path='/empleado-formulario'
 							component={EmployeedForm}
+						/>
+						<Route
+							exact
+							path='/contratos'
+							component={Contratos}
 						/>
 					</div>
 				</Fragment>
