@@ -72,9 +72,6 @@ export default function NavLateral(props) {
 									path='/tipo-licencia'
 									title='Tipo de licencia'
 								/>
-								<MenuItem />
-{/* 								
-								<MenuItem /> */}
 							</DropDownMenu>
 							<DropDownMenu title='Empleado' icon='fa fa-child'>
 								<MenuItem path='/empleados' title='Gestionar' />
@@ -133,10 +130,10 @@ export default function NavLateral(props) {
 							</DropDownMenu>
 						</ul>
 					</div>
-					<div className="sidebar-footer">
-						<a href="#">
-							<i className="fa fa-power-off"> Cerrar sesión</i>
-						</a>
+					<div className='sidebar-footer'>
+						<button type='button'>
+							<i className='fa fa-power-off'> Cerrar sesión</i>
+						</button>
 					</div>
 				</div>
 			</nav>

@@ -4,8 +4,6 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import LicenseTypeCard from '../components/LicenseTypeCard';
-import LicenseTypeModal from '../components/LicenseTypeModal';
 import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
 
@@ -44,7 +42,7 @@ export default function LicenseType() {
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
-			<form className='buscar justify-content-sm-start'>
+				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
 							<input
@@ -64,19 +62,19 @@ export default function LicenseType() {
 						</div>
 					</div>
 				</form>
-			<div className='row'>
-				{data.licenseTypes.map((lt) => {
-					return (
-						<ContratoCard
-							key={lt.id}
-							data={lt}
-							setData={setSelectedItem}
-						/>
-					);
-				})}
+				<div className='row'>
+					{data.licenseTypes.map((lt) => {
+						return (
+							<ContratoCard
+								key={lt.id}
+								data={lt}
+								setData={setSelectedItem}
+							/>
+						);
+					})}
+				</div>
+				<ContratoModal licenseType={selectedItem} />
 			</div>
-			<ContratoModal licenseType={selectedItem} />
-		</div>
 		</div>
 	);
 }

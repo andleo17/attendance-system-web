@@ -12,7 +12,11 @@ export default function DropDownMenu(props) {
 				<span>{props.title}</span>
 			</div>
 			<div className={`slideup ${active ? 'slidedown' : ''}`}>
-				<ul>{props.children.map((c) => c)}</ul>
+				<ul>
+					{props.children.map
+						? props.children.map((c) => c)
+						: props.children}
+				</ul>
 			</div>
 		</li>
 	);
