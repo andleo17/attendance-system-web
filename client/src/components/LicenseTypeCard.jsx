@@ -63,21 +63,11 @@ export default function LicenseTypeCard(props) {
 						onClick={() =>
 							mutation({
 								variables: { licenseTypeId: parseInt(data.id) },
-								update: (store) => {
-									const { licenseTypes } = store.readQuery({
+								refetchQueries: [
+									{
 										query: LIST_LICENSETYPE,
-									});
-									licenseTypes.splice(
-										licenseTypes.findIndex(
-											(lt) => lt.id === data.id
-										),
-										1
-									);
-									store.writeQuery({
-										query: LIST_LICENSETYPE,
-										data: { licenseTypes },
-									});
-								},
+									},
+								],
 							})
 						}
 					>

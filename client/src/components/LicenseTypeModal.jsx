@@ -99,22 +99,9 @@ export default function LicenseTypeModal(props) {
 											),
 										},
 									},
-									update: (store, { data }) => {
-										if (licenseType.mode === 0) {
-											const {
-												licenseTypes,
-											} = store.readQuery({
-												query: LIST_LICENSETYPE,
-											});
-											licenseTypes.push(
-												data.addLicenseType
-											);
-											store.writeQuery({
-												query: LIST_LICENSETYPE,
-												data: { licenseTypes },
-											});
-										}
-									},
+									refetchQueries: [
+										{ query: LIST_LICENSETYPE },
+									],
 								})
 							}
 						>
