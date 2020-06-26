@@ -535,7 +535,7 @@ body {
 	display: none;
 }
 
-.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a:after {
+.sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > .title:after {
 	transform: rotate(90deg);
 	right: 17px;
 }
