@@ -20,7 +20,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 
 
 
-export default function Cotrato(props) {
+export default function Horario(props) {
     const { data, setData } = props;
 
     const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
@@ -65,7 +65,7 @@ export default function Cotrato(props) {
                                 type='button'
                                 className='degradado btn '
                                 data-toggle='modal'
-                                data-target='#frmContrato'
+                                data-target='#frmLicenseType'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
                                 }
@@ -77,7 +77,7 @@ export default function Cotrato(props) {
                                 type='button'
                                 className='degradado btn'
                                 data-toggle='modal'
-                                data-target='#frmContrato'
+                                data-target='#frmLicenseType'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
                                 }
@@ -89,7 +89,7 @@ export default function Cotrato(props) {
                                 type='button'
                                 className='degradado btn'
                                 data-toggle='modal'
-                                data-target='#frmContrato'
+                                data-target='#frmLicenseType'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
                                 }

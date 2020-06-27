@@ -29,7 +29,7 @@ export default function Employee() {
 						<div className=''>
 							<NavLink
 								to='/empleado-formulario'
-								className='degradado d-flex h-100 align-items-center justify-content-center text-decoration-none'
+								className='degradado d-flex h-100 align-items-center pl-1 pr-1 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-user-plus mr-1'></i>
 								NUEVO
@@ -38,9 +38,6 @@ export default function Employee() {
 					</div>
 				</form>
 
-				
-				
-			
 				<br />
 				<div className=' row card-employeed  '>
 

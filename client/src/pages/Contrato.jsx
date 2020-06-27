@@ -4,8 +4,6 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import LicenseTypeCard from '../components/LicenseTypeCard';
-import LicenseTypeModal from '../components/LicenseTypeModal';
 import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
 
@@ -19,7 +17,7 @@ export const LIST_LICENSETYPE = gql`
 	}
 `;
 
-export default function LicenseType() {
+export default function Contrato() {
 	const initialState = {
 		__typename: 'Contract',
 		description: null,
@@ -54,13 +52,16 @@ export default function LicenseType() {
 							/>
 						</div>
 						<div className=''>
-							<NavLink
-								to='/empleado-formulario'
-								className='degradado d-flex h-100 align-items-center justify-content-center text-decoration-none'
-							>
-								<i className='fa fa-user-plus mr-1'></i>
+						<button
+                                // to='/empleado-formulario'
+                                type='button'
+                                data-toggle='modal'
+                                data-target='#frmContrato'
+                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+                            >
+                                <i className='fa fa-user-plus mr-1'></i>
 								NUEVO
-							</NavLink>
+							</button>
 						</div>
 					</div>
 				</form>

@@ -14,7 +14,7 @@ export default function NavLateral(props) {
 				className='btn btn-sm btn-dark'
 				onClick={() => props.setShow(!props.show)}
 			>
-				<i className='fas fa-bars'></i>
+				<i className='fas fa-bars text-white'></i>
 			</span>
 			<nav id='sidebar' className='sidebar-wrapper '>
 				<div className='sidebar-content'>

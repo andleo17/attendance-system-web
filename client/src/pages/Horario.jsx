@@ -4,8 +4,9 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import LicenseTypeCard from '../components/LicenseTypeCard';
-import LicenseTypeModal from '../components/LicenseTypeModal';
+import ContratoModal from '../components/ContratoModal';
+import HorarioCard from '../components/HorarioCard'
+
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -17,9 +18,9 @@ export const LIST_LICENSETYPE = gql`
 	}
 `;
 
-export default function LicenseType() {
+export default function Horarios() {
 	const initialState = {
-		__typename: 'LicenseType',
+		__typename: 'Contract',
 		description: null,
 		id: null,
 		maximumDays: null,
@@ -38,7 +39,7 @@ export default function LicenseType() {
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Tipo de licencia
+					Horarios
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -52,22 +53,20 @@ export default function LicenseType() {
 							/>
 						</div>
 						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmLicenseType'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-user-plus mr-1'></i>
+							<NavLink
+								to='/empleado-formulario'
+								className='degradado d-flex h-100 align-items-center justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-user-plus mr-1'></i>
 								NUEVO
-							</button>
+							</NavLink>
 						</div>
 					</div>
 				</form>
 			<div className='row'>
 				{data.licenseTypes.map((lt) => {
 					return (
-						<LicenseTypeCard
+						<HorarioCard
 							key={lt.id}
 							data={lt}
 							setData={setSelectedItem}
@@ -75,7 +74,7 @@ export default function LicenseType() {
 					);
 				})}
 			</div>
-			<LicenseTypeModal licenseType={selectedItem} />
+			<ContratoModal licenseType={selectedItem} />
 		</div>
 		</div>
 	);
