@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import NavLateral from './NavLateral';
-import Footer from './Footer';
 import Employee from '../pages/Employee';
 import LicenseType from '../pages/LicenseType';
 import Login from '../pages/Login';
@@ -16,7 +15,6 @@ function App() {
 	const [show, setShow] = useState(true);
 	return (
 		<Fragment>
-			{/* <Footer /> */}
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Fragment>

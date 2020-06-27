@@ -42,7 +42,7 @@ export default function Contrato() {
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
-			<form className='buscar justify-content-sm-start'>
+				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
 							<input
@@ -65,19 +65,19 @@ export default function Contrato() {
 						</div>
 					</div>
 				</form>
-			<div className='row'>
-				{data.licenseTypes.map((lt) => {
-					return (
-						<ContratoCard
-							key={lt.id}
-							data={lt}
-							setData={setSelectedItem}
-						/>
-					);
-				})}
+				<div className='row'>
+					{data.licenseTypes.map((lt) => {
+						return (
+							<ContratoCard
+								key={lt.id}
+								data={lt}
+								setData={setSelectedItem}
+							/>
+						);
+					})}
+				</div>
+				<ContratoModal licenseType={selectedItem} />
 			</div>
-			<ContratoModal licenseType={selectedItem} />
-		</div>
 		</div>
 	);
 }
