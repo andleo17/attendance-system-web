@@ -34,30 +34,26 @@ export default function LicenseTypeCard(props) {
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
+					<div className='text-capitalize  font-italic'>Paola Cieza Bances</div>
 				</div>
-				<div className='card-body '>
-					<div className='mb-2'>
-                        <i className='fa fa-tag pr-4 pl-2'></i>
-						<b>Nombre</b>
-						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 text-capitalize'>Paola Cieza Bances</div>
-					</div>
+				<div className='card-body pt-0 pb-0 '>
+					
 					<div className='mb-1'>
                         <i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Motivo</b>
-						<div className='ml-5 text-justify text-muted '>Pues la verdad me estoy ahogando sin tu amor, como quisiera poder vivir sin aire, vivir sin agua, me encantaría robar tu corazón :C</div>
+						<div className='ml-5 text-justify font-italic '>Por dolor del corazón.</div>
 					</div>
                     <div className='mb-2'>
                         <i className='fa fa-calendar pr-4 pl-2'></i>
 						<b>Fecha presentación</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5 font-italic'>12/06/20</div>
 					</div>
                     <div className='mb-2'>
                         <i className='fa fa-calendar-check pr-4 pl-2'></i>
 						<b>Fecha permiso</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5 font-italic'>22/06/20</div>
 					</div>
 				</div>
 

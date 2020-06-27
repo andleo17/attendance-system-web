@@ -34,37 +34,41 @@ export default function UsuarioCard(props) {
                         <div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
                             <div htmlFor="" className='badge-sonar'></div>
                             <img src={foto} alt='' className=' mt-5 circle mb-0 bg-transparent h-50 w-50' />
-                             <label htmlFor="" className=' text-sistema '> <b> Vigente</b></label>
+                            <label htmlFor="" className=' text-sistema '> <b> Vigente</b></label>
                         </div>
                         <div className='card-body col-6  p-0 pl-2 pt-1'>
-                        <div className='font-italic  mb-1'>Paola Cieza Bances</div>
-
-                            {/* <div className='mb-2'>
-                                <i className='fa fa-tag pr-2 '></i>
-                                <b>Nombre</b>
-                                <div className='pl-4  font-italic'>Paola Cieza Bances</div>
-                                <div className=''>{data.description}</div>
-                            </div> */}
+                            <div className='font-italic  mb-1'>Paola Cieza Bances</div>
                             <div className='mb-2'>
-                                <i className='fa fa-user-circle pr-2'></i>
-                                <b>Usuario</b>
-                                <div className='pl-4 font-italic'> Paolitha</div>
+                                <i className='fa fa-exclamation-triangle pr-2'></i>
+                                <b>Código asistencia</b>
+                                <div className='pl-4 font-italic'> 02</div>
                             </div>
                             <div className='mb-2'>
-                                <i className='fa fa-key pr-2'></i>
-                                <b>Contraseña</b>
-                                <div className='pl-4 font-italic'> ....</div>
+                                <i className='fa fa-calendar pr-2'></i>
+                                <b>Fecha</b>
+                                <div className='pl-4 font-italic'> 21/06/20</div>
 
                             </div>
                         </div>
 
                         <div className='card-footer p-1 pl-1 pr-1   col-2 d-flex flex-column justify-content-around m-0'>
+                            <button
+                                type='button'
+                                className='degradado btn'
+                                data-toggle='modal'
+                                data-target='#frmJustificacion'
+                                onClick={() =>
+                                    setData(Object.assign(data, { mode: 1 }))
+                                }
+                            >
+                                <i className='fa fa-eye text-white'></i>
+                            </button>
 
                             <button
                                 type='button'
                                 className='degradado btn'
                                 data-toggle='modal'
-                                data-target='#frmContrato'
+                                data-target='#frmJustificacion'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
                                 }
@@ -72,11 +76,26 @@ export default function UsuarioCard(props) {
                                 <i className='fa fa-pencil-alt text-white'></i>
                             </button>
 
-                         
+                            <button
+                                type='button'
+                                className='degradado btn'
+                                onClick={() =>
+                                    mutation({
+                                        variables: { licenseTypeId: parseInt(data.id) },
+                                        refetchQueries: [
+                                            {
+                                                query: LIST_LICENSETYPE,
+                                            },
+                                        ],
+                                    })
+                                }
+                            >
+                                <i className='fa fa-ban text-white'></i>
+                            </button>
 
                             <button
                                 type='button'
-                                className='degradado btn  '
+                                className='degradado btn'
                                 onClick={() =>
                                     mutation({
                                         variables: { licenseTypeId: parseInt(data.id) },

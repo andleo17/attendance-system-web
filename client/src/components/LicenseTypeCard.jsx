@@ -24,27 +24,27 @@ export default function LicenseTypeCard(props) {
 	return (
 		<div className='col-sm-3 p-3'>
 			<div className='card card-licensetype'>
-				<div className='card-title text-lg-center'>
+				<div className='card-title text-lg-center m-0'>
 					<h3
-						className='text-white pl-2'
+						className='text-white pl-2 m-0'
 						style={{ background: '#D5691E' }}
 					>
 						LICENCIA
 					</h3>
 				</div>
-				<div className='text-center'>
+				<div className='card-header p-0 m-0 text-center'>
 					<img src={foto} alt='' className='h-50 w-50' />
 				</div>
-				<div className='card-body '>
+				<div className='card-body  pt-0 pb-0 '>
 					<div className='mb-2'>
                         <i className='fa fa-tag pr-4 pl-2'></i>
 						<b>Nombre</b>
-						<div className='ml-5'>{data.description}</div>
+						<div className='ml-5 font-italic'>{data.description}</div>
 					</div>
 					<div className='mb-1'>
                         <i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Tiempo</b>
-						<div className='ml-5'>{data.maximumDays} días</div>
+						<div className='ml-5 font-italic'>{data.maximumDays} días</div>
 					</div>
 				</div>
 				<div className='card-footer d-flex justify-content-between'>

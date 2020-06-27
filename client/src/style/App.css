@@ -311,6 +311,14 @@ body {
 	transition: all 0.3s ease;
 }
 
+
+.page-content #showPage {
+	-webkit-transition: all 5s ease;
+	-moz-transition: all 5s ease;
+	-ms-transition: all 5s ease;
+	-o-transition: all 5s ease;
+	transition: all 5s ease;
+}
 /*----------------page-wrapper----------------*/
 
 .page-wrapper {
@@ -610,6 +618,7 @@ body {
 	width: 100%;
 	padding-left: 0px;
 	padding-top: 20px;
+	/* padding-bottom: 20px; */
 }
 
 .page-wrapper .page-content > div {
@@ -1095,4 +1104,19 @@ th {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+}
+
+.fuera{
+	border-radius:250px;
+	position: relative;
+    overflow: hidden;
+    margin-left: -15px;
+    margin-bottom: -20px;
+	z-index: 1;
+	width: 40px;
+	height: 40px;
+	background: #591EA8;
+	text-align: center;
+	align-items: center;
+	color: white;
 }

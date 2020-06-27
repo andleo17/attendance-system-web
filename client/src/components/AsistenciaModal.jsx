@@ -25,7 +25,7 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function UsiarioModal(props) {
+export default function LicenseTypeModal(props) {
 	const { licenseType } = props;
 	const mutation =
 		licenseType.mode === 0
@@ -33,11 +33,11 @@ export default function UsiarioModal(props) {
 			: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div id='frmAsistencia' className='modal fade inputEmpleado' tabIndex='-1'>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
-						<h5 className='modal-title'>Nuevo usuario</h5>
+						<h5 className='modal-title'>Nuevo asistencia</h5>
 						<button
 							type='button'
 							className='close text-white'
@@ -49,7 +49,7 @@ export default function UsiarioModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-                            <i className='fa fa-id-card pl-2'></i>
+							<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
@@ -59,66 +59,50 @@ export default function UsiarioModal(props) {
 										(licenseType.description =
 											e.target.value)
 									}
-									defaultValue={licenseType.description}
+									// defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
-                            <i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo ' >Nombre:</label>
-								<input
-									id='txtTiempo'
-									type='text' disabled
-									className='form-control bg-white'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-							</div>
-                            
-                            <div className='form-group'>
-                            <i className='fa fa-user-circle pl-2'></i>
-								<label htmlFor='txtTiempo'>Usuario:</label>
+							<i className='fa fa-tag pl-2'></i>
+								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-                                
-							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-key pl-2'></i>
-								<label htmlFor='txtTiempo'>Contraseña:</label>
-								<input
-									id='txtTiempo'
-									type='password'
-									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
-								<input
-									id='txtTiempo'
-									type='checkbox'
-									className=' ml-4'
+									className='form-control bg-white' disabled
 									onChange={(e) =>
 										(licenseType.maximumDays =
 											e.target.value)
 									}
 									// defaultValue={licenseType.maximumDays}
-								/> <label htmlFor="">Vigente</label>
+								/>
+							</div>
+                            <div className='form-group'>
+							<i className='fa fa-calendar-check pl-2'></i>
+								<label htmlFor='txtTiempo'>Fecha </label>
+								<input
+									id='txtTiempo'
+									type='date'
+									className='form-control'
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									// defaultValue={licenseType.maximumDays}
+								/>
+							</div>
+                            
+                            
+                            <div className='form-group'>
+							<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Hora entrada:</label> <br/>
+								
+
+                                <input type="time" name="" id="" className='form-control'/>
+							</div>
+                            <div className='form-group'>
+							<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Hora salida:</label> <br/>
+                                <input type="time" name="" id="" className='form-control'/>
 							</div>
 						</form>
 					</div>

@@ -11,20 +11,27 @@ import Contratos from '../pages/Contrato'
 import Horarios from '../pages/Horario'
 import Permisos from '../pages/Permiso'
 import Usuarios from '../pages/Usuario'
-
+import Justificaciones from '../pages/Justificación'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Asistencia from '../pages/Asistencia'
+import Licencias from '../pages/Licencia' 
+ 
 function App() {
 	const [show, setShow] = useState(true);
 	return (
 		<Fragment>
 			<Switch>
-				<Route exact path='/login' component={Login} />
+					<Route exact path='/login' component={Login} />
+				
 				<Fragment>
 					<div
 						className={`page-wrapper chiller-theme ${
 							show ? 'toggled' : ''
-						}`}
+							}`}
 					>
 						<NavLateral setShow={setShow} show={show} />
+
 						<Route
 							exact
 							path='/tipo-licencia'
@@ -56,7 +63,25 @@ function App() {
 							path='/usuarios'
 							component={Usuarios}
 						/>
+						<Route
+							exact
+							path='/justificaciones'
+							component={Justificaciones}
+						/>
+						<Route
+							exact
+							path='/asistencias'
+							component={Asistencia}
+						/>
+						<Route
+							exact
+							path='/licencias'
+							component={Licencias}
+						/>
+						{/* <Footer /> */}
 					</div>
+					
+
 				</Fragment>
 			</Switch>
 		</Fragment>

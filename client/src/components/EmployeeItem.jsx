@@ -10,18 +10,18 @@ export default class EmployeeItem extends Component {
 			
 			<div className=' row card-employeed  mb-3 '>
 
-			<div className='col-lg-3  card-header  text-center align-items-center fondito'>
+			<div className='col-lg-3  card-header  text-center  fondito'>
 				<img
 					src={foto}
 					alt=''
 					className=' rounded-circle  '
 				/>
 			</div>
-			<div className='col-lg-7 p-2'>
+			<div className='col-lg-7 p-2 font-italic'>
 				<h3 className='ml-3'>Paola Cieza Bances</h3>
 
 				<div className='row'>
-					<div className='col-sm-2 pl-3 text-sistema'>
+					<div className='col-sm-2 pl-3 text-sistema font-italic'>
 						<i className='fa fa-id-card  mr-2'></i>
 						<label htmlFor=''> Dni:</label>
 					</div>
@@ -31,14 +31,14 @@ export default class EmployeeItem extends Component {
 				</div>
 
 				<div className='row'>
-					<div className='col-sm-2 pl-3 text-sistema'>
+					<div className='col-sm-2 pl-3 text-sistema font-italic'>
 						<i className='fa fa-venus-mars mr-2'></i>
 						<label htmlFor='' className=''>
 							{' '}
 							Sexo:
 						</label>
 					</div>
-					<div className='col-sm-8 pl-5'>
+					<div className='col-sm-8 pl-5 font-italic'>
 						<label htmlFor=''> Femenino</label>
 					</div>
 				</div>
@@ -51,7 +51,7 @@ export default class EmployeeItem extends Component {
 							Correo:
 						</label>
 					</div>
-					<div className='col-sm-8 pl-5'>
+					<div className='col-sm-8 pl-5 font-italic'>
 						<label htmlFor=''> paolacieza8@gmail.com</label>
 					</div>
 				</div>
@@ -64,7 +64,7 @@ export default class EmployeeItem extends Component {
 							Estado:
 						</label>
 					</div>
-					<div className='col-sm-8 pl-5'>
+					<div className='col-sm-8 pl-5 font-italic'>
 						<label htmlFor=''> Vigente</label>
 					</div>
 				</div>

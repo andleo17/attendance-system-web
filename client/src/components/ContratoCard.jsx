@@ -35,24 +35,21 @@ export default function Cotrato(props) {
                             <div htmlFor="" className='badge-sonar'></div>
                             <img src={foto} alt='' className=' mt-5 circle  bg-transparent h-50 w-50' />
                         </div>
-                        <div className='card-body col-6  '>
+                        <div className='card-body col-6 p-0 pl-2 pt-1 '>
+                            <div className='font-italic  mb-1'>Paola Cieza Bances</div>
+
+
                             <div className='mb-2'>
-                                <i className='fa fa-tag '></i>
-                                <b>Nombre</b>
-                                <div className=''>Paola Cieza Bances</div>
-                                {/* <div className=''>{data.description}</div> */}
-                            </div>
-                            <div className='mb-2'>
-                                <i className='fa fa-calendar-plus '></i>
+                                <i className='fa fa-calendar-plus pr-2'></i>
                                 <b>Fecha inicio</b>
                                 {/* <div> <input type="date" name="" id="" className='form-control' /></div> */}
                                 {/* <div className=''>{data.maximumDays} días</div> */}
-                                <div className=''> 12/12/12</div>
+                                <div className='ml-4 font-italic'> 12/12/12</div>
                             </div>
                             <div className='mb-2'>
-                                <i className='fa fa-calendar-times '></i>
+                                <i className='fa fa-calendar-times pr-2'></i>
                                 <b>Fecha fin</b>
-                                <div className=''> 12/12/12</div>
+                                <div className='ml-4 font-italic'> 12/12/12</div>
 
                                 {/* <div> <input type="date" name="" id="" className='form-control' /></div> */}
 

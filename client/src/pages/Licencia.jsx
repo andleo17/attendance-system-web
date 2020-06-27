@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import  UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
+import LicenciaCard from '../components/LicenciaCard';
+import LicenciaModal from '../components/LicenciaModal'
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -32,13 +34,13 @@ export default function Usuario() {
 	if (error) return <h1>{error.message}</h1>;
 
 	return (
-		<div className='page-content' >
+		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Usuario
+					Licencias
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -55,7 +57,7 @@ export default function Usuario() {
 						<button
                                 type='button'
                                 data-toggle='modal'
-                                data-target='#frmContrato'
+                                data-target='#frmJustificacion'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
                                 <i className='fa fa-user-plus mr-1'></i>
@@ -67,7 +69,7 @@ export default function Usuario() {
 				<div className='row'>
 					{data.licenseTypes.map((lt) => {
 						return (
-							<UsuarioCard
+							<LicenciaCard
 								key={lt.id}
 								data={lt}
 								setData={setSelectedItem}
@@ -75,9 +77,8 @@ export default function Usuario() {
 						);
 					})}
 				</div>
-				<UsuarioModal licenseType={selectedItem} />
+				<LicenciaModal licenseType={selectedItem} />
 			</div>
-
 		</div>
 	);
 }

@@ -34,25 +34,21 @@ export default function HorarioCard(props) {
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
+					<div className='ext-capitalize font-italic'>Paola Cieza Bances</div>
 				</div>
 				<div className='card-body '>
-					<div className='mb-2'>
-                        <i className='fa fa-tag pr-4 pl-2'></i>
-						<b>Nombre</b>
-						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 text-capitalize'>Paola Cieza Bances</div>
-					</div>
+					
                     <div className='mb-2'>
                         <i className='fa fa-calendar-check pr-4 pl-2'></i>
 						<b>Fecha inicio</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5 font-italic'>12/12/12</div>
 					</div>
                     <div className='mb-2'>
                         <i className='fa fa-calendar-times pr-4 pl-2'></i>
 						<b>Fecha fin</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5 font-italic'>20/12/20</div>
 					</div>
 				</div>
 				<div className='card-footer d-flex justify-content-between'>
