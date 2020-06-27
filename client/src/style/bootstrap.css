@@ -2957,17 +2957,17 @@ a.text-sistema:hover, a.text-dark:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
-.bg-primary {
+.bg-sistema {
   background-color: #D5691E !important;
 }
 
-a.bg-primary:hover, a.bg-primary:focus,
-button.bg-primary:hover,
-button.bg-primary:focus {
+a.bg-sistema:hover, a.bg-sistema:focus,
+button.bg-sistema:hover,
+button.bg-sistema:focus {
   background-color: #b66023 !important;
 }
 
-.border-danger {
+.border-sistema {
   border-color: #D5691E !important;
 }
 /* ---------------------------------------- color del sisteme-------------------------------------- */

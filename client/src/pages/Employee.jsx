@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
+import foto from '../recursos/perfil.jpg'
 import { NavLink } from 'react-router-dom';
 import EmployeeItem from '../components/EmployeeItem';
 
@@ -15,7 +16,7 @@ export default function Employee() {
 					Empleado
 				</h1>
 			</div>
-			{/* bg-dark p-3  */}
+
 			<div className='  bg-dark p-3 ml-3 mr-3'>
 				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
@@ -37,7 +38,11 @@ export default function Employee() {
 						</div>
 					</div>
 				</form>
-				<div className='row'>
+
+				<br />
+
+
+				<div className=''>
 					{Array(5)
 						.fill(<EmployeeItem />)
 						.map((e) => e)}

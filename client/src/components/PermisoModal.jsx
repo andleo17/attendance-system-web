@@ -49,6 +49,7 @@ export default function LicenseTypeModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
+							<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
@@ -62,6 +63,7 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
+							<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
@@ -75,6 +77,7 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
                             <div className='form-group'>
+							<i className='fa fa-calendar-check pl-2'></i>
 								<label htmlFor='txtTiempo'>Fecha </label>
 								<input
 									id='txtTiempo'
@@ -90,11 +93,12 @@ export default function LicenseTypeModal(props) {
                             
                             
                             <div className='form-group'>
+							<i className='fa fa-ban pl-2'></i>
 								<label htmlFor='txtTiempo'>Estado:</label> <br/>
 								<input
 									id='txtTiempo'
 									type='checkbox'
-									className=''
+									className='ml-4'
 									onChange={(e) =>
 										(licenseType.maximumDays =
 											e.target.value)

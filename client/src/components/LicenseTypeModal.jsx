@@ -49,11 +49,12 @@ export default function LicenseTypeModal(props) {
 					<div className='modal-body'>
 						<form>
 							<div className='form-group'>
+							<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtName'>Nombre:</label>
 								<input
 									id='txtName'
 									type='text'
-									className='form-control'
+									className='form-control '  
 									onChange={(e) =>
 										(licenseType.description =
 											e.target.value)
@@ -62,6 +63,7 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
+							<i className='fa fa-calendar pl-2'></i>
 								<label htmlFor='txtTiempo'>Tiempo:</label>
 								<input
 									id='txtTiempo'

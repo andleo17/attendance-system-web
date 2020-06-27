@@ -10,6 +10,7 @@ import EmployeedForm from '../pages/EmployeedForm';
 import Contratos from '../pages/Contrato'
 import Horarios from '../pages/Horario'
 import Permisos from '../pages/Permiso'
+import Usuarios from '../pages/Usuario'
 
 function App() {
 	const [show, setShow] = useState(true);
@@ -49,6 +50,11 @@ function App() {
 							exact
 							path='/permisos'
 							component={Permisos}
+						/>
+						<Route
+							exact
+							path='/usuarios'
+							component={Usuarios}
 						/>
 					</div>
 				</Fragment>

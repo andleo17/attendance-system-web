@@ -1,79 +1,122 @@
 import React, { Component } from 'react';
+import foto from '../recursos/perfil.jpg'
+import { NavLink } from 'react-router-dom';
 
 export default class EmployeeItem extends Component {
 	render() {
 		return (
-			<div className='col-12 my-2'>
-				<div className='card'>
-					<div className='row'>
-						<div className='col-3 fondito'>
-							<img
-								src=''
-								alt=''
-								className='card-img rounded-circle'
-							/>
-						</div>
-						<div className='col p-3'>
-							<h3 className='mb-3 font-weight-bold'>
-								Paola Cieza Bances
-							</h3>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-id-card'></i>
-									<span className='ml-2'>Dni:</span>
-								</div>
-								<div className='col'>
-									<span>75756219</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-venus-mars'></i>
-									<span className='ml-2'>Sexo:</span>
-								</div>
-								<div className='col'>
-									<span>Femenino</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-envelope'></i>
-									<span className='ml-2'>Correo:</span>
-								</div>
-								<div className='col'>
-									<span>paolacieza8@gmail.com</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-ban'></i>
-									<span className='ml-2'>Estado:</span>
-								</div>
-								<div className='col'>
-									<span>Vigente</span>
-								</div>
-							</div>
-						</div>
-						<div className='col-2 border border-bottom-0 border-top-0 border-right-0 d-flex flex-column justify-content-around px-5'>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-eye mr-3' />
-								<span>Ver</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-pencil-alt mr-3' />
-								<span>Modificar</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fas fa-ban mr-3' />
-								<span>Dar de baja</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-trash-alt mr-3' />
-								<span>Eliminar</span>
-							</button>
-						</div>
+			
+
+			
+			<div className=' row card-employeed  mb-3 '>
+
+			<div className='col-lg-3  card-header  text-center align-items-center fondito'>
+				<img
+					src={foto}
+					alt=''
+					className=' rounded-circle  '
+				/>
+			</div>
+			<div className='col-lg-7 p-2'>
+				<h3 className='ml-3'>Paola Cieza Bances</h3>
+
+				<div className='row'>
+					<div className='col-sm-2 pl-3 text-sistema'>
+						<i className='fa fa-id-card  mr-2'></i>
+						<label htmlFor=''> Dni:</label>
+					</div>
+					<div className='col-sm-8 pl-5'>
+						<label htmlFor=''> 75756219</label>
 					</div>
 				</div>
+
+				<div className='row'>
+					<div className='col-sm-2 pl-3 text-sistema'>
+						<i className='fa fa-venus-mars mr-2'></i>
+						<label htmlFor='' className=''>
+							{' '}
+							Sexo:
+						</label>
+					</div>
+					<div className='col-sm-8 pl-5'>
+						<label htmlFor=''> Femenino</label>
+					</div>
+				</div>
+
+				<div className='row'>
+					<div className='col-sm-2 pl-3 text-sistema'>
+						<i className='fa fa-envelope mr-2'></i>
+						<label htmlFor='' className=''>
+							{' '}
+							Correo:
+						</label>
+					</div>
+					<div className='col-sm-8 pl-5'>
+						<label htmlFor=''> paolacieza8@gmail.com</label>
+					</div>
+				</div>
+
+				<div className='row'>
+					<div className='col-sm-2 pl-3 text-sistema'>
+						<i className='fa fa-ban mr-2'></i>
+						<label htmlFor='' className=''>
+							{' '}
+							Estado:
+						</label>
+					</div>
+					<div className='col-sm-8 pl-5'>
+						<label htmlFor=''> Vigente</label>
+					</div>
+				</div>
+			</div>
+			{/* <div className='col-lg-2 d-flex flex-column text-center align-items-center border border-bottom-0 border-top-0 border-right-0'> */}
+			<div className='col-lg-2 p-2 espaciado border border-bottom-0  border-right-0 text-center'>
+
+				<NavLink to='/empleado-formulario' className='degradado border-0  mb-1' style={{ width: '100%' }} >
+					<i className='col-2 fa fa-eye'></i>
+					<label
+						htmlFor=''
+						className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+					>
+						{' '}
+						Ver
+					</label>
+				</NavLink>{' '}
+				<NavLink to='/empleado-formulario' className='degradado  border-0 mb-1' style={{ width: '100%' }}>
+					<i className='col-2 fa fa-pencil-alt '></i>
+					<label
+						htmlFor=''
+						className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+						style={{ width: '' }}
+					>
+						{' '}
+						Modificar
+					</label>
+				</NavLink>{' '}
+				<button className='degradado  border-0 mb-1' style={{ width: '100%' }}>
+					<i className='col-2 fas fa-ban '></i>
+					<label
+						htmlFor=''
+						className='col-9 m-0 ml-2 border border-right-0 border-top-0 border-bottom-0'
+					>
+						{' '}
+						Dar baja
+					</label>
+				</button>{' '}
+				
+				<button className='degradado  border-0 mb-1' style={{ width: '100%' }}>
+					
+					<i className='col-2 fa fa-trash-alt '></i>
+					<label
+						htmlFor=''
+						className='col-9 m-0 ml-2  border border-right-0 border-top-0 border-bottom-0'
+					>
+						{' '}
+						Eliminar
+					</label>
+				</button>{' '}
+
+			</div>
 			</div>
 		);
 	}

@@ -25,7 +25,7 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function LicenseTypeModal(props) {
+export default function UsiarioModal(props) {
 	const { licenseType } = props;
 	const mutation =
 		licenseType.mode === 0
@@ -37,7 +37,7 @@ export default function LicenseTypeModal(props) {
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
-						<h5 className='modal-title'>Nuevo contrato</h5>
+						<h5 className='modal-title'>Nuevo usuario</h5>
 						<button
 							type='button'
 							className='close text-white'
@@ -49,11 +49,11 @@ export default function LicenseTypeModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-							<i className='fa fa-id-card pl-2'></i>
+                            <i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
-									type='text' 
+									type='text'
 									className='form-control '
 									onChange={(e) =>
 										(licenseType.description =
@@ -63,39 +63,26 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo'>Nombre:</label>
+                            <i className='fa fa-tag pl-2'></i>
+								<label htmlFor='txtTiempo ' >Nombre:</label>
+								<input
+									id='txtTiempo'
+									type='text' disabled
+									className='form-control bg-white'
+									onChange={(e) =>
+										(licenseType.maximumDays =
+											e.target.value)
+									}
+									defaultValue={licenseType.maximumDays}
+								/>
+							</div>
+                            
+                            <div className='form-group'>
+                            <i className='fa fa-user-circle pl-2'></i>
+								<label htmlFor='txtTiempo'>Usuario:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control bg-white' disabled
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-							</div>
-                            <div className='form-group'>
-							<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha inicio:</label>
-								<input
-									id='txtTiempo'
-									type='date'
-									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-							</div>
-                            <div className='form-group'>
-							<i className='fa fa-calendar-times pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha fin:</label>
-								<input
-									id='txtTiempo'
-									type='date'
 									className='form-control'
 									onChange={(e) =>
 										(licenseType.maximumDays =
@@ -106,11 +93,11 @@ export default function LicenseTypeModal(props) {
                                 
 							</div>
                             <div className='form-group'>
-                            <i className='fa fa-money-bill-alt pl-2'></i>
-								<label htmlFor='txtTiempo'>Monto:</label>
+                            <i className='fa fa-key pl-2'></i>
+								<label htmlFor='txtTiempo'>Contraseña:</label>
 								<input
 									id='txtTiempo'
-									type='number'
+									type='password'
 									className='form-control'
 									onChange={(e) =>
 										(licenseType.maximumDays =
@@ -119,20 +106,7 @@ export default function LicenseTypeModal(props) {
 									defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            <div className='form-group'>
-							<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
-								<input
-									id='txtTiempo'
-									type='checkbox'
-									className='ml-4'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/> <label htmlFor="">Vigente</label>
-							</div>
+                            
 						</form>
 					</div>
 					<div className='modal-footer'>
