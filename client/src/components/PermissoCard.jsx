@@ -36,6 +36,7 @@ export default function PermissionCard(props) {
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
+					<div className='text-capitalize  font-italic'>Paola Cieza Bances</div>
 				</div>
 				<div className='card-body '>
 					<div className='mb-2'>
@@ -66,6 +67,7 @@ export default function PermissionCard(props) {
 				<div className='card-footer d-flex justify-content-between'>
 					<button
 						type='button'
+						title='Modificar'
 						className='degradado btn'
 						data-toggle='modal'
 						data-target='#frmPermiso'
@@ -77,6 +79,7 @@ export default function PermissionCard(props) {
 					</button>
                     <button
 						type='button'
+						title='Dar de baja'
 						className='degradado btn'
 						onClick={() =>
 							setData(Object.assign(data, { mode: 1 }))
@@ -86,6 +89,7 @@ export default function PermissionCard(props) {
 					</button>
 					<button
 						type='button'
+						title='Eliminar'
 						className='degradado btn ' 
 						onClick={() =>
 							mutation({

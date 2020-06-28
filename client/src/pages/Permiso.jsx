@@ -78,6 +78,7 @@ export default function Permissions() {
                         <div className='col'>
                             <input
                                 type='text'
+                                title='Buscar por empleado'
                                 className='form-control'
                                 placeholder='Ingrese DNI y presione ENTER para buscar'
                                 onChange={(e) => setEmployeeCardId(e.target.value)}
@@ -112,7 +113,7 @@ export default function Permissions() {
                                 // data-target='#frmPermiso'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
-                                <i className='fa fa-user-plus mr-1'></i>
+                                <i className='fa fa-arrow-circle-up mr-1'></i>
 								NUEVO
 							</button>
                         </div>

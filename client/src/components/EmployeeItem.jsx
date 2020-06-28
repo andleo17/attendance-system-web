@@ -1,78 +1,95 @@
 import React, { Component } from 'react';
+import foto from '../recursos/perfil.jpg';
+import { NavLink } from 'react-router-dom';
 
 export default class EmployeeItem extends Component {
 	render() {
+		const {
+			name,
+			lastname,
+			cardId,
+			gender,
+			email,
+			state,
+		} = this.props.employee;
 		return (
-			<div className='col-12 my-2'>
-				<div className='card'>
+			<div className='row card-employeed mb-3'>
+				<div className='col-lg-3 card-header text-center fondito'>
+					<img src={foto} alt='' className='rounded-circle' />
+				</div>
+				<div className='col-lg-7 p-2 font-italic'>
+					<h3 className='ml-3'>{`${name}, ${lastname}`}</h3>
 					<div className='row'>
-						<div className='col-3 fondito'>
-							<img
-								src=''
-								alt=''
-								className='card-img rounded-circle'
-							/>
+						<div className='col-sm-2 pl-3 text-sistema font-italic'>
+							<i className='fa fa-id-card mr-2'></i>
+							<span> Dni:</span>
 						</div>
-						<div className='col p-3'>
-							<h3 className='mb-3 font-weight-bold'>
-								Paola Cieza Bances
-							</h3>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-id-card'></i>
-									<span className='ml-2'>Dni:</span>
-								</div>
-								<div className='col'>
-									<span>75756219</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-venus-mars'></i>
-									<span className='ml-2'>Sexo:</span>
-								</div>
-								<div className='col'>
-									<span>Femenino</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-envelope'></i>
-									<span className='ml-2'>Correo:</span>
-								</div>
-								<div className='col'>
-									<span>paolacieza8@gmail.com</span>
-								</div>
-							</div>
-							<div className='row mb-2'>
-								<div className='col-2 font-weight-bold'>
-									<i className='fa fa-ban'></i>
-									<span className='ml-2'>Estado:</span>
-								</div>
-								<div className='col'>
-									<span>Vigente</span>
-								</div>
-							</div>
-						</div>
-						<div className='col-2 border border-bottom-0 border-top-0 border-right-0 d-flex flex-column justify-content-around px-5'>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-eye mr-3' />
-								<span>Ver</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-pencil-alt mr-3' />
-								<span>Modificar</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fas fa-ban mr-3' />
-								<span>Dar de baja</span>
-							</button>
-							<button className='degradado btn text-white text-left'>
-								<i className='fa fa-trash-alt mr-3' />
-								<span>Eliminar</span>
-							</button>
+						<div className='col-sm-8 pl-5'>
+							<span>{cardId}</span>
 						</div>
 					</div>
+
+					<div className='row'>
+						<div className='col-sm-2 pl-3 text-sistema font-italic'>
+							<i className='fa fa-venus-mars mr-2'></i>
+							<span> Sexo:</span>
+						</div>
+						<div className='col-sm-8 pl-5 font-italic'>
+							<span>{gender}</span>
+						</div>
+					</div>
+
+					<div className='row'>
+						<div className='col-sm-2 pl-3 text-sistema'>
+							<i className='fa fa-envelope mr-2'></i>
+							<span> Correo:</span>
+						</div>
+						<div className='col-sm-8 pl-5 font-italic'>
+							<span>{email}</span>
+						</div>
+					</div>
+
+					<div className='row'>
+						<div className='col-sm-2 pl-3 text-sistema'>
+							<i className='fa fa-ban mr-2'></i>
+							<span> Estado:</span>
+						</div>
+						<div className='col-sm-8 pl-5 font-italic'>
+							<span>{state ? 'Vigente' : 'No vigente'}</span>
+						</div>
+					</div>
+				</div>
+				<div className='col-lg-2 p-2 espaciado border border-bottom-0  border-right-0 text-center'>
+					<NavLink
+						to='/empleado-formulario'
+						className='degradado border-0 mb-1 row align-items-center px-2'
+					>
+						<i className='col-2 fa fa-eye' />
+						<span className='col border border-right-0 border-top-0 border-bottom-0'>
+							Ver
+						</span>
+					</NavLink>
+					<NavLink
+						to='/empleado-formulario'
+						className='degradado border-0 mb-1 row align-items-center px-2'
+					>
+						<i className='col-2 fa fa-pencil-alt' />
+						<span className='col border border-right-0 border-top-0 border-bottom-0'>
+							Modificar
+						</span>
+					</NavLink>
+					<button className='degradado border-0 mb-1 row align-items-center px-2'>
+						<i className='col-2 fas fa-ban' />
+						<span className='col border border-right-0 border-top-0 border-bottom-0'>
+							Dar baja
+						</span>
+					</button>
+					<button className='degradado border-0 mb-1 row align-items-center px-2'>
+						<i className='col-2 fa fa-trash-alt' />
+						<span className='col border border-right-0 border-top-0 border-bottom-0'>
+							Eliminar
+						</span>
+					</button>
 				</div>
 			</div>
 		);

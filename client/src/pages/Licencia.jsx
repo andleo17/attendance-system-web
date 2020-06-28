@@ -4,8 +4,10 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import LicenseTypeCard from '../components/LicenseTypeCard';
-import LicenseTypeModal from '../components/LicenseTypeModal';
+import  UsuarioCard from '../components/UsuarioCard';
+import UsuarioModal from '../components/UsuarioModal';
+import LicenciaCard from '../components/LicenciaCard';
+import LicenciaModal from '../components/LicenciaModal'
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -17,9 +19,9 @@ export const LIST_LICENSETYPE = gql`
 	}
 `;
 
-export default function LicenseType() {
+export default function Usuario() {
 	const initialState = {
-		__typename: 'LicenseType',
+		__typename: 'Contract',
 		description: null,
 		id: null,
 		maximumDays: null,
@@ -38,46 +40,46 @@ export default function LicenseType() {
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Tipo de licencia
+					Licencias
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
-			<form className='buscar justify-content-sm-start'>
+				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
 							<input
 								type='text'
+								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Buscar'
-								title='Buscar un tipo de licencia por nombre'
 							/>
 						</div>
 						<div className=''>
 						<button
-                                type='button'
+								type='button'
                                 data-toggle='modal'
-                                data-target='#frmLicenseType'
+                                data-target='#frmJustificacion'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
-                                <i className='fa fa-plus mr-1'></i>
-								NUEVA
+                                <i className='fa fa-file-word mr-1'></i>
+								NUEVO
 							</button>
 						</div>
 					</div>
 				</form>
-			<div className='row'>
-				{data.licenseTypes.map((lt) => {
-					return (
-						<LicenseTypeCard
-							key={lt.id}
-							data={lt}
-							setData={setSelectedItem}
-						/>
-					);
-				})}
+				<div className='row'>
+					{data.licenseTypes.map((lt) => {
+						return (
+							<LicenciaCard
+								key={lt.id}
+								data={lt}
+								setData={setSelectedItem}
+							/>
+						);
+					})}
+				</div>
+				<LicenciaModal licenseType={selectedItem} />
 			</div>
-			<LicenseTypeModal licenseType={selectedItem} />
-		</div>
 		</div>
 	);
 }

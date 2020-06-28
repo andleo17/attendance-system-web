@@ -33,11 +33,11 @@ export default function LicenseTypeModal(props) {
 			: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div id='frmAsistencia' className='modal fade inputEmpleado' tabIndex='-1'>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
-						<h5 className='modal-title'>Nuevo contrato</h5>
+						<h5 className='modal-title'>Nuevo asistencia</h5>
 						<button
 							type='button'
 							className='close text-white'
@@ -53,18 +53,18 @@ export default function LicenseTypeModal(props) {
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
-									type='text' 
+									type='text'
 									className='form-control '
 									onChange={(e) =>
 										(licenseType.description =
 											e.target.value)
 									}
-									defaultValue={licenseType.description}
+									// defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
 							<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo'>Nombre:</label>
+								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
 									type='text'
@@ -73,12 +73,12 @@ export default function LicenseTypeModal(props) {
 										(licenseType.maximumDays =
 											e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
                             <div className='form-group'>
 							<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha inicio:</label>
+								<label htmlFor='txtTiempo'>Fecha </label>
 								<input
 									id='txtTiempo'
 									type='date'
@@ -87,51 +87,22 @@ export default function LicenseTypeModal(props) {
 										(licenseType.maximumDays =
 											e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
+                            
+                            
                             <div className='form-group'>
-							<i className='fa fa-calendar-times pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha fin:</label>
-								<input
-									id='txtTiempo'
-									type='date'
-									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-                                
-							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-money-bill-alt pl-2'></i>
-								<label htmlFor='txtTiempo'>Monto:</label>
-								<input
-									id='txtTiempo'
-									type='number'
-									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
+							<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Hora entrada:</label> <br/>
+								
+
+                                <input type="time" name="" id="" className='form-control'/>
 							</div>
                             <div className='form-group'>
 							<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
-								<input
-									id='txtTiempo'
-									type='checkbox'
-									className='ml-4'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/> <label htmlFor="">Vigente</label>
+								<label htmlFor='txtTiempo'>Hora salida:</label> <br/>
+                                <input type="time" name="" id="" className='form-control'/>
 							</div>
 						</form>
 					</div>

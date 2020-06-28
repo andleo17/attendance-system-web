@@ -51,6 +51,7 @@ export default function PermissioneModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
+							<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
@@ -104,6 +105,7 @@ export default function PermissioneModal(props) {
 							</div>
                             
                             <div className='form-group'>
+							<i className='fa fa-ban pl-2'></i>
 								<label htmlFor='txtTiempo'>Estado:</label> <br/>
 								<input
 									id='txtTiempo'

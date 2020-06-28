@@ -4,9 +4,9 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import HorarioCard from '../components/HorarioCard'
-import HorarioModal from '../components/HorarioModal'
-import HorarioDetalleModal from '../components/HorarioDetalleModal'
+import { buildResolveInfo } from 'graphql/execution/execute';
+import AsistenciaCard from '../components/AsistenciaCard'
+import AsistenciaModal from '../components/AsistenciaModal'
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -33,13 +33,13 @@ export default function Contrato() {
     if (error) return <h1>{error.message}</h1>;
 
     return (
-        <div className='page-content'>
+        <div className='page-content' >
             <div
-                className='row badge-dark pl-4 '
+                className='row badge-dark pl-4 ' 
                 style={{ background: '#D5691E' }}
             >
                 <h1 htmlFor='' className=''>
-                    Horarios
+                    Asistencias
 				</h1>
             </div>
             <div className='  bg-dark p-3 ml-3 mr-3'>
@@ -57,11 +57,11 @@ export default function Contrato() {
                             <button
                                 type='button'
                                 data-toggle='modal'
-                                data-target='#frmHorario'
+                                data-target='#frmAsistencia'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
-                                <i className='fa fa-calendar-plus mr-1'></i>
-								NUEVO
+                                <i className='fa fa-clock mr-1'></i>
+								NUEVA
 							</button>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export default function Contrato() {
                 <div className='row'>
                     {data.licenseTypes.map((lt) => {
                         return (
-                            <HorarioCard
+                            <AsistenciaCard
                                 key={lt.id}
                                 data={lt}
                                 setData={setSelectedItem}
@@ -77,8 +77,7 @@ export default function Contrato() {
                         );
                     })}
                 </div>
-                <HorarioModal licenseType={selectedItem} />
-				<HorarioDetalleModal licenseType={selectedItem} />
+                <AsistenciaModal licenseType={selectedItem} />
             </div>
         </div>
     );

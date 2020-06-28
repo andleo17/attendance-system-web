@@ -72,6 +72,10 @@ export default function NavLateral(props) {
 									path='/tipo-licencia'
 									title='Tipo de licencia'
 								/>
+								<MenuItem
+									path='/control-asistencia'
+									title='Control diario de asistencia'
+								/>
 							</DropDownMenu>
 							<DropDownMenu title='Empleado' icon='fa fa-child'>
 								<MenuItem path='/empleados' title='Gestionar' />
