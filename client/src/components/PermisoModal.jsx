@@ -4,6 +4,7 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { useState } from 'react';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
@@ -25,13 +26,14 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function LicenseTypeModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
-	const [execute] = useMutation(mutation);
+export default function PermissioneModal(props) {
+	const { permission } = props;
+	console.log(permission);
+	// const mutation =
+	// 	licenseType.mode === 0
+	// 		? ADD_LICENSE_TYPE_MUTATION
+	// 		: MODIFY_LICENSE_TYPE_MUTATION;
+	// const [execute] = useMutation(mutation);
 	return (
 		<div id='frmPermiso' className='modal fade inputEmpleado' tabIndex='-1'>
 			<div className='modal-dialog  modal-dialog-centered'>
@@ -54,40 +56,52 @@ export default function LicenseTypeModal(props) {
 									id='txtName'
 									type='text'
 									className='form-control '
-									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
-									}
-									// defaultValue={licenseType.description}
+									// onChange={(e) =>
+									// 	(licenseType.description =
+									// 		e.target.value)
+									// }
+									defaultValue={permission.employeeCardId}
 								/>
 							</div>
 							<div className='form-group'>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtTiempo '>Motivo:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control bg-white' disabled
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									className='form-control bg-white'
+									// onChange={(e) =>
+									// 	(licenseType.maximumDays =
+									// 		e.target.value)
+									// }
+									value={permission.motive}
 								/>
 							</div>
                             <div className='form-group'>
-								<label htmlFor='txtTiempo'>Fecha </label>
+								<label htmlFor='txtFechaPresentacion'>Fecha de presentación</label>
 								<input
-									id='txtTiempo'
+									id='txtFechaPresentacion'
 									type='date'
 									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									// onChange={(e) =>
+									// 	(licenseType.maximumDays =
+									// 		e.target.value)
+									// }
+									defaultValue={permission.presentationDate}
 								/>
 							</div>
-                            
+							<div className='form-group'>
+								<label htmlFor='txtFechaPermiso'>Fecha de permisio</label>
+								<input
+									id='txtFechaPermiso'
+									type='date'
+									className='form-control'
+									// onChange={(e) =>
+									// 	(licenseType.maximumDays =
+									// 		e.target.value)
+									// }
+									defaultValue={permission.date}
+								/>
+							</div>
                             
                             <div className='form-group'>
 								<label htmlFor='txtTiempo'>Estado:</label> <br/>
@@ -95,11 +109,11 @@ export default function LicenseTypeModal(props) {
 									id='txtTiempo'
 									type='checkbox'
 									className=''
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									// onChange={(e) =>
+									// 	(licenseType.maximumDays =
+									// 		e.target.value)
+									// }
+									defaultValue={permission.state}
 								/> <label htmlFor="">Vigente</label>
 							</div>
 						</form>
@@ -115,25 +129,25 @@ export default function LicenseTypeModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							onClick={() =>
-								execute({
-									variables: {
-										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
-											maximumDays: parseInt(
-												licenseType.maximumDays
-											),
-										},
-									},
-									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
-									],
-								})
-							}
+							// onClick={() =>
+							// 	execute({
+							// 		variables: {
+							// 			input: {
+							// 				id: parseInt(licenseType.id),
+							// 				description:
+							// 					licenseType.description,
+							// 				maximumDays: parseInt(
+							// 					licenseType.maximumDays
+							// 				),
+							// 			},
+							// 		},
+							// 		refetchQueries: [
+							// 			{ query: LIST_LICENSETYPE },
+							// 		],
+							// 	})
+							// }
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							Soy un botón {/* {licenseType.mode === 0 ? 'Registrar' : 'Modificar'} */}
 						</button>
 					</div>
 				</div>

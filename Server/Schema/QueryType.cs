@@ -22,6 +22,9 @@ namespace Server.Schema
 
 			descriptor.Field(q => q.GetLicenses(default, default))
 				.Type<NonNullType<ListType<NonNullType<LicenseType>>>>();
+			
+			descriptor.Field(q => q.GetPermissions(default, default))
+				.Type<NonNullType<ListType<NonNullType<PermissionType>>>>();
 
 			descriptor.Field(q => q.GetLicenseTypes(default))
 				.Type<NonNullType<ListType<NonNullType<LicenseTypeType>>>>();

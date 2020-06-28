@@ -69,6 +69,18 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<IReadOnlyList<Permission>> GetPermissions([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
+		{
+			if (employeeCardId != null)
+			{
+				return await (from p in dBAttendanceContext.Permission where p.EmployeeCardId == employeeCardId select p).ToListAsync();
+			}
+			else
+			{
+				return await dBAttendanceContext.Permission.ToListAsync();
+			}
+		}
+
 		public async Task<IReadOnlyList<Models.LicenseType>> GetLicenseTypes([Service] DBAttendanceContext dBAttendanceContext)
 		{
 			return await dBAttendanceContext.LicenseType.ToListAsync();

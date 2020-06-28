@@ -2,40 +2,68 @@ import React, { useState } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import LicenseTypeCard from '../components/LicenseTypeCard';
-import LicenseTypeModal from '../components/LicenseTypeModal';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
 import { buildResolveInfo } from 'graphql/execution/execute';
+import { useEffect } from 'react';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
-			id
-		}
+export const LIST_PERMISSION = gql`
+	query ListPermission($employeeCardId: String) {
+        permissions(employeeCardId: $employeeCardId){
+            id
+            date
+            motive
+            state
+            presentationDate
+            employeeCardId
+            employee{
+              name
+              lastname
+            }
+          }
 	}
 `;
 
-export default function Contrato() {
-    const initialState = {
-        __typename: 'Contract',
-        description: null,
-        id: null,
-        maximumDays: null,
-        mode: 0,
-    };
-    const [selectedItem, setSelectedItem] = useState(initialState);
+export const initialState = { permissions : [{
+    __typename: 'Permission',
+    date: null,
+    id: null,
+    motive:null,
+    presentationDate: null,
+    state: null,
+    enployeeCardId: null,
+    employee : {
+        __typename: 'Employee',
+        name: null,
+        lastname: null
+    }
+}]};
 
-    const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-    if (loading) return <h1>Loading...</h1>;
-    if (error) return <h1>{error.message}</h1>;
+export default function Permissions() {
 
+    const [selectedItem, setSelectedItem] = useState(initialState.permissions[0]);
+    const [employeeCardId, setEmployeeCardId] = useState(null);   
+    const [search,{ loading, data, error}] = useLazyQuery(LIST_PERMISSION);
+    let listPermission = initialState;
+
+    if (data && data.permissions) {
+        listPermission = data;
+    }    
     return (
-        <div className='page-content'>
+        
+        <div className='page-content' onLoad={
+            ()=>{
+                if(employeeCardId == null){
+                    search({
+                        variables: null,
+                    })
+                }
+            }
+          }
+        
+        >
             <div
                 className='row badge-dark pl-4 '
                 style={{ background: '#D5691E' }}
@@ -51,14 +79,37 @@ export default function Contrato() {
                             <input
                                 type='text'
                                 className='form-control'
-                                placeholder='Buscar'
+                                placeholder='Ingrese DNI y presione ENTER para buscar'
+                                onChange={(e) => setEmployeeCardId(e.target.value)}
+                           
+                                onKeyDown={
+                                    (e)=>{
+                                        if (e.keyCode === 13 && !e.shiftKey) {
+                                            e.preventDefault();
+                                            if (e.target.value == ''){
+                                                search({
+                                                    variables: null,
+                                                });
+                                            }
+                                            else{
+                                                search({
+                                                    variables: {employeeCardId},
+                                                });
+                                            }
+                                            
+                                        }
+                                    }
+
+                                
+                                }
+                                
                             />
                         </div>
                         <div className=''>
                             <button
                                 type='button'
-                                data-toggle='modal'
-                                data-target='#frmPermiso'
+                                // data-toggle='modal'
+                                // data-target='#frmPermiso'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
                                 <i className='fa fa-user-plus mr-1'></i>
@@ -67,18 +118,19 @@ export default function Contrato() {
                         </div>
                     </div>
                 </form>
-                <div className='row'>
-                    {data.licenseTypes.map((lt) => {
+                
+                {
+                    listPermission.permissions.map((p) => {
                         return (
                             <PermisoCard
-                                key={lt.id}
-                                data={lt}
+                                key={p.id}
+                                data={p}
                                 setData={setSelectedItem}
                             />
                         );
-                    })}
-                </div>
-                <PermisoModal licenseType={selectedItem} />
+                    })
+                }
+                <PermisoModal permission={selectedItem} />
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function LicenseTypeCard(props) {
+export default function PermissionCard(props) {
 	const { data, setData } = props;
 
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
@@ -29,7 +29,9 @@ export default function LicenseTypeCard(props) {
 						className='text-white pl-2 m-0'
 						style={{ background: '#D5691E' }}
 					>
-						Vigente
+						{
+							data.state === true ? 'VIGENTE' : 'NO VIGENTE'
+						}
 					</h3>
 				</div>
 				<div className='text-center card-header m-0'>
@@ -40,24 +42,24 @@ export default function LicenseTypeCard(props) {
                         <i className='fa fa-tag pr-4 pl-2'></i>
 						<b>Nombre</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 text-capitalize'>Paola Cieza Bances</div>
+						<div className='ml-5 text-capitalize'>{data.employee.name} {data.employee.lastname}</div>
 					</div>
 					<div className='mb-1'>
                         <i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Motivo</b>
-						<div className='ml-5 text-justify text-muted '>Pues la verdad me estoy ahogando sin tu amor, como quisiera poder vivir sin aire, vivir sin agua, me encantaría robar tu corazón :C</div>
+					<div className='ml-5 text-justify text'>{data.motive}</div>
 					</div>
                     <div className='mb-2'>
                         <i className='fa fa-calendar pr-4 pl-2'></i>
 						<b>Fecha presentación</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5'>{data.presentationDate}</div>
 					</div>
                     <div className='mb-2'>
                         <i className='fa fa-calendar-check pr-4 pl-2'></i>
 						<b>Fecha permiso</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5'>Soltera, pero nunca sola.</div>
+						<div className='ml-5'>{data.date}</div>
 					</div>
 				</div>
 
