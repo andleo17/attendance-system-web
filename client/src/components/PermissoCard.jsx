@@ -36,14 +36,14 @@ export default function PermissionCard(props) {
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
-					<div className='text-capitalize  font-italic'>Paola Cieza Bances</div>
+					<div className='text-capitalize  font-italic'>{data.employee.name} {data.employee.lastname}</div>
 				</div>
 				<div className='card-body '>
 					<div className='mb-2'>
                         <i className='fa fa-tag pr-4 pl-2'></i>
-						<b>Nombre</b>
+						<b>Código</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 text-capitalize'>{data.employee.name} {data.employee.lastname}</div>
+						<div className='ml-5 text-capitalize'>{data.id}</div>
 					</div>
 					<div className='mb-1'>
                         <i className='fa fa-calendar-alt pr-4 pl-2'></i>

@@ -34,6 +34,7 @@ export const initialState = { permissions : [{
     presentationDate: null,
     state: null,
     enployeeCardId: null,
+    mode: 0,
     employee : {
         __typename: 'Employee',
         name: null,
@@ -109,8 +110,11 @@ export default function Permissions() {
                         <div className=''>
                             <button
                                 type='button'
-                                // data-toggle='modal'
-                                // data-target='#frmPermiso'
+                                data-toggle='modal'
+                                data-target='#frmPermiso'
+                                onClick={() =>
+                                    setSelectedItem(Object.assign({ mode: 0 }))
+                                }
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
                                 <i className='fa fa-arrow-circle-up mr-1'></i>
@@ -119,7 +123,7 @@ export default function Permissions() {
                         </div>
                     </div>
                 </form>
-                
+                <div className='row'>
                 {
                     listPermission.permissions.map((p) => {
                         return (
@@ -131,6 +135,7 @@ export default function Permissions() {
                         );
                     })
                 }
+                </div>
                 <PermisoModal permission={selectedItem} />
             </div>
         </div>

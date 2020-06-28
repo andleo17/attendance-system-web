@@ -3,7 +3,7 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { LIST_PERMISSION } from '../pages/Permiso';
 import { useState } from 'react';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
@@ -16,26 +16,37 @@ const ADD_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_PERMISSION_MUTATION = gql`
+	mutation ModifyPermission($input: PermissionInput!) {
+		modifyPermission(input: $input) {
 			id
-			description
-			maximumDays
+            date
+            motive
+            state
+            presentationDate
+            employeeCardId
+            employee{
+              name
+              lastname
+            }
 		}
 	}
 `;
 
 export default function PermissioneModal(props) {
 	const { permission } = props;
-	console.log(permission);
-	// const mutation =
-	// 	licenseType.mode === 0
-	// 		? ADD_LICENSE_TYPE_MUTATION
-	// 		: MODIFY_LICENSE_TYPE_MUTATION;
-	// const [execute] = useMutation(mutation);
+	// const [p, setP] = useState(permission);
+	
+
+	
+	const mutation =
+		permission.mode === 0
+			? ADD_LICENSE_TYPE_MUTATION
+			: MODIFY_PERMISSION_MUTATION;
+	const [execute] = useMutation(mutation);
+	
 	return (
-		<div id='frmPermiso' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div id='frmPermiso' className='modal fade inputEmpleado' tabIndex='-1' >
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
@@ -48,20 +59,19 @@ export default function PermissioneModal(props) {
 							<span>&times;</span>
 						</button>
 					</div>
-					<div className='modal-body '>
-						<form>
+					<div className='modal-body'>
+						<form key={permission.id}>
 							<div className='form-group'>
 							<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
+									
 									id='txtName'
 									type='text'
 									className='form-control '
-									// onChange={(e) =>
-									// 	(licenseType.description =
-									// 		e.target.value)
-									// }
-									defaultValue={permission.employeeCardId}
+									onChange={(e) => (permission.employeeCardId = e.target.value)}
+									defaultValue={permission.employeeCardId} 
+									
 								/>
 							</div>
 							<div className='form-group'>
@@ -70,11 +80,8 @@ export default function PermissioneModal(props) {
 									id='txtTiempo'
 									type='text'
 									className='form-control bg-white'
-									// onChange={(e) =>
-									// 	(licenseType.maximumDays =
-									// 		e.target.value)
-									// }
-									value={permission.motive}
+									onChange={(e) => (permission.motive = e.target.value )}
+									defaultValue={permission.motive}
 								/>
 							</div>
                             <div className='form-group'>
@@ -83,10 +90,7 @@ export default function PermissioneModal(props) {
 									id='txtFechaPresentacion'
 									type='date'
 									className='form-control'
-									// onChange={(e) =>
-									// 	(licenseType.maximumDays =
-									// 		e.target.value)
-									// }
+									onChange={(e) => (permission.presentationDate = e.target.value)}
 									defaultValue={permission.presentationDate}
 								/>
 							</div>
@@ -96,10 +100,7 @@ export default function PermissioneModal(props) {
 									id='txtFechaPermiso'
 									type='date'
 									className='form-control'
-									// onChange={(e) =>
-									// 	(licenseType.maximumDays =
-									// 		e.target.value)
-									// }
+									onChange={(e) => (permission.date =  e.target.value)}
 									defaultValue={permission.date}
 								/>
 							</div>
@@ -111,11 +112,12 @@ export default function PermissioneModal(props) {
 									id='txtTiempo'
 									type='checkbox'
 									className=''
+									onChange={(e) => (permission.state =  e.target.checked)}
 									// onChange={(e) =>
 									// 	(licenseType.maximumDays =
 									// 		e.target.value)
 									// }
-									defaultValue={permission.state}
+									checked = {permission.state}
 								/> <label htmlFor="">Vigente</label>
 							</div>
 						</form>
@@ -131,25 +133,28 @@ export default function PermissioneModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							// onClick={() =>
-							// 	execute({
-							// 		variables: {
-							// 			input: {
-							// 				id: parseInt(licenseType.id),
-							// 				description:
-							// 					licenseType.description,
-							// 				maximumDays: parseInt(
-							// 					licenseType.maximumDays
-							// 				),
-							// 			},
-							// 		},
-							// 		refetchQueries: [
-							// 			{ query: LIST_LICENSETYPE },
-							// 		],
-							// 	})
-							// }
+							onClick={() =>
+								execute({
+									variables: {
+										input: {
+											date: 
+												permission.date,
+											employeeCardId:
+												permission.employeeCardId,
+											id: parseInt(permission.id),
+											motive:
+												permission.motive,
+											state:
+												permission.state
+										},
+									},
+									refetchQueries: [
+										{ query: LIST_PERMISSION },
+									],
+								})
+							}
 						>
-							Soy un botón {/* {licenseType.mode === 0 ? 'Registrar' : 'Modificar'} */}
+							{permission.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>
