@@ -1,11 +1,28 @@
 import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
-import foto from '../recursos/perfil.jpg'
+import foto from '../recursos/perfil.jpg';
 import { NavLink } from 'react-router-dom';
 import EmployeeItem from '../components/EmployeeItem';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const EMPLOYEE_QUERY = gql`
+	query EmployeeQuery {
+		employees {
+			cardId
+			name
+			lastname
+			email
+			state
+		}
+	}
+`;
 
 export default function Employee() {
+	const { loading, error, data } = useQuery(EMPLOYEE_QUERY);
+	if (loading) return <h1>Cargando</h1>;
+	if (error) return <h1>Error</h1>;
 	return (
 		<div className='page-content'>
 			<div
@@ -41,11 +58,10 @@ export default function Employee() {
 
 				<br />
 
-
 				<div className=''>
-					{Array(5)
-						.fill(<EmployeeItem />)
-						.map((e) => e)}
+					{data.employees.map((e) => (
+						<EmployeeItem employee={e} />
+					))}
 				</div>
 			</div>
 		</div>
