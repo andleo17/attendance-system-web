@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const USERS_QUERY = gql`
 	query Users {
@@ -33,8 +35,8 @@ export default function Usuario() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(USERS_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>

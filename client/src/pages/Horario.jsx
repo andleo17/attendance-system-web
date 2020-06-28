@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
 import HorarioCard from '../components/HorarioCard';
 import HorarioModal from '../components/HorarioModal';
 import HorarioDetalleModal from '../components/HorarioDetalleModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const SCHEDULE_QUERY = gql`
 	query Schedules {
@@ -34,8 +36,8 @@ export default function Horario() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(SCHEDULE_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>

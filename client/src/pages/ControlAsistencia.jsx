@@ -4,7 +4,9 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import ControlAsistenciaCard from '../components/ControlAsistenciaCard'
+import ControlAsistenciaCard from '../components/ControlAsistenciaCard';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -27,8 +29,8 @@ export default function Contrato() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>
@@ -50,7 +52,6 @@ export default function Contrato() {
 								placeholder='Buscar'
 							/>
 						</div>
-						
 					</div>
 				</form>
 				<div className='row'>

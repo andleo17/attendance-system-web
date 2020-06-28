@@ -8,6 +8,8 @@ import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
 import { buildResolveInfo } from 'graphql/execution/execute';
 import { useEffect } from 'react';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const LIST_PERMISSION = gql`
 	query ListPermission($employeeCardId: String) {
@@ -52,6 +54,8 @@ export default function Permissions() {
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
 	const [search, { loading, data, error }] = useLazyQuery(LIST_PERMISSION);
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 	let listPermission = initialState;
 
 	if (data && data.permissions) {

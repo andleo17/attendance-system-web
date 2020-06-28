@@ -7,6 +7,8 @@ import { NavLink } from 'react-router-dom';
 import { buildResolveInfo } from 'graphql/execution/execute';
 import AsistenciaCard from '../components/AsistenciaCard';
 import AsistenciaModal from '../components/AsistenciaModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const ATTENDANCES_QUERY = gql`
 	query Attendances {
@@ -34,8 +36,8 @@ export default function Contrato() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(ATTENDANCES_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>

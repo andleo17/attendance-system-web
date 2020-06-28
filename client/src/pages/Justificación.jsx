@@ -8,6 +8,8 @@ import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
 import JustificacionCard from '../components/JustificacionCard';
 import JustificacionModal from '../components/JustifcicacionModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const JUSTIFICATIONS_QUERY = gql`
 	query Justifications {
@@ -37,8 +39,8 @@ export default function Usuario() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(JUSTIFICATIONS_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>

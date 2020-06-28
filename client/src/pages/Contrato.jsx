@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const CONTRACT_QUERY = gql`
 	query Contracts {
@@ -32,8 +34,8 @@ export default function Contrato() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(CONTRACT_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>
