@@ -6,13 +6,19 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
+export const CONTRACT_QUERY = gql`
+	query Contracts {
+		contracts {
 			id
+			startDate
+			finishDate
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
@@ -27,9 +33,9 @@ export default function Contrato() {
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
-	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	const { loading, data, error } = useQuery(CONTRACT_QUERY);
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>
@@ -53,20 +59,20 @@ export default function Contrato() {
 							/>
 						</div>
 						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmContrato'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-file-archive mr-1'></i>
+							<button
+								type='button'
+								data-toggle='modal'
+								data-target='#frmContrato'
+								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-file-archive mr-1'></i>
 								NUEVO
 							</button>
 						</div>
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenseTypes.map((lt) => {
+					{data.contracts.map((lt) => {
 						return (
 							<ContratoCard
 								key={lt.id}

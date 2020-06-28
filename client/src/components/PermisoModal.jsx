@@ -3,7 +3,8 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { LIST_PERMISSION } from '../pages/Permiso';
+import { useState } from 'react';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
@@ -15,25 +16,37 @@ const ADD_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_PERMISSION_MUTATION = gql`
+	mutation ModifyPermission($input: PermissionInput!) {
+		modifyPermission(input: $input) {
 			id
-			description
-			maximumDays
+            date
+            motive
+            state
+            presentationDate
+            employeeCardId
+            employee{
+              name
+              lastname
+            }
 		}
 	}
 `;
 
-export default function LicenseTypeModal(props) {
-	const { licenseType } = props;
+export default function PermissioneModal(props) {
+	const { permission } = props;
+	// const [p, setP] = useState(permission);
+	
+
+	
 	const mutation =
-		licenseType.mode === 0
+		permission.mode === 0
 			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+			: MODIFY_PERMISSION_MUTATION;
 	const [execute] = useMutation(mutation);
+	
 	return (
-		<div id='frmPermiso' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div id='frmPermiso' className='modal fade inputEmpleado' tabIndex='-1' >
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
 					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
@@ -46,51 +59,51 @@ export default function LicenseTypeModal(props) {
 							<span>&times;</span>
 						</button>
 					</div>
-					<div className='modal-body '>
-						<form>
+					<div className='modal-body'>
+						<form key={permission.id}>
 							<div className='form-group'>
 							<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
+									
 									id='txtName'
 									type='text'
 									className='form-control '
-									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
-									}
-									// defaultValue={licenseType.description}
+									onChange={(e) => (permission.employeeCardId = e.target.value)}
+									defaultValue={permission.employeeCardId} 
+									
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtTiempo '>Motivo:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control bg-white' disabled
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									className='form-control bg-white'
+									onChange={(e) => (permission.motive = e.target.value )}
+									defaultValue={permission.motive}
 								/>
 							</div>
                             <div className='form-group'>
-							<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha </label>
+								<label htmlFor='txtFechaPresentacion'>Fecha de presentación</label>
 								<input
-									id='txtTiempo'
+									id='txtFechaPresentacion'
 									type='date'
 									className='form-control'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									onChange={(e) => (permission.presentationDate = e.target.value)}
+									defaultValue={permission.presentationDate}
 								/>
 							</div>
-                            
+							<div className='form-group'>
+								<label htmlFor='txtFechaPermiso'>Fecha de permisio</label>
+								<input
+									id='txtFechaPermiso'
+									type='date'
+									className='form-control'
+									onChange={(e) => (permission.date =  e.target.value)}
+									defaultValue={permission.date}
+								/>
+							</div>
                             
                             <div className='form-group'>
 							<i className='fa fa-ban pl-2'></i>
@@ -98,12 +111,13 @@ export default function LicenseTypeModal(props) {
 								<input
 									id='txtTiempo'
 									type='checkbox'
-									className='ml-4'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									className=''
+									onChange={(e) => (permission.state =  e.target.checked)}
+									// onChange={(e) =>
+									// 	(licenseType.maximumDays =
+									// 		e.target.value)
+									// }
+									checked = {permission.state}
 								/> <label htmlFor="">Vigente</label>
 							</div>
 						</form>
@@ -123,21 +137,24 @@ export default function LicenseTypeModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
-											maximumDays: parseInt(
-												licenseType.maximumDays
-											),
+											date: 
+												permission.date,
+											employeeCardId:
+												permission.employeeCardId,
+											id: parseInt(permission.id),
+											motive:
+												permission.motive,
+											state:
+												permission.state
 										},
 									},
 									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
+										{ query: LIST_PERMISSION },
 									],
 								})
 							}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{permission.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>
