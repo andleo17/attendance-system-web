@@ -5,6 +5,7 @@ import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import moment from 'moment';
 
 const DELETE_LICENSE_TYPE_MUTATION = gql`
 	mutation DeleteLicenseType($licenseTypeId: Byte!) {
@@ -29,26 +30,29 @@ export default function HorarioCard(props) {
 						className='text-white pl-2 m-0'
 						style={{ background: '#D5691E' }}
 					>
-						Vigente
+						{data.state ? 'Vigente' : 'No vigente'}
 					</h3>
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
-					<div className='ext-capitalize font-italic'>Paola Cieza Bances</div>
+					<div className='ext-capitalize font-italic'>
+						{`${data.employee.name} ${data.employee.lastname}`}
+					</div>
 				</div>
 				<div className='card-body '>
-					
-                    <div className='mb-2'>
-                        <i className='fa fa-calendar-check pr-4 pl-2'></i>
+					<div className='mb-2'>
+						<i className='fa fa-calendar-check pr-4 pl-2'></i>
 						<b>Fecha inicio</b>
-						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 font-italic'>12/12/12</div>
+						<div className='ml-5 font-italic'>
+							{moment(data.startDate).format('DD/MM/YYYY')}
+						</div>
 					</div>
-                    <div className='mb-2'>
-                        <i className='fa fa-calendar-times pr-4 pl-2'></i>
+					<div className='mb-2'>
+						<i className='fa fa-calendar-times pr-4 pl-2'></i>
 						<b>Fecha fin</b>
-						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 font-italic'>20/12/20</div>
+						<div className='ml-5 font-italic'>
+							{moment(data.finishDate).format('DD/MM/YYYY')}
+						</div>
 					</div>
 				</div>
 				<div className='card-footer d-flex justify-content-between'>
@@ -64,7 +68,7 @@ export default function HorarioCard(props) {
 					>
 						<i className='fa fa-eye text-white'></i>
 					</button>
-                    <button
+					<button
 						type='button'
 						title='Modificar'
 						className='degradado btn'
@@ -76,7 +80,7 @@ export default function HorarioCard(props) {
 					>
 						<i className='fa fa-pencil-alt text-white'></i>
 					</button>
-                    <button
+					<button
 						type='button'
 						title='Dar de baja'
 						className='degradado btn'
@@ -89,7 +93,7 @@ export default function HorarioCard(props) {
 					<button
 						type='button'
 						title='Eliminar'
-						className='degradado btn ' 
+						className='degradado btn '
 						onClick={() =>
 							mutation({
 								variables: { licenseTypeId: parseInt(data.id) },
