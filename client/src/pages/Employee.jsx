@@ -1,7 +1,6 @@
 import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
-import foto from '../recursos/perfil.jpg';
 import { NavLink } from 'react-router-dom';
 import EmployeeItem from '../components/EmployeeItem';
 import { useQuery } from '@apollo/react-hooks';

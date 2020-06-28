@@ -4,17 +4,24 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import  UsuarioCard from '../components/UsuarioCard';
+import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
-import JustificacionCard from '../components/JustificacionCard'
-import JustificacionModal from '../components/JustifcicacionModal'
+import JustificacionCard from '../components/JustificacionCard';
+import JustificacionModal from '../components/JustifcicacionModal';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
+export const JUSTIFICATIONS_QUERY = gql`
+	query Justifications {
+		justifications {
 			id
+			date
+			state
+			attendance {
+				id
+				employee {
+					name
+					lastname
+				}
+			}
 		}
 	}
 `;
@@ -29,7 +36,7 @@ export default function Usuario() {
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
-	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
+	const { loading, data, error } = useQuery(JUSTIFICATIONS_QUERY);
 	if (loading) return <h1>Loading...</h1>;
 	if (error) return <h1>{error.message}</h1>;
 
@@ -55,20 +62,20 @@ export default function Usuario() {
 							/>
 						</div>
 						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmJustificacion'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-check-circle mr-1'></i>
+							<button
+								type='button'
+								data-toggle='modal'
+								data-target='#frmJustificacion'
+								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-check-circle mr-1'></i>
 								NUEVO
 							</button>
 						</div>
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenseTypes.map((lt) => {
+					{data.justifications.map((lt) => {
 						return (
 							<JustificacionCard
 								key={lt.id}

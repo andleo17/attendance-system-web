@@ -23,9 +23,9 @@ export const SCHEDULE_QUERY = gql`
 	}
 `;
 
-export default function Contrato() {
+export default function Horario() {
 	const initialState = {
-		__typename: 'Contract',
+		__typename: 'Schedule',
 		description: null,
 		id: null,
 		maximumDays: null,

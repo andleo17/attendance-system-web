@@ -4,15 +4,20 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import  UsuarioCard from '../components/UsuarioCard';
+import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
+export const USERS_QUERY = gql`
+	query Users {
+		users {
 			id
+			name
+			password
+			state
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
@@ -27,12 +32,12 @@ export default function Usuario() {
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
-	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
+	const { loading, data, error } = useQuery(USERS_QUERY);
 	if (loading) return <h1>Loading...</h1>;
 	if (error) return <h1>{error.message}</h1>;
 
 	return (
-		<div className='page-content' >
+		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
@@ -53,20 +58,20 @@ export default function Usuario() {
 							/>
 						</div>
 						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmContrato'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-user-plus mr-1'></i>
+							<button
+								type='button'
+								data-toggle='modal'
+								data-target='#frmContrato'
+								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-user-plus mr-1'></i>
 								NUEVO
 							</button>
 						</div>
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenseTypes.map((lt) => {
+					{data.users.map((lt) => {
 						return (
 							<UsuarioCard
 								key={lt.id}
@@ -78,7 +83,6 @@ export default function Usuario() {
 				</div>
 				<UsuarioModal licenseType={selectedItem} />
 			</div>
-
 		</div>
 	);
 }
