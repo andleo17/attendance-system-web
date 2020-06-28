@@ -16,10 +16,6 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-
-
-
-
 export default function Cotrato(props) {
     const { data, setData } = props;
 
