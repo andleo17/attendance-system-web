@@ -38,22 +38,15 @@ export default function Cotrato(props) {
                         <div className='card-body col-6 p-0 pl-2 pt-1 '>
                             <div className='font-italic  mb-1'>Paola Cieza Bances</div>
 
-
                             <div className='mb-2'>
                                 <i className='fa fa-calendar-plus pr-2'></i>
                                 <b>Fecha inicio</b>
-                                {/* <div> <input type="date" name="" id="" className='form-control' /></div> */}
-                                {/* <div className=''>{data.maximumDays} días</div> */}
                                 <div className='ml-4 font-italic'> 12/12/12</div>
                             </div>
                             <div className='mb-2'>
                                 <i className='fa fa-calendar-times pr-2'></i>
                                 <b>Fecha fin</b>
                                 <div className='ml-4 font-italic'> 12/12/12</div>
-
-                                {/* <div> <input type="date" name="" id="" className='form-control' /></div> */}
-
-                                {/* <div className=''>{data.maximumDays} días</div> */}
                             </div>
                         </div>
 
@@ -61,6 +54,7 @@ export default function Cotrato(props) {
                             <button
                                 type='button'
                                 className='degradado btn '
+                                title='Visualizar'
                                 data-toggle='modal'
                                 data-target='#frmContrato'
                                 onClick={() =>
@@ -72,6 +66,7 @@ export default function Cotrato(props) {
 
                             <button
                                 type='button'
+                                title='Modificar'
                                 className='degradado btn'
                                 data-toggle='modal'
                                 data-target='#frmContrato'
@@ -84,6 +79,7 @@ export default function Cotrato(props) {
 
                             <button
                                 type='button'
+                                title='Dar de baja'
                                 className='degradado btn'
                                 data-toggle='modal'
                                 data-target='#frmContrato'
@@ -94,9 +90,9 @@ export default function Cotrato(props) {
                                 <i className='fa fa-ban text-white'></i>
                             </button>
 
-
                             <button
                                 type='button'
+                                title='Eliminar'
                                 className='degradado btn  '
                                 onClick={() =>
                                     mutation({

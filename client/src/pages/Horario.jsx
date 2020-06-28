@@ -48,6 +48,7 @@ export default function Contrato() {
                         <div className='col'>
                             <input
                                 type='text'
+                                title='Buscar por empleado'
                                 className='form-control'
                                 placeholder='Buscar'
                             />

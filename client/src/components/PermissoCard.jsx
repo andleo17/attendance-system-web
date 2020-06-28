@@ -60,6 +60,7 @@ export default function LicenseTypeCard(props) {
 				<div className='card-footer d-flex justify-content-between'>
 					<button
 						type='button'
+						title='Modificar'
 						className='degradado btn'
 						data-toggle='modal'
 						data-target='#frmPermiso'
@@ -71,6 +72,7 @@ export default function LicenseTypeCard(props) {
 					</button>
                     <button
 						type='button'
+						title='Dar de baja'
 						className='degradado btn'
 						onClick={() =>
 							setData(Object.assign(data, { mode: 1 }))
@@ -80,6 +82,7 @@ export default function LicenseTypeCard(props) {
 					</button>
 					<button
 						type='button'
+						title='Eliminar'
 						className='degradado btn ' 
 						onClick={() =>
 							mutation({

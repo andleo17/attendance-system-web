@@ -20,7 +20,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 
 
 
-export default function UsuarioCard(props) {
+export default function Cotrato(props) {
     const { data, setData } = props;
 
     const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
@@ -31,24 +31,29 @@ export default function UsuarioCard(props) {
                 <div className='card card-licensetype'>
 
                     <div className="row p-0 ">
-                        <div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
+                        <div className='card-header bg-light-gray col-4 d-flex flex-column justify-content-between p-0 '>
                             <div htmlFor="" className='badge-sonar'></div>
-                            <img src={foto} alt='' className=' mt-5 circle mb-0 bg-transparent h-50 w-50' />
-                             <label htmlFor="" className=' text-sistema '> <b> Vigente</b></label>
+                            <img src={foto} alt='' className=' mt-5 circle  bg-transparent h-50 w-50' />
                         </div>
-                        <div className='card-body col-6  p-0 pl-2 pt-1'>
-                        <div className='font-italic  mb-1'>Paola Cieza Bances</div>
+                        <div className='card-body col-6 p-0 pl-2 pt-1 '>
+                            <div className='font-italic  mb-1'>Paola Cieza Bances</div>
+
 
                             <div className='mb-2'>
-                                <i className='fa fa-user-circle pr-2'></i>
-                                <b>Usuario</b>
-                                <div className='pl-4 font-italic'> Paolitha</div>
+                                <i className='fa fa-clock pr-2'></i>
+                                <b>Hora entrada</b>
+                                <div className='ml-4 font-italic'>
+                                    <label htmlFor="" className='mr-2'> 07:00 </label> -
+                                <label htmlFor="" className='ml-2'>07:05</label>
+                                </div>
                             </div>
                             <div className='mb-2'>
-                                <i className='fa fa-key pr-2'></i>
-                                <b>Contraseña</b>
-                                <div className='pl-4 font-italic'> ....</div>
-
+                                <i className='fa fa-clock pr-2'></i>
+                                <b>Hora salida</b>
+                                <div className='ml-4 font-italic'> 
+                                <label htmlFor="" className='mr-2'> 07:00 </label> -
+                                <label htmlFor="" className='ml-2'>07:05</label>
+                                </div>
                             </div>
                         </div>
 
@@ -56,23 +61,20 @@ export default function UsuarioCard(props) {
 
                             <button
                                 type='button'
-                                title='Modificar'
                                 className='degradado btn'
-                                data-toggle='modal'
-                                data-target='#frmContrato'
+                                title='Marca entrada'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
                                 }
                             >
-                                <i className='fa fa-pencil-alt text-white'></i>
+                                <i className='fa fa-outdent text-white'></i>
                             </button>
 
-                         
 
                             <button
                                 type='button'
-                                title='Eliminar'
-                                className='degradado btn  '
+                                className='degradado btn  ' 
+                                title='Marca salida'
                                 onClick={() =>
                                     mutation({
                                         variables: { licenseTypeId: parseInt(data.id) },
@@ -84,7 +86,7 @@ export default function UsuarioCard(props) {
                                     })
                                 }
                             >
-                                <i className='fa fa-trash-alt text-white'></i>
+                                <i className='fa fa-indent text-white'></i>
                             </button>
                         </div>
                     </div>

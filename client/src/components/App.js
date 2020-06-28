@@ -15,7 +15,8 @@ import Justificaciones from '../pages/Justificación'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Asistencia from '../pages/Asistencia'
-import Licencias from '../pages/Licencia' 
+import Licencias from '../pages/Licencia'
+import ControlAsistencia from '../pages/ControlAsistencia' 
  
 function App() {
 	const [show, setShow] = useState(true);
@@ -77,6 +78,11 @@ function App() {
 							exact
 							path='/licencias'
 							component={Licencias}
+						/>
+						<Route
+							exact
+							path='/control-asistencia'
+							component={ControlAsistencia}
 						/>
 						{/* <Footer /> */}
 					</div>

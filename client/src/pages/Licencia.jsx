@@ -49,18 +49,19 @@ export default function Usuario() {
 						<div className='col'>
 							<input
 								type='text'
+								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Buscar'
 							/>
 						</div>
 						<div className=''>
 						<button
-                                type='button'
+								type='button'
                                 data-toggle='modal'
                                 data-target='#frmJustificacion'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
-                                <i className='fa fa-user-plus mr-1'></i>
+                                <i className='fa fa-file-word mr-1'></i>
 								NUEVO
 							</button>
 						</div>

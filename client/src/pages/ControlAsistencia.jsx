@@ -4,8 +4,7 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import  UsuarioCard from '../components/UsuarioCard';
-import UsuarioModal from '../components/UsuarioModal';
+import ControlAsistenciaCard from '../components/ControlAsistenciaCard'
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -17,7 +16,7 @@ export const LIST_LICENSETYPE = gql`
 	}
 `;
 
-export default function Usuario() {
+export default function Contrato() {
 	const initialState = {
 		__typename: 'Contract',
 		description: null,
@@ -32,13 +31,13 @@ export default function Usuario() {
 	if (error) return <h1>{error.message}</h1>;
 
 	return (
-		<div className='page-content' >
+		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Usuario
+					Control diario de asistencia
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -47,28 +46,17 @@ export default function Usuario() {
 						<div className='col'>
 							<input
 								type='text'
-								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Buscar'
 							/>
 						</div>
-						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmContrato'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-user-plus mr-1'></i>
-								NUEVO
-							</button>
-						</div>
+						
 					</div>
 				</form>
 				<div className='row'>
 					{data.licenseTypes.map((lt) => {
 						return (
-							<UsuarioCard
+							<ControlAsistenciaCard
 								key={lt.id}
 								data={lt}
 								setData={setSelectedItem}
@@ -76,9 +64,7 @@ export default function Usuario() {
 						);
 					})}
 				</div>
-				<UsuarioModal licenseType={selectedItem} />
 			</div>
-
 		</div>
 	);
 }

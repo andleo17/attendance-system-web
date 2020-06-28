@@ -54,6 +54,7 @@ export default function UsuarioCard(props) {
                         <div className='card-footer p-1 pl-1 pr-1   col-2 d-flex flex-column justify-content-around m-0'>
                             <button
                                 type='button'
+                                title='Visualizar'
                                 className='degradado btn'
                                 data-toggle='modal'
                                 data-target='#frmJustificacion'
@@ -66,6 +67,7 @@ export default function UsuarioCard(props) {
 
                             <button
                                 type='button'
+                                title='Modificar'
                                 className='degradado btn'
                                 data-toggle='modal'
                                 data-target='#frmJustificacion'
@@ -78,6 +80,7 @@ export default function UsuarioCard(props) {
 
                             <button
                                 type='button'
+                                title='Dar de baja'
                                 className='degradado btn'
                                 onClick={() =>
                                     mutation({
@@ -95,6 +98,7 @@ export default function UsuarioCard(props) {
 
                             <button
                                 type='button'
+                                title='Eliminar'
                                 className='degradado btn'
                                 onClick={() =>
                                     mutation({

@@ -48,6 +48,7 @@ export default function Contrato() {
                         <div className='col'>
                             <input
                                 type='text'
+                                title='Buscar por empleado'
                                 className='form-control'
                                 placeholder='Buscar'
                             />
@@ -59,8 +60,8 @@ export default function Contrato() {
                                 data-target='#frmAsistencia'
                                 className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
                             >
-                                <i className='fa fa-user-plus mr-1'></i>
-								NUEVO
+                                <i className='fa fa-clock mr-1'></i>
+								NUEVA
 							</button>
                         </div>
                     </div>

@@ -51,6 +51,7 @@ export default function LicenseTypeCard(props) {
 					<button
 						type='button'
 						className='degradado btn'
+						title='Modificar'
 						data-toggle='modal'
 						data-target='#frmLicenseType'
 						onClick={() =>
@@ -62,6 +63,7 @@ export default function LicenseTypeCard(props) {
 					<button
 						type='button'
 						className='degradado btn ' 
+						title='Eliminar'
 						onClick={() =>
 							mutation({
 								variables: { licenseTypeId: parseInt(data.id) },

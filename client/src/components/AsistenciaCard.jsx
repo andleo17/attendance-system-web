@@ -43,13 +43,11 @@ export default function LicenseTypeCard(props) {
                     <div className='mb-2'>
                         <i className='fa fa-clock pr-4 pl-2'></i>
                         <b>Hora entrada</b>
-                        {/* <div className='ml-5'>{data.description}</div> */}
                         <div className='ml-5 font-italic'>10:00</div>
                     </div>
                     <div className='mb-2'>
                         <i className='fa fa-clock pr-4 pl-2'></i>
                         <b>Hora salida</b>
-                        {/* <div className='ml-5'>{data.description}</div> */}
                         <div className='ml-5 font-italic'>03:00</div>
                     </div>
                 </div>
@@ -57,6 +55,7 @@ export default function LicenseTypeCard(props) {
                 <div className='card-footer d-flex justify-content-between'>
                     <button
                         type='button'
+                        title='Modificar'
                         className='degradado btn'
                         data-toggle='modal'
                         data-target='#frmAsistencia'
@@ -68,6 +67,7 @@ export default function LicenseTypeCard(props) {
                     </button>
                     <button
                         type='button'
+                        title='Dar de baja'
                         className='degradado btn'
                         onClick={() =>
                             setData(Object.assign(data, { mode: 1 }))
@@ -77,6 +77,7 @@ export default function LicenseTypeCard(props) {
                     </button>
                     <button
                         type='button'
+                        title='Eliminar'
                         className='degradado btn '
                         onClick={() =>
                             mutation({
