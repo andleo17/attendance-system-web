@@ -6,6 +6,7 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
 import moment from 'moment';
+import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
 
 const DELETE_LICENSE_TYPE_MUTATION = gql`
 	mutation DeleteLicenseType($licenseTypeId: Byte!) {
@@ -17,7 +18,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function UsuarioCard(props) {
+export default function JustificationCard(props) {
 	const { data, setData } = props;
 
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
@@ -94,11 +95,11 @@ export default function UsuarioCard(props) {
 								onClick={() =>
 									mutation({
 										variables: {
-											licenseTypeId: parseInt(data.id),
+											justificationId: parseInt(data.id),
 										},
 										refetchQueries: [
 											{
-												query: LIST_LICENSETYPE,
+												query: JUSTIFICATIONS_QUERY,
 											},
 										],
 									})

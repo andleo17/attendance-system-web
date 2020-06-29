@@ -4,6 +4,7 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
@@ -26,9 +27,9 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 `;
 
 export default function UsiarioModal(props) {
-    const { licenseType } = props;
+    const { justification } = props;
     const mutation =
-        licenseType.mode === 0
+        justification.mode === 0
             ? ADD_LICENSE_TYPE_MUTATION
             : MODIFY_LICENSE_TYPE_MUTATION;
     const [execute] = useMutation(mutation);
@@ -57,7 +58,7 @@ export default function UsiarioModal(props) {
                                     type='text'
                                     className='form-control '
                                     onChange={(e) =>
-                                        (licenseType.description =
+                                        (justification.description =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.description}
@@ -71,7 +72,7 @@ export default function UsiarioModal(props) {
                                     type='text' disabled
                                     className='form-control bg-white'
                                     onChange={(e) =>
-                                        (licenseType.maximumDays =
+                                        (justification.maximumDays =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.maximumDays}
@@ -86,7 +87,7 @@ export default function UsiarioModal(props) {
                                     type='text'
                                     className='form-control'
                                     onChange={(e) =>
-                                        (licenseType.maximumDays =
+                                        (justification.maximumDays =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.maximumDays}
@@ -101,7 +102,7 @@ export default function UsiarioModal(props) {
                                     type='text'
                                     className='form-control'
                                     onChange={(e) =>
-                                        (licenseType.maximumDays =
+                                        (justification.maximumDays =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.maximumDays}
@@ -115,7 +116,7 @@ export default function UsiarioModal(props) {
                                     type='text'
                                     className='form-control'
                                     onChange={(e) =>
-                                        (licenseType.maximumDays =
+                                        (justification.maximumDays =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.maximumDays}
@@ -129,7 +130,7 @@ export default function UsiarioModal(props) {
                                     type='text' disabled
                                     className='form-control bg-transparent'
                                     onChange={(e) =>
-                                        (licenseType.maximumDays =
+                                        (justification.maximumDays =
                                             e.target.value)
                                     }
                                 // defaultValue={licenseType.maximumDays}
@@ -144,7 +145,7 @@ export default function UsiarioModal(props) {
 									type='checkbox'
 									className=' ml-4'
 									onChange={(e) =>
-										(licenseType.maximumDays =
+										(justification.maximumDays =
 											e.target.value)
 									}
 									// defaultValue={licenseType.maximumDays}
@@ -167,21 +168,21 @@ export default function UsiarioModal(props) {
                                 execute({
                                     variables: {
                                         input: {
-                                            id: parseInt(licenseType.id),
+                                            id: parseInt(justification.id),
                                             description:
-                                                licenseType.description,
+                                                justification.description,
                                             maximumDays: parseInt(
-                                                licenseType.maximumDays
+                                                justification.maximumDays
                                             ),
                                         },
                                     },
                                     refetchQueries: [
-                                        { query: LIST_LICENSETYPE },
+                                        { query: JUSTIFICATIONS_QUERY },
                                     ],
                                 })
                             }
                         >
-                            {licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+                            {justification.mode === 0 ? 'Registrar' : 'Modificar'}
                         </button>
                     </div>
                 </div>
