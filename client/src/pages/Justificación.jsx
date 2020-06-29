@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
@@ -12,38 +12,76 @@ import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const JUSTIFICATIONS_QUERY = gql`
-	query Justifications {
-		justifications {
-			id
-			date
-			state
-			attendance {
-				id
-				employee {
-					name
-					lastname
-				}
-			}
+query ListJustifications($employeeCardId: String) {
+	justifications(employeeCardId: $employeeCardId) {
+		id
+		date
+		motive
+		state
+		attendanceId
+		attendance{
+		  id
+		  date
+		  employee{
+			name
+			lastname
+			cardId
+		  }
 		}
 	}
+}
 `;
+export 	const initialState = {
+	justifications: [
+		{
+			__typename: 'Justification',
+			id: null,
+			date: null,
+			motive: null,
+			state: null,
+			attendanceId: null,
+			mode: 0,
+			attendance: {
+				__typename: 'Attendance',
+				id: null,
+				date: null,
+				employee: {
+					__typename: 'Employee',
+					name: null,
+					lastname: null,
+					cardId: null,
+				},
+			},
+		},
+	],
 
-export default function Usuario() {
-	const initialState = {
-		__typename: 'Contract',
-		description: null,
-		id: null,
-		maximumDays: null,
-		mode: 0,
-	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
+};
 
-	const { loading, data, error } = useQuery(JUSTIFICATIONS_QUERY);
+export default function Justificación() {
+
+	const [selectedItem, setSelectedItem] = useState(
+		initialState.justifications[0]
+	);
+	const [employeeCardId, setEmployeeCardId] = useState(null);
+	const  [search, { loading, data, error }] = useLazyQuery(JUSTIFICATIONS_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
+	let listJustifications = initialState;
 
+	if (data && data.justifications) {
+		listJustifications = data;
+	}
 	return (
-		<div className='page-content'>
+		<div className='page-content'
+		onLoad={() => {
+			if (employeeCardId == null) {
+				search({
+					variables: null,
+				});
+			}
+		}}
+		
+		>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
@@ -60,7 +98,24 @@ export default function Usuario() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
-								placeholder='Buscar'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
+								onChange={(e) =>
+									setEmployeeCardId(e.target.value)
+								}
+								onKeyDown={(e) => {
+									if (e.keyCode === 13 && !e.shiftKey) {
+										e.preventDefault();
+										if (e.target.value == '') {
+											search({
+												variables: null,
+											});
+										} else {
+											search({
+												variables: { employeeCardId },
+											});
+										}
+									}
+								}}
 							/>
 						</div>
 						<div className=''>
@@ -68,6 +123,9 @@ export default function Usuario() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmJustificacion'
+								onClick={() =>
+									setSelectedItem(Object.assign({ mode: 0 }))
+								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-check-circle mr-1'></i>
@@ -77,17 +135,17 @@ export default function Usuario() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.justifications.map((lt) => {
+					{listJustifications.justifications.map((j) => {
 						return (
 							<JustificacionCard
-								key={lt.id}
-								data={lt}
+								key={j.id}
+								data={j}
 								setData={setSelectedItem}
 							/>
 						);
 					})}
 				</div>
-				<JustificacionModal licenseType={selectedItem} />
+				<JustificacionModal justification={selectedItem} />
 			</div>
 		</div>
 	);

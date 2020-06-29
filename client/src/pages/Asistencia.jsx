@@ -3,8 +3,6 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
-import { buildResolveInfo } from 'graphql/execution/execute';
 import AsistenciaCard from '../components/AsistenciaCard';
 import AsistenciaModal from '../components/AsistenciaModal';
 import Loader from '../components/Loader';

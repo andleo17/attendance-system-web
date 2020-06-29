@@ -38,6 +38,9 @@ namespace Server.Schema
 			descriptor.Field(q => q.Login(default, default, default))
 				.Argument("username", a => a.Type<NonNullType<StringType>>())
 				.Argument("password", a => a.Type<NonNullType<StringType>>());
+			
+			descriptor.Field(q => q.GetDelay(default))
+				.Type<NonNullType<ListType<NonNullType<AttendanceType>>>>();
 		}
 	}
 }

@@ -3,7 +3,6 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
 import Loader from '../components/Loader';
@@ -60,6 +59,7 @@ export default function LicenseType() {
 								data-toggle='modal'
 								data-target='#frmLicenseType'
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+								onClick={() => setSelectedItem(initialState)}
 							>
 								<i className='fa fa-plus mr-1'></i>
 								NUEVA
