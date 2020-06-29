@@ -26,10 +26,11 @@ export const USERS_QUERY = gql`
 
 export default function Usuario() {
 	const initialState = {
-		__typename: 'Contract',
-		description: null,
+		__typename: 'User',
 		id: null,
-		maximumDays: null,
+		name: null,
+		password: null,
+		state: null,
 		mode: 0,
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
@@ -83,7 +84,7 @@ export default function Usuario() {
 						);
 					})}
 				</div>
-				<UsuarioModal licenseType={selectedItem} />
+				<UsuarioModal user={selectedItem} />
 			</div>
 		</div>
 	);

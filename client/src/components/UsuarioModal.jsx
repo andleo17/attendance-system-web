@@ -3,34 +3,36 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { USERS_QUERY } from '../pages/Usuario';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
+const ADD_USER_MUTATION = gql`
+	mutation AddUser($input: UserInput!) {
+		addUser(input: $input) {
 			id
-			description
-			maximumDays
+			name
+			password
+			state
 		}
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_USER_MUTATION = gql`
+	mutation ModifyUser($input: UserInput!) {
+		modifyUser(input: $input) {
 			id
-			description
-			maximumDays
+			name
+			password
+			state
 		}
 	}
 `;
 
 export default function UsiarioModal(props) {
-	const { licenseType } = props;
+	const { user } = props;
 	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+	user.mode === 0
+			? ADD_USER_MUTATION
+			: MODIFY_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
@@ -56,10 +58,10 @@ export default function UsiarioModal(props) {
 									type='text'
 									className='form-control '
 									onChange={(e) =>
-										(licenseType.description =
+										(user.description =
 											e.target.value)
 									}
-									defaultValue={licenseType.description}
+									defaultValue={user.description}
 								/>
 							</div>
 							<div className='form-group'>
@@ -70,10 +72,10 @@ export default function UsiarioModal(props) {
 									type='text' disabled
 									className='form-control bg-white'
 									onChange={(e) =>
-										(licenseType.maximumDays =
+										(user.maximumDays =
 											e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									defaultValue={user.maximumDays}
 								/>
 							</div>
                             
@@ -85,10 +87,10 @@ export default function UsiarioModal(props) {
 									type='text'
 									className='form-control'
 									onChange={(e) =>
-										(licenseType.maximumDays =
+										(user.name =
 											e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									defaultValue={user.name}
 								/>
                                 
 							</div>
@@ -100,10 +102,10 @@ export default function UsiarioModal(props) {
 									type='password'
 									className='form-control'
 									onChange={(e) =>
-										(licenseType.maximumDays =
+										(user.password =
 											e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									defaultValue={user.password}
 								/>
 							</div>
                             <div className='form-group'>
@@ -114,10 +116,10 @@ export default function UsiarioModal(props) {
 									type='checkbox'
 									className=' ml-4'
 									onChange={(e) =>
-										(licenseType.maximumDays =
+										(user.state =
 											e.target.value)
 									}
-									// defaultValue={licenseType.maximumDays}
+									// defaultValue={user.state}
 								/> <label htmlFor="">Vigente</label>
 							</div>
 						</form>
@@ -137,21 +139,21 @@ export default function UsiarioModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
+											id: parseInt(user.id),
 											description:
-												licenseType.description,
+											user.description,
 											maximumDays: parseInt(
-												licenseType.maximumDays
+												user.maximumDays
 											),
 										},
 									},
 									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
+										{ query: USERS_QUERY },
 									],
 								})
 							}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{user.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>

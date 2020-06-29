@@ -4,15 +4,23 @@ import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import {CONTRACT_QUERY} from '../pages/Contrato'
 import moment from 'moment';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+const DELETE_CONTRACT_MUTATION = gql`
+	mutation DeleteContract($contractId: Byte!) {
+		deleteContract(contractId: $contractId) {
 			id
-			description
-			maximumDays
+			starDate
+			finisdDate
+			Mount
+			State
+			ExtraHours
+			EmployeeCardId
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
@@ -20,7 +28,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 export default function Contrato(props) {
 	const { data, setData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [mutation] = useMutation(DELETE_CONTRACT_MUTATION);
 
 	return (
 		<div className='col-sm-4 pt-3 pl-1 pr-1'>
@@ -109,11 +117,11 @@ export default function Contrato(props) {
 								onClick={() =>
 									mutation({
 										variables: {
-											licenseTypeId: parseInt(data.id),
+											ContractId: parseInt(data.id),
 										},
 										refetchQueries: [
 											{
-												query: LIST_LICENSETYPE,
+												query: CONTRACT_QUERY,
 											},
 										],
 									})

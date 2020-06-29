@@ -17,13 +17,13 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-export default function UsuarioCard(props) {
+export default function LicenciaCard(props) {
 	const { data, setData } = props;
 
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
 	return (
-		<div className='col-sm-4 pt-3 pl-1 pr-1'>
+		<div className='col-sm-4 pt-3 pl-1 pr-1' >
 			<div className=''>
 				<div className='card card-licensetype'>
 					<div className='row p-0 '>

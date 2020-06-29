@@ -4,14 +4,15 @@ import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { USERS_QUERY } from '../pages/Usuario';
 
 const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+	mutation DeleteUser($userId: Byte!) {
+		deleteUser(userId: $userId) {
 			id
-			description
-			maximumDays
+			name
+			password
+			state
 		}
 	}
 `;
@@ -81,11 +82,11 @@ export default function UsuarioCard(props) {
 								onClick={() =>
 									mutation({
 										variables: {
-											licenseTypeId: parseInt(data.id),
+											userId: parseInt(data.id),
 										},
 										refetchQueries: [
 											{
-												query: LIST_LICENSETYPE,
+												query: USERS_QUERY,
 											},
 										],
 									})

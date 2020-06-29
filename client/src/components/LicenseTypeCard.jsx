@@ -29,7 +29,7 @@ export default function LicenseTypeCard(props) {
 						className='text-white pl-2 m-0'
 						style={{ background: '#D5691E' }}
 					>
-						LICENCIA
+						 <br/>
 					</h3>
 				</div>
 				<div className='card-header p-0 m-0 text-center'>
