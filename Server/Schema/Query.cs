@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Server.Schema
 {
 	public class Query
@@ -128,6 +129,30 @@ namespace Server.Schema
 			{
 				throw new QueryException("Usuario no encontrado");
 			}
+		}
+
+		public async Task<IReadOnlyList<Attendance>> GetDelay([Service] DBAttendanceContext dBAttendanceContext)
+		{
+				DateTime firstSunday = new DateTime(1753, 1, 7);
+				var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
+				try
+				{
+					// return await dBAttendanceContext.Attendance
+					// 				.Where(a => DbF.DateDiffDay(firstSunday, a.Date) % 7 == 1 ).ToListAsync();
+
+					return await (from a in dBAttendanceContext.Attendance 
+											join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
+											join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
+											where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour  
+											select a).ToListAsync();
+				}
+				catch (System.Exception e)
+				{
+					
+					throw new QueryException(e.Message);
+				}
+				
+				
 		}
 	}
 }

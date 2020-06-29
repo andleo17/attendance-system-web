@@ -30,7 +30,7 @@ export const initialState = { permissions : [{
     __typename: 'Permission',
     date: null,
     id: null,
-    motive:null,
+    motive:"bandera",
     presentationDate: null,
     state: null,
     enployeeCardId: null,
