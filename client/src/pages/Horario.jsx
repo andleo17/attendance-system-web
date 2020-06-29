@@ -3,7 +3,6 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
 import HorarioCard from '../components/HorarioCard';
 import HorarioModal from '../components/HorarioModal';
 import HorarioDetalleModal from '../components/HorarioDetalleModal';

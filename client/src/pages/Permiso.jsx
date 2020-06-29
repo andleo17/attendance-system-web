@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
+import { useLazyQuery } from '@apollo/react-hooks';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
-import { buildResolveInfo } from 'graphql/execution/execute';
-import { useEffect } from 'react';
 import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
@@ -95,7 +92,7 @@ export default function Permissions() {
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
 										e.preventDefault();
-										if (e.target.value == '') {
+										if (e.target.value === '') {
 											search({
 												variables: null,
 											});

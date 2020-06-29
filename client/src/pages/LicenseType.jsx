@@ -3,7 +3,6 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
 import Loader from '../components/Loader';
