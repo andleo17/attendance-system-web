@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 const LOGIN_QUERY = gql`
 	query LoginQuery($username: String!, $password: String!) {
@@ -18,8 +20,8 @@ export default function Login() {
 	const [password, setPassword] = useState('');
 
 	const [login, { loading, data, error }] = useLazyQuery(LOGIN_QUERY);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 	if (data && data.login) {
 		return <Redirect to='/' />;
 	}

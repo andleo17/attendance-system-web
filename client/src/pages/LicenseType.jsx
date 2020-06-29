@@ -6,6 +6,8 @@ import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 export const LIST_LICENSETYPE = gql`
 	query ListLicenseType {
@@ -28,8 +30,8 @@ export default function LicenseType() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>
@@ -42,7 +44,7 @@ export default function LicenseType() {
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
-			<form className='buscar justify-content-sm-start'>
+				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
 							<input
@@ -53,31 +55,32 @@ export default function LicenseType() {
 							/>
 						</div>
 						<div className=''>
-						<button
-                                type='button'
-                                data-toggle='modal'
-                                data-target='#frmLicenseType'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-plus mr-1'></i>
+							<button
+								type='button'
+								data-toggle='modal'
+								data-target='#frmLicenseType'
+								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+								onClick={() => setSelectedItem(initialState)}
+							>
+								<i className='fa fa-plus mr-1'></i>
 								NUEVA
 							</button>
 						</div>
 					</div>
 				</form>
-			<div className='row'>
-				{data.licenseTypes.map((lt) => {
-					return (
-						<LicenseTypeCard
-							key={lt.id}
-							data={lt}
-							setData={setSelectedItem}
-						/>
-					);
-				})}
+				<div className='row'>
+					{data.licenseTypes.map((lt) => {
+						return (
+							<LicenseTypeCard
+								key={lt.id}
+								data={lt}
+								setData={setSelectedItem}
+							/>
+						);
+					})}
+				</div>
+				<LicenseTypeModal licenseType={selectedItem} />
 			</div>
-			<LicenseTypeModal licenseType={selectedItem} />
-		</div>
 		</div>
 	);
 }

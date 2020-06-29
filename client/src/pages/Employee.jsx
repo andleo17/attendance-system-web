@@ -1,11 +1,12 @@
 import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
-import foto from '../recursos/perfil.jpg';
 import { NavLink } from 'react-router-dom';
 import EmployeeItem from '../components/EmployeeItem';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
 const EMPLOYEE_QUERY = gql`
 	query EmployeeQuery {
@@ -21,8 +22,8 @@ const EMPLOYEE_QUERY = gql`
 
 export default function Employee() {
 	const { loading, error, data } = useQuery(EMPLOYEE_QUERY);
-	if (loading) return <h1>Cargando</h1>;
-	if (error) return <h1>Error</h1>;
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 	return (
 		<div className='page-content'>
 			<div

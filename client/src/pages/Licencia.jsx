@@ -4,17 +4,26 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { NavLink } from 'react-router-dom';
-import  UsuarioCard from '../components/UsuarioCard';
+import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
 import LicenciaCard from '../components/LicenciaCard';
-import LicenciaModal from '../components/LicenciaModal'
+import LicenciaModal from '../components/LicenciaModal';
+import Loader from '../components/Loader';
+import ErrorIcon from '../components/ErrorIcon';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
+export const LICENSES_QUERY = gql`
+	query Licenses {
+		licenses {
 			id
+			startDate
+			state
+			licenseType {
+				description
+			}
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
@@ -29,9 +38,9 @@ export default function Usuario() {
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
-	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-	if (loading) return <h1>Loading...</h1>;
-	if (error) return <h1>{error.message}</h1>;
+	const { loading, data, error } = useQuery(LICENSES_QUERY);
+	if (loading) return <Loader />;
+	if (error) return <ErrorIcon error={error} />;
 
 	return (
 		<div className='page-content'>
@@ -55,20 +64,20 @@ export default function Usuario() {
 							/>
 						</div>
 						<div className=''>
-						<button
+							<button
 								type='button'
-                                data-toggle='modal'
-                                data-target='#frmJustificacion'
-                                className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-                            >
-                                <i className='fa fa-file-word mr-1'></i>
+								data-toggle='modal'
+								data-target='#frmJustificacion'
+								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+							>
+								<i className='fa fa-file-word mr-1'></i>
 								NUEVO
 							</button>
 						</div>
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenseTypes.map((lt) => {
+					{data.licenses.map((lt) => {
 						return (
 							<LicenciaCard
 								key={lt.id}
