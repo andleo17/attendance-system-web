@@ -17,7 +17,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 `;
 
 export default function LicenseTypeCard(props) {
-	const { data, setData } = props;
+	const { data, showData } = props;
 
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
@@ -29,7 +29,7 @@ export default function LicenseTypeCard(props) {
 						className='text-white pl-2 m-0'
 						style={{ background: '#D5691E' }}
 					>
-						 <br/>
+						<br />
 					</h3>
 				</div>
 				<div className='card-header p-0 m-0 text-center'>
@@ -37,14 +37,18 @@ export default function LicenseTypeCard(props) {
 				</div>
 				<div className='card-body  pt-0 pb-0 '>
 					<div className='mb-2'>
-                        <i className='fa fa-tag pr-4 pl-2'></i>
+						<i className='fa fa-tag pr-4 pl-2'></i>
 						<b>Nombre</b>
-						<div className='ml-5 font-italic'>{data.description}</div>
+						<div className='ml-5 font-italic'>
+							{data.description}
+						</div>
 					</div>
 					<div className='mb-1'>
-                        <i className='fa fa-calendar-alt pr-4 pl-2'></i>
+						<i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Tiempo</b>
-						<div className='ml-5 font-italic'>{data.maximumDays} días</div>
+						<div className='ml-5 font-italic'>
+							{data.maximumDays} días
+						</div>
 					</div>
 				</div>
 				<div className='card-footer d-flex justify-content-between'>
@@ -54,15 +58,13 @@ export default function LicenseTypeCard(props) {
 						title='Modificar'
 						data-toggle='modal'
 						data-target='#frmLicenseType'
-						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
-						}
+						onClick={showData}
 					>
 						<i className='fa fa-pencil-alt text-white'></i>
 					</button>
 					<button
 						type='button'
-						className='degradado btn ' 
+						className='degradado btn '
 						title='Eliminar'
 						onClick={() =>
 							mutation({
