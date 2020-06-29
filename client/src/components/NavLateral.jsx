@@ -7,6 +7,7 @@ import DropDownMenu from './DropDownMenu';
 import MenuItem from './MenuItem';
 
 export default function NavLateral(props) {
+	const { user, logOut } = props;
 	return (
 		<Fragment>
 			<span
@@ -36,8 +37,8 @@ export default function NavLateral(props) {
 							/>
 						</div>
 						<div className='user-info'>
-							<span className='user-name'> Paola Cieza </span>
-							<span className='user-role'>Administrator</span>
+							<span className='user-name'>{user.name}</span>
+							<span className='user-role'>{user.lastname}</span>
 						</div>
 					</div>
 					<div className='sidebar-search'>
@@ -137,6 +138,7 @@ export default function NavLateral(props) {
 					<button
 						type='button'
 						className='btn text-white sidebar-footer'
+						onClick={logOut}
 					>
 						<i className='fa fa-power-off' />
 						<span className='ml-3'>Cerrar sesión</span>
