@@ -100,6 +100,7 @@ export default function LicenseTypeModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
+							data-dismiss='modal'
 							onClick={() => {
 								execute({
 									variables: {
