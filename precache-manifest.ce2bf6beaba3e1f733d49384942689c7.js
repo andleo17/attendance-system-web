@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c60e699bd8f07676882e372bf7803971",
+    "revision": "1cfb61a0eb977042c30beabcb636444c",
     "url": "/attendance-system-web/index.html"
   },
   {
