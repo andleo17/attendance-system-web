@@ -4,7 +4,6 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
-import { useState } from 'react';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
