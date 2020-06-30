@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/attendance-system-web/static/js/main.7ac45836.chunk.js",
-    "main.js.map": "/attendance-system-web/static/js/main.7ac45836.chunk.js.map",
+    "main.js": "/attendance-system-web/static/js/main.c96154d7.chunk.js",
+    "main.js.map": "/attendance-system-web/static/js/main.c96154d7.chunk.js.map",
     "runtime-main.js": "/attendance-system-web/static/js/runtime-main.c08421ab.js",
     "runtime-main.js.map": "/attendance-system-web/static/js/runtime-main.c08421ab.js.map",
     "static/js/2.eac228d2.chunk.js": "/attendance-system-web/static/js/2.eac228d2.chunk.js",
     "static/js/2.eac228d2.chunk.js.map": "/attendance-system-web/static/js/2.eac228d2.chunk.js.map",
     "index.html": "/attendance-system-web/index.html",
-    "precache-manifest.6a7a70cba54de8b6e74f4a40717e31f2.js": "/attendance-system-web/precache-manifest.6a7a70cba54de8b6e74f4a40717e31f2.js",
+    "precache-manifest.ac4ec41d74e694b3914a2074efb6f332.js": "/attendance-system-web/precache-manifest.ac4ec41d74e694b3914a2074efb6f332.js",
     "service-worker.js": "/attendance-system-web/service-worker.js",
     "static/js/2.eac228d2.chunk.js.LICENSE.txt": "/attendance-system-web/static/js/2.eac228d2.chunk.js.LICENSE.txt",
     "static/media/licenciastrabajo1.jpg": "/attendance-system-web/static/media/licenciastrabajo1.a7d330f4.jpg",
@@ -16,6 +16,6 @@
   "entrypoints": [
     "static/js/runtime-main.c08421ab.js",
     "static/js/2.eac228d2.chunk.js",
-    "static/js/main.7ac45836.chunk.js"
+    "static/js/main.c96154d7.chunk.js"
   ]
 }

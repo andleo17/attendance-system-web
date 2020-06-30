@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "602fb086d54777eed5463d5c2281e643",
+    "revision": "d4f7a2a74680e3b9539461dbd1882092",
     "url": "/attendance-system-web/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/attendance-system-web/static/js/2.eac228d2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c095fbf9af2d25bf05d2",
-    "url": "/attendance-system-web/static/js/main.7ac45836.chunk.js"
+    "revision": "79a4ed5f4123c84f71c9",
+    "url": "/attendance-system-web/static/js/main.c96154d7.chunk.js"
   },
   {
     "revision": "d012ebcef15d4dc9b0cf",
