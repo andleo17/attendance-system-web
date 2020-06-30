@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Redirect } from 'react-router';
 import Loader from '../components/Loader';
-import ErrorIcon from '../components/ErrorIcon';
 
 export const LOGIN_QUERY = gql`
 	query LoginQuery($username: String!, $password: String!) {

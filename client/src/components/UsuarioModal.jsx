@@ -29,16 +29,20 @@ const MODIFY_USER_MUTATION = gql`
 
 export default function UsiarioModal(props) {
 	const { user } = props;
-	const mutation =
-	user.mode === 0
-			? ADD_USER_MUTATION
-			: MODIFY_USER_MUTATION;
+	const mutation = user.mode === 0 ? ADD_USER_MUTATION : MODIFY_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div
+			id='frmContrato'
+			className='modal fade inputEmpleado'
+			tabIndex='-1'
+		>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo usuario</h5>
 						<button
 							type='button'
@@ -51,76 +55,73 @@ export default function UsiarioModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-                            <i className='fa fa-id-card pl-2'></i>
+								<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
 									type='text'
 									className='form-control '
 									onChange={(e) =>
-										(user.description =
-											e.target.value)
+										(user.description = e.target.value)
 									}
 									defaultValue={user.description}
 								/>
 							</div>
 							<div className='form-group'>
-                            <i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo ' >Nombre:</label>
+								<i className='fa fa-tag pl-2'></i>
+								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
-									type='text' disabled
+									type='text'
+									disabled
 									className='form-control bg-white'
 									onChange={(e) =>
-										(user.maximumDays =
-											e.target.value)
+										(user.maximumDays = e.target.value)
 									}
 									defaultValue={user.maximumDays}
 								/>
 							</div>
-                            
-                            <div className='form-group'>
-                            <i className='fa fa-user-circle pl-2'></i>
+
+							<div className='form-group'>
+								<i className='fa fa-user-circle pl-2'></i>
 								<label htmlFor='txtTiempo'>Usuario:</label>
 								<input
-									id='txtTiempo'
+									id='txtName'
 									type='text'
 									className='form-control'
 									onChange={(e) =>
-										(user.name =
-											e.target.value)
+										(user.name = e.target.value)
 									}
 									defaultValue={user.name}
 								/>
-                                
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-key pl-2'></i>
+							<div className='form-group'>
+								<i className='fa fa-key pl-2'></i>
 								<label htmlFor='txtTiempo'>Contraseña:</label>
 								<input
-									id='txtTiempo'
+									id='txtPassword'
 									type='password'
 									className='form-control'
 									onChange={(e) =>
-										(user.password =
-											e.target.value)
+										(user.password = e.target.value)
 									}
 									defaultValue={user.password}
 								/>
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
+							<div className='form-group'>
+								<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<br />
 								<input
-									id='txtTiempo'
+									id='chkState'
 									type='checkbox'
 									className=' ml-4'
 									onChange={(e) =>
-										(user.state =
-											e.target.value)
+										(user.state = e.target.value)
 									}
 									// defaultValue={user.state}
-								/> <label htmlFor="">Vigente</label>
+								/>{' '}
+								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
 					</div>
@@ -140,16 +141,13 @@ export default function UsiarioModal(props) {
 									variables: {
 										input: {
 											id: parseInt(user.id),
-											description:
-											user.description,
+											description: user.description,
 											maximumDays: parseInt(
 												user.maximumDays
 											),
 										},
 									},
-									refetchQueries: [
-										{ query: USERS_QUERY },
-									],
+									refetchQueries: [{ query: USERS_QUERY }],
 								})
 							}
 						>
