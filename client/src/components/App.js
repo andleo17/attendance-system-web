@@ -16,6 +16,11 @@ import Asistencia from '../pages/Asistencia';
 import Licencias from '../pages/Licencia';
 import ControlAsistencia from '../pages/ControlAsistencia';
 import Main from '../pages/Main';
+import ReporteFaltas from '../pages/ReporteFaltas'
+import ReporteAsistencias from '../pages/ReporteAsistencias'
+import ReporteTardanzas from '../pages/ReporteTardanzas'
+import ReporteJustificaciones from '../pages/ReporteJustificaciones'
+import ReporteLicencias from '../pages/ReporteLicencias'
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -110,6 +115,31 @@ export default class App extends React.Component {
 								exact
 								path='/control-asistencia'
 								component={ControlAsistencia}
+							/>
+							<Route
+								exact
+								path='/reportes/inasistencias'
+								component={ReporteFaltas}
+							/>
+							<Route
+								exact
+								path='/reportes/asistencias'
+								component={ReporteAsistencias}
+							/>
+							<Route
+								exact
+								path='/reportes/justificaciones'
+								component={ReporteJustificaciones}
+							/>
+							<Route
+								exact
+								path='/reportes/licencias'
+								component={ReporteLicencias}
+							/>
+							<Route
+								exact
+								path='/reportes/tardanzas'
+								component={ReporteTardanzas}
 							/>
 						</div>
 					</Fragment>
