@@ -32,9 +32,8 @@ export default function Contrato(props) {
 
 	return (
 		<div className='col-sm-4 pt-3 pl-1 pr-1'>
-			<div className=''>
-				<div className='card card-licensetype'>
-					<div className='row p-0 '>
+				<div className='card card-licensetype' style={{height:'170px'}}>
+					<div className='row p-0' style={{height:'170px'}}>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -133,6 +132,5 @@ export default function Contrato(props) {
 					</div>
 				</div>
 			</div>
-		</div>
 	);
 }

@@ -24,9 +24,8 @@ export default function UsuarioCard(props) {
 
 	return (
 		<div className='col-sm-4 pt-3 pl-1 pr-1'>
-			<div className=''>
-				<div className='card card-licensetype'>
-					<div className='row p-0 '>
+				<div className='card card-licensetype h-100' >
+					<div className='row p-0 h-100'>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -40,7 +39,7 @@ export default function UsuarioCard(props) {
 							</label>
 						</div>
 						<div className='card-body col-6  p-0 pl-2 pt-1'>
-							<div className='font-italic  mb-1'>
+							<div className='font-italic  mb-1' >
 								{`${data.employee.name} ${data.employee.lastname}`}
 							</div>
 
@@ -97,7 +96,6 @@ export default function UsuarioCard(props) {
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	);
 }
