@@ -56,7 +56,8 @@ export default function Usuario() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
-								placeholder='Buscar'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
+								
 							/>
 						</div>
 						<div className=''>
@@ -64,6 +65,9 @@ export default function Usuario() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmContrato'
+								onClick={() =>
+									setSelectedItem(Object.assign({ mode: 0 }))
+								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-user-plus mr-1'></i>
