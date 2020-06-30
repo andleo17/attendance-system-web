@@ -26,8 +26,11 @@ export default function JustificationCard(props) {
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
 			<div className=''>
-				<div className='card card-licensetype' style={{height:'100%'}}>
-					<div className='row p-0 ' style={{height:'100%'}}>
+				<div
+					className='card card-licensetype'
+					style={{ height: '100%' }}
+				>
+					<div className='row p-0 ' style={{ height: '100%' }}>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -41,16 +44,15 @@ export default function JustificationCard(props) {
 							</label>
 						</div>
 						<div className='card-body col-6  p-0 pl-2 pt-1'>
-							<div className='font-italic  mb-1' >
+							<div className='font-italic  mb-1'>
 								{`${data.attendance.employee.name} ${data.attendance.employee.lastname}`}
-
 							</div>
 							<div className='mb-2'>
 								<i className='fa fa-exclamation-triangle pr-2'></i>
 								<b>Código asistencia</b>
 								<div className='pl-4 font-italic'>
 									{' '}
-									{data.attendance.id}
+									{data.attendanceId}
 								</div>
 							</div>
 							<div className='mb-2'>
@@ -69,9 +71,7 @@ export default function JustificationCard(props) {
 								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmJustificacion'
-								onClick={() =>
-									setData(Object.assign(data, { mode: 1 }))
-								}
+								onClick={() => setData(0)}
 							>
 								<i className='fa fa-eye text-white'></i>
 							</button>
@@ -82,9 +82,7 @@ export default function JustificationCard(props) {
 								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmJustificacion'
-								onClick={() =>
-									setData(Object.assign(data, { mode: 1 }))
-								}
+								onClick={() => setData(1)}
 							>
 								<i className='fa fa-pencil-alt text-white'></i>
 							</button>
