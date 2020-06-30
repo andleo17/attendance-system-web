@@ -29,17 +29,16 @@ export const initialState = {
 	permissions: [
 		{
 			__typename: 'Permission',
-			date: null,
-			id: null,
-			motive: null,
-			presentationDate: null,
-			state: null,
-			enployeeCardId: null,
-			mode: 0,
+			date: '',
+			id: '',
+			motive: '',
+			presentationDate: '',
+			state: '',
+			employeeCardId: '',
 			employee: {
 				__typename: 'Employee',
-				name: null,
-				lastname: null,
+				name: '',
+				lastname: '',
 			},
 		},
 	],
@@ -51,7 +50,7 @@ export default function Permissions() {
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
 	const [search, { loading, data, error }] = useLazyQuery(LIST_PERMISSION);
-	if (loading) return <Loader />;
+	// if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 	let listPermission = initialState;
 
@@ -59,6 +58,9 @@ export default function Permissions() {
 		listPermission = data;
 	}
 	return (
+		// <div onLoad={()=>console.log("xdxdxdxdxd")}>
+		// 	jkfljsflkjdsfkjdsfjlskjdl
+		// </div>
 		<div
 			className='page-content'
 			onLoad={() => {
@@ -110,9 +112,7 @@ export default function Permissions() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmPermiso'
-								onClick={() =>
-									setSelectedItem(Object.assign({ mode: 0 }))
-								}
+								onClick={() => setSelectedItem(initialState.permissions[0])}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-arrow-circle-up mr-1'></i>
@@ -127,12 +127,15 @@ export default function Permissions() {
 							<PermisoCard
 								key={p.id}
 								data={p}
-								setData={setSelectedItem}
+								showData={() => setSelectedItem(p)}
 							/>
 						);
 					})}
 				</div>
-				<PermisoModal permission={selectedItem} />
+				<PermisoModal 
+					item={selectedItem}
+					update={setSelectedItem}
+				 />
 			</div>
 		</div>
 	);

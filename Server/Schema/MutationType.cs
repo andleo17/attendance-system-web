@@ -91,7 +91,7 @@ namespace Server.Schema
 
 			descriptor.Field(m => m.DeletePermission(default, default))
 				.Type<PermissionType>()
-				.Argument("permissionId", a => a.Type<NonNullType<IdType>>());
+				.Argument("permissionId", a => a.Type<NonNullType<IntType>>());
 
 			descriptor.Field(m => m.AddSchedule(default, default))
 				.Type<ScheduleType>()
@@ -116,6 +116,10 @@ namespace Server.Schema
 			descriptor.Field(m => m.DownUser(default, default))
 				.Type<UserType>()
 				.Argument("userId", a => a.Type<NonNullType<IdType>>());
+
+			descriptor.Field(m => m.DownPermission(default, default))
+				.Type<PermissionType>()
+				.Argument("permissionId", a => a.Type<NonNullType<IntType>>());
 		}
 	}
 }

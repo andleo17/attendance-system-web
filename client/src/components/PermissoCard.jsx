@@ -4,22 +4,29 @@ import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { LIST_PERMISSION } from '../pages/Permiso';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+const DELETE_PERMISSION_MUTATION = gql`
+	mutation DeletePermission($permissionId: Int!) {
+		deletePermission(permissionId: $permissionId) {
 			id
-			description
-			maximumDays
 		}
 	}
 `;
 
-export default function PermissionCard(props) {
-	const { data, setData } = props;
+const DOWN_PERMISSION_MUTATION = gql`
+mutation DownPermission($permissionId: Int!) {
+	downPermission(permissionId: $permissionId) {
+		id
+	}
+}
+`;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+export default function PermissionCard(props) {
+	const { data, showData } = props;
+
+	const [deletePermission] = useMutation(DELETE_PERMISSION_MUTATION);
+	const [downPermission] = useMutation(DOWN_PERMISSION_MUTATION);
 
 	return (
 		<div className='col-lg-3 p-3'>
@@ -73,9 +80,7 @@ export default function PermissionCard(props) {
 						className='degradado btn'
 						data-toggle='modal'
 						data-target='#frmPermiso'
-						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
-						}
+						onClick={showData}
 					>
 						<i className='fa fa-pencil-alt text-white'></i>
 					</button>
@@ -84,7 +89,14 @@ export default function PermissionCard(props) {
 						title='Dar de baja'
 						className='degradado btn'
 						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
+							downPermission({
+								variables: { permissionId: parseInt(data.id) },
+								refetchQueries: [
+									{
+										query: LIST_PERMISSION,
+									},
+								],
+							})
 						}
 					>
 						<i className='fa fa-ban text-white'></i>
@@ -94,11 +106,11 @@ export default function PermissionCard(props) {
 						title='Eliminar'
 						className='degradado btn '
 						onClick={() =>
-							mutation({
-								variables: { licenseTypeId: parseInt(data.id) },
+							deletePermission({
+								variables: { permissionId: parseInt(data.id) },
 								refetchQueries: [
 									{
-										query: LIST_LICENSETYPE,
+										query: LIST_PERMISSION,
 									},
 								],
 							})
