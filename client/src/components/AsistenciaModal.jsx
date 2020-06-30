@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
@@ -33,10 +31,17 @@ export default function LicenseTypeModal(props) {
 			: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmAsistencia' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div
+			id='frmAsistencia'
+			className='modal fade inputEmpleado'
+			tabIndex='-1'
+		>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo asistencia</h5>
 						<button
 							type='button'
@@ -49,7 +54,7 @@ export default function LicenseTypeModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-							<i className='fa fa-id-card pl-2'></i>
+								<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
@@ -63,12 +68,13 @@ export default function LicenseTypeModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-tag pl-2'></i>
+								<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control bg-white' disabled
+									className='form-control bg-white'
+									disabled
 									onChange={(e) =>
 										(licenseType.maximumDays =
 											e.target.value)
@@ -76,8 +82,8 @@ export default function LicenseTypeModal(props) {
 									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            <div className='form-group'>
-							<i className='fa fa-calendar-check pl-2'></i>
+							<div className='form-group'>
+								<i className='fa fa-calendar-check pl-2'></i>
 								<label htmlFor='txtTiempo'>Fecha </label>
 								<input
 									id='txtTiempo'
@@ -90,19 +96,32 @@ export default function LicenseTypeModal(props) {
 									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            
-                            
-                            <div className='form-group'>
-							<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Hora entrada:</label> <br/>
-								
 
-                                <input type="time" name="" id="" className='form-control'/>
+							<div className='form-group'>
+								<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>
+									Hora entrada:
+								</label>{' '}
+								<br />
+								<input
+									type='time'
+									name=''
+									id=''
+									className='form-control'
+								/>
 							</div>
-                            <div className='form-group'>
-							<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Hora salida:</label> <br/>
-                                <input type="time" name="" id="" className='form-control'/>
+							<div className='form-group'>
+								<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>
+									Hora salida:
+								</label>{' '}
+								<br />
+								<input
+									type='time'
+									name=''
+									id=''
+									className='form-control'
+								/>
 							</div>
 						</form>
 					</div>

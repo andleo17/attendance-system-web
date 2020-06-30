@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { USERS_QUERY } from '../pages/Usuario';
@@ -29,14 +27,10 @@ const MODIFY_USER_MUTATION = gql`
 	}
 `;
 
-
-
 export default function UsuarioModal(props) {
 	const { item, update } = props;
-	let nombreC = item.employee.name + ' '+item.employee.lastname;
-	const mutation = item.id
-		? MODIFY_USER_MUTATION
-		: ADD_USER_MUTATION;
+	let nombreC = item.employee.name + ' ' + item.employee.lastname;
+	const mutation = item.id ? MODIFY_USER_MUTATION : ADD_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div
@@ -127,8 +121,7 @@ export default function UsuarioModal(props) {
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtState'>Estado:</label>{' '}
-								<br />
+								<label htmlFor='txtState'>Estado:</label> <br />
 								<input
 									id='txtState'
 									type='checkbox'
@@ -140,8 +133,7 @@ export default function UsuarioModal(props) {
 											state: e.target.checked,
 										})
 									}
-								/>
-								{' '}
+								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
@@ -177,9 +169,7 @@ export default function UsuarioModal(props) {
 											).value,
 										},
 									},
-									refetchQueries: [
-										{ query: USERS_QUERY },
-									],
+									refetchQueries: [{ query: USERS_QUERY }],
 								});
 							}}
 						>

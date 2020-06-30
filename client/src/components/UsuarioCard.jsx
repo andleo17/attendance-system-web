@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -21,13 +19,17 @@ export default function UsuarioCard(props) {
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
-			<div className='card card-licensetype h-100' style={{ height: '100%' }} >
+			<div
+				className='card card-licensetype h-100'
+				style={{ height: '100%' }}
+			>
 				<div className='row p-0 h-100' style={{ height: '100%' }}>
 					<div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
 						<div htmlFor='' className='badge-sonar'></div>
 						<img
 							src={foto}
 							className=' mt-5 circle mb-0 bg-transparent h-50 w-50'
+							alt='foto'
 						/>
 						<label htmlFor='' className=' text-sistema '>
 							{' '}
@@ -35,16 +37,13 @@ export default function UsuarioCard(props) {
 						</label>
 					</div>
 					<div className='card-body col-6  p-0 pl-2 pt-1'>
-						<div className='font-italic  mb-1' >
+						<div className='font-italic  mb-1'>
 							{`${data.employee.name} ${data.employee.lastname}`}
 						</div>
 						<div className='mb-2'>
 							<i className='fa fa-user-circle pr-2'></i>
 							<b>Usuario</b>
-							<div className='pl-4 font-italic'>
-								{' '}
-								{data.name}
-							</div>
+							<div className='pl-4 font-italic'> {data.name}</div>
 						</div>
 						<div className='mb-2'>
 							<i className='fa fa-key pr-2'></i>
@@ -73,7 +72,7 @@ export default function UsuarioCard(props) {
 							className='degradado btn p-1 '
 							onClick={() =>
 								downUser({
-									variables: { userId: parseInt(data.id), },
+									variables: { userId: parseInt(data.id) },
 									refetchQueries: [
 										{
 											query: USERS_QUERY,

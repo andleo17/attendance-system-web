@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
 import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
-import moment from 'moment';
 
 export const CONTRACT_QUERY = gql`
 	query Contracts {

@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
@@ -38,7 +36,7 @@ export default function JustificacionModal(props) {
 		: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 
-	const [findEmployee, { data, error }] = useLazyQuery(FIND_EMPLOYEE);
+	const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
 
 	return (
 		<div

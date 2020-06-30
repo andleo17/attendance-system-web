@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import NavLateral from './NavLateral';
 import Employee from '../pages/Employee';
 import LicenseType from '../pages/LicenseType';
