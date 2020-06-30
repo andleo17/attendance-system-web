@@ -45,6 +45,9 @@ namespace Server.Schema
 
 			descriptor.Field(q => q.GetDelay(default))
 				.Type<NonNullType<ListType<NonNullType<AttendanceType>>>>();
+			
+			descriptor.Field(q => q.GetNonAttendance(default))
+				.Type<NonNullType<ListType<NonNullType<ScheduleDetailType>>>>();
 		}
 	}
 }

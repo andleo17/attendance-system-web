@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import {  useQuery } from '@apollo/react-hooks';
-import Loader from '../components/Loader';
+import  ComponentGeneral from '../components/LoadingReport';
 import ErrorIcon from '../components/ErrorIcon';
 import ContentAttendance  from '../components/R-Asistencias';
-import foto from '../recursos/perfil.jpg';
+
 
 export const LIST_ATTENDANCES = gql`
 	query ListAttendances($employeeCardId: String) {
@@ -27,40 +25,20 @@ export const LIST_ATTENDANCES = gql`
 `;
 
 const pxToMm = (px) => {
-    return Math.floor(px/document.getElementById('attendanceReport').offsetHeight);
+    return Math.floor(px/document.getElementById('report').offsetHeight);
 };
   
 const mmToPx = (mm) => {
-    return document.getElementById('attendanceReport').offsetHeight*mm;
+    return document.getElementById('report').offsetHeight*mm;
 };
   
 const range = (start, end) => {
       return Array(end-start).join(0).split(0).map(function(val, id) {return id+start});
 };
 
-
-export const initialState = {
-	attendances: [
-		{
-			__typename: 'Attendances',
-			date: '',
-			id: '',
-			inHour: '',
-			outHour: '',
-			employeeCardId: '',
-			employee: {
-				__typename: 'Employee',
-				name: '',
-				lastname: '',
-			},
-		},
-	],
-};
-
-
 function Imprimir(){
   
-    const input = document.getElementById("attendanceReport");
+    const input = document.getElementById("report");
     const inputHeightMm = pxToMm(input.offsetHeight);
     const a4WidthMm = 210;
     const a4HeightMm = 297; 
@@ -88,92 +66,31 @@ function Imprimir(){
 
 }
 
+
+
+
 export default function RAsistencias() {
     const [employeeCardId, setEmployeeCardId] = useState(null);
     const { loading, error, data, refetch} = useQuery(LIST_ATTENDANCES, {
         variables:  {employeeCardId},
       });
-    
-      if (loading){
+    const colums =["Fecha", "Código", "Documento", "Nombres", "Apellidos", "Hora entrada", "Hora salida"];
+    const title = "Asistencias";
+    if (loading){
         return (
-            <div 
-            className='page-content' id='attendanceReport'
-        >
-            <div
-                className='row badge-dark pl-4 '
-                style={{ background: '#D5691E' }}
-            >
-                <h1>Asistencias</h1>
-            </div>
-            <div className='  bg-dark p-3 ml-3 mr-3'>
-                <form className='buscar justify-content-sm-start'>
-                    <div className='form-row'>
-                        <div className='col'>
-                            <input
-                                id='txtSearch'
-                                type='text'
-                                className='form-control'
-                                placeholder='Ingrese DNI y presione ENTER para buscar'
-                                title='Buscar'
-                                defaultValue={employeeCardId}
-                            />
-                        </div>
-                        <div className=''>
-                            <button
-                                type='button'
-                                title= "Antes de generar el PDF oculte la barra lateral"
-                                className='degradado d-flex align-items-center border-0 justify-content-center p-0' style={{ width: '40px', height: '40px' }}
-                            >
-                                <i className='fa fa-file-pdf '></i>
-
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <div className='card table-responsive-lg  p-3 mt-3 text-center'>
-                    <table className='table tablaDetalleHorario'>
-                        <thead className='thead-dark '>
-                            <tr>
-                                <th scope='col'>Fecha</th>
-                                <th scope='col'>Código</th>
-                                <th scope='col'>Documento</th>
-                                <th scope='col'>Nombres</th>
-                                <th scope='col'>Apellidos</th>
-                                <th scope='col'>Hora entrada</th>
-                                <th scope='col'>Hora salida</th>
-                            </tr>
-                        </thead>
-                        <tbody className=''>
-                            <tr>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                                <td>Cargando...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-           
-
+            <ComponentGeneral employeeCardId={employeeCardId} colums={colums} title={title}/>
         ) ;
-      };
+    };
     if (error) return <ErrorIcon error={error} />;
-    
     return (
         <div 
-            className='page-content' id='attendanceReport'
+            className='page-content' id='report'
         >
             <div
                 className='row badge-dark pl-4 '
                 style={{ background: '#D5691E' }}
             >
-                <h1>Asistencias</h1>
+                <h1>{title}</h1>
             </div>
             <div className='  bg-dark p-3 ml-3 mr-3'>
                 <form className='buscar justify-content-sm-start'>
@@ -219,7 +136,6 @@ export default function RAsistencias() {
                                 className='degradado d-flex align-items-center border-0 justify-content-center p-0' style={{ width: '40px', height: '40px' }}
                             >
                                 <i className='fa fa-file-pdf '></i>
-
                             </button>
                         </div>
                     </div>
@@ -228,19 +144,14 @@ export default function RAsistencias() {
                     <table className='table tablaDetalleHorario'>
                         <thead className='thead-dark '>
                             <tr>
-                                <th scope='col'>Fecha</th>
-                                <th scope='col'>Código</th>
-                                <th scope='col'>Documento</th>
-                                <th scope='col'>Nombres</th>
-                                <th scope='col'>Apellidos</th>
-                                <th scope='col'>Hora entrada</th>
-                                <th scope='col'>Hora salida</th>
+                                {
+                                    colums.map((c)=>{
+                                      return  <th key={c} scope='col'>{c}</th>
+                                    })  
+                                }
                             </tr>
                         </thead>
                         <tbody className=''>
-                            {/* {
-                                ()=> {if (loading) return <Loader />;}
-                            } */}
                             {data.attendances.map((a) => {
                                 return (
                                     <ContentAttendance key= {a.id} a = {a} /> 

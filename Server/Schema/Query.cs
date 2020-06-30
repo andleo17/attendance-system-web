@@ -174,5 +174,34 @@ namespace Server.Schema
 
 
 		}
+
+
+		public async Task<IReadOnlyList<ScheduleDetail>> GetNonAttendance([Service] DBAttendanceContext dBAttendanceContext)
+		{
+			DateTime firstSunday = new DateTime(1753, 1, 7);
+			var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
+			var date = DateTime.Today;
+			try
+			{
+				// return await dBAttendanceContext.Attendance
+				// 				.Where(a => DbF.DateDiffDay(firstSunday, a.Date) % 7 == 1 ).ToListAsync();
+				var stringSQL = "select * from ((select * from (select dateadd(dd, value, dateadd(month, DATEPART(m,GETDATE())-1, dateadd(year, DATEPART(YEAR,GETDATE())-1900, '1900.01.01'))) as dt_val "+
+								"from(select (v2 * 4 + v1) * 4 + v0 as value from(select 0 as v0 union select 1 union select 2 union select 3) as rs0 cross join "+
+								"(select 0 as v1 union select 1 union select 2 union select 3) as rs1 cross join "+
+								"(select 0 as v2 union select 1 union select 2 union select 3) as rs2) as rs) as rs2 inner join (select S.EmployeeCardId as CardID,SD.Day from Schedule S "+
+								"inner join ScheduleDetail SD on S.Id = SD.ScheduleId) "+
+								"as SDJ on SDJ.Day = DATEPART(dw,dt_val)-1 where month(dt_val) = DATEPART(m,GETDATE()))) As X left join Attendance as A "+
+								"on X.dt_val = A.Date and X.CardID = A.EmployeeCardId  where X.dt_val<GETDATE() and A.Id is null order by X.dt_val ";
+								
+				return await dBAttendanceContext.ScheduleDetail.FromSqlRaw(stringSQL).ToListAsync();
+			}
+			catch (System.Exception e)
+			{
+
+				throw new QueryException(e.Message);
+			}
+
+
+		}
 	}
 }
