@@ -7,6 +7,7 @@ import ContratoCard from '../components/ContratoCard';
 import ContratoModal from '../components/ContratoModal';
 import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
+import moment from 'moment';
 
 export const CONTRACT_QUERY = gql`
 	query Contracts {
@@ -14,6 +15,10 @@ export const CONTRACT_QUERY = gql`
 			id
 			startDate
 			finishDate
+			mount
+			state
+			extraHours
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -22,18 +27,23 @@ export const CONTRACT_QUERY = gql`
 	}
 `;
 
+const initialState = {
+	__typename: 'Contract',
+	id: '',
+	startDate: '',
+	finishDate: '',
+	mount: 0,
+	state: false,
+	extraHours: false,
+	employeeCardId: '',
+	employee: {
+		name: '',
+		lastname: '',
+	},
+	mode: 2,
+};
+
 export default function Contrato() {
-	const initialState = {
-		__typename: 'Contract',
-		id: null,
-		startDate: null,
-		finishDate: null,
-		Mount: null,
-		State: null,
-		ExtraHours: null,
-		EmployeeCardId: null,
-		// mode: 0,
-	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(CONTRACT_QUERY);
@@ -46,11 +56,9 @@ export default function Contrato() {
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
-				<h1 htmlFor='' className=''>
-					Contrato
-				</h1>
+				<h1>Contrato</h1>
 			</div>
-			<div className='  bg-dark p-3 ml-3 mr-3'>
+			<div className='bg-dark p-3 ml-3 mr-3'>
 				<form className='buscar justify-content-sm-start'>
 					<div className='form-row'>
 						<div className='col'>
@@ -67,7 +75,7 @@ export default function Contrato() {
 								data-toggle='modal'
 								data-target='#frmContrato'
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
-								// onClick={() => setSelectedItem(initialState) }
+								onClick={() => setSelectedItem(initialState)}
 							>
 								<i className='fa fa-file-archive mr-1'></i>
 								NUEVO
@@ -76,17 +84,20 @@ export default function Contrato() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.contracts.map((lt) => {
+					{data.contracts.map((c) => {
+						c = Object.assign(c, { mode: 0 });
 						return (
 							<ContratoCard
-								key={lt.id}
-								data={lt}
-								setData={setSelectedItem}
+								key={c.id}
+								data={c}
+								setData={(mode) =>
+									setSelectedItem({ ...c, mode })
+								}
 							/>
 						);
 					})}
 				</div>
-				<ContratoModal contract={selectedItem} />
+				<ContratoModal item={selectedItem} update={setSelectedItem} />
 			</div>
 		</div>
 	);

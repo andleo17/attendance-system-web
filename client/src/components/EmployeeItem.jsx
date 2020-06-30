@@ -8,7 +8,7 @@ export default class EmployeeItem extends Component {
 			name,
 			lastname,
 			cardId,
-			gender,
+			genre,
 			email,
 			state,
 		} = this.props.employee;
@@ -35,7 +35,7 @@ export default class EmployeeItem extends Component {
 							<span> Sexo:</span>
 						</div>
 						<div className='col-sm-8 pl-5 font-italic'>
-							<span>{gender}</span>
+							<span>{genre}</span>
 						</div>
 					</div>
 

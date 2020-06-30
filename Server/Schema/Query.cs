@@ -18,6 +18,26 @@ namespace Server.Schema
 			return await (from e in dBAttendanceContext.Employee orderby e.Lastname select e).ToListAsync();
 		}
 
+		public async Task<Employee> GetEmployee([Service] DBAttendanceContext dBAttendanceContext, string cardId)
+		{
+			try
+			{
+				var employee = await dBAttendanceContext.Employee.FindAsync(cardId);
+				if (employee != null)
+				{
+					return employee;
+				}
+				else
+				{
+					throw new QueryException("Empleado no encontrado");
+				}
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 		public async Task<IReadOnlyList<Attendance>> GetAttendances([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
 		{
 			if (employeeCardId != null)
@@ -133,26 +153,26 @@ namespace Server.Schema
 
 		public async Task<IReadOnlyList<Attendance>> GetDelay([Service] DBAttendanceContext dBAttendanceContext)
 		{
-				DateTime firstSunday = new DateTime(1753, 1, 7);
-				var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
-				try
-				{
-					// return await dBAttendanceContext.Attendance
-					// 				.Where(a => DbF.DateDiffDay(firstSunday, a.Date) % 7 == 1 ).ToListAsync();
+			DateTime firstSunday = new DateTime(1753, 1, 7);
+			var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
+			try
+			{
+				// return await dBAttendanceContext.Attendance
+				// 				.Where(a => DbF.DateDiffDay(firstSunday, a.Date) % 7 == 1 ).ToListAsync();
 
-					return await (from a in dBAttendanceContext.Attendance 
-											join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
-											join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
-											where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour  
-											select a).ToListAsync();
-				}
-				catch (System.Exception e)
-				{
-					
-					throw new QueryException(e.Message);
-				}
-				
-				
+				return await (from a in dBAttendanceContext.Attendance
+							  join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
+							  join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
+							  where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour
+							  select a).ToListAsync();
+			}
+			catch (System.Exception e)
+			{
+
+				throw new QueryException(e.Message);
+			}
+
+
 		}
 	}
 }

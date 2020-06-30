@@ -2,19 +2,20 @@ import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
-import { CONTRACT_QUERY } from '../pages/Contrato'
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { CONTRACT_QUERY } from '../pages/Contrato';
+import moment from 'moment';
 
 const ADD_CONTRACT_MUTATION = gql`
 	mutation AddContract($input: ContractInput!) {
 		addContract(input: $input) {
 			id
-			starDate
-			finisdDate
-			Mount
-			State
-			ExtraHours
-			EmployeeCardId
+			startDate
+			finishDate
+			mount
+			state
+			extraHours
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -27,12 +28,12 @@ const MODIFY_CONTRACT_MUTATION = gql`
 	mutation ModifyContract($input: ContractInput!) {
 		modifyContract(input: $input) {
 			id
-			starDate
-			finisdDate
-			Mount
-			State
-			ExtraHours
-			EmployeeCardId
+			startDate
+			finishDate
+			mount
+			state
+			extraHours
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -41,18 +42,34 @@ const MODIFY_CONTRACT_MUTATION = gql`
 	}
 `;
 
+const FIND_EMPLOYEE = gql`
+	query Employee($cardId: ID!) {
+		employee(cardId: $cardId) {
+			name
+			lastname
+		}
+	}
+`;
+
 export default function ContractModal(props) {
-	const { contract } = props;
-	const mutation =
-		contract.mode === 0
-			? ADD_CONTRACT_MUTATION
-			: MODIFY_CONTRACT_MUTATION;
+	const { item, update } = props;
+	const mutation = item.id ? MODIFY_CONTRACT_MUTATION : ADD_CONTRACT_MUTATION;
 	const [execute] = useMutation(mutation);
+
+	const [findEmployee, { data, error }] = useLazyQuery(FIND_EMPLOYEE);
+
 	return (
-		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div
+			id='frmContrato'
+			className='modal fade inputEmpleado'
+			tabIndex='-1'
+		>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{ background: '#D5691E' }}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo contrato</h5>
 						<button
 							type='button'
@@ -71,109 +88,141 @@ export default function ContractModal(props) {
 									id='txtName'
 									type='text'
 									className='form-control '
+									value={item.employeeCardId}
 									onChange={(e) =>
-										(contract.EmployeeCardId =
-											e.target.value)
+										update({
+											...item,
+											employeeCardId: e.target.value,
+										})
 									}
-									defaultValue={contract.EmployeeCardId}
+									onKeyUp={(e) => {
+										if (e.key == 'Enter') {
+											findEmployee({
+												variables: {
+													cardId: e.target.value,
+												},
+											});
+										}
+									}}
+									readOnly={item.mode === 0 || item.id}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo'>Nombre:</label>
+								<label htmlFor='txtEmployee'>Nombre:</label>
 								<input
-									id='txtTiempo'
+									id='txtEmployee'
 									type='text'
-									className='form-control bg-white' disabled
-								// onChange={(e) =>
-								// 	(licenseType.maximumDays =
-								// 		e.target.value)
-								// }
-								// defaultValue={contract.maximumDays}
+									className='form-control bg-white'
+									defaultValue={
+										item.mode === 2
+											? data &&
+											  data.employee &&
+											  `${data.employee.name} ${data.employee.lastname}`
+											: `${item.employee.name} ${item.employee.lastname}`
+									}
+									readOnly
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha inicio:</label>
+								<label htmlFor='txtDateI'>Fecha inicio:</label>
 								<input
-									id='txtTiempo'
+									id='txtDateI'
 									type='date'
 									className='form-control'
-									onChange={(e) =>
-										(contract.starDate =
-											e.target.value)
+									value={
+										item.startDate &&
+										moment(item.startDate).format(
+											'YYYY-MM-DD'
+										)
 									}
-									defaultValue={contract.starDate}
+									onChange={(e) =>
+										update({
+											...item,
+											startDate: e.target.value,
+										})
+									}
+									readOnly={item.mode === 0}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-calendar-times pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha fin:</label>
+								<label htmlFor='txtDateF'>Fecha fin:</label>
 								<input
-									id='txtTiempo'
+									id='txtDateF'
 									type='date'
 									className='form-control'
-									onChange={(e) =>
-										(contract.finisdDate =
-											e.target.value)
+									value={
+										item.finishDate &&
+										moment(item.finishDate).format(
+											'YYYY-MM-DD'
+										)
 									}
-									defaultValue={contract.finisdDate}
+									onChange={(e) =>
+										update({
+											...item,
+											finishDate: e.target.value,
+										})
+									}
+									readOnly={item.mode === 0}
 								/>
-
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-money-bill-alt pl-2'></i>
-								<label htmlFor='txtTiempo'>Monto:</label>
+								<label htmlFor='txtMount'>Monto:</label>
 								<input
-									id='txtTiempo'
+									id='txtMount'
 									type='number'
 									className='form-control'
+									value={item.mount}
 									onChange={(e) =>
-										(contract.Mount =
-											e.target.value)
+										update({
+											...item,
+											mount: e.target.value,
+										})
 									}
-									defaultValue={contract.Mount}
+									readOnly={item.mode === 0}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Horas extras:</label> <br />
+								<label htmlFor='chkExtraHours'>
+									Horas extras:
+								</label>
 								<input
-									id='txtTiempo'
+									id='chkExtraHours'
 									type='checkbox'
 									className='ml-4'
+									checked={item.extraHours}
 									onChange={(e) =>
-										(contract.State =
-											e.target.value)
+										update({
+											...item,
+											extraHours: e.target.checked,
+										})
 									}
-									defaultValue={contract.State}
-								/> <label htmlFor=""
-									onChange={(e) =>
-										(contract.ExtraHours =
-											e.target.value)
-									}
-									defaultValue={contract.ExtraHours}
-								>Sí</label>
+									disabled={item.mode === 0}
+								/>
+								<label htmlFor='chkExtraHours'>Sí</label>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br />
+								<label htmlFor='chkState'>Estado:</label>
+								<br />
 								<input
-									id='txtTiempo'
+									id='chkState'
 									type='checkbox'
 									className='ml-4'
+									checked={item.state}
 									onChange={(e) =>
-										(contract.State =
-											e.target.value)
+										update({
+											...item,
+											state: e.target.checked,
+										})
 									}
-									defaultValue={contract.State}
-								/> <label htmlFor=""
-									onChange={(e) =>
-										(contract.State =
-											e.target.value)
-									}
-									defaultValue={contract.State}
-								>Vigente</label>
+									disabled={item.mode === 0}
+								/>
+								<label htmlFor='chkState'>Vigente</label>
 							</div>
 						</form>
 					</div>
@@ -185,31 +234,34 @@ export default function ContractModal(props) {
 						>
 							Cerrar
 						</button>
-						<button
-							type='button'
-							className='btn degradado text-white'
-							onClick={() =>
-								execute({
-									variables: {
-										input: {
-											id: parseInt(contract.id),
-											starDate:contract.starDate,
-											finisdDate: contract.finisdDate,
-											Mount: contract.Mount,
-											State:  contract.State,
-											ExtraHours: contract.ExtraHours,
-											EmployeeCardId:  contract.EmployeeCardId
+						{(item.mode === 1 || item.mode === 2) && (
+							<button
+								type='button'
+								className='btn degradado text-white'
+								data-dismiss='modal'
+								onClick={() =>
+									execute({
+										variables: {
+											input: {
+												id: parseInt(item.id),
+												startDate: item.startDate,
+												finishDate: item.finishDate,
+												mount: parseFloat(item.mount),
+												state: item.state,
+												extraHours: item.extraHours,
+												employeeCardId:
+													item.employeeCardId,
+											},
 										},
-									},
-									refetchQueries: [
-										{ query: CONTRACT_QUERY },
-									],
-								})
-							}
-						>
-							xd
-							{contract.mode === 0 ? 'Registrar' : 'Modificar'}
-						</button>
+										refetchQueries: [
+											{ query: CONTRACT_QUERY },
+										],
+									})
+								}
+							>
+								{item.id ? 'Modificar' : 'Registrar'}
+							</button>
+						)}
 					</div>
 				</div>
 			</div>
