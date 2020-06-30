@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_PERMISSION } from '../pages/Permiso';
@@ -45,8 +43,8 @@ export default function PermissioneModal(props) {
 	// console.log(permission.motive);
 
 	const mutation = item.id
-			? MODIFY_PERMISSION_MUTATION
-			: ADD_PERMISSION_MUTATION;
+		? MODIFY_PERMISSION_MUTATION
+		: ADD_PERMISSION_MUTATION;
 	const [execute] = useMutation(mutation);
 
 	return (
@@ -82,11 +80,10 @@ export default function PermissioneModal(props) {
 											employeeCardId: e.target.value,
 										})
 									}
-									
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-file pl-2'></i>
+								<i className='fa fa-file pl-2'></i>
 								<label htmlFor='txtMotive '>Motivo:</label>
 								<input
 									id='txtMotive'
@@ -101,9 +98,11 @@ export default function PermissioneModal(props) {
 									}
 								/>
 							</div>
-                            <div className='form-group'>
-							<i className='fa fa-calendar-alt pl-2'></i>
-								<label htmlFor='txtPresentationDate'>Fecha de presentación</label>
+							<div className='form-group'>
+								<i className='fa fa-calendar-alt pl-2'></i>
+								<label htmlFor='txtPresentationDate'>
+									Fecha de presentación
+								</label>
 								<input
 									id='txtPresentationDate'
 									type='date'
@@ -118,8 +117,10 @@ export default function PermissioneModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtDate'>Fecha de permiso</label>
+								<i className='fa fa-calendar-check pl-2'></i>
+								<label htmlFor='txtDate'>
+									Fecha de permiso
+								</label>
 								<input
 									id='txtDate'
 									type='date'
@@ -136,8 +137,7 @@ export default function PermissioneModal(props) {
 
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtState'>Estado:</label>{' '}
-								<br />
+								<label htmlFor='txtState'>Estado:</label> <br />
 								<input
 									id='txtState'
 									type='checkbox'
@@ -146,10 +146,9 @@ export default function PermissioneModal(props) {
 									onChange={(e) =>
 										update({
 											...item,
-											state: e.target.value,
+											state: e.target.checked,
 										})
 									}
-
 								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
@@ -173,7 +172,7 @@ export default function PermissioneModal(props) {
 											date: document.getElementById(
 												'txtDate'
 											).value,
-											employeeCardId:document.getElementById(
+											employeeCardId: document.getElementById(
 												'txtDocument'
 											).value,
 											id: parseInt(item.id),

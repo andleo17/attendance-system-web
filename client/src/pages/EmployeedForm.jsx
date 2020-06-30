@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 
 export default function EmployeedForm() {

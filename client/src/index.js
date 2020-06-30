@@ -4,21 +4,21 @@ import App from './components/App';
 
 import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 const client = new ApolloClient({
-	uri: 'http://localhost:5000/',
+	uri: 'http://andleo-001-site1.dtempurl.com/attendance-usat-server/',
 	cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
-	<BrowserRouter>
+	<HashRouter basename={process.env.PUBLIC_URL}>
 		<ApolloProvider client={client}>
 			<React.StrictMode>
 				<App />
 			</React.StrictMode>
 		</ApolloProvider>
-	</BrowserRouter>,
+	</HashRouter>,
 	document.getElementById('root')
 );
 

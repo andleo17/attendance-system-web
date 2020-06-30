@@ -1,16 +1,13 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
+import moment from 'moment';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
 		addLicenseType(input: $input) {
 			id
-			description
-			maximumDays
 		}
 	}
 `;
@@ -19,19 +16,28 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 	mutation ModifyLicenseType($input: LicenseTypeInput!) {
 		modifyLicenseType(input: $input) {
 			id
-			description
-			maximumDays
 		}
 	}
 `;
 
-export default function UsiarioModal(props) {
-	const { justification } = props;
-	const mutation =
-		justification.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+const FIND_EMPLOYEE = gql`
+	query Employee($cardId: ID!) {
+		employee(cardId: $cardId) {
+			name
+			lastname
+		}
+	}
+`;
+
+export default function JustificacionModal(props) {
+	const { justification, update } = props;
+	const mutation = justification.id
+		? ADD_LICENSE_TYPE_MUTATION
+		: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
+
+	const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
+
 	return (
 		<div
 			id='frmJustificacion'
@@ -57,113 +63,158 @@ export default function UsiarioModal(props) {
 						<form>
 							<div className='form-group'>
 								<i className='fa fa-id-card pl-2'></i>
-								<label htmlFor='txtName'>Documento:</label>
+								<label htmlFor='txtCardId'>Documento:</label>
 								<input
-									id='txtName'
+									id='txtCardId'
 									type='text'
 									className='form-control '
 									onChange={(e) =>
-										(justification.description =
-											e.target.value)
+										update({
+											...justification,
+											attendance: {
+												employee: {
+													cardId: e.target.value,
+												},
+											},
+										})
 									}
-									// defaultValue={licenseType.description}
+									onKeyUp={(e) => {
+										if (e.key === 'Enter') {
+											findEmployee({
+												variables: {
+													cardId: e.target.value,
+												},
+											});
+										}
+									}}
+									value={
+										justification.attendance.employee.cardId
+									}
+									readOnly={
+										justification.mode === 0 ||
+										justification.id
+									}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtName '>Nombre:</label>
 								<input
-									id='txtTiempo'
+									id='txtName'
 									type='text'
-									disabled
 									className='form-control bg-white'
-									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+									defaultValue={
+										justification.mode === 2
+											? data &&
+											  data.employee &&
+											  `${data.employee.name} ${data.employee.lastname}`
+											: `${justification.attendance.employee.name} ${justification.attendance.employee.lastname}`
 									}
-									// defaultValue={licenseType.maximumDays}
+									readOnly
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>
+								<label htmlFor='txtAttendanceId'>
 									Código asistencia:
 								</label>
 								<input
-									id='txtTiempo'
+									id='txtAttendanceId'
 									type='text'
 									className='form-control'
 									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+										update({
+											...justification,
+											attendanceId: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
+									value={justification.attendanceId}
+									readOnly={justification.mode === 0}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>Motivo:</label>
+								<label htmlFor='txtMotive'>Motivo:</label>
 								<input
-									id='txtTiempo'
+									id='txtMotive'
 									type='text'
 									className='form-control'
 									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+										update({
+											...justification,
+											motive: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
+									value={justification.motive}
+									readOnly={justification.mode === 0}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>
+								<label htmlFor='txtAttendanceDate'>
 									Fecha inasistencia:
 								</label>
 								<input
-									id='txtTiempo'
-									type='text'
+									id='txtAttendanceDate'
+									type='date'
 									className='form-control'
 									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+										update({
+											...justification,
+											attendance: {
+												date: e.target.value,
+											},
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
+									value={
+										justification.attendance.date &&
+										moment(
+											justification.attendance.date
+										).format('YYYY-MM-DD')
+									}
+									readOnly={justification.mode === 0}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>
+								<label htmlFor='txtDate'>
 									Fecha justificación:
 								</label>
 								<input
-									id='txtTiempo'
-									type='text'
-									disabled
+									id='txtDate'
+									type='date'
 									className='form-control bg-transparent'
-									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+									value={
+										justification.id
+											? moment(justification.date).format(
+													'YYYY-MM-DD'
+											  )
+											: moment(Date()).format(
+													'YYYY-MM-DD'
+											  )
 									}
-									// defaultValue={licenseType.maximumDays}
+									readOnly
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label>{' '}
-								<br />
+								<label htmlFor='chkState'>Estado:</label> <br />
 								<input
-									id='txtTiempo'
+									id='chkState'
 									type='checkbox'
 									className=' ml-4'
 									onChange={(e) =>
-										(justification.maximumDays =
-											e.target.value)
+										update({
+											...justification,
+											state: e.target.checked,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
-								/>{' '}
-								<label htmlFor=''>Vigente</label>
+									checked={justification.state}
+									disabled={justification.mode === 0}
+								/>
+								<label htmlFor='chkState'>Vigente</label>
 							</div>
 						</form>
 					</div>
@@ -175,31 +226,33 @@ export default function UsiarioModal(props) {
 						>
 							Cerrar
 						</button>
-						<button
-							type='button'
-							className='btn degradado text-white'
-							onClick={() =>
-								execute({
-									variables: {
-										input: {
-											id: parseInt(justification.id),
-											description:
-												justification.description,
-											maximumDays: parseInt(
-												justification.maximumDays
-											),
+						{(justification.mode === 1 ||
+							justification.mode === 2) && (
+							<button
+								type='button'
+								className='btn degradado text-white'
+								data-dismiss='modal'
+								onClick={() =>
+									execute({
+										variables: {
+											input: {
+												attendanceId:
+													justification.attendanceId,
+												date: justification.date,
+												id: justification.id,
+												motive: justification.motive,
+												state: justification.state,
+											},
 										},
-									},
-									refetchQueries: [
-										{ query: JUSTIFICATIONS_QUERY },
-									],
-								})
-							}
-						>
-							{justification.mode === 0
-								? 'Registrar'
-								: 'Modificar'}
-						</button>
+										refetchQueries: [
+											{ query: JUSTIFICATIONS_QUERY },
+										],
+									})
+								}
+							>
+								{justification.id ? 'Modificar' : 'Registrar'}
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

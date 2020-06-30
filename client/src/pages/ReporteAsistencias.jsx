@@ -10,17 +10,17 @@ import ContentAttendance  from '../components/R-Asistencias';
 
 export const LIST_ATTENDANCES = gql`
 	query ListAttendances($employeeCardId: String) {
-        attendances(employeeCardId: $employeeCardId){
-            date
-            id
-            employeeCardId
-            inHour
-            outHour
-            employee{
-              name
-              lastname
-            }
-        }
+		attendances(employeeCardId: $employeeCardId) {
+			date
+			id
+			employeeCardId
+			inHour
+			outHour
+			employee {
+				name
+				lastname
+			}
+		}
 	}
 `;
 
@@ -113,15 +113,18 @@ export default function RAsistencias() {
 								}
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
-                                        e.preventDefault();
-                                        if(e.target.value === ''){
-                                            setEmployeeCardId(null);
-										    refetch();
-                                        } else{
-                                            setEmployeeCardId(document.getElementById("txtSearch").value)
-                                            refetch();
-                                        }
-                                        
+										e.preventDefault();
+										if (e.target.value === '') {
+											setEmployeeCardId(null);
+											refetch();
+										} else {
+											setEmployeeCardId(
+												document.getElementById(
+													'txtSearch'
+												).value
+											);
+											refetch();
+										}
 									}
 								}}
                             />

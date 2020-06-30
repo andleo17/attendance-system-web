@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import foto from '../recursos/licenciastrabajo1.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -23,7 +21,7 @@ export default function LicenseTypeCard(props) {
 
 	return (
 		<div className='col-lg-12 col-md-6 col-lg-4 col-xl-3 p-3'>
-			<div className='card card-licensetype ' >
+			<div className='card card-licensetype '>
 				<div className='card-title text-lg-center m-0'>
 					<h3
 						className='text-white pl-2 m-0'
@@ -33,7 +31,15 @@ export default function LicenseTypeCard(props) {
 					</h3>
 				</div>
 				<div className='text-center card-header m-0  '>
-					<img src={foto} alt='' className='h-50 w-50  m-0 ' style={{borderRadius:'10px', border:'2px solid black'}} />
+					<img
+						src={foto}
+						alt=''
+						className='h-50 w-50  m-0 '
+						style={{
+							borderRadius: '10px',
+							border: '2px solid black',
+						}}
+					/>
 				</div>
 				<div className='card-body  pt-0 pb-0  '>
 					<div className='mb-2'>

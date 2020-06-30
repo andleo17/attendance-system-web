@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 import JustificacionCard from '../components/JustificacionCard';
@@ -32,21 +30,20 @@ export const initialState = {
 	justifications: [
 		{
 			__typename: 'Justification',
-			id: null,
-			date: null,
-			motive: null,
-			state: null,
-			attendanceId: null,
-			mode: 0,
+			id: '',
+			date: '',
+			motive: '',
+			state: false,
+			attendanceId: '',
+			mode: 2,
 			attendance: {
 				__typename: 'Attendance',
-				id: null,
-				date: null,
+				date: '',
 				employee: {
 					__typename: 'Employee',
-					name: null,
-					lastname: null,
-					cardId: null,
+					name: '',
+					lastname: '',
+					cardId: '',
 				},
 			},
 		},
@@ -83,9 +80,7 @@ export default function Justificación() {
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
-				<h1 htmlFor='' className=''>
-					Justificación
-				</h1>
+				<h1>Justificación</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
 				<form className='buscar justify-content-sm-start'>
@@ -121,7 +116,9 @@ export default function Justificación() {
 								data-toggle='modal'
 								data-target='#frmJustificacion'
 								onClick={() =>
-									setSelectedItem(Object.assign({ mode: 0 }))
+									setSelectedItem(
+										initialState.justifications[0]
+									)
 								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
@@ -133,16 +130,22 @@ export default function Justificación() {
 				</form>
 				<div className='row'>
 					{listJustifications.justifications.map((j) => {
+						j = Object.assign(j, { mode: 2 });
 						return (
 							<JustificacionCard
 								key={j.id}
 								data={j}
-								setData={setSelectedItem}
+								setData={(mode) =>
+									setSelectedItem({ ...j, mode })
+								}
 							/>
 						);
 					})}
 				</div>
-				<JustificacionModal justification={selectedItem} />
+				<JustificacionModal
+					justification={selectedItem}
+					update={setSelectedItem}
+				/>
 			</div>
 		</div>
 	);
