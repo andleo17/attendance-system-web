@@ -16,15 +16,11 @@ import Asistencia from '../pages/Asistencia';
 import Licencias from '../pages/Licencia';
 import ControlAsistencia from '../pages/ControlAsistencia';
 import Main from '../pages/Main';
-<<<<<<< HEAD
 import ReporteFaltas from '../pages/ReporteFaltas'
 import ReporteAsistencias from '../pages/ReporteAsistencias'
 import ReporteTardanzas from '../pages/ReporteTardanzas'
 import ReporteJustificaciones from '../pages/ReporteJustificaciones'
 import ReporteLicencias from '../pages/ReporteLicencias'
-=======
-import Pdf from '../pages/Pdf'
->>>>>>> 910b5a0d514acd8a402ec583a3a22b91530a8463
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -145,11 +141,11 @@ export default class App extends React.Component {
 								path='/reportes/tardanzas'
 								component={ReporteTardanzas}
 							/>
-							<Route
+							{/* <Route
 								exact
 								path='/pdf'
 								component={Pdf}
-							/>
+							/> */}
 						</div>
 					</Fragment>
 				</Switch>
