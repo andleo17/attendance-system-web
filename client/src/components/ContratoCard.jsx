@@ -89,18 +89,26 @@ export default function Contrato(props) {
 							type='button'
 							title='Dar de baja'
 							className='degradado btn  '
-							onClick={() =>
+							onClick={() => {
 								down({
 									variables: {
-										input: { ...data, state: false },
+										input: {
+											id: parseInt(data.id),
+											startDate: data.startDate,
+											finishDate: data.finishDate,
+											mount: parseFloat(data.mount),
+											state: false,
+											extraHours: data.extraHours,
+											employeeCardId: data.employeeCardId,
+										},
 									},
 									refetchQueries: [
 										{
 											query: CONTRACT_QUERY,
 										},
 									],
-								})
-							}
+								});
+							}}
 						>
 							<i className='fa fa-ban text-white'></i>
 						</button>
