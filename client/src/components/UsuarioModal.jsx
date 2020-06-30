@@ -12,6 +12,7 @@ const ADD_USER_MUTATION = gql`
 			name
 			password
 			state
+			EmployeeCardId
 		}
 	}
 `;
@@ -23,13 +24,16 @@ const MODIFY_USER_MUTATION = gql`
 			name
 			password
 			state
+			EmployeeCardId
 		}
 	}
 `;
 
 export default function UsiarioModal(props) {
-	const { user } = props;
-	const mutation = user.mode === 0 ? ADD_USER_MUTATION : MODIFY_USER_MUTATION;
+	const { item, update } = props;
+	const mutation = item.id === 0
+		? ADD_USER_MUTATION
+		: MODIFY_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div
@@ -56,71 +60,86 @@ export default function UsiarioModal(props) {
 						<form>
 							<div className='form-group'>
 								<i className='fa fa-id-card pl-2'></i>
-								<label htmlFor='txtName'>Documento:</label>
+								<label htmlFor='txtDocument'>Documento:</label>
 								<input
-									id='txtName'
+									id='txtDocument'
 									type='text'
 									className='form-control '
+									value={item.EmployeeCardId}
 									onChange={(e) =>
-										(user.description = e.target.value)
+										update({
+											...item,
+											EmployeeCardId: e.target.value,
+										})
 									}
-									defaultValue={user.description}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtName '>Nombre:</label>
 								<input
-									id='txtTiempo'
+									id='txtName'
 									type='text'
 									disabled
 									className='form-control bg-white'
-									onChange={(e) =>
-										(user.maximumDays = e.target.value)
-									}
-									defaultValue={user.maximumDays}
+									// onChange={(e) =>
+									// 	(user.maximumDays = e.target.value)
+									// }
+									// defaultValue={user.maximumDays}
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-user-circle pl-2'></i>
-								<label htmlFor='txtTiempo'>Usuario:</label>
+								<label htmlFor='txtUser'>Usuario:</label>
 								<input
-									id='txtName'
+									id='txtUser'
 									type='text'
 									className='form-control'
+									value={item.name}
 									onChange={(e) =>
-										(user.name = e.target.value)
+										update({
+											...item,
+											name: e.target.value,
+										})
 									}
-									defaultValue={user.name}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-key pl-2'></i>
-								<label htmlFor='txtTiempo'>Contraseña:</label>
+								<label htmlFor='txtPassword'>Contraseña:</label>
 								<input
 									id='txtPassword'
 									type='password'
 									className='form-control'
+									value={item.password}
 									onChange={(e) =>
-										(user.password = e.target.value)
+										update({
+											...item,
+											password: e.target.value,
+										})
 									}
-									defaultValue={user.password}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<label htmlFor='txtState'>Estado:</label>{' '}
 								<br />
 								<input
-									id='chkState'
+									id='txtState'
 									type='checkbox'
 									className=' ml-4'
+									value={item.State}
 									onChange={(e) =>
-										(user.state = e.target.value)
+										update({
+											...item,
+											State: e.target.value,
+										})
 									}
-									// defaultValue={user.state}
-								/>{' '}
+									
+								// defaultValue={user.state}
+								/>
+								{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
@@ -136,22 +155,25 @@ export default function UsiarioModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							onClick={() =>
+							data-dismiss='modal'
+							onClick={() => {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(user.id),
-											description: user.description,
-											maximumDays: parseInt(
-												user.maximumDays
-											),
+											id: parseInt(item.id),
+											name: document.getElementById('txtName').value,
+											password: document.getElementById('txtPassword').value,
+											// state: state,
+											EmployeeCardId: document.getElementById('txtDocument').value,
 										},
 									},
-									refetchQueries: [{ query: USERS_QUERY }],
-								})
-							}
+									refetchQueries: [
+										{ query: USERS_QUERY },
+									],
+								});
+							}}
 						>
-							{user.mode === 0 ? 'Registrar' : 'Modificar'}
+							{item.id ? 'Modificar' : 'Registrar'}
 						</button>
 					</div>
 				</div>

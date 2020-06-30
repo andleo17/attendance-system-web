@@ -31,9 +31,9 @@ export default function Contrato(props) {
 	const [mutation] = useMutation(DELETE_CONTRACT_MUTATION);
 
 	return (
-		<div className='col-sm-4 pt-3 pl-1 pr-1'>
-				<div className='card card-licensetype' style={{height:'170px'}}>
-					<div className='row p-0' style={{height:'170px'}}>
+		<div className='col-lg-4 pt-3 pl-1 pr-1'>
+				<div className='card card-licensetype' style={{height:'100%'}}>
+					<div className='row p-0' style={{height:'100%'}}>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -43,7 +43,7 @@ export default function Contrato(props) {
 							/>
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
-							<div className='font-italic  mb-1' style={{height:'39px'}} >
+							<div className='font-italic  mb-1'>
 								{`${data.employee.name} ${data.employee.lastname}`}
 							</div>
 
@@ -72,7 +72,7 @@ export default function Contrato(props) {
 						<div className='card-footer p-1 pl-1 pr-1   col-2 d-flex flex-column justify-content-between m-0'>
 							<button
 								type='button'
-								className='degradado btn '
+								className='degradado btn p-1'
 								title='Visualizar'
 								data-toggle='modal'
 								data-target='#frmContrato'
@@ -86,7 +86,7 @@ export default function Contrato(props) {
 							<button
 								type='button'
 								title='Modificar'
-								className='degradado btn'
+								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmContrato'
 								onClick={() =>
@@ -99,7 +99,7 @@ export default function Contrato(props) {
 							<button
 								type='button'
 								title='Dar de baja'
-								className='degradado btn'
+								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmContrato'
 								onClick={() =>
@@ -112,7 +112,7 @@ export default function Contrato(props) {
 							<button
 								type='button'
 								title='Eliminar'
-								className='degradado btn  '
+								className='degradado btn p-1 '
 								onClick={() =>
 									mutation({
 										variables: {

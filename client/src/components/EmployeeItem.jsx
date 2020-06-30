@@ -20,7 +20,7 @@ export default class EmployeeItem extends Component {
 				<div className='col-lg-7 p-2 font-italic'>
 					<h3 className='ml-3'>{`${name}, ${lastname}`}</h3>
 					<div className='row'>
-						<div className='col-sm-2 pl-3 text-sistema font-italic'>
+						<div className='col-sm-3 pl-3 text-sistema font-italic'>
 							<i className='fa fa-id-card mr-2'></i>
 							<span> Dni:</span>
 						</div>
@@ -30,7 +30,7 @@ export default class EmployeeItem extends Component {
 					</div>
 
 					<div className='row'>
-						<div className='col-sm-2 pl-3 text-sistema font-italic'>
+						<div className='col-sm-3 pl-3 text-sistema font-italic'>
 							<i className='fa fa-venus-mars mr-2'></i>
 							<span> Sexo:</span>
 						</div>
@@ -40,7 +40,7 @@ export default class EmployeeItem extends Component {
 					</div>
 
 					<div className='row'>
-						<div className='col-sm-2 pl-3 text-sistema'>
+						<div className='col-sm-3 pl-3 text-sistema'>
 							<i className='fa fa-envelope mr-2'></i>
 							<span> Correo:</span>
 						</div>
@@ -50,7 +50,7 @@ export default class EmployeeItem extends Component {
 					</div>
 
 					<div className='row'>
-						<div className='col-sm-2 pl-3 text-sistema'>
+						<div className='col-sm-3 pl-3 text-sistema'>
 							<i className='fa fa-ban mr-2'></i>
 							<span> Estado:</span>
 						</div>

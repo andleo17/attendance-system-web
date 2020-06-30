@@ -161,8 +161,7 @@ export default function PermissioneModal(props) {
 									variables: {
 										input: {
 											date: permission.date,
-											employeeCardId:
-												permission.employeeCardId,
+											employeeCardId: permission.employeeCardId,
 											id: parseInt(permission.id),
 											motive: permission.motive,
 											state: permission.state,

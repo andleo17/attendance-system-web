@@ -23,7 +23,7 @@ export default function LicenseTypeCard(props) {
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
 	return (
-		<div className='col-sm-3 p-3'>
+		<div className='col-lg-3 p-3'>
 			<div className='fuera p-2'>{data.id}</div>
 			<div className='card card-licensetype mt-0'>
 				<div className='text-center card-header m-0'>
