@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CONTRACT_QUERY } from '../pages/Contrato';
 import moment from 'moment';
 
@@ -10,12 +10,12 @@ const ADD_CONTRACT_MUTATION = gql`
 	mutation AddContract($input: ContractInput!) {
 		addContract(input: $input) {
 			id
-			starDate
-			finisdDate
-			Mount
-			State
-			ExtraHours
-			EmployeeCardId
+			startDate
+			finishDate
+			mount
+			state
+			extraHours
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -28,12 +28,12 @@ const MODIFY_CONTRACT_MUTATION = gql`
 	mutation ModifyContract($input: ContractInput!) {
 		modifyContract(input: $input) {
 			id
-			starDate
-			finisdDate
-			Mount
-			State
-			ExtraHours
-			EmployeeCardId
+			startDate
+			finishDate
+			mount
+			state
+			extraHours
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -42,10 +42,22 @@ const MODIFY_CONTRACT_MUTATION = gql`
 	}
 `;
 
+const FIND_EMPLOYEE = gql`
+	query Employee($cardId: ID!) {
+		employee(cardId: $cardId) {
+			name
+			lastname
+		}
+	}
+`;
+
 export default function ContractModal(props) {
 	const { item, update } = props;
 	const mutation = item.id ? MODIFY_CONTRACT_MUTATION : ADD_CONTRACT_MUTATION;
 	const [execute] = useMutation(mutation);
+
+	const [findEmployee, { data, error }] = useLazyQuery(FIND_EMPLOYEE);
+
 	return (
 		<div
 			id='frmContrato'
@@ -83,6 +95,15 @@ export default function ContractModal(props) {
 											employeeCardId: e.target.value,
 										})
 									}
+									onKeyUp={(e) => {
+										if (e.key == 'Enter') {
+											findEmployee({
+												variables: {
+													cardId: e.target.value,
+												},
+											});
+										}
+									}}
 									readOnly={item.mode === 0 || item.id}
 								/>
 							</div>
@@ -93,7 +114,13 @@ export default function ContractModal(props) {
 									id='txtEmployee'
 									type='text'
 									className='form-control bg-white'
-									value={`${item.employee.name} ${item.employee.lastname}`}
+									defaultValue={
+										item.mode === 2
+											? data &&
+											  data.employee &&
+											  `${data.employee.name} ${data.employee.lastname}`
+											: `${item.employee.name} ${item.employee.lastname}`
+									}
 									readOnly
 								/>
 							</div>
@@ -104,9 +131,12 @@ export default function ContractModal(props) {
 									id='txtDateI'
 									type='date'
 									className='form-control'
-									value={moment(item.startDate).format(
-										'YYYY-MM-DD'
-									)}
+									value={
+										item.startDate &&
+										moment(item.startDate).format(
+											'YYYY-MM-DD'
+										)
+									}
 									onChange={(e) =>
 										update({
 											...item,
@@ -123,9 +153,12 @@ export default function ContractModal(props) {
 									id='txtDateF'
 									type='date'
 									className='form-control'
-									value={moment(item.finishDate).format(
-										'YYYY-MM-DD'
-									)}
+									value={
+										item.finishDate &&
+										moment(item.finishDate).format(
+											'YYYY-MM-DD'
+										)
+									}
 									onChange={(e) =>
 										update({
 											...item,
@@ -205,14 +238,15 @@ export default function ContractModal(props) {
 							<button
 								type='button'
 								className='btn degradado text-white'
+								data-dismiss='modal'
 								onClick={() =>
 									execute({
 										variables: {
 											input: {
 												id: parseInt(item.id),
-												starDate: item.startDate,
-												finisdDate: item.finishDate,
-												mount: item.mount,
+												startDate: item.startDate,
+												finishDate: item.finishDate,
+												mount: parseFloat(item.mount),
 												state: item.state,
 												extraHours: item.extraHours,
 												employeeCardId:
