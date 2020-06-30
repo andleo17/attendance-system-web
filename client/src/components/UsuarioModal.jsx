@@ -163,7 +163,7 @@ export default function UsiarioModal(props) {
 											id: parseInt(item.id),
 											name: document.getElementById('txtName').value,
 											password: document.getElementById('txtPassword').value,
-											// state: state,
+											state: document.getElementById('').che,
 											EmployeeCardId: document.getElementById('txtDocument').value,
 										},
 									},
