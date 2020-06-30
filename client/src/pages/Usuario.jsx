@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import UsuarioCard from '../components/UsuarioCard';
@@ -64,7 +62,6 @@ export default function Usuario() {
 								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
-
 							/>
 						</div>
 						<div className=''>
@@ -92,10 +89,7 @@ export default function Usuario() {
 						);
 					})}
 				</div>
-				<UsuarioModal
-					item={selectedItem}
-					update={setSelectedItem}
-				/>
+				<UsuarioModal item={selectedItem} update={setSelectedItem} />
 			</div>
 		</div>
 	);

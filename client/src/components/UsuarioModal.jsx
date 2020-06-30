@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { USERS_QUERY } from '../pages/Usuario';
@@ -31,9 +29,7 @@ const MODIFY_USER_MUTATION = gql`
 
 export default function UsiarioModal(props) {
 	const { item, update } = props;
-	const mutation = item.id === 0
-		? ADD_USER_MUTATION
-		: MODIFY_USER_MUTATION;
+	const mutation = item.id === 0 ? ADD_USER_MUTATION : MODIFY_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div
@@ -123,8 +119,7 @@ export default function UsiarioModal(props) {
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtState'>Estado:</label>{' '}
-								<br />
+								<label htmlFor='txtState'>Estado:</label> <br />
 								<input
 									id='txtState'
 									type='checkbox'
@@ -136,10 +131,9 @@ export default function UsiarioModal(props) {
 											State: e.target.value,
 										})
 									}
-									
-								// defaultValue={user.state}
-								/>
-								{' '}
+
+									// defaultValue={user.state}
+								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
@@ -161,15 +155,20 @@ export default function UsiarioModal(props) {
 									variables: {
 										input: {
 											id: parseInt(item.id),
-											name: document.getElementById('txtName').value,
-											password: document.getElementById('txtPassword').value,
-											state: document.getElementById('').che,
-											EmployeeCardId: document.getElementById('txtDocument').value,
+											name: document.getElementById(
+												'txtName'
+											).value,
+											password: document.getElementById(
+												'txtPassword'
+											).value,
+											state: document.getElementById('')
+												.che,
+											EmployeeCardId: document.getElementById(
+												'txtDocument'
+											).value,
 										},
 									},
-									refetchQueries: [
-										{ query: USERS_QUERY },
-									],
+									refetchQueries: [{ query: USERS_QUERY }],
 								});
 							}}
 						>

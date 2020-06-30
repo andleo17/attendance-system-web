@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 
 export default function Footer() {
 	return (
@@ -15,10 +13,9 @@ export default function Footer() {
 						className='text-danger'
 					>
 						Tercermundistas
-				</a>
+					</a>
 				</small>
 			</footer>
 		</div>
-
 	);
 }

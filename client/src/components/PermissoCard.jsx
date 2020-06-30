@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -15,11 +13,11 @@ const DELETE_PERMISSION_MUTATION = gql`
 `;
 
 const DOWN_PERMISSION_MUTATION = gql`
-mutation DownPermission($permissionId: Int!) {
-	downPermission(permissionId: $permissionId) {
-		id
+	mutation DownPermission($permissionId: Int!) {
+		downPermission(permissionId: $permissionId) {
+			id
+		}
 	}
-}
 `;
 
 export default function PermissionCard(props) {
@@ -41,7 +39,10 @@ export default function PermissionCard(props) {
 				</div>
 				<div className='text-center card-header m-0'>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
-					<div className='text-capitalize  font-italic' style={{height:'35px'}}>
+					<div
+						className='text-capitalize  font-italic'
+						style={{ height: '35px' }}
+					>
 						{data.employee.name} {data.employee.lastname}
 					</div>
 				</div>

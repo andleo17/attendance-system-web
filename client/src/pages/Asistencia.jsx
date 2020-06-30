@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import AsistenciaCard from '../components/AsistenciaCard';

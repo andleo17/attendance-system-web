@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CONTRACT_QUERY } from '../pages/Contrato';

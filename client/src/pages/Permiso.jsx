@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
-import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const LIST_PERMISSION = gql`
@@ -49,7 +46,7 @@ export default function Permissions() {
 		initialState.permissions[0]
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
-	const [search, { loading, data, error }] = useLazyQuery(LIST_PERMISSION);
+	const [search, { data, error }] = useLazyQuery(LIST_PERMISSION);
 	// if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 	let listPermission = initialState;
@@ -112,7 +109,9 @@ export default function Permissions() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmPermiso'
-								onClick={() => setSelectedItem(initialState.permissions[0])}
+								onClick={() =>
+									setSelectedItem(initialState.permissions[0])
+								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-arrow-circle-up mr-1'></i>
@@ -132,10 +131,7 @@ export default function Permissions() {
 						);
 					})}
 				</div>
-				<PermisoModal 
-					item={selectedItem}
-					update={setSelectedItem}
-				 />
+				<PermisoModal item={selectedItem} update={setSelectedItem} />
 			</div>
 		</div>
 	);

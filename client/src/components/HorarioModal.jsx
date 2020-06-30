@@ -1,6 +1,4 @@
 import React from 'react';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
@@ -36,7 +34,10 @@ export default function HorarioModal(props) {
 		<div id='frmHorario' className='modal fade inputEmpleado' tabIndex='-1'>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo horario</h5>
 						<button
 							type='button'
@@ -49,7 +50,7 @@ export default function HorarioModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-                            <i className='fa fa-id-card pl-2'></i>
+								<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
@@ -63,12 +64,13 @@ export default function HorarioModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-                            <i className='fa fa-tag pl-2'></i>
+								<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
 									type='text'
-									className='form-control bg-white' disabled
+									className='form-control bg-white'
+									disabled
 									onChange={(e) =>
 										(licenseType.maximumDays =
 											e.target.value)
@@ -76,8 +78,8 @@ export default function HorarioModal(props) {
 									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-calendar-check pl-2'></i>
+							<div className='form-group'>
+								<i className='fa fa-calendar-check pl-2'></i>
 								<label htmlFor='txtTiempo'>Fecha inicio </label>
 								<input
 									id='txtTiempo'
@@ -90,8 +92,8 @@ export default function HorarioModal(props) {
 									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-calendar-times pl-2'></i>
+							<div className='form-group'>
+								<i className='fa fa-calendar-times pl-2'></i>
 								<label htmlFor='txtTiempo'>Fecha fin </label>
 								<input
 									id='txtTiempo'
@@ -104,10 +106,11 @@ export default function HorarioModal(props) {
 									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
-                            
-                            <div className='form-group'>
-                            <i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
+
+							<div className='form-group'>
+								<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<br />
 								<input
 									id='txtTiempo'
 									type='checkbox'
@@ -117,7 +120,8 @@ export default function HorarioModal(props) {
 											e.target.value)
 									}
 									// defaultValue={licenseType.maximumDays}
-								/> <label htmlFor="">Vigente</label>
+								/>{' '}
+								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
 					</div>

@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import '../style/App.css';
-import '../style/bootstrap.css';
 import NavLateral from './NavLateral';
 import Employee from '../pages/Employee';
 import LicenseType from '../pages/LicenseType';
@@ -16,11 +14,11 @@ import Asistencia from '../pages/Asistencia';
 import Licencias from '../pages/Licencia';
 import ControlAsistencia from '../pages/ControlAsistencia';
 import Main from '../pages/Main';
-import ReporteFaltas from '../pages/ReporteFaltas'
-import ReporteAsistencias from '../pages/ReporteAsistencias'
-import ReporteTardanzas from '../pages/ReporteTardanzas'
-import ReporteJustificaciones from '../pages/ReporteJustificaciones'
-import ReporteLicencias from '../pages/ReporteLicencias'
+import ReporteFaltas from '../pages/ReporteFaltas';
+import ReporteAsistencias from '../pages/ReporteAsistencias';
+import ReporteTardanzas from '../pages/ReporteTardanzas';
+import ReporteJustificaciones from '../pages/ReporteJustificaciones';
+import ReporteLicencias from '../pages/ReporteLicencias';
 
 export default class App extends React.Component {
 	constructor(props) {
