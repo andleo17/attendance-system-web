@@ -39,7 +39,7 @@ export default function UsuarioCard(props) {
 							</label>
 						</div>
 						<div className='card-body col-6  p-0 pl-2 pt-1'>
-							<div className='font-italic  mb-1' >
+							<div className='font-italic  mb-1'style={{height:'37px'}} >
 								{`${data.employee.name} ${data.employee.lastname}`}
 							</div>
 
