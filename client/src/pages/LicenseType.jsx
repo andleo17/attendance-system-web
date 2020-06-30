@@ -18,16 +18,15 @@ export const LIST_LICENSETYPE = gql`
 	}
 `;
 
-export default function LicenseType() {
-	const initialState = {
-		__typename: 'LicenseType',
-		description: null,
-		id: null,
-		maximumDays: null,
-		mode: 0,
-	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
+const initialState = {
+	__typename: 'LicenseType',
+	id: '',
+	description: '',
+	maximumDays: 0,
+};
 
+export default function LicenseType() {
+	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
@@ -38,9 +37,7 @@ export default function LicenseType() {
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
-				<h1 htmlFor='' className=''>
-					Tipo de licencia
-				</h1>
+				<h1>Tipo de licencia</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
 				<form className='buscar justify-content-sm-start'>
@@ -73,12 +70,15 @@ export default function LicenseType() {
 							<LicenseTypeCard
 								key={lt.id}
 								data={lt}
-								setData={setSelectedItem}
+								showData={() => setSelectedItem(lt)}
 							/>
 						);
 					})}
 				</div>
-				<LicenseTypeModal licenseType={selectedItem} />
+				<LicenseTypeModal
+					item={selectedItem}
+					update={setSelectedItem}
+				/>
 			</div>
 		</div>
 	);

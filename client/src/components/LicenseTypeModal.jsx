@@ -4,6 +4,7 @@ import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { useState } from 'react';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
 	mutation AddLicenseType($input: LicenseTypeInput!) {
@@ -26,17 +27,23 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 `;
 
 export default function LicenseTypeModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+	const { item, update } = props;
+	const mutation = item.id
+		? MODIFY_LICENSE_TYPE_MUTATION
+		: ADD_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmLicenseType' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div
+			id='frmLicenseType'
+			className='modal fade inputEmpleado'
+			tabIndex='-1'
+		>
 			<div className='modal-dialog modal-sm modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo tipo de licencia</h5>
 						<button
 							type='button'
@@ -49,31 +56,35 @@ export default function LicenseTypeModal(props) {
 					<div className='modal-body'>
 						<form>
 							<div className='form-group'>
-							<i className='fa fa-tag pl-2'></i>
+								<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtName'>Nombre:</label>
 								<input
-									id='txtName'
+									id='txtDescription'
 									type='text'
-									className='form-control '  
+									className='form-control'
+									value={item.description}
 									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
+										update({
+											...item,
+											description: e.target.value,
+										})
 									}
-									defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
-							<i className='fa fa-calendar pl-2'></i>
+								<i className='fa fa-calendar pl-2'></i>
 								<label htmlFor='txtTiempo'>Tiempo:</label>
 								<input
 									id='txtTiempo'
 									type='number'
 									className='form-control'
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											maximumDays: e.target.value,
+										})
 									}
-									defaultValue={licenseType.maximumDays}
+									value={item.maximumDays}
 								/>
 							</div>
 						</form>
@@ -89,25 +100,29 @@ export default function LicenseTypeModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							onClick={() =>
+							data-dismiss='modal'
+							onClick={() => {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
+											id: parseInt(item.id),
+											description: document.getElementById(
+												'txtDescription'
+											).value,
 											maximumDays: parseInt(
-												licenseType.maximumDays
+												document.getElementById(
+													'txtTiempo'
+												).value
 											),
 										},
 									},
 									refetchQueries: [
 										{ query: LIST_LICENSETYPE },
 									],
-								})
-							}
+								});
+							}}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{item.id ? 'Modificar' : 'Registrar'}
 						</button>
 					</div>
 				</div>
