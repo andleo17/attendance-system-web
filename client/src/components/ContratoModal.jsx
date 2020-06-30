@@ -96,7 +96,7 @@ export default function ContractModal(props) {
 										})
 									}
 									onKeyUp={(e) => {
-										if (e.key == 'Enter') {
+										if (e.key === 'Enter') {
 											findEmployee({
 												variables: {
 													cardId: e.target.value,
