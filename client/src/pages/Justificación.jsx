@@ -3,35 +3,32 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { NavLink } from 'react-router-dom';
-import UsuarioCard from '../components/UsuarioCard';
-import UsuarioModal from '../components/UsuarioModal';
 import JustificacionCard from '../components/JustificacionCard';
 import JustificacionModal from '../components/JustifcicacionModal';
 import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const JUSTIFICATIONS_QUERY = gql`
-query ListJustifications($employeeCardId: String) {
-	justifications(employeeCardId: $employeeCardId) {
-		id
-		date
-		motive
-		state
-		attendanceId
-		attendance{
-		  id
-		  date
-		  employee{
-			name
-			lastname
-			cardId
-		  }
+	query ListJustifications($employeeCardId: String) {
+		justifications(employeeCardId: $employeeCardId) {
+			id
+			date
+			motive
+			state
+			attendanceId
+			attendance {
+				id
+				date
+				employee {
+					name
+					lastname
+					cardId
+				}
+			}
 		}
 	}
-}
 `;
-export 	const initialState = {
+export const initialState = {
 	justifications: [
 		{
 			__typename: 'Justification',
@@ -54,16 +51,16 @@ export 	const initialState = {
 			},
 		},
 	],
-
 };
 
 export default function Justificación() {
-
 	const [selectedItem, setSelectedItem] = useState(
 		initialState.justifications[0]
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
-	const  [search, { loading, data, error }] = useLazyQuery(JUSTIFICATIONS_QUERY);
+	const [search, { loading, data, error }] = useLazyQuery(
+		JUSTIFICATIONS_QUERY
+	);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 	let listJustifications = initialState;
@@ -72,15 +69,15 @@ export default function Justificación() {
 		listJustifications = data;
 	}
 	return (
-		<div className='page-content'
-		onLoad={() => {
-			if (employeeCardId == null) {
-				search({
-					variables: null,
-				});
-			}
-		}}
-		
+		<div
+			className='page-content'
+			onLoad={() => {
+				if (employeeCardId == null) {
+					search({
+						variables: null,
+					});
+				}
+			}}
 		>
 			<div
 				className='row badge-dark pl-4 '
@@ -105,7 +102,7 @@ export default function Justificación() {
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
 										e.preventDefault();
-										if (e.target.value == '') {
+										if (e.target.value === '') {
 											search({
 												variables: null,
 											});

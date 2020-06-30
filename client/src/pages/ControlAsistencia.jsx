@@ -25,7 +25,7 @@ export default function Contrato() {
 		maximumDays: null,
 		mode: 0,
 	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
+	const [setSelectedItem] = useState(initialState);
 
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
 	if (loading) return <Loader />;

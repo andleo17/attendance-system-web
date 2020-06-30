@@ -86,6 +86,7 @@ export default function PermissioneModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
+							<i className='fa fa-file pl-2'></i>
 								<label htmlFor='txtTiempo '>Motivo:</label>
 								<input
 									id='txtTiempo'
@@ -97,10 +98,9 @@ export default function PermissioneModal(props) {
 									defaultValue={permission.motive}
 								/>
 							</div>
-							<div className='form-group'>
-								<label htmlFor='txtFechaPresentacion'>
-									Fecha de presentación
-								</label>
+                            <div className='form-group'>
+							<i className='fa fa-calendar-alt pl-2'></i>
+								<label htmlFor='txtFechaPresentacion'>Fecha de presentación</label>
 								<input
 									id='txtFechaPresentacion'
 									type='date'
@@ -113,9 +113,8 @@ export default function PermissioneModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
-								<label htmlFor='txtFechaPermiso'>
-									Fecha de permisio
-								</label>
+							<i className='fa fa-calendar-check pl-2'></i>
+								<label htmlFor='txtFechaPermiso'>Fecha de permiso</label>
 								<input
 									id='txtFechaPermiso'
 									type='date'
@@ -134,10 +133,8 @@ export default function PermissioneModal(props) {
 								<input
 									id='txtTiempo'
 									type='checkbox'
-									className=''
-									onChange={(e) =>
-										(permission.state = e.target.checked)
-									}
+									className='ml-4'
+									onChange={(e) => (permission.state =  e.target.checked)}
 									// onChange={(e) =>
 									// 	(licenseType.maximumDays =
 									// 		e.target.value)

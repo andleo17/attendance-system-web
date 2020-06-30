@@ -33,9 +33,9 @@ export default function HorarioCard(props) {
 						{data.state ? 'Vigente' : 'No vigente'}
 					</h3>
 				</div>
-				<div className='text-center card-header m-0'>
+				<div className='text-center card-header m-0 '>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
-					<div className='ext-capitalize font-italic'>
+					<div className='ext-capitalize font-italic'style={{height:'35px'}}>
 						{`${data.employee.name} ${data.employee.lastname}`}
 					</div>
 				</div>

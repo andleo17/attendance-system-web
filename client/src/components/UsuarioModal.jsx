@@ -3,40 +3,46 @@ import '../style/App.css';
 import '../style/bootstrap.css';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { USERS_QUERY } from '../pages/Usuario';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
+const ADD_USER_MUTATION = gql`
+	mutation AddUser($input: UserInput!) {
+		addUser(input: $input) {
 			id
-			description
-			maximumDays
+			name
+			password
+			state
 		}
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_USER_MUTATION = gql`
+	mutation ModifyUser($input: UserInput!) {
+		modifyUser(input: $input) {
 			id
-			description
-			maximumDays
+			name
+			password
+			state
 		}
 	}
 `;
 
 export default function UsiarioModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+	const { user } = props;
+	const mutation = user.mode === 0 ? ADD_USER_MUTATION : MODIFY_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
-		<div id='frmContrato' className='modal fade inputEmpleado' tabIndex='-1'>
+		<div
+			id='frmContrato'
+			className='modal fade inputEmpleado'
+			tabIndex='-1'
+		>
 			<div className='modal-dialog  modal-dialog-centered'>
 				<div className='modal-content'>
-					<div className='modal-header  text-white' style={{background:'#D5691E'}}>
+					<div
+						className='modal-header  text-white'
+						style={{ background: '#D5691E' }}
+					>
 						<h5 className='modal-title'>Nuevo usuario</h5>
 						<button
 							type='button'
@@ -49,76 +55,73 @@ export default function UsiarioModal(props) {
 					<div className='modal-body '>
 						<form>
 							<div className='form-group'>
-                            <i className='fa fa-id-card pl-2'></i>
+								<i className='fa fa-id-card pl-2'></i>
 								<label htmlFor='txtName'>Documento:</label>
 								<input
 									id='txtName'
 									type='text'
 									className='form-control '
 									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
+										(user.description = e.target.value)
 									}
-									defaultValue={licenseType.description}
+									defaultValue={user.description}
 								/>
 							</div>
 							<div className='form-group'>
-                            <i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo ' >Nombre:</label>
-								<input
-									id='txtTiempo'
-									type='text' disabled
-									className='form-control bg-white'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									defaultValue={licenseType.maximumDays}
-								/>
-							</div>
-                            
-                            <div className='form-group'>
-                            <i className='fa fa-user-circle pl-2'></i>
-								<label htmlFor='txtTiempo'>Usuario:</label>
+								<i className='fa fa-tag pl-2'></i>
+								<label htmlFor='txtTiempo '>Nombre:</label>
 								<input
 									id='txtTiempo'
 									type='text'
+									disabled
+									className='form-control bg-white'
+									onChange={(e) =>
+										(user.maximumDays = e.target.value)
+									}
+									defaultValue={user.maximumDays}
+								/>
+							</div>
+
+							<div className='form-group'>
+								<i className='fa fa-user-circle pl-2'></i>
+								<label htmlFor='txtTiempo'>Usuario:</label>
+								<input
+									id='txtName'
+									type='text'
 									className='form-control'
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										(user.name = e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									defaultValue={user.name}
 								/>
-                                
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-key pl-2'></i>
+							<div className='form-group'>
+								<i className='fa fa-key pl-2'></i>
 								<label htmlFor='txtTiempo'>Contraseña:</label>
 								<input
-									id='txtTiempo'
+									id='txtPassword'
 									type='password'
 									className='form-control'
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										(user.password = e.target.value)
 									}
-									defaultValue={licenseType.maximumDays}
+									defaultValue={user.password}
 								/>
 							</div>
-                            <div className='form-group'>
-                            <i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label> <br/>
+							<div className='form-group'>
+								<i className='fa fa-ban pl-2'></i>
+								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<br />
 								<input
-									id='txtTiempo'
+									id='chkState'
 									type='checkbox'
 									className=' ml-4'
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										(user.state = e.target.value)
 									}
-									// defaultValue={licenseType.maximumDays}
-								/> <label htmlFor="">Vigente</label>
+									// defaultValue={user.state}
+								/>{' '}
+								<label htmlFor=''>Vigente</label>
 							</div>
 						</form>
 					</div>
@@ -137,21 +140,18 @@ export default function UsiarioModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
+											id: parseInt(user.id),
+											description: user.description,
 											maximumDays: parseInt(
-												licenseType.maximumDays
+												user.maximumDays
 											),
 										},
 									},
-									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
-									],
+									refetchQueries: [{ query: USERS_QUERY }],
 								})
 							}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{user.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>

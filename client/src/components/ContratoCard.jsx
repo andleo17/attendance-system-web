@@ -4,15 +4,23 @@ import '../style/bootstrap.css';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import {CONTRACT_QUERY} from '../pages/Contrato'
 import moment from 'moment';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+const DELETE_CONTRACT_MUTATION = gql`
+	mutation DeleteContract($contractId: Byte!) {
+		deleteContract(contractId: $contractId) {
 			id
-			description
-			maximumDays
+			starDate
+			finisdDate
+			Mount
+			State
+			ExtraHours
+			EmployeeCardId
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
@@ -20,13 +28,12 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 export default function Contrato(props) {
 	const { data, setData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [mutation] = useMutation(DELETE_CONTRACT_MUTATION);
 
 	return (
 		<div className='col-sm-4 pt-3 pl-1 pr-1'>
-			<div className=''>
-				<div className='card card-licensetype'>
-					<div className='row p-0 '>
+				<div className='card card-licensetype' style={{height:'170px'}}>
+					<div className='row p-0' style={{height:'170px'}}>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -36,7 +43,7 @@ export default function Contrato(props) {
 							/>
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
-							<div className='font-italic  mb-1'>
+							<div className='font-italic  mb-1' style={{height:'39px'}} >
 								{`${data.employee.name} ${data.employee.lastname}`}
 							</div>
 
@@ -109,11 +116,11 @@ export default function Contrato(props) {
 								onClick={() =>
 									mutation({
 										variables: {
-											licenseTypeId: parseInt(data.id),
+											ContractId: parseInt(data.id),
 										},
 										refetchQueries: [
 											{
-												query: LIST_LICENSETYPE,
+												query: CONTRACT_QUERY,
 											},
 										],
 									})
@@ -125,6 +132,5 @@ export default function Contrato(props) {
 					</div>
 				</div>
 			</div>
-		</div>
 	);
 }

@@ -25,10 +25,14 @@ export const CONTRACT_QUERY = gql`
 export default function Contrato() {
 	const initialState = {
 		__typename: 'Contract',
-		description: null,
 		id: null,
-		maximumDays: null,
-		mode: 0,
+		startDate: null,
+		finishDate: null,
+		Mount: null,
+		State: null,
+		ExtraHours: null,
+		EmployeeCardId: null,
+		// mode: 0,
 	};
 	const [selectedItem, setSelectedItem] = useState(initialState);
 
@@ -63,6 +67,7 @@ export default function Contrato() {
 								data-toggle='modal'
 								data-target='#frmContrato'
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
+								// onClick={() => setSelectedItem(initialState) }
 							>
 								<i className='fa fa-file-archive mr-1'></i>
 								NUEVO
@@ -81,7 +86,7 @@ export default function Contrato() {
 						);
 					})}
 				</div>
-				<ContratoModal licenseType={selectedItem} />
+				<ContratoModal contract={selectedItem} />
 			</div>
 		</div>
 	);
