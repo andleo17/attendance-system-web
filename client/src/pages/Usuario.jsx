@@ -26,16 +26,16 @@ export const USERS_QUERY = gql`
 
 const initialState = {
 	__typename: 'User',
-	id: null,
-	name: null,
-	password: null,
-	state: null,
-	employeeCardId: null,
+	id: '',
+	name: '',
+	password: '',
+	state: '',
+	employeeCardId: '',
 	mode: 0,
 	employee: {
 		__typename: 'Employee',
-		name: null,
-		lastname: null,
+		name: '',
+		lastname: '',
 	},
 };
 
@@ -44,7 +44,7 @@ export default function Usuario() {
 	const { loading, data, error } = useQuery(USERS_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
-
+	// console.log(data);
 	return (
 		<div className='page-content'>
 			<div
@@ -82,12 +82,12 @@ export default function Usuario() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.users.map((lt) => {
+					{data.users.map((u) => {
 						return (
 							<UsuarioCard
-								key={lt.id}
-								data={lt}
-								showData={() => setSelectedItem(lt)}
+								key={u.id}
+								data={u}
+								showData={() => setSelectedItem(u)}
 							/>
 						);
 					})}

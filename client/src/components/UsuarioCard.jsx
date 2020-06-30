@@ -6,14 +6,10 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { USERS_QUERY } from '../pages/Usuario';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteUser($userId: Byte!) {
-		deleteUser(userId: $userId) {
+const DELETE_USER_MUTATION = gql`
+	mutation DownUser($userId: ID!) {
+		downUser(userId: $userId) {
 			id
-			name
-			password
-			state
-			EmployeeCardId
 		}
 	}
 `;
@@ -21,7 +17,7 @@ const DELETE_LICENSE_TYPE_MUTATION = gql`
 export default function UsuarioCard(props) {
 	const { data, showData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [downUser] = useMutation(DELETE_USER_MUTATION);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -31,7 +27,6 @@ export default function UsuarioCard(props) {
 						<div htmlFor='' className='badge-sonar'></div>
 						<img
 							src={foto}
-							alt=''
 							className=' mt-5 circle mb-0 bg-transparent h-50 w-50'
 						/>
 						<label htmlFor='' className=' text-sistema '>
@@ -43,7 +38,6 @@ export default function UsuarioCard(props) {
 						<div className='font-italic  mb-1' >
 							{`${data.employee.name} ${data.employee.lastname}`}
 						</div>
-
 						<div className='mb-2'>
 							<i className='fa fa-user-circle pr-2'></i>
 							<b>Usuario</b>
@@ -78,7 +72,7 @@ export default function UsuarioCard(props) {
 							title='Eliminar'
 							className='degradado btn p-1 '
 							onClick={() =>
-								mutation({
+								downUser({
 									variables: { userId: parseInt(data.id), },
 									refetchQueries: [
 										{

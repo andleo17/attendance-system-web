@@ -146,7 +146,7 @@ export default function PermissioneModal(props) {
 									onChange={(e) =>
 										update({
 											...item,
-											state: e.target.value,
+											state: e.target.checked,
 										})
 									}
 
