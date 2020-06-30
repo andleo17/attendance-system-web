@@ -16,6 +16,7 @@ const EMPLOYEE_QUERY = gql`
 			lastname
 			email
 			state
+			genre
 		}
 	}
 `;
