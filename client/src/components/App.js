@@ -16,6 +16,7 @@ import Asistencia from '../pages/Asistencia';
 import Licencias from '../pages/Licencia';
 import ControlAsistencia from '../pages/ControlAsistencia';
 import Main from '../pages/Main';
+import Pdf from '../pages/Pdf'
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -111,6 +112,11 @@ export default class App extends React.Component {
 								exact
 								path='/control-asistencia'
 								component={ControlAsistencia}
+							/>
+							<Route
+								exact
+								path='/pdf'
+								component={Pdf}
 							/>
 						</div>
 					</Fragment>
