@@ -703,5 +703,22 @@ namespace Server.Schema
 				throw new QueryException(e.Message);
 			}
 		}
+
+		public async Task<Permission> DownPermission([Service] DBAttendanceContext dBAttendanceContext, int permissionId)
+		{
+			try
+			{
+				var permission = await dBAttendanceContext.Permission.FindAsync(permissionId);
+				permission.State = false;
+				await dBAttendanceContext.SaveChangesAsync();
+				return permission;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
 	}
+	
 }

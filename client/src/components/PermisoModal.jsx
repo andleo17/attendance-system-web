@@ -39,17 +39,14 @@ const MODIFY_PERMISSION_MUTATION = gql`
 	}
 `;
 
-// var x = [];
-
 export default function PermissioneModal(props) {
-	const { permission } = props;
+	const { item, update } = props;
 	// const [p, setP] = useState(permission);
-	console.log(permission.motive);
+	// console.log(permission.motive);
 
-	const mutation =
-		permission.mode === 0
-			? ADD_PERMISSION_MUTATION
-			: MODIFY_PERMISSION_MUTATION;
+	const mutation = item.id
+			? MODIFY_PERMISSION_MUTATION
+			: ADD_PERMISSION_MUTATION;
 	const [execute] = useMutation(mutation);
 
 	return (
@@ -70,76 +67,89 @@ export default function PermissioneModal(props) {
 						</button>
 					</div>
 					<div className='modal-body'>
-						<form key={permission.id}>
+						<form>
 							<div className='form-group'>
 								<i className='fa fa-id-card pl-2'></i>
-								<label htmlFor='txtName'>Documento:</label>
+								<label htmlFor='txtDocument'>Documento:</label>
 								<input
-									id='txtName'
+									id='txtDocument'
 									type='text'
 									className='form-control '
+									value={item.employeeCardId}
 									onChange={(e) =>
-										(permission.employeeCardId =
-											e.target.value)
+										update({
+											...item,
+											employeeCardId: e.target.value,
+										})
 									}
-									defaultValue={permission.employeeCardId}
+									
 								/>
 							</div>
 							<div className='form-group'>
 							<i className='fa fa-file pl-2'></i>
-								<label htmlFor='txtTiempo '>Motivo:</label>
+								<label htmlFor='txtMotive '>Motivo:</label>
 								<input
-									id='txtTiempo'
+									id='txtMotive'
 									type='text'
 									className='form-control bg-white'
+									value={item.motive}
 									onChange={(e) =>
-										(permission.motive = e.target.value)
+										update({
+											...item,
+											motive: e.target.value,
+										})
 									}
-									defaultValue={permission.motive}
 								/>
 							</div>
                             <div className='form-group'>
 							<i className='fa fa-calendar-alt pl-2'></i>
-								<label htmlFor='txtFechaPresentacion'>Fecha de presentación</label>
+								<label htmlFor='txtPresentationDate'>Fecha de presentación</label>
 								<input
-									id='txtFechaPresentacion'
+									id='txtPresentationDate'
 									type='date'
 									className='form-control'
+									value={item.presentationDate}
 									onChange={(e) =>
-										(permission.presentationDate =
-											e.target.value)
+										update({
+											...item,
+											presentationDate: e.target.value,
+										})
 									}
-									defaultValue={permission.presentationDate}
 								/>
 							</div>
 							<div className='form-group'>
 							<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtFechaPermiso'>Fecha de permiso</label>
+								<label htmlFor='txtDate'>Fecha de permiso</label>
 								<input
-									id='txtFechaPermiso'
+									id='txtDate'
 									type='date'
 									className='form-control'
+									value={item.date}
 									onChange={(e) =>
-										(permission.date = e.target.value)
+										update({
+											...item,
+											date: e.target.value,
+										})
 									}
-									defaultValue={permission.date}
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<label htmlFor='txtState'>Estado:</label>{' '}
 								<br />
 								<input
-									id='txtTiempo'
+									id='txtState'
 									type='checkbox'
 									className='ml-4'
-									onChange={(e) => (permission.state =  e.target.checked)}
-									// onChange={(e) =>
-									// 	(licenseType.maximumDays =
-									// 		e.target.value)
-									// }
-									checked={permission.state}
+									checked={item.state}
+									onChange={(e) =>
+										update({
+											...item,
+											state: e.target.value,
+										})
+									}
+
 								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
@@ -160,12 +170,19 @@ export default function PermissioneModal(props) {
 								execute({
 									variables: {
 										input: {
-											date: permission.date,
-											employeeCardId:
-												permission.employeeCardId,
-											id: parseInt(permission.id),
-											motive: permission.motive,
-											state: permission.state,
+											date: document.getElementById(
+												'txtDate'
+											).value,
+											employeeCardId:document.getElementById(
+												'txtDocument'
+											).value,
+											id: parseInt(item.id),
+											motive: document.getElementById(
+												'txtMotive'
+											).value,
+											state: document.getElementById(
+												'txtState'
+											).checked,
 										},
 									},
 									refetchQueries: [
@@ -175,7 +192,7 @@ export default function PermissioneModal(props) {
 							}
 							data-dismiss='modal'
 						>
-							{permission.mode === 0 ? 'Registrar' : 'Modificar'}
+							{item.id ? 'Modificar' : 'Registrar'}
 						</button>
 					</div>
 				</div>

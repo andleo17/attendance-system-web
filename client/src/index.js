@@ -7,7 +7,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { BrowserRouter } from 'react-router-dom';
 
 const client = new ApolloClient({
-	uri: 'http://andleo-001-site1.dtempurl.com/attendance-usat-server/',
+	uri: 'http://localhost:5000/',
 	cache: new InMemoryCache(),
 });
 

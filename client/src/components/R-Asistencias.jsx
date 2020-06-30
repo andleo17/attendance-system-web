@@ -5,17 +5,17 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
 
-export default function ReporteAsistencias(props) {
-
+export default function ContentAttendance(props) {
+    const { a } = props;
     return (
-        <tr>
-            <td>-----</td>
-            <td>-----</td>
-            <td>-----</td>
-            <td>-----</td>
-            <td>-----</td>
-            <td>-----</td>
-            <td>-----</td>
-        </tr>
+        <tr key={a.id}>
+            <td>{a.date}</td>
+            <td>{a.id}</td>
+            <td>{a.employeeCardId}</td>
+            <td>{a.employee.name}</td>
+            <td>{a.employee.lastname}</td>
+            <td>{a.inHour}</td>
+            <td>{a.outHour}</td> 
+        </tr>    
     );
 }
