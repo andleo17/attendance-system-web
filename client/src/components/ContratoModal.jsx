@@ -54,7 +54,7 @@ export default function ContractModal(props) {
 	const mutation = item.id ? MODIFY_CONTRACT_MUTATION : ADD_CONTRACT_MUTATION;
 	const [execute] = useMutation(mutation);
 
-	const [findEmployee, { data, error }] = useLazyQuery(FIND_EMPLOYEE);
+	const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
 
 	return (
 		<div

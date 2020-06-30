@@ -29,6 +29,7 @@ export default function UsuarioCard(props) {
 						<img
 							src={foto}
 							className=' mt-5 circle mb-0 bg-transparent h-50 w-50'
+							alt='foto'
 						/>
 						<label htmlFor='' className=' text-sistema '>
 							{' '}
