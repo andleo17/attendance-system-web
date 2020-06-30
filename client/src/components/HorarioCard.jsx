@@ -23,7 +23,7 @@ export default function HorarioCard(props) {
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
 	return (
-		<div className='col-sm-3 p-3'>
+		<div className='col-lg-3 p-3'>
 			<div className='card card-licensetype'>
 				<div className='card-title  text-lg-center m-0  '>
 					<h3
@@ -35,7 +35,7 @@ export default function HorarioCard(props) {
 				</div>
 				<div className='text-center card-header m-0 '>
 					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
-					<div className='ext-capitalize font-italic'style={{height:'35px'}}>
+					<div className='text-capitalize font-italic' style={{height:'35px'}}>
 						{`${data.employee.name} ${data.employee.lastname}`}
 					</div>
 				</div>

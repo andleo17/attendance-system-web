@@ -15,6 +15,7 @@ export const USERS_QUERY = gql`
 			name
 			password
 			state
+			employeeCardId
 			employee {
 				name
 				lastname
@@ -23,17 +24,23 @@ export const USERS_QUERY = gql`
 	}
 `;
 
-export default function Usuario() {
-	const initialState = {
-		__typename: 'User',
-		id: null,
+const initialState = {
+	__typename: 'User',
+	id: null,
+	name: null,
+	password: null,
+	state: null,
+	employeeCardId: null,
+	mode: 0,
+	employee: {
+		__typename: 'Employee',
 		name: null,
-		password: null,
-		state: null,
-		mode: 0,
-	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
+		lastname: null,
+	},
+};
 
+export default function Usuario() {
+	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(USERS_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
@@ -57,7 +64,7 @@ export default function Usuario() {
 								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
-								
+
 							/>
 						</div>
 						<div className=''>
@@ -65,9 +72,7 @@ export default function Usuario() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmContrato'
-								onClick={() =>
-									setSelectedItem(Object.assign({ mode: 0 }))
-								}
+								onClick={() => setSelectedItem(initialState)}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-user-plus mr-1'></i>
@@ -82,12 +87,15 @@ export default function Usuario() {
 							<UsuarioCard
 								key={lt.id}
 								data={lt}
-								setData={setSelectedItem}
+								showData={() => setSelectedItem(lt)}
 							/>
 						);
 					})}
 				</div>
-				<UsuarioModal user={selectedItem} />
+				<UsuarioModal
+					item={selectedItem}
+					update={setSelectedItem}
+				/>
 			</div>
 		</div>
 	);

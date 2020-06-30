@@ -29,7 +29,7 @@ export default function PermissionCard(props) {
 	const [downPermission] = useMutation(DOWN_PERMISSION_MUTATION);
 
 	return (
-		<div className='col-sm-3 p-3'>
+		<div className='col-lg-3 p-3'>
 			<div className='card card-licensetype'>
 				<div className='card-title  text-lg-center m-0  '>
 					<h3

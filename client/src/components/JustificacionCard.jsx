@@ -24,10 +24,10 @@ export default function JustificationCard(props) {
 	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
 	return (
-		<div className='col-sm-4 pt-3 pl-1 pr-1'>
+		<div className='col-lg-4 pt-3 pl-1 pr-1'>
 			<div className=''>
-				<div className='card card-licensetype' style={{height:'170px'}}>
-					<div className='row p-0 ' style={{height:'170px'}}>
+				<div className='card card-licensetype' style={{height:'100%'}}>
+					<div className='row p-0 ' style={{height:'100%'}}>
 						<div className='card-header bg-light-gray col-4 d-flex flex-column text-center justify-content-between p-0 '>
 							<div htmlFor='' className='badge-sonar'></div>
 							<img
@@ -41,7 +41,7 @@ export default function JustificationCard(props) {
 							</label>
 						</div>
 						<div className='card-body col-6  p-0 pl-2 pt-1'>
-							<div className='font-italic  mb-1' style={{height:'39px'}}>
+							<div className='font-italic  mb-1' >
 								{`${data.attendance.employee.name} ${data.attendance.employee.lastname}`}
 
 							</div>
@@ -66,7 +66,7 @@ export default function JustificationCard(props) {
 							<button
 								type='button'
 								title='Visualizar'
-								className='degradado btn'
+								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmJustificacion'
 								onClick={() =>
@@ -79,7 +79,7 @@ export default function JustificationCard(props) {
 							<button
 								type='button'
 								title='Modificar'
-								className='degradado btn'
+								className='degradado btn p-1'
 								data-toggle='modal'
 								data-target='#frmJustificacion'
 								onClick={() =>
@@ -92,7 +92,7 @@ export default function JustificationCard(props) {
 							<button
 								type='button'
 								title='Dar de baja'
-								className='degradado btn'
+								className='degradado btn p-1'
 								onClick={() =>
 									mutation({
 										variables: {
@@ -112,7 +112,7 @@ export default function JustificationCard(props) {
 							<button
 								type='button'
 								title='Eliminar'
-								className='degradado btn'
+								className='degradado btn p-1'
 								onClick={() =>
 									mutation({
 										variables: {

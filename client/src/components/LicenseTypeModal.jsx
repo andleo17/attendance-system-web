@@ -77,13 +77,13 @@ export default function LicenseTypeModal(props) {
 									id='txtTiempo'
 									type='number'
 									className='form-control'
+									value={item.maximumDays}
 									onChange={(e) =>
 										update({
 											...item,
 											maximumDays: e.target.value,
 										})
 									}
-									value={item.maximumDays}
 								/>
 							</div>
 						</form>
