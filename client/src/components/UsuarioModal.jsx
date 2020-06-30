@@ -10,7 +10,7 @@ const ADD_USER_MUTATION = gql`
 			name
 			password
 			state
-			EmployeeCardId
+			employeeCardId
 		}
 	}
 `;
@@ -22,14 +22,15 @@ const MODIFY_USER_MUTATION = gql`
 			name
 			password
 			state
-			EmployeeCardId
+			employeeCardId
 		}
 	}
 `;
 
-export default function UsiarioModal(props) {
+export default function UsuarioModal(props) {
 	const { item, update } = props;
-	const mutation = item.id === 0 ? ADD_USER_MUTATION : MODIFY_USER_MUTATION;
+	let nombreC = item.employee.name + ' ' + item.employee.lastname;
+	const mutation = item.id ? MODIFY_USER_MUTATION : ADD_USER_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div
@@ -61,23 +62,24 @@ export default function UsiarioModal(props) {
 									id='txtDocument'
 									type='text'
 									className='form-control '
-									value={item.EmployeeCardId}
+									value={item.employeeCardId}
 									onChange={(e) =>
 										update({
 											...item,
-											EmployeeCardId: e.target.value,
+											employeeCardId: e.target.value,
 										})
 									}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtName '>Nombre:</label>
+								<label htmlFor='txtName'>Nombre:</label>
 								<input
 									id='txtName'
 									type='text'
 									disabled
 									className='form-control bg-white'
+									value={nombreC}
 									// onChange={(e) =>
 									// 	(user.maximumDays = e.target.value)
 									// }
@@ -87,9 +89,9 @@ export default function UsiarioModal(props) {
 
 							<div className='form-group'>
 								<i className='fa fa-user-circle pl-2'></i>
-								<label htmlFor='txtUser'>Usuario:</label>
+								<label htmlFor='txtNameU'>Usuario:</label>
 								<input
-									id='txtUser'
+									id='txtNameU'
 									type='text'
 									className='form-control'
 									value={item.name}
@@ -124,15 +126,13 @@ export default function UsiarioModal(props) {
 									id='txtState'
 									type='checkbox'
 									className=' ml-4'
-									value={item.State}
+									checked={item.state}
 									onChange={(e) =>
 										update({
 											...item,
-											State: e.target.value,
+											state: e.target.checked,
 										})
 									}
-
-									// defaultValue={user.state}
 								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
@@ -156,14 +156,15 @@ export default function UsiarioModal(props) {
 										input: {
 											id: parseInt(item.id),
 											name: document.getElementById(
-												'txtName'
+												'txtNameU'
 											).value,
 											password: document.getElementById(
 												'txtPassword'
 											).value,
-											state: document.getElementById('')
-												.che,
-											EmployeeCardId: document.getElementById(
+											state: document.getElementById(
+												'txtState'
+											).checked,
+											employeeCardId: document.getElementById(
 												'txtDocument'
 											).value,
 										},

@@ -56,7 +56,7 @@ export default function PermissionCard(props) {
 					<div className='mb-1'>
 						<i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Motivo</b>
-						<div className='ml-5 text-justify text'>
+						<div className='ml-5 text-justify text mb-1' style={{height:'40px'}}>
 							{data.motive}
 						</div>
 					</div>
