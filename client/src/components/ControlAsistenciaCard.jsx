@@ -26,17 +26,17 @@ export default function Cotrato(props) {
     const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
     return (
-        <div className='col-sm-4 pt-3 pl-1 pr-1'>
+        <div className='col-lg-4 pt-3 pl-1 pr-1'>
             <div className="">
-                <div className='card card-licensetype' style={{height:'170px'}}>
+                <div className='card card-licensetype' style={{height:'100%'}}>
 
-                    <div className="row p-0 "style={{height:'170px'}} >
+                    <div className="row p-0 "style={{height:'100%'}} >
                         <div className='card-header bg-light-gray col-4 d-flex flex-column justify-content-between p-0 '>
                             <div htmlFor="" className='badge-sonar'></div>
                             <img src={foto} alt='' className=' mt-5 circle  bg-transparent h-50 w-50' />
                         </div>
                         <div className='card-body col-6 p-0 pl-2 pt-1 '>
-                            <div className='font-italic  mb-1' style={{height:'39px'}}>Paola Cieza Bances</div>
+                            <div className='font-italic  mb-1' >Paola Cieza Bances</div>
 
 
                             <div className='mb-2'>
@@ -61,7 +61,7 @@ export default function Cotrato(props) {
 
                             <button
                                 type='button'
-                                className='degradado btn'
+                                className='degradado btn p-1'
                                 title='Marca entrada'
                                 onClick={() =>
                                     setData(Object.assign(data, { mode: 1 }))
@@ -73,7 +73,7 @@ export default function Cotrato(props) {
 
                             <button
                                 type='button'
-                                className='degradado btn  ' 
+                                className='degradado btn  p-1' 
                                 title='Marca salida'
                                 onClick={() =>
                                     mutation({
