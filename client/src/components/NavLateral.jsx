@@ -105,7 +105,7 @@ export default function NavLateral(props) {
 									title='Tardanzas'
 								/>
 								<MenuItem
-									path='/reportes/asistencias'
+									path='/reportes/asistencias-empleado'
 									title='Asistencias'
 								/>
 								<MenuItem
@@ -113,24 +113,12 @@ export default function NavLateral(props) {
 									title='Inasistencias'
 								/>
 								<MenuItem
-									path='/reportes/inasistencias-empleado'
-									title='Inasistencias por empleado'
+									path='/reportes/justificaciones-empleado'
+									title='Justificaciones'
 								/>
 								<MenuItem
-									path='/reportes/licencias'
+									path='/reportes/licencias-empleado'
 									title='Licencias'
-								/>
-								<MenuItem
-									path='/reportes/licencias-tipo'
-									title='Licencias por tipo'
-								/>
-								<MenuItem
-									path='/reportes/estadisticas-inasistencias'
-									title='Estadísticas de inasistencias'
-								/>
-								<MenuItem
-									path='/reportes/estadisticas-asistencias'
-									title='Estadísticas de asistencias'
 								/>
 							</DropDownMenu>
 						</ul>
