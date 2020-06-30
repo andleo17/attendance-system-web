@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/attendance-system-web/static/css/main.cd336c6e.chunk.css",
+    "main.js": "/attendance-system-web/static/js/main.68203851.chunk.js",
+    "main.js.map": "/attendance-system-web/static/js/main.68203851.chunk.js.map",
+    "runtime-main.js": "/attendance-system-web/static/js/runtime-main.c08421ab.js",
+    "runtime-main.js.map": "/attendance-system-web/static/js/runtime-main.c08421ab.js.map",
+    "static/js/2.6b884881.chunk.js": "/attendance-system-web/static/js/2.6b884881.chunk.js",
+    "static/js/2.6b884881.chunk.js.map": "/attendance-system-web/static/js/2.6b884881.chunk.js.map",
+    "index.html": "/attendance-system-web/index.html",
+    "precache-manifest.3099ddec1bd29ff799ee59ebe4649121.js": "/attendance-system-web/precache-manifest.3099ddec1bd29ff799ee59ebe4649121.js",
+    "service-worker.js": "/attendance-system-web/service-worker.js",
+    "static/css/main.cd336c6e.chunk.css.map": "/attendance-system-web/static/css/main.cd336c6e.chunk.css.map",
+    "static/js/2.6b884881.chunk.js.LICENSE.txt": "/attendance-system-web/static/js/2.6b884881.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/attendance-system-web/static/media/embarazada.dbc60235.jpg",
+    "static/media/licenciastrabajo1.jpg": "/attendance-system-web/static/media/licenciastrabajo1.a7d330f4.jpg",
+    "static/media/perfil.jpg": "/attendance-system-web/static/media/perfil.17ca7094.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c08421ab.js",
+    "static/js/2.6b884881.chunk.js",
+    "static/css/main.cd336c6e.chunk.css",
+    "static/js/main.68203851.chunk.js"
+  ]
+}
