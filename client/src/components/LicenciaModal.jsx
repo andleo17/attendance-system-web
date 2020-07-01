@@ -1,38 +1,55 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { LICENSES_QUERY } from '../pages/Licencia';
 
 const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
+	mutation AddLicense($input: LicenseTypeInput!) {
+		addLicense(input: $input) {
 			id
-			description
-			maximumDays
+			startDate
+			finishDate
+			state
+			licenseType {
+				description
+			}
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
 
 const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+	mutation ModifyLicense($input: LicenseTypeInput!) {
+		modifyLicense(input: $input) {
 			id
-			description
-			maximumDays
+			startDate
+			finishDate
+			state
+			licenseType {
+				description
+			}
+			employee {
+				name
+				lastname
+			}
 		}
 	}
 `;
 
-export default function UsiarioModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+export default function LicenseModal(props) {
+	const { item, update } = props;
+	let nombreC = item.employee.name + ' ' + item.employee.lastname;
+	const mutation =item.id
+			? MODIFY_LICENSE_TYPE_MUTATION
+			: ADD_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
+
 	return (
 		<div
-			id='frmJustificacion'
+			id='frmLicencia'
 			className='modal fade inputEmpleado'
 			tabIndex='-1'
 		>
@@ -55,40 +72,38 @@ export default function UsiarioModal(props) {
 						<form>
 							<div className='form-group'>
 								<i className='fa fa-id-card pl-2'></i>
-								<label htmlFor='txtName'>Documento:</label>
+								<label htmlFor='txtDocument'>Documento:</label>
 								<input
-									id='txtName'
+									id='txtDocument'
 									type='text'
 									className='form-control '
+									value={item.employeeCardId}
 									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
+										update({
+											...item,
+											employeeCardId: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtName '>Nombre:</label>
 								<input
-									id='txtTiempo'
+									id='txtName'
 									type='text'
 									disabled
 									className='form-control bg-white'
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
-								/>
+									value={nombreC}
+									/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>Tipo:</label>
+								<label htmlFor='txtTipo'>Tipo:</label>
 								<select
-									name='selectorC'
-									id='selectorC'
+									name='txtTipo'
+									id='txtTipo'
 									class='btn'
 									className='form-control btn btn-outline-sistema '
 									style={{ width: '100%' }}
@@ -103,57 +118,63 @@ export default function UsiarioModal(props) {
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha inicio:</label>
+								<label htmlFor='txtFechaInicio'>Fecha inicio:</label>
 								<input
-									id='txtTiempo'
+									id='txtFechaInicio'
 									type='text'
 									className='form-control'
+									value={	item.startDate}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											startDate: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha fin:</label>
+								<label htmlFor='txtFechaFin'>Fecha fin:</label>
 								<input
-									id='txtTiempo'
+									id='txtFechaFin'
 									type='text'
 									disabled
 									className='form-control bg-transparent'
+									value={	item.finishDate}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											finishDate: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtTiempo'>Documento</label>
+								<label htmlFor='txtFile'>Documento</label>
 								<input
 									type='file'
 									name=''
 									className='form-control'
-									id=''
+									id='txtFile'
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<label htmlFor='txtState'>Estado:</label>{' '}
 								<br />
 								<input
-									id='txtTiempo'
+									id='txtState'
 									type='checkbox'
 									className=' ml-4'
+									checked={item.state}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											state: e.target.checked,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
@@ -174,21 +195,28 @@ export default function UsiarioModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
-											maximumDays: parseInt(
-												licenseType.maximumDays
-											),
+											id: parseInt(item.id),
+											employeeCardId: document.getElementById(
+												'txtDocument'
+											).value,
+											startDate: document.getElementById(
+												'txtFechaInicio'
+											).value,
+											finishDate: document.getElementById(
+												'txtFechaFin'
+											).value,
+											state: document.getElementById(
+												'txtState'
+											).checked,
 										},
 									},
 									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
+										{ query: LICENSES_QUERY },
 									],
 								})
 							}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{item.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>

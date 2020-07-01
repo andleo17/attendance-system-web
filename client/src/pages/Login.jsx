@@ -29,10 +29,10 @@ export default function Login(props) {
 
 	if (localStorage.getItem('user') == null) {
 		return (
-			<div className='row justify-content-center inputEmpleado pt-5 mb-5 '>
+			<div className='row justify-content-center  pt-5 mb-5 '>
 				<div className='row mb-5'> </div>
 				<form className='border-0 rounded inputLogin pt-5'>
-					<h1 className='h1Inicio mt-5'>
+					<h1 className='h1Inicio text-center mt-5'>
 						<em>I</em>
 						<em>N</em>
 						<em className='planet left'>I</em>
@@ -41,7 +41,7 @@ export default function Login(props) {
 						<em>O</em>
 					</h1>
 
-					<div className='form-group mt-5'>
+					<div className='form-group inputEmpleado mt-5'>
 						<label htmlFor='username' className='text-white'>
 							Usuario
 						</label>

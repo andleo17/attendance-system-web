@@ -988,6 +988,21 @@ em.planet.right {
   top: -1.2vmin;
 } */
 
+@media screen and (max-width: 628px) {
+	.h1Inicio::before{
+		text-align: center;
+		/* left: 13vmin; */
+		border: transparent;
+	}
+}
+@media screen and (max-width: 1200px) {
+	.h1Inicio::before{
+		text-align: center;
+		left: 13vmin;
+	}
+}
+
+
 @-webkit-keyframes planet-rotate {
 	to {
 		-webkit-transform: rotate(1turn);

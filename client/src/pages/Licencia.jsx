@@ -11,6 +11,7 @@ export const LICENSES_QUERY = gql`
 		licenses {
 			id
 			startDate
+			finishDate
 			state
 			licenseType {
 				description
@@ -23,16 +24,27 @@ export const LICENSES_QUERY = gql`
 	}
 `;
 
-export default function Usuario() {
-	const initialState = {
-		__typename: 'Contract',
-		description: null,
-		id: null,
-		maximumDays: null,
-		mode: 0,
-	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
+const initialState = {
+	__typename: 'Licenses',
+	id: '',
+	startDate: '',
+	finishDate: '',
+		state: '',
+		licenseType: {
+			__typename: 'LicenseType',
+			description: '',
+		},
+		employee: {
+			__typename: 'Employee',
+			name: '',
+			lastname: '',
+		},
+	mode: 0,
+};
 
+export default function Licencia() {
+	
+	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(LICENSES_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
@@ -62,7 +74,8 @@ export default function Usuario() {
 							<button
 								type='button'
 								data-toggle='modal'
-								data-target='#frmJustificacion'
+								data-target='#frmLicencia'
+								onClick={() => setSelectedItem(initialState)}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-file-word mr-1'></i>
@@ -72,17 +85,17 @@ export default function Usuario() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenses.map((lt) => {
+					{data.licenses.map((l) => {
 						return (
 							<LicenciaCard
-								key={lt.id}
-								data={lt}
-								setData={setSelectedItem}
+								key={l.id}
+								data={l}
+								showData={() => setSelectedItem(l)}
 							/>
 						);
 					})}
 				</div>
-				<LicenciaModal licenseType={selectedItem} />
+				<LicenciaModal item={selectedItem} update={setSelectedItem}  />
 			</div>
 		</div>
 	);
