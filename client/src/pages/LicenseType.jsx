@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import LicenseTypeCard from '../components/LicenseTypeCard';
 import LicenseTypeModal from '../components/LicenseTypeModal';
-import Loader from '../components/Loader';
+import LoadingPage from '../components/LoadingPage';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const LIST_LICENSETYPE = gql`
@@ -26,7 +26,9 @@ const initialState = {
 export default function LicenseType() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
-	if (loading) return <Loader />;
+	if (loading){
+		return <LoadingPage employeeCardId= {null} title="Tipo de licencia"/>
+	};
 	if (error) return <ErrorIcon error={error} />;
 
 	return (
@@ -45,7 +47,7 @@ export default function LicenseType() {
 								type='text'
 								className='form-control'
 								maxLength='8'
-								placeholder='Ingrese DNI y presione ENTER para buscar'
+								placeholder='Ingrese nombre y presione ENTER para buscar'
 								title='Buscar un tipo de licencia por nombre'
 							/>
 						</div>
