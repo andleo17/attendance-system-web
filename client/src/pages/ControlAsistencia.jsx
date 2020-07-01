@@ -5,17 +5,20 @@ import ControlAsistenciaCard from '../components/ControlAsistenciaCard';
 import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
-export const LIST_LICENSETYPE = gql`
-	query ListLicenseType {
-		licenseTypes {
-			description
-			maximumDays
-			id
-		}
+export const ATTENDANCES_QUERY = gql`
+query Attendances{
+	attendances{
+	  inHour
+	  outHour
+	  employee{
+		  name
+		lastname
+	  }
 	}
+  }
 `;
 
-export default function Contrato() {
+export default function ControlAsistencia() {
 	const initialState = {
 		__typename: 'Contract',
 		description: null,
@@ -24,8 +27,7 @@ export default function Contrato() {
 		mode: 0,
 	};
 	const [setSelectedItem] = useState(initialState);
-
-	const { loading, data, error } = useQuery(LIST_LICENSETYPE);
+	const { loading, data, error } = useQuery(ATTENDANCES_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 
@@ -52,12 +54,12 @@ export default function Contrato() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.licenseTypes.map((lt) => {
+					{data.attendances.map((ca) => {
 						return (
 							<ControlAsistenciaCard
-								key={lt.id}
-								data={lt}
-								setData={setSelectedItem}
+								key={ca.id}
+								data={ca}
+								showData={() => setSelectedItem(ca)}
 							/>
 						);
 					})}

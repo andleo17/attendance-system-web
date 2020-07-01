@@ -2,22 +2,13 @@ import React from 'react';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { ATTENDANCES_QUERY } from '../pages/ControlAsistencia';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
-			id
-			description
-			maximumDays
-		}
-	}
-`;
 
-export default function Cotrato(props) {
-	const { data, setData } = props;
+export default function ControlAsistenciaCard(props) {
+	const { data, showData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	// const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -37,7 +28,7 @@ export default function Cotrato(props) {
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
 							<div className='font-italic  mb-1'>
-								Paola Cieza Bances
+							{`${data.employee.name} ${data.employee.lastname}`}
 							</div>
 
 							<div className='mb-2'>
@@ -46,11 +37,11 @@ export default function Cotrato(props) {
 								<div className='ml-4 font-italic'>
 									<label htmlFor='' className='mr-2'>
 										{' '}
-										07:00{' '}
+										{data.inHour}
 									</label>{' '}
 									-
 									<label htmlFor='' className='ml-2'>
-										07:05
+										....
 									</label>
 								</div>
 							</div>
@@ -60,11 +51,11 @@ export default function Cotrato(props) {
 								<div className='ml-4 font-italic'>
 									<label htmlFor='' className='mr-2'>
 										{' '}
-										07:00{' '}
+										{data.outHour}
 									</label>{' '}
 									-
 									<label htmlFor='' className='ml-2'>
-										07:05
+										....
 									</label>
 								</div>
 							</div>
@@ -75,9 +66,7 @@ export default function Cotrato(props) {
 								type='button'
 								className='degradado btn p-1'
 								title='Marca entrada'
-								onClick={() =>
-									setData(Object.assign(data, { mode: 1 }))
-								}
+								
 							>
 								<i className='fa fa-outdent text-white'></i>
 							</button>
@@ -86,18 +75,7 @@ export default function Cotrato(props) {
 								type='button'
 								className='degradado btn  p-1'
 								title='Marca salida'
-								onClick={() =>
-									mutation({
-										variables: {
-											licenseTypeId: parseInt(data.id),
-										},
-										refetchQueries: [
-											{
-												query: LIST_LICENSETYPE,
-											},
-										],
-									})
-								}
+								
 							>
 								<i className='fa fa-indent text-white'></i>
 							</button>

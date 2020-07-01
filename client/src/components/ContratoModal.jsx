@@ -188,6 +188,7 @@ export default function ContractModal(props) {
 								<label htmlFor='chkExtraHours'>
 									Horas extras:
 								</label>
+								<br />
 								<input
 									id='chkExtraHours'
 									type='checkbox'

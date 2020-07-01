@@ -91,18 +91,18 @@ export default function LicenciaCard(props) {
 							type='button'
 							title='Dar de baja'
 							className='degradado btn p-1'
-							// onClick={() =>
-							// 	mutation({
-							// 		variables: {
-							// 			licenseId: parseInt(data.id),
-							// 		},
-							// 		refetchQueries: [
-							// 			{
-							// 				query: LICENSES_QUERY,
-							// 			},
-							// 		],
-							// 	})
-							// }
+							onClick={() =>
+								downLicense({
+									variables: {
+										licenseId: parseInt(data.id),
+									},
+									refetchQueries: [
+										{
+											query: LICENSES_QUERY,
+										},
+									],
+								})
+							}
 						>
 							<i className='fa fa-ban text-white'></i>
 						</button>
