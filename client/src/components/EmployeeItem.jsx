@@ -70,7 +70,7 @@ export default class EmployeeItem extends Component {
 						</span>
 					</NavLink>
 					<NavLink
-						to={`/empleado/editar/${cardId}`}
+						to={`/empleado/${cardId}/editar`}
 						className='degradado border-0 mb-1 row align-items-center px-2'
 					>
 						<i className='col-2 fa fa-pencil-alt' />
