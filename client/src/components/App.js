@@ -14,12 +14,12 @@ import Asistencia from '../pages/Asistencia';
 import Licencias from '../pages/Licencia';
 import ControlAsistencia from '../pages/ControlAsistencia';
 import Main from '../pages/Main';
-import ReporteFaltas from '../pages/ReporteFaltas'
-import ReporteAsistencias from '../pages/ReporteAsistencias'
-import ReporteTardanzas from '../pages/ReporteTardanzas'
-import ReporteJustificaciones from '../pages/ReporteJustificaciones'
-import ReporteLicencias from '../pages/ReporteLicencias'
-import Mantenimiento from '../pages/Mantenimiento'
+import ReporteFaltas from '../pages/ReporteFaltas';
+import ReporteAsistencias from '../pages/ReporteAsistencias';
+import ReporteTardanzas from '../pages/ReporteTardanzas';
+import ReporteJustificaciones from '../pages/ReporteJustificaciones';
+import ReporteLicencias from '../pages/ReporteLicencias';
+import Mantenimiento from '../pages/Mantenimiento';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -70,11 +70,7 @@ export default class App extends React.Component {
 								path='/empleados'
 								component={Employee}
 							/>
-							<Route
-								exact
-								path='/empleado-formulario'
-								component={EmployeedForm}
-							/>
+							<Route path='/empleado' component={EmployeedForm} />
 							<Route
 								exact
 								path='/contratos'
