@@ -118,10 +118,6 @@ export default function NavLateral(props) {
 									path='/reportes/licencias'
 									title='Licencias'
 								/>
-								<MenuItem
-									path='/mantenimiento'
-									title='Mantenimiento'
-								/>
 							</DropDownMenu>
 						</ul>
 					</div>

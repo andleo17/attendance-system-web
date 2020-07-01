@@ -1,59 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function RFaltas() {
+export default function Mantenimiento() {
 	return (
 		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
-				<h1>Inasistencias</h1>
+				<h1>LO LAMENTAMOS...</h1>
 			</div>
-			<div className='  bg-dark p-3 ml-3 mr-3'>
-				<form className='buscar justify-content-sm-start'>
-					<div className='form-row'>
-						<div className='col'>
-							<input
-								type='text'
-								className='form-control'
-								placeholder='Buscar'
-								title='Buscar'
-							/>
-						</div>
-						<div className=''>
-							<button
-								type='button'
-								data-toggle='modal'
-								data-target='#frmLicenseType'
-								className='degradado d-flex align-items-center border-0 justify-content-center p-0'
-								style={{ width: '40px', height: '40px' }}
-							>
-								<i className='fa fa-file-pdf '></i>
-							</button>
-						</div>
-					</div>
-				</form>
-
-				<div className='card table-responsive-lg  p-3 mt-3 text-center'>
-					<table class='table tablaDetalleHorario'>
-						<thead class='thead-dark '>
-							<tr>
-								<th scope='col'>Fecha</th>
-								<th scope='col'>Documento</th>
-								<th scope='col'>Nombres</th>
-								<th scope='col'>Apellidos</th>
-							</tr>
-						</thead>
-						<tbody className=''>
-							<tr>
-								<td>---</td>
-								<td>---</td>
-								<td>---</td>
-								<td>---</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div className=' p-3 ml-3 mr-3 row'>
+				<div className='col-lg-6'>
+                    <h1 className='mante bg-dark text-justify'>
+                    NUESTRO REPORTE ESTÁ FUERA DE SERVICIO, LE DIO COVID-19.
+                    </h1>
+                    </div>
+				<img  className='col-lg-6' src="https://i.pinimg.com/originals/2f/51/af/2f51af66c19f2adac5304ff4c5821c5a.gif" alt=""/>
 			</div>
 		</div>
 	);

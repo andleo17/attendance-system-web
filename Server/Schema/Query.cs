@@ -151,7 +151,7 @@ namespace Server.Schema
 			}
 		}
 
-		public async Task<IReadOnlyList<Attendance>> GetDelay([Service] DBAttendanceContext dBAttendanceContext)
+		public async Task<IReadOnlyList<Attendance>> GetDelay([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
 		{
 			DateTime firstSunday = new DateTime(1753, 1, 7);
 			var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
@@ -159,12 +159,21 @@ namespace Server.Schema
 			{
 				// return await dBAttendanceContext.Attendance
 				// 				.Where(a => DbF.DateDiffDay(firstSunday, a.Date) % 7 == 1 ).ToListAsync();
-
-				return await (from a in dBAttendanceContext.Attendance
+				if (employeeCardId != null)
+				{
+					return await (from a in dBAttendanceContext.Attendance
+							  join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
+							  join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
+							  where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour && a.EmployeeCardId==employeeCardId
+							  select a).ToListAsync();	
+				}else{
+					return await (from a in dBAttendanceContext.Attendance
 							  join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
 							  join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
 							  where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour
 							  select a).ToListAsync();
+				}
+				
 			}
 			catch (System.Exception e)
 			{

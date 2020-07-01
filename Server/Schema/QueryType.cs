@@ -43,7 +43,7 @@ namespace Server.Schema
 				.Argument("username", a => a.Type<NonNullType<StringType>>())
 				.Argument("password", a => a.Type<NonNullType<StringType>>());
 
-			descriptor.Field(q => q.GetDelay(default))
+			descriptor.Field(q => q.GetDelay(default,default))
 				.Type<NonNullType<ListType<NonNullType<AttendanceType>>>>();
 			
 			descriptor.Field(q => q.GetNonAttendance(default))

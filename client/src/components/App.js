@@ -136,16 +136,6 @@ export default class App extends React.Component {
 								path='/reportes/tardanzas'
 								component={ReporteTardanzas}
 							/>
-							<Route
-								exact
-								path='/mantenimiento'
-								component={Mantenimiento}
-							/>
-							{/* <Route
-								exact
-								path='/pdf'
-								component={Pdf}
-							/> */}
 						</div>
 					</Fragment>
 				</Switch>
