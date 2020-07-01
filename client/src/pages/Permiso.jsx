@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { gql } from 'apollo-boost';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { gql, from } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
 import ErrorIcon from '../components/ErrorIcon';
+import LoadingPermission from '../components/LoadingPermission';
+
 
 export const LIST_PERMISSION = gql`
 	query ListPermission($employeeCardId: String) {
@@ -23,8 +25,6 @@ export const LIST_PERMISSION = gql`
 `;
 
 export const initialState = {
-	permissions: [
-		{
 			__typename: 'Permission',
 			date: '',
 			id: '',
@@ -37,37 +37,28 @@ export const initialState = {
 				name: '',
 				lastname: '',
 			},
-		},
-	],
 };
 
-export default function Permissions() {
-	const [selectedItem, setSelectedItem] = useState(
-		initialState.permissions[0]
-	);
-	const [employeeCardId, setEmployeeCardId] = useState(null);
-	const [search, { data, error }] = useLazyQuery(LIST_PERMISSION);
-	// if (loading) return <Loader />;
-	if (error) return <ErrorIcon error={error} />;
-	let listPermission = initialState;
 
-	if (data && data.permissions) {
-		listPermission = data;
-	}
+
+
+
+export default function Permissions() {
+	const [selectedItem, setSelectedItem] = useState(initialState);
+	const [employeeCardId, setEmployeeCardId] = useState(null);
+	const { loading, error, data, refetch} = useQuery(LIST_PERMISSION, {
+        variables:  {employeeCardId},
+	});
+	var condition;
+	if (loading){
+		return <LoadingPermission employeeCardId={employeeCardId}/>
+	};
+	if (error) return <ErrorIcon error={error} />;
+	
+
 	return (
-		// <div onLoad={()=>console.log("xdxdxdxdxd")}>
-		// 	jkfljsflkjdsfkjdsfjlskjdl
-		// </div>
-		<div
-			className='page-content'
-			onLoad={() => {
-				if (employeeCardId == null) {
-					search({
-						variables: null,
-					});
-				}
-			}}
-		>
+	
+		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
@@ -81,24 +72,33 @@ export default function Permissions() {
 					<div className='form-row'>
 						<div className='col'>
 							<input
+								id='txtSearch'
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
-								onChange={(e) =>
-									setEmployeeCardId(e.target.value)
+								defaultValue={employeeCardId}
+                                onChange={(e) =>
+									{
+                                        if (e.target.value === '') {
+                                            setEmployeeCardId(null)
+                                            refetch();
+										}
+                                    }
 								}
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
 										e.preventDefault();
 										if (e.target.value === '') {
-											search({
-												variables: null,
-											});
+											setEmployeeCardId(null);
+											refetch();
 										} else {
-											search({
-												variables: { employeeCardId },
-											});
+											setEmployeeCardId(
+												document.getElementById(
+													'txtSearch'
+												).value
+											);
+											refetch();
 										}
 									}
 								}}
@@ -110,7 +110,7 @@ export default function Permissions() {
 								data-toggle='modal'
 								data-target='#frmPermiso'
 								onClick={() =>
-									setSelectedItem(initialState.permissions[0])
+									setSelectedItem(initialState)
 								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
@@ -121,7 +121,7 @@ export default function Permissions() {
 					</div>
 				</form>
 				<div className='row'>
-					{listPermission.permissions.map((p) => {
+					{data.permissions.map((p) => {
 						return (
 							<PermisoCard
 								key={p.id}
