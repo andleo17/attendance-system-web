@@ -213,5 +213,35 @@ namespace Server.Schema
 
 		}
 
+		public async Task<Attendance> GetAttendancesDate([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId, DateTime dateAttendance)
+		{
+			DateTime firstSunday = new DateTime(1753, 1, 7);
+			var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
+			var date = DateTime.Today;
+
+			try
+			{
+				var attendance = await (from a in dBAttendanceContext.Attendance
+							  join s in dBAttendanceContext.Schedule on a.EmployeeCardId equals s.EmployeeCardId
+							  join sd in dBAttendanceContext.ScheduleDetail on s.Id equals sd.ScheduleId
+							  where (DbF.DateDiffDay(firstSunday, a.Date) % 7 == sd.Day) && a.InHour > sd.InHour 
+							  && a.EmployeeCardId==employeeCardId && a.Date == dateAttendance
+							  select a).FirstOrDefaultAsync();
+
+				if(attendance != null){
+					return attendance;
+				}
+				else{
+					throw new QueryException("No se encontró tardanza");
+				}	
+			}
+			catch (System.Exception e)
+			{
+				
+				throw new QueryException(e.Message);
+			}
+			
+			
+		}
 	}
 }

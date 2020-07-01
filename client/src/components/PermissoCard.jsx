@@ -48,20 +48,20 @@ export default function PermissionCard(props) {
 				</div>
 				<div className='card-body '>
 					<div className='mb-2'>
-						<i className='fa fa-tag pr-4 pl-2'></i>
-						<b>Código</b>
+						<i className='fa fa-id-card pr-4 pl-2'></i>
+						<b>Dni</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
-						<div className='ml-5 text-capitalize'>{data.id}</div>
+						<div className='ml-5 text-capitalize'>{data.employeeCardId}</div>
 					</div>
 					<div className='mb-1'>
-						<i className='fa fa-calendar-alt pr-4 pl-2'></i>
+						<i className='fa fa-file pr-4 pl-2'></i>
 						<b>Motivo</b>
 						<div className='ml-5 text-justify text mb-1' style={{height:'40px'}}>
 							{data.motive}
 						</div>
 					</div>
 					<div className='mb-2'>
-						<i className='fa fa-calendar pr-4 pl-2'></i>
+						<i className='fa fa-calendar-alt pr-4 pl-2'></i>
 						<b>Fecha presentación</b>
 						{/* <div className='ml-5'>{data.description}</div> */}
 						<div className='ml-5'>{data.presentationDate}</div>

@@ -29,6 +29,19 @@ const FIND_EMPLOYEE = gql`
 	}
 `;
 
+const FIND_DELAY = gql`
+	query Delay($cardId: String!, $date: Date!) {
+		attendancesDate(employeeCardId: $cardId, dateAttendance: $date){
+			id
+			date
+			employee{
+				name
+				lastname
+			}
+		}
+	}
+`;
+
 export default function JustificacionModal(props) {
 	const { justification, update } = props;
 	const mutation = justification.id
@@ -36,7 +49,9 @@ export default function JustificacionModal(props) {
 		: MODIFY_LICENSE_TYPE_MUTATION;
 	const [execute] = useMutation(mutation);
 
-	const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
+	// const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
+
+	const [findDelay, { data }] = useLazyQuery(FIND_DELAY);
 
 	return (
 		<div
@@ -80,9 +95,10 @@ export default function JustificacionModal(props) {
 									}
 									onKeyUp={(e) => {
 										if (e.key === 'Enter') {
-											findEmployee({
+											findDelay({
 												variables: {
 													cardId: e.target.value,
+													date: document.getElementById('txtAttendanceDate').value,
 												},
 											});
 										}
@@ -97,6 +113,45 @@ export default function JustificacionModal(props) {
 								/>
 							</div>
 							<div className='form-group'>
+								<i className='fa fa-exclamation-triangle pl-2'></i>
+								<label htmlFor='txtAttendanceDate'>
+									Fecha inasistencia:
+								</label>
+								<input
+									id='txtAttendanceDate'
+									type='date'
+									className='form-control'
+									onChange={(e) =>{
+											update({
+												...justification,
+												attendance: {
+													date: e.target.value,
+													employee: {
+														cardId: justification.attendance.employee.cardId,
+														name: justification.attendance.employee.name,
+														lastname: justification.attendance.employee.lastname,
+													},
+												},
+											});
+											findDelay({
+												variables: {
+													cardId: justification.attendance.employee.cardId,
+													date: e.target.value,
+												},
+											});
+										}
+										
+									}
+									value={
+										justification.attendance.date &&
+										moment(
+											justification.attendance.date
+										).format('YYYY-MM-DD')
+									}
+									readOnly={justification.mode === 0}
+								/>
+							</div>
+							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
 								<label htmlFor='txtName '>Nombre:</label>
 								<input
@@ -106,8 +161,8 @@ export default function JustificacionModal(props) {
 									defaultValue={
 										justification.mode === 2
 											? data &&
-											  data.employee &&
-											  `${data.employee.name} ${data.employee.lastname}`
+											  data.attendancesDate &&
+											  `${data.attendancesDate.employee.name} ${data.attendancesDate.employee.lastname}`
 											: `${justification.attendance.employee.name} ${justification.attendance.employee.lastname}`
 									}
 									readOnly
@@ -129,8 +184,15 @@ export default function JustificacionModal(props) {
 											attendanceId: e.target.value,
 										})
 									}
-									value={justification.attendanceId}
-									readOnly={justification.mode === 0}
+									// value={justification.attendanceId}
+									defaultValue={
+										justification.mode === 2
+											? data &&
+											  data.attendancesDate &&
+											  `${data.attendancesDate.id}`
+											: `${justification.attendanceId}`
+									}
+									readOnly
 								/>
 							</div>
 							<div className='form-group'>
@@ -147,32 +209,6 @@ export default function JustificacionModal(props) {
 										})
 									}
 									value={justification.motive}
-									readOnly={justification.mode === 0}
-								/>
-							</div>
-							<div className='form-group'>
-								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtAttendanceDate'>
-									Fecha inasistencia:
-								</label>
-								<input
-									id='txtAttendanceDate'
-									type='date'
-									className='form-control'
-									onChange={(e) =>
-										update({
-											...justification,
-											attendance: {
-												date: e.target.value,
-											},
-										})
-									}
-									value={
-										justification.attendance.date &&
-										moment(
-											justification.attendance.date
-										).format('YYYY-MM-DD')
-									}
 									readOnly={justification.mode === 0}
 								/>
 							</div>
