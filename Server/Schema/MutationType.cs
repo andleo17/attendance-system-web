@@ -120,6 +120,12 @@ namespace Server.Schema
 			descriptor.Field(m => m.DownPermission(default, default))
 				.Type<PermissionType>()
 				.Argument("permissionId", a => a.Type<NonNullType<IntType>>());
+			
+			descriptor.Field(m => m.DownJustification(default, default))
+				.Type<JustificationType>();
+
+			descriptor.Field(m => m.DownLicense(default, default))
+				.Type<LicenseType>();
 		}
 	}
 }

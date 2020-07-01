@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import JustificacionCard from '../components/JustificacionCard';
 import JustificacionModal from '../components/JustifcicacionModal';
 import Loader from '../components/Loader';
@@ -27,8 +27,6 @@ export const JUSTIFICATIONS_QUERY = gql`
 	}
 `;
 export const initialState = {
-	justifications: [
-		{
 			__typename: 'Justification',
 			id: '',
 			date: '',
@@ -46,18 +44,18 @@ export const initialState = {
 					cardId: '',
 				},
 			},
-		},
-	],
+
 };
 
 export default function Justificación() {
 	const [selectedItem, setSelectedItem] = useState(
-		initialState.justifications[0]
+		initialState
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
-	const [search, { loading, data, error }] = useLazyQuery(
-		JUSTIFICATIONS_QUERY
-	);
+	const { loading, error, data, refetch} = useQuery(JUSTIFICATIONS_QUERY, {
+        variables:  {employeeCardId},
+	});
+
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 	let listJustifications = initialState;
@@ -67,15 +65,7 @@ export default function Justificación() {
 	}
 	return (
 		<div
-			className='page-content'
-			onLoad={() => {
-				if (employeeCardId == null) {
-					search({
-						variables: null,
-					});
-				}
-			}}
-		>
+			className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
@@ -87,25 +77,34 @@ export default function Justificación() {
 					<div className='form-row'>
 						<div className='col'>
 							<input
+								id='txtSearch'
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
 								maxLength='8'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
-								onChange={(e) =>
-									setEmployeeCardId(e.target.value)
+								defaultValue={employeeCardId}
+                                onChange={(e) =>
+									{
+                                        if (e.target.value === '') {
+                                            setEmployeeCardId(null)
+                                            refetch();
+										}
+                                    }
 								}
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
 										e.preventDefault();
 										if (e.target.value === '') {
-											search({
-												variables: null,
-											});
+											setEmployeeCardId(null);
+											refetch();
 										} else {
-											search({
-												variables: { employeeCardId },
-											});
+											setEmployeeCardId(
+												document.getElementById(
+													'txtSearch'
+												).value
+											);
+											refetch();
 										}
 									}
 								}}
@@ -117,9 +116,7 @@ export default function Justificación() {
 								data-toggle='modal'
 								data-target='#frmJustificacion'
 								onClick={() =>
-									setSelectedItem(
-										initialState.justifications[0]
-									)
+									setSelectedItem(initialState)
 								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>

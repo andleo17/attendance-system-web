@@ -2,24 +2,32 @@ import React from 'react';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
-import moment from 'moment';
 import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
+import moment from 'moment';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
-			id
-			description
-			maximumDays
+const DELETE_JUSTIFICATION_MUTATION = gql`
+	mutation DeleteJustification($justificationId: ID!){
+		deleteJustification(justificationId: $justificationId){
+		id
 		}
 	}
 `;
 
+
+const DOWN_JUSTIFICATION_MUTATION = gql`
+	mutation DeleteJustification($justificationId: Int!){
+		downJustification(justificationId: $justificationId){
+		id
+		}
+	}
+`;
+
+
 export default function JustificationCard(props) {
 	const { data, setData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [deleteJustification] = useMutation(DELETE_JUSTIFICATION_MUTATION);
+	const [downJustification] = useMutation(DOWN_JUSTIFICATION_MUTATION);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -90,7 +98,7 @@ export default function JustificationCard(props) {
 								title='Dar de baja'
 								className='degradado btn p-1'
 								onClick={() =>
-									mutation({
+									downJustification({
 										variables: {
 											justificationId: parseInt(data.id),
 										},
@@ -110,13 +118,13 @@ export default function JustificationCard(props) {
 								title='Eliminar'
 								className='degradado btn p-1'
 								onClick={() =>
-									mutation({
+									deleteJustification({
 										variables: {
-											licenseTypeId: parseInt(data.id),
+											justificationId: parseInt(data.id),
 										},
 										refetchQueries: [
 											{
-												query: LIST_LICENSETYPE,
+												query: JUSTIFICATIONS_QUERY,
 											},
 										],
 									})

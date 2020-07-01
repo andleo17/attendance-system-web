@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { ATTENDANCES_QUERY } from '../pages/ControlAsistencia';
 
 
+
 export default function ControlAsistenciaCard(props) {
 	const { data, showData } = props;
 
@@ -28,7 +29,7 @@ export default function ControlAsistenciaCard(props) {
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
 							<div className='font-italic  mb-1'>
-							{`${data.employee.name} ${data.employee.lastname}`}
+							{`${data.schedule.employee.name} ${data.schedule.employee.lastname}`}
 							</div>
 
 							<div className='mb-2'>
@@ -75,7 +76,6 @@ export default function ControlAsistenciaCard(props) {
 								type='button'
 								className='degradado btn  p-1'
 								title='Marca salida'
-								
 							>
 								<i className='fa fa-indent text-white'></i>
 							</button>

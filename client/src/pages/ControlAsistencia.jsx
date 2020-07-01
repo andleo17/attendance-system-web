@@ -6,16 +6,19 @@ import Loader from '../components/Loader';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const ATTENDANCES_QUERY = gql`
-query Attendances{
-	attendances{
-	  inHour
-	  outHour
-	  employee{
-		  name
-		lastname
-	  }
+query ListAttendancesDay($employeeCardId: String) {
+	schedulesDetailHour(employeeCardId: $employeeCardId) {
+			id
+			inHour
+			outHour
+			schedule{
+	  			employee{
+					name
+				lastname
+	  			}
+			}
+  		}
 	}
-  }
 `;
 
 export default function ControlAsistencia() {
@@ -27,7 +30,8 @@ export default function ControlAsistencia() {
 		mode: 0,
 	};
 	const [setSelectedItem] = useState(initialState);
-	const { loading, data, error } = useQuery(ATTENDANCES_QUERY);
+	const { loading, data, error } = useQuery(ATTENDANCES_QUERY,  {
+        variables:  null,});
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 
@@ -55,7 +59,7 @@ export default function ControlAsistencia() {
 					</div>
 				</form>
 				<div className='row'>
-					{data.attendances.map((ca) => {
+					{data.schedulesDetailHour.map((ca) => {
 						return (
 							<ControlAsistenciaCard
 								key={ca.id}

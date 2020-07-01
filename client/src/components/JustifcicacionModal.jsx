@@ -4,30 +4,22 @@ import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
 import moment from 'moment';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
+const ADD_JUSTIFICATION_MUTATION = gql`
+	mutation AddJustification($input: JustificationInput!){
+		addJustification(input: $input){
 			id
 		}
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_JUSTIFICATION_MUTATION = gql`
+	mutation ModifyJustification($input: JustificationInput!){
+		modifyJustification(input: $input){
 			id
 		}
 	}
 `;
 
-const FIND_EMPLOYEE = gql`
-	query Employee($cardId: ID!) {
-		employee(cardId: $cardId) {
-			name
-			lastname
-		}
-	}
-`;
 
 const FIND_DELAY = gql`
 	query Delay($cardId: String!, $date: Date!) {
@@ -45,8 +37,8 @@ const FIND_DELAY = gql`
 export default function JustificacionModal(props) {
 	const { justification, update } = props;
 	const mutation = justification.id
-		? ADD_LICENSE_TYPE_MUTATION
-		: MODIFY_LICENSE_TYPE_MUTATION;
+		? MODIFY_JUSTIFICATION_MUTATION
+		: ADD_JUSTIFICATION_MUTATION;
 	const [execute] = useMutation(mutation);
 
 	// const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
@@ -272,12 +264,11 @@ export default function JustificacionModal(props) {
 									execute({
 										variables: {
 											input: {
-												attendanceId:
-													justification.attendanceId,
-												date: justification.date,
-												id: justification.id,
-												motive: justification.motive,
-												state: justification.state,
+												attendanceId: document.getElementById('txtAttendanceId').value,
+												date: document.getElementById('txtDate').value,
+												id: parseInt(justification.id),
+												motive: document.getElementById('txtMotive').value,
+												state: document.getElementById('chkState').checked,
 											},
 										},
 										refetchQueries: [
