@@ -105,6 +105,19 @@ export default function EmployeedForm(props) {
 
 	if (loading) return <Loader />;
 
+	if (props.match.params.cardId) {
+		if (error)
+			return (
+				<div className='page-content'>
+					{error.graphQLErrors.map((e) => (
+						<div key={e.message} className='alert-danger'>
+							{e.message}
+						</div>
+					))}
+				</div>
+			);
+	}
+
 	return (
 		<div className='page-content inputEmpleado'>
 			<div
@@ -700,30 +713,55 @@ export default function EmployeedForm(props) {
 					</table>
 				</div>
 			</form>
-			<button
-				type='button'
-				id='float-button'
-				onClick={() =>
-					execute({
-						variables: {
-							input: {
-								cardId: employee.cardId,
-								name: employee.name,
-								lastname: employee.lastname,
-								birthDate: employee.birthdate,
-								genre: employee.genre,
-								address: employee.address,
-								email: employee.email,
-								phone: employee.phone,
-								photoName: employee.photoName,
-								state: employee.state,
+			{(props.match.params.mode != null ||
+				props.match.params.cardId == null) && (
+				<button
+					type='button'
+					id='float-button'
+					onClick={() => {
+						const c = employee.contract[0];
+						const s = employee.schedule[0];
+						execute({
+							variables: {
+								input: {
+									cardId: employee.cardId,
+									name: employee.name,
+									lastname: employee.lastname,
+									birthDate: employee.birthdate,
+									genre: employee.genre,
+									address: employee.address,
+									email: employee.email,
+									phone: employee.phone,
+									photoName: employee.photoName,
+									state: employee.state,
+									contract: {
+										id: c.id,
+										startDate: c.startDate,
+										finishDate: c.finishDate,
+										mount: c.mount,
+										extraHours: parseFloat(c.extraHours),
+										state: c.state,
+									},
+									schedule: {
+										id: s.id,
+										startDate: s.startDate,
+										finishDate: s.startDate,
+										state: s.state,
+									},
+								},
 							},
-						},
-					})
-				}
-			>
-				<i className='fas fa-plus' />
-			</button>
+						});
+					}}
+				>
+					<i
+						className={`fas ${
+							props.match.params.mode
+								? 'fa-pencil-alt'
+								: 'fa-plus'
+						}`}
+					/>
+				</button>
+			)}
 		</div>
 	);
 }

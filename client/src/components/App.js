@@ -70,7 +70,10 @@ export default class App extends React.Component {
 								path='/empleados'
 								component={Employee}
 							/>
-							<Route path='/empleado' component={EmployeedForm} />
+							<Route
+								path='/empleado/:cardId?/:mode?'
+								component={EmployeedForm}
+							/>
 							<Route
 								exact
 								path='/contratos'
