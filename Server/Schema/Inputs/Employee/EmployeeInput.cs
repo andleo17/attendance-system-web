@@ -12,7 +12,6 @@ namespace Server.Schema.Inputs
 		public string Address { get; set; }
 		public string Phone { get; set; }
 		public string Email { get; set; }
-		public byte[] Photo { get; set; }
 		public string PhotoName { get; set; }
 		public bool State { get; set; }
 		public ContractInput Contract { get; set; }

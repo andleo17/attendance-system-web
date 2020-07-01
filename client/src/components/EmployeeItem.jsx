@@ -61,7 +61,7 @@ export default class EmployeeItem extends Component {
 				</div>
 				<div className='col-lg-2 p-2 espaciado border border-bottom-0  border-right-0 text-center'>
 					<NavLink
-						to='/empleado-formulario'
+						to={`/empleado/${cardId}`}
 						className='degradado border-0 mb-1 row align-items-center px-2'
 					>
 						<i className='col-2 fa fa-eye' />
@@ -70,7 +70,7 @@ export default class EmployeeItem extends Component {
 						</span>
 					</NavLink>
 					<NavLink
-						to='/empleado-formulario'
+						to={`/empleado/editar/${cardId}`}
 						className='degradado border-0 mb-1 row align-items-center px-2'
 					>
 						<i className='col-2 fa fa-pencil-alt' />

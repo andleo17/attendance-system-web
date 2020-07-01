@@ -166,7 +166,6 @@ namespace Server.Schema
 					Address = input.Address,
 					Phone = input.Phone,
 					Email = input.Email,
-					Photo = input.Photo,
 					PhotoName = input.PhotoName
 				};
 				var contractInput = input.Contract;
@@ -217,7 +216,6 @@ namespace Server.Schema
 					employee.Address = input.Address;
 					employee.Phone = input.Phone;
 					employee.Email = input.Email;
-					employee.Photo = input.Photo;
 					employee.PhotoName = input.PhotoName;
 					employee.State = input.State;
 					await dBAttendanceContext.SaveChangesAsync();
@@ -752,5 +750,5 @@ namespace Server.Schema
 		}
 
 	}
-	
+
 }

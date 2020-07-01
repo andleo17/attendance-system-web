@@ -32,9 +32,6 @@ namespace Server.Schema.Inputs
 			descriptor.Field(a => a.Email)
 				.Type<NonNullType<StringType>>();
 
-			descriptor.Field(a => a.Photo)
-				.Type<NonNullType<AnyType>>();
-
 			descriptor.Field(a => a.PhotoName)
 				.Type<NonNullType<StringType>>();
 
