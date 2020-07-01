@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import UsuarioCard from '../components/UsuarioCard';
 import UsuarioModal from '../components/UsuarioModal';
-import Loader from '../components/Loader';
+import LoadingPage from '../components/LoadingPage';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const USERS_QUERY = gql`
@@ -40,7 +40,9 @@ const initialState = {
 export default function Usuario() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(USERS_QUERY);
-	if (loading) return <Loader />;
+	if (loading){
+		return <LoadingPage employeeCardId= {null} title="Licencias"/>
+	};
 	if (error) return <ErrorIcon error={error} />;
 	// console.log(data);
 	return (
