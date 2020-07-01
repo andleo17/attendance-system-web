@@ -932,6 +932,7 @@ body::after {
 	justify-content: center;
 	position: relative;
 	color: #c7490f;
+	/* color: #b49789; */
 }
 
 .h1Inicio::before {
@@ -941,12 +942,14 @@ body::after {
 	z-index: -1;
 	left: 12.5vmin;
 	top: -2vmin;
+	/* width: 10vmin; */
 	width: 10vmin;
 	height: 10vmin;
 	border-radius: 50%;
 	border: 0.5vmin solid currentColor;
 	box-sizing: border-box;
 	color: rgb(104, 96, 96);
+	/* color: rgb(226, 24, 24); */
 }
 
 em {
@@ -990,6 +993,8 @@ em.planet.right {
   left: 0vmin;
   top: -1.2vmin;
 } */
+
+
 
 @-webkit-keyframes planet-rotate {
 	to {
@@ -1243,10 +1248,3 @@ th {
 .mante h1{
 	border: 1px solid #8159b6;
 }
-
-
-
-
-
-
-

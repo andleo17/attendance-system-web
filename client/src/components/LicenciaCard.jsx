@@ -2,23 +2,30 @@ import React from 'react';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { LICENSES_QUERY } from '../pages/Licencia';
 import moment from 'moment';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+const DELETE_LICENSE_MUTATION = gql`
+	mutation DeleteLicense($licenseId: ID!) {
+		deleteLicense(licenseId: $licenseId) {
 			id
-			description
-			maximumDays
+		}
+	}
+`;
+
+const DOWN_LICENSE_MUTATION = gql`
+	mutation DownLicense($licenseId: ID!) {
+		downLicense(licenseId: $licenseId) {
+			id
 		}
 	}
 `;
 
 export default function LicenciaCard(props) {
-	const { data, setData } = props;
+	const { data, showData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [deleteLicense] = useMutation(DELETE_LICENSE_MUTATION);
+	const [downLicense] = useMutation(DOWN_LICENSE_MUTATION);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -63,10 +70,8 @@ export default function LicenciaCard(props) {
 							title='Visualizar'
 							className='degradado btn p-1'
 							data-toggle='modal'
-							data-target='#frmJustificacion'
-							onClick={() =>
-								setData(Object.assign(data, { mode: 1 }))
-							}
+							data-target='#frmLicencia'
+							onClick={showData}
 						>
 							<i className='fa fa-eye text-white p-0 m-0'></i>
 						</button>
@@ -76,10 +81,8 @@ export default function LicenciaCard(props) {
 							title='Modificar'
 							className='degradado btn p-1'
 							data-toggle='modal'
-							data-target='#frmJustificacion'
-							onClick={() =>
-								setData(Object.assign(data, { mode: 1 }))
-							}
+							data-target='#frmLicencia'
+							onClick={showData}
 						>
 							<i className='fa fa-pencil-alt text-white'></i>
 						</button>
@@ -88,18 +91,18 @@ export default function LicenciaCard(props) {
 							type='button'
 							title='Dar de baja'
 							className='degradado btn p-1'
-							onClick={() =>
-								mutation({
-									variables: {
-										licenseTypeId: parseInt(data.id),
-									},
-									refetchQueries: [
-										{
-											query: LIST_LICENSETYPE,
-										},
-									],
-								})
-							}
+							// onClick={() =>
+							// 	mutation({
+							// 		variables: {
+							// 			licenseId: parseInt(data.id),
+							// 		},
+							// 		refetchQueries: [
+							// 			{
+							// 				query: LICENSES_QUERY,
+							// 			},
+							// 		],
+							// 	})
+							// }
 						>
 							<i className='fa fa-ban text-white'></i>
 						</button>
@@ -109,13 +112,13 @@ export default function LicenciaCard(props) {
 							title='Eliminar'
 							className='degradado btn p-1'
 							onClick={() =>
-								mutation({
+								deleteLicense({
 									variables: {
-										licenseTypeId: parseInt(data.id),
+										licenseId: parseInt(data.id),
 									},
 									refetchQueries: [
 										{
-											query: LIST_LICENSETYPE,
+											query: LICENSES_QUERY,
 										},
 									],
 								})
