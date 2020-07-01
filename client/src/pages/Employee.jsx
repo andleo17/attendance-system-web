@@ -29,9 +29,7 @@ export default function Employee() {
 				className='row badge-dark pl-4 '
 				style={{ background: '#D5691E' }}
 			>
-				<h1 htmlFor='' className=''>
-					Empleado
-				</h1>
+				<h1>Empleado</h1>
 			</div>
 
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -41,12 +39,13 @@ export default function Employee() {
 							<input
 								type='text'
 								className='form-control'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 							/>
 						</div>
 						<div className=''>
 							<NavLink
-								to='/empleado-formulario'
+								to='/empleado'
 								className='degradado d-flex h-100 align-items-center pl-1 pr-1 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-user-plus mr-1'></i>

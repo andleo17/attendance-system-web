@@ -14,24 +14,40 @@ export const SCHEDULE_QUERY = gql`
 			startDate
 			finishDate
 			state
+			employeeCardId
 			employee {
 				name
 				lastname
+				photo
+			}
+			scheduleDetail{
+				day
+				id
+				inHour
+				outHour
 			}
 		}
 	}
 `;
 
-export default function Horario() {
-	const initialState = {
-		__typename: 'Schedule',
-		description: null,
-		id: null,
-		maximumDays: null,
-		mode: 0,
-	};
-	const [selectedItem, setSelectedItem] = useState(initialState);
 
+export const initialState = {
+	__typename: 'Schedule',
+	id: '',
+	startDate: '',
+	finishDate: '',
+	state: '',
+	employeeCardId: '',
+	employee: {
+		__typename: 'Employee',
+		name: '',
+		lastname: '',
+	}
+};
+
+export default function Horario() {
+
+	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(SCHEDULE_QUERY);
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
@@ -54,7 +70,8 @@ export default function Horario() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 							/>
 						</div>
 						<div className=''>
@@ -62,6 +79,9 @@ export default function Horario() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmHorario'
+								onClick={() =>
+									setSelectedItem(initialState)
+								}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-calendar-plus mr-1'></i>
@@ -76,13 +96,13 @@ export default function Horario() {
 							<HorarioCard
 								key={s.id}
 								data={s}
-								setData={setSelectedItem}
+								showData={() => setSelectedItem(s)}
 							/>
 						);
 					})}
 				</div>
-				<HorarioModal licenseType={selectedItem} />
-				<HorarioDetalleModal licenseType={selectedItem} />
+				<HorarioModal item={selectedItem} update={setSelectedItem} />
+				<HorarioDetalleModal schedules={selectedItem} />
 			</div>
 		</div>
 	);

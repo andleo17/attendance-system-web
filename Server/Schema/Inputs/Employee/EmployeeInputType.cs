@@ -12,7 +12,7 @@ namespace Server.Schema.Inputs
 				.Type<IdType>();
 
 			descriptor.Field(a => a.Name)
-				.Type<NonNullType<DateType>>();
+				.Type<NonNullType<StringType>>();
 
 			descriptor.Field(a => a.Lastname)
 				.Type<NonNullType<StringType>>();
@@ -31,9 +31,6 @@ namespace Server.Schema.Inputs
 
 			descriptor.Field(a => a.Email)
 				.Type<NonNullType<StringType>>();
-
-			descriptor.Field(a => a.Photo)
-				.Type<NonNullType<AnyType>>();
 
 			descriptor.Field(a => a.PhotoName)
 				.Type<NonNullType<StringType>>();

@@ -74,8 +74,9 @@ export default function Permissions() {
 							<input
 								id='txtSearch'
 								type='text'
-								title='Buscar por empleado'
 								className='form-control'
+								title='Buscar por empleado'
+								maxLength='8'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
 								defaultValue={employeeCardId}
                                 onChange={(e) =>

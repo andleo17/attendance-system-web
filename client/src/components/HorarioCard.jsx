@@ -2,23 +2,21 @@ import React from 'react';
 import foto from '../recursos/perfil.jpg';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { SCHEDULE_QUERY } from '../pages/Horario';
 import moment from 'moment';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
+const DOWN_SCHEDULE_MUTATION = gql`
+	mutation DownSchedule($scheduleId: ID!) {
+		downSchedule(scheduleId: $scheduleId) {
 			id
-			description
-			maximumDays
 		}
 	}
 `;
 
 export default function HorarioCard(props) {
-	const { data, setData } = props;
+	const { data, showData } = props;
 
-	const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [downSchedule] = useMutation(DOWN_SCHEDULE_MUTATION);
 
 	return (
 		<div className='col-lg-3 p-3'>
@@ -32,7 +30,7 @@ export default function HorarioCard(props) {
 					</h3>
 				</div>
 				<div className='text-center card-header m-0 '>
-					<img src={foto} alt='' className='h-50 w-50 circle m-0' />
+					<img src={foto}   alt='' className='h-50 w-50 circle m-0' />
 					<div
 						className='text-capitalize font-italic'
 						style={{ height: '35px' }}
@@ -63,9 +61,7 @@ export default function HorarioCard(props) {
 						className='degradado btn'
 						data-toggle='modal'
 						data-target='#frmHorarioDetalle'
-						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
-						}
+						
 					>
 						<i className='fa fa-eye text-white'></i>
 					</button>
@@ -75,9 +71,7 @@ export default function HorarioCard(props) {
 						className='degradado btn'
 						data-toggle='modal'
 						data-target='#frmHorario'
-						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
-						}
+						onClick={showData}
 					>
 						<i className='fa fa-pencil-alt text-white'></i>
 					</button>
@@ -86,28 +80,19 @@ export default function HorarioCard(props) {
 						title='Dar de baja'
 						className='degradado btn'
 						onClick={() =>
-							setData(Object.assign(data, { mode: 1 }))
-						}
-					>
-						<i className='fa fa-ban text-white'></i>
-					</button>
-					<button
-						type='button'
-						title='Eliminar'
-						className='degradado btn '
-						onClick={() =>
-							mutation({
-								variables: { licenseTypeId: parseInt(data.id) },
+							downSchedule({
+								variables: { scheduleId: parseInt(data.id) },
 								refetchQueries: [
 									{
-										query: LIST_LICENSETYPE,
+										query: SCHEDULE_QUERY,
 									},
 								],
 							})
 						}
 					>
-						<i className='fa fa-trash-alt text-white'></i>
+						<i className='fa fa-ban text-white'></i>
 					</button>
+					
 				</div>
 			</div>
 		</div>
