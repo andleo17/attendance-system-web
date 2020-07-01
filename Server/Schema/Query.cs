@@ -243,5 +243,24 @@ namespace Server.Schema
 			
 			
 		}
+
+		public async Task<IReadOnlyList<ScheduleDetail>> GetSchedulesDetailHour([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
+        {
+            DateTime firstSunday = new DateTime(1753, 1, 7);
+            var DbF = Microsoft.EntityFrameworkCore.EF.Functions;
+            var date = DateTime.Today;
+            if (employeeCardId != null)
+            {
+                return await (from sd in dBAttendanceContext.ScheduleDetail select sd).ToListAsync();
+                         
+
+            }
+            else
+            {
+                return await (from s in dBAttendanceContext.Schedule join sd in dBAttendanceContext.ScheduleDetail on s.Id equals 
+                sd.ScheduleId where s.State == true && (DbF.DateDiffDay(firstSunday, date) % 7 == sd.Day) select sd).ToListAsync();
+
+            }
+        }
 	}
 }
