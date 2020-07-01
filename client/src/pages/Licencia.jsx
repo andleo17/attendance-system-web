@@ -13,6 +13,8 @@ export const LICENSES_QUERY = gql`
 			startDate
 			finishDate
 			state
+			document
+			employeeCardId
 			licenseType {
 				description
 			}
@@ -29,21 +31,23 @@ const initialState = {
 	id: '',
 	startDate: '',
 	finishDate: '',
-		state: '',
-		licenseType: {
-			__typename: 'LicenseType',
-			description: '',
-		},
-		employee: {
-			__typename: 'Employee',
-			name: '',
-			lastname: '',
-		},
+	state: '',
+	document: '',
+	employeeCardId: '',
+	licenseType: {
+		__typename: 'LicenseType',
+		description: '',
+	},
+	employee: {
+		__typename: 'Employee',
+		name: '',
+		lastname: '',
+	},
 	mode: 0,
 };
 
 export default function Licencia() {
-	
+
 	const [selectedItem, setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(LICENSES_QUERY);
 	if (loading) return <Loader />;
@@ -95,7 +99,7 @@ export default function Licencia() {
 						);
 					})}
 				</div>
-				<LicenciaModal item={selectedItem} update={setSelectedItem}  />
+				<LicenciaModal item={selectedItem} update={setSelectedItem} />
 			</div>
 		</div>
 	);

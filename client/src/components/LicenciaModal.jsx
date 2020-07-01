@@ -3,13 +3,16 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LICENSES_QUERY } from '../pages/Licencia';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicense($input: LicenseTypeInput!) {
+const ADD_LICENSE_MUTATION = gql`
+	mutation AddLicense($input: LicenseInput!) {
 		addLicense(input: $input) {
 			id
 			startDate
 			finishDate
 			state
+			document
+			documentName
+			employeeCardId
 			licenseType {
 				description
 			}
@@ -21,13 +24,15 @@ const ADD_LICENSE_TYPE_MUTATION = gql`
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicense($input: LicenseTypeInput!) {
+const MODIFY_LICENSE_MUTATION = gql`
+	mutation ModifyLicense($input: LicenseInput!) {
 		modifyLicense(input: $input) {
 			id
 			startDate
 			finishDate
 			state
+			document
+			employeeCardId
 			licenseType {
 				description
 			}
@@ -41,10 +46,12 @@ const MODIFY_LICENSE_TYPE_MUTATION = gql`
 
 export default function LicenseModal(props) {
 	const { item, update } = props;
+	// const {}
 	let nombreC = item.employee.name + ' ' + item.employee.lastname;
-	const mutation =item.id
-			? MODIFY_LICENSE_TYPE_MUTATION
-			: ADD_LICENSE_TYPE_MUTATION;
+	let nombreLi = item.licenseType.description;
+	const mutation = item.id
+		? MODIFY_LICENSE_MUTATION
+		: ADD_LICENSE_MUTATION;
 	const [execute] = useMutation(mutation);
 
 	return (
@@ -95,7 +102,7 @@ export default function LicenseModal(props) {
 									disabled
 									className='form-control bg-white'
 									value={nombreC}
-									/>
+								/>
 							</div>
 
 							<div className='form-group'>
@@ -107,13 +114,14 @@ export default function LicenseModal(props) {
 									class='btn'
 									className='form-control btn btn-outline-sistema '
 									style={{ width: '100%' }}
+									// value={nombreLi}
 								>
-									<option value='1' disabled selected>
+									{/* <option disabled selected>
 										SELECCIONAR
-									</option>
-									<option value='2'>Femenino</option>
-									<option value='3'>Masculino</option>
-									<option value='4'>Otro</option>
+									</option> */}
+									<option value={nombreLi} 
+									>{nombreLi} </option>
+
 								</select>
 							</div>
 							<div className='form-group'>
@@ -121,9 +129,9 @@ export default function LicenseModal(props) {
 								<label htmlFor='txtFechaInicio'>Fecha inicio:</label>
 								<input
 									id='txtFechaInicio'
-									type='text'
+									type='date'
 									className='form-control'
-									value={	item.startDate}
+									value={item.startDate}
 									onChange={(e) =>
 										update({
 											...item,
@@ -137,10 +145,9 @@ export default function LicenseModal(props) {
 								<label htmlFor='txtFechaFin'>Fecha fin:</label>
 								<input
 									id='txtFechaFin'
-									type='text'
-									disabled
+									type='date'
 									className='form-control bg-transparent'
-									value={	item.finishDate}
+									value={item.finishDate}
 									onChange={(e) =>
 										update({
 											...item,
@@ -153,10 +160,11 @@ export default function LicenseModal(props) {
 								<i className='fa fa-exclamation-triangle pl-2'></i>
 								<label htmlFor='txtFile'>Documento</label>
 								<input
+									id='txtFile'
 									type='file'
 									name=''
 									className='form-control'
-									id='txtFile'
+									// value={item.document}
 								/>
 							</div>
 
@@ -195,7 +203,7 @@ export default function LicenseModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(item.id),
+											// id: parseInt(item.id),
 											employeeCardId: document.getElementById(
 												'txtDocument'
 											).value,
@@ -208,6 +216,10 @@ export default function LicenseModal(props) {
 											state: document.getElementById(
 												'txtState'
 											).checked,
+											document: document.getElementById(
+												'txtFile'
+											).value
+
 										},
 									},
 									refetchQueries: [
