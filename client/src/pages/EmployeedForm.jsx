@@ -734,22 +734,10 @@ export default function EmployeedForm(props) {
 									phone: employee.phone,
 									photoName: employee.photoName,
 									state: employee.state,
-									contract: {
-										id: c.id,
-										startDate: c.startDate,
-										finishDate: c.finishDate,
-										mount: c.mount,
-										extraHours: parseFloat(c.extraHours),
-										state: c.state,
-									},
-									schedule: {
-										id: s.id,
-										startDate: s.startDate,
-										finishDate: s.startDate,
-										state: s.state,
-									},
 								},
 							},
+						}).then((res) => {
+							if (res) window.location.replace('/empleados');
 						});
 					}}
 				>
