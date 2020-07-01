@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { LIST_PERMISSION } from '../pages/Permiso';
 
 const ADD_PERMISSION_MUTATION = gql`
@@ -37,10 +37,18 @@ const MODIFY_PERMISSION_MUTATION = gql`
 	}
 `;
 
+const FIND_EMPLOYEE = gql`
+	query Employee($cardId: ID!) {
+		employee(cardId: $cardId) {
+			name
+			lastname
+		}
+	}
+`;
+
 export default function PermissioneModal(props) {
 	const { item, update } = props;
-	// const [p, setP] = useState(permission);
-	// console.log(permission.motive);
+	const [findEmployee, { data }] = useLazyQuery(FIND_EMPLOYEE);
 
 	const mutation = item.id
 		? MODIFY_PERMISSION_MUTATION
@@ -55,7 +63,7 @@ export default function PermissioneModal(props) {
 						className='modal-header  text-white'
 						style={{ background: '#D5691E' }}
 					>
-						<h5 className='modal-title'>Nuevo permiso</h5>
+						<h5 className='modal-title'>{item.id ? 'Modificar permiso' : 'Nuevo permiso'}</h5>
 						<button
 							type='button'
 							className='close text-white'
@@ -80,6 +88,32 @@ export default function PermissioneModal(props) {
 											employeeCardId: e.target.value,
 										})
 									}
+									onKeyUp={(e) => {
+										if (e.key === 'Enter') {
+											findEmployee({
+												variables: {
+													cardId: e.target.value,
+												},
+											});
+										}
+									}}
+								/>
+							</div>
+							<div className='form-group'>
+								<i className='fa fa-tag pl-2'></i>
+								<label htmlFor='txtEmployee'>Nombre:</label>
+								<input
+									id='txtEmployee'
+									type='text'
+									className='form-control bg-white'
+									defaultValue={
+										item.id
+											? `${item.employee.name} ${item.employee.lastname}`
+											: data &&
+											  data.employee &&
+											  `${data.employee.name} ${data.employee.lastname}`
+									}
+									readOnly
 								/>
 							</div>
 							<div className='form-group'>

@@ -48,6 +48,8 @@ namespace Server.Schema
 			
 			descriptor.Field(q => q.GetNonAttendance(default))
 				.Type<NonNullType<ListType<NonNullType<ScheduleDetailType>>>>();
+			
+			descriptor.Field(q => q.GetAttendancesDate(default, default, default));
 		}
 	}
 }
