@@ -3,33 +3,10 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { LIST_LICENSETYPE } from '../pages/LicenseType';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
-			id
-			description
-			maximumDays
-		}
-	}
-`;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
-			id
-			description
-			maximumDays
-		}
-	}
-`;
 
 export default function HorarioModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
-	const [execute] = useMutation(mutation);
+	
 	return (
 		<div
 			id='frmHorarioDetalle'
@@ -226,25 +203,8 @@ export default function HorarioModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							onClick={() =>
-								execute({
-									variables: {
-										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
-											maximumDays: parseInt(
-												licenseType.maximumDays
-											),
-										},
-									},
-									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
-									],
-								})
-							}
+							
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>

@@ -101,7 +101,8 @@ export default function RLicencias() {
                                 id='txtSearch'
                                 type='text'
                                 className='form-control'
-                                placeholder='Ingrese DNI y presione ENTER para buscar'
+                                maxLength='8'
+                                placeholder='Ingrese DNI y presione ENTER para buscar'                                
                                 title='Buscar'
                                 defaultValue={employeeCardId}
                                 onChange={(e) =>

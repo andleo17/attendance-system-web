@@ -39,7 +39,8 @@ export default function Employee() {
 							<input
 								type='text'
 								className='form-control'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 							/>
 						</div>
 						<div className=''>
