@@ -60,7 +60,7 @@ export default function Employee() {
 
 				<div className=''>
 					{data.employees.map((e) => (
-						<EmployeeItem employee={e} />
+						<EmployeeItem employee={e} key={e.cardId} />
 					))}
 				</div>
 			</div>

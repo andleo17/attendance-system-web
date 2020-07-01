@@ -1,7 +1,5 @@
 body {
 	background: rgb(48, 45, 45);
-	/* background: #eee; */
-	font-family: 'Lobster', cursive;
 }
 
 .App {
@@ -568,7 +566,6 @@ body {
 	position: absolute;
 	width: 100%;
 	bottom: 0;
-	display: flex;
 }
 
 .sidebar-footer > a {
@@ -1173,24 +1170,18 @@ th {
 	}
 }
 
-
-
-
 /* ----------------------------------BIENVENIDOOOO ------------------------------*/
 
-
-
-
 @keyframes tipsy {
-	0 {
-	  transform: translateX(-50%) translateY(-50%) rotate(0deg);
+	0% {
+		transform: translateX(-50%) translateY(-50%) rotate(0deg);
 	}
 	100% {
-	  transform: translateX(-50%) translateY(-50%) rotate(360deg);
+		transform: translateX(-50%) translateY(-50%) rotate(360deg);
 	}
-  }
-  
-  .conten samp {
+}
+
+.conten samp {
 	color: #fffbf1;
 	text-shadow: 0 2px 5px #ffe5bd, 0 40px 60px #ec9c59;
 	font-size: 90px;
@@ -1202,54 +1193,47 @@ th {
 	top: 50%;
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
-  }
-  
-  @media screen and (max-width: 408px) {
+}
+
+@media screen and (max-width: 408px) {
 	.conten samp {
 		font-size: 50px;
 	}
 }
-  .conten samp:before,
-  .conten samp:after {
+.conten samp:before,
+.conten samp:after {
 	content: '';
-	padding: .9em 2.9em;
+	padding: 0.9em 2.9em;
 	position: absolute;
 	left: 50%;
 	width: 100%;
 	top: 50%;
 	display: block;
-	border: 15px solid #D5691E;
+	border: 15px solid #d5691e;
 	transform: translateX(-50%) translateY(-50%) rotate(0deg);
 	animation: 10s infinite alternate ease-in-out tipsy;
-  }
-  
-  .conten samp:before {
-	border-color: #A35117 #D5691E rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+}
+
+.conten samp:before {
+	border-color: #a35117 #d5691e rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
 	z-index: -1;
-  }
-  
-  .conten samp:after {
-	border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #A35117 #D5691E;
-	box-shadow: 25px 25px 25px rgba(46, 46, 49, .8);
-  }
+}
+
+.conten samp:after {
+	border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #a35117 #d5691e;
+	box-shadow: 25px 25px 25px rgba(46, 46, 49, 0.8);
+}
 
 /* mantenimietno */
 
-.mante{
+.mante {
 	color: white;
 	border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #d9524a #d9524a;
-	box-shadow: 25px 25px 25px rgba(46, 46, 49, .8);
+	box-shadow: 25px 25px 25px rgba(46, 46, 49, 0.8);
 	padding: 30px;
 	margin: 30;
 }
 
-.mante h1{
+.mante h1 {
 	border: 1px solid #8159b6;
 }
-
-
-
-
-
-
-

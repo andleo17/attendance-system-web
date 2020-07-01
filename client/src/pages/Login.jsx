@@ -70,7 +70,10 @@ export default function Login(props) {
 					</div>
 					{error &&
 						error.graphQLErrors.map((e) => (
-							<div className='form-group alert-danger p-3'>
+							<div
+								className='form-group alert-danger p-3'
+								key={e.message}
+							>
 								{e.message}
 							</div>
 						))}
