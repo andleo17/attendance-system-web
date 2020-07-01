@@ -73,7 +73,8 @@ export default function Licencia() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 							/>
 						</div>
 						<div className=''>

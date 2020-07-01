@@ -63,7 +63,8 @@ export default function Contrato() {
 								type='text'
 								className='form-control'
 								title='Buscar contrato por empleado'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 							/>
 						</div>
 						<div className=''>

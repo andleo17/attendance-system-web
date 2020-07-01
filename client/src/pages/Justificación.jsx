@@ -90,6 +90,7 @@ export default function Justificación() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
+								maxLength='8'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
 								onChange={(e) =>
 									setEmployeeCardId(e.target.value)

@@ -44,7 +44,8 @@ export default function LicenseType() {
 							<input
 								type='text'
 								className='form-control'
-								placeholder='Buscar'
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'
 								title='Buscar un tipo de licencia por nombre'
 							/>
 						</div>

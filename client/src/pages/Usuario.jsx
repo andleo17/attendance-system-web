@@ -61,8 +61,8 @@ export default function Usuario() {
 								type='text'
 								title='Buscar por empleado'
 								className='form-control'
-								placeholder='Ingrese DNI y presione ENTER para buscar'
-							/>
+								maxLength='8'
+								placeholder='Ingrese DNI y presione ENTER para buscar'							/>
 						</div>
 						<div className=''>
 							<button

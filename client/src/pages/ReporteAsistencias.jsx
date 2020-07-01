@@ -100,6 +100,7 @@ export default function RAsistencias() {
                                 id='txtSearch'
                                 type='text'
                                 className='form-control'
+                                maxLength='8'
                                 placeholder='Ingrese DNI y presione ENTER para buscar'
                                 title='Buscar'
                                 defaultValue={employeeCardId}

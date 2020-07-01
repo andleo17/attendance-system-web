@@ -1,34 +1,50 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
+import { SCHEDULE_QUERY } from '../pages/Horario';
 
-const ADD_LICENSE_TYPE_MUTATION = gql`
-	mutation AddLicenseType($input: LicenseTypeInput!) {
-		addLicenseType(input: $input) {
+const ADD_SCHEDULE_MUTATION = gql`
+	mutation AddSchedule($input: ScheduleInput!) {
+		addSchedule(input: $input) {
 			id
-			description
-			maximumDays
+			startDate
+			finishDate
+			state
+			employeeCardId
+			scheduleDetail{
+				day
+				id
+				inHour
+				outHour
+			}
 		}
 	}
 `;
 
-const MODIFY_LICENSE_TYPE_MUTATION = gql`
-	mutation ModifyLicenseType($input: LicenseTypeInput!) {
-		modifyLicenseType(input: $input) {
+const MODIFY_SCHEDULE_MUTATION = gql`
+	mutation ModifySchedule($input: ScheduleInput!) {
+		modifySchedule(input: $input) {
 			id
-			description
-			maximumDays
+			startDate
+			finishDate
+			state
+			employeeCardId
+			scheduleDetail{
+				day
+				id
+				inHour
+				outHour
+			}
 		}
 	}
 `;
 
 export default function HorarioModal(props) {
-	const { licenseType } = props;
-	const mutation =
-		licenseType.mode === 0
-			? ADD_LICENSE_TYPE_MUTATION
-			: MODIFY_LICENSE_TYPE_MUTATION;
+	const { item, update } = props;
+	let nombreC = item.employee.name + ' ' + item.employee.lastname;
+	const mutation =item.id 
+	? MODIFY_SCHEDULE_MUTATION 
+	: ADD_SCHEDULE_MUTATION;
 	const [execute] = useMutation(mutation);
 	return (
 		<div id='frmHorario' className='modal fade inputEmpleado' tabIndex='-1'>
@@ -51,75 +67,79 @@ export default function HorarioModal(props) {
 						<form>
 							<div className='form-group'>
 								<i className='fa fa-id-card pl-2'></i>
-								<label htmlFor='txtName'>Documento:</label>
+								<label htmlFor='txtDocument'>Documento:</label>
 								<input
-									id='txtName'
+									id='txtDocument'
 									type='text'
 									className='form-control '
+									value={item.employeeCardId}
 									onChange={(e) =>
-										(licenseType.description =
-											e.target.value)
+										update({
+											...item,
+											employeeCardId: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.description}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-tag pl-2'></i>
-								<label htmlFor='txtTiempo '>Nombre:</label>
+								<label htmlFor='txtNombre '>Nombre:</label>
 								<input
-									id='txtTiempo'
+									id='txtNombre'
 									type='text'
 									className='form-control bg-white'
 									disabled
-									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
-									}
-									// defaultValue={licenseType.maximumDays}
+									value={nombreC}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-calendar-check pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha inicio </label>
+								<label htmlFor='txtFechaInicio'>Fecha inicio </label>
 								<input
-									id='txtTiempo'
+									id='txtFechaInicio'
 									type='date'
 									className='form-control'
+									value={item.startDate}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											startDate: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-calendar-times pl-2'></i>
-								<label htmlFor='txtTiempo'>Fecha fin </label>
+								<label htmlFor='txtFechaFin'>Fecha fin </label>
 								<input
-									id='txtTiempo'
+									id='txtFechaFin'
 									type='date'
 									className='form-control'
+									value={item.finishDate}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											finishDate: e.target.value,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>
 							</div>
 
 							<div className='form-group'>
 								<i className='fa fa-ban pl-2'></i>
-								<label htmlFor='txtTiempo'>Estado:</label>{' '}
+								<label htmlFor='txtState'>Estado:</label>{' '}
 								<br />
 								<input
-									id='txtTiempo'
+									id='txtState'
 									type='checkbox'
 									className=' ml-4'
+									checked={item.state}
 									onChange={(e) =>
-										(licenseType.maximumDays =
-											e.target.value)
+										update({
+											...item,
+											state: e.target.checked,
+										})
 									}
-									// defaultValue={licenseType.maximumDays}
 								/>{' '}
 								<label htmlFor=''>Vigente</label>
 							</div>
@@ -140,21 +160,29 @@ export default function HorarioModal(props) {
 								execute({
 									variables: {
 										input: {
-											id: parseInt(licenseType.id),
-											description:
-												licenseType.description,
-											maximumDays: parseInt(
-												licenseType.maximumDays
+											id: parseInt(item.id),
+											employeeCardId: document.getElementById(
+												'txtDocument'
+											).value,
+											startDate: document.getElementById(
+												'txtFechaInicio'
 											),
+											finishDate: document.getElementById(
+												'txtFechaFin'
+											),
+											state: document.getElementById(
+												'txtState'
+											).checked,
+											
 										},
 									},
 									refetchQueries: [
-										{ query: LIST_LICENSETYPE },
+										{ query: SCHEDULE_QUERY },
 									],
 								})
 							}
 						>
-							{licenseType.mode === 0 ? 'Registrar' : 'Modificar'}
+							{item.is ? 'Registrar' : 'Modificar'}
 						</button>
 					</div>
 				</div>
