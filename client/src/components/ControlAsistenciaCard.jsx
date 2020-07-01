@@ -28,7 +28,7 @@ export default function ControlAsistenciaCard(props) {
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
 							<div className='font-italic  mb-1'>
-							{`${data.employee.name} ${data.employee.lastname}`}
+							{`${data.schedule.employee.name} ${data.schedule.employee.lastname}`}
 							</div>
 
 							<div className='mb-2'>
