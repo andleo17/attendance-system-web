@@ -167,7 +167,7 @@ export default function LicenseModal(props) {
 								/> <input value={item.documentName} id='txtFile' type="text" className='' /> 
 								<button className='p-1 degradado border-0 ml-2'>
 									 <i className='fa fa-eye m-0 '></i>
-									 </button>
+									 </button>	 
 							</div>
 
 							<div className='form-group'>
