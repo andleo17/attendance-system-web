@@ -1252,3 +1252,24 @@ th {
 .mante h1 {
 	border: 1px solid #8159b6;
 }
+
+#float-button {
+	border: 3px solid orange;
+	border-radius: 50%;
+	background-color: #d5691e;
+	color: white;
+	position: fixed;
+	right: 25px;
+	bottom: 25px;
+	z-index: 2;
+	font-size: 2.5em;
+	height: 1.8em;
+	width: 1.8em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#float-button i {
+	margin: 0;
+}

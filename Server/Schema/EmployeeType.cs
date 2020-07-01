@@ -50,8 +50,9 @@ namespace Server.Schema
 				.Name("attendance")
 				.Type<NonNullType<ListType<NonNullType<AttendanceType>>>>();
 
-			descriptor.Field<EmployeeType>(a => ResolveContract(default, default))
+			descriptor.Field<EmployeeType>(a => ResolveContract(default, default, default))
 				.Name("contract")
+				.Argument("last", a => a.Type<BooleanType>())
 				.Type<NonNullType<ListType<NonNullType<ContractType>>>>();
 
 			descriptor.Field<EmployeeType>(a => ResolveLicense(default, default))
@@ -62,8 +63,9 @@ namespace Server.Schema
 				.Name("permission")
 				.Type<NonNullType<ListType<NonNullType<PermissionType>>>>();
 
-			descriptor.Field<EmployeeType>(a => ResolverSchedule(default, default))
+			descriptor.Field<EmployeeType>(a => ResolverSchedule(default, default, default))
 				.Name("schedule")
+				.Argument("last", a => a.Type<BooleanType>())
 				.Type<NonNullType<ListType<NonNullType<ScheduleType>>>>();
 
 			descriptor.Field<EmployeeType>(a => ResolveUser(default, default))
@@ -78,11 +80,20 @@ namespace Server.Schema
 				.ToListAsync();
 		}
 
-		public async Task<IReadOnlyList<Contract>> ResolveContract([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext)
+		public async Task<IReadOnlyList<Contract>> ResolveContract([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext, bool last)
 		{
-			return await dBAttendanceContext.Contract
-				.Where(c => c.EmployeeCardId == employee.CardId)
-				.ToListAsync();
+			if (!last)
+			{
+				return await dBAttendanceContext.Contract
+					.Where(c => c.EmployeeCardId == employee.CardId)
+					.ToListAsync();
+
+			}
+			else
+			{
+				var list = await (from c in dBAttendanceContext.Contract where c.EmployeeCardId == employee.CardId orderby c.Id descending select c).ToListAsync();
+				return list.Take(1).ToList();
+			}
 		}
 
 		public async Task<IReadOnlyList<License>> ResolveLicense([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext)
@@ -99,11 +110,19 @@ namespace Server.Schema
 				.ToListAsync();
 		}
 
-		public async Task<IReadOnlyList<Schedule>> ResolverSchedule([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext)
+		public async Task<IReadOnlyList<Schedule>> ResolverSchedule([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext, bool last)
 		{
-			return await dBAttendanceContext.Schedule
-				.Where(s => s.EmployeeCardId == employee.CardId)
-				.ToListAsync();
+			if (!last)
+			{
+				return await dBAttendanceContext.Schedule
+					.Where(s => s.EmployeeCardId == employee.CardId)
+					.ToListAsync();
+			}
+			else
+			{
+				var list = await (from s in dBAttendanceContext.Schedule where s.EmployeeCardId == employee.CardId orderby s.Id descending select s).ToListAsync();
+				return list.Take(1).ToList();
+			}
 		}
 
 		public async Task<IReadOnlyList<User>> ResolveUser([Parent] Employee employee, [Service] DBAttendanceContext dBAttendanceContext)

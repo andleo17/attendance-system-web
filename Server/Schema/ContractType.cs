@@ -17,10 +17,10 @@ namespace Server.Schema
 				.Type<NonNullType<IdType>>();
 
 			descriptor.Field(a => a.StartDate)
-				.Type<NonNullType<DateTimeType>>();
+				.Type<NonNullType<DateType>>();
 
 			descriptor.Field(a => a.FinishDate)
-				.Type<NonNullType<DateTimeType>>();
+				.Type<NonNullType<DateType>>();
 
 			descriptor.Field(a => a.Mount)
 				.Type<NonNullType<FloatType>>();
