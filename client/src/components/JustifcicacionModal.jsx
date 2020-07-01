@@ -35,7 +35,7 @@ const FIND_DELAY = gql`
 `;
 
 export default function JustificacionModal(props) {
-	const { justification, update } = props;
+	const { justification, update, refetch } = props;
 	const mutation = justification.id
 		? MODIFY_JUSTIFICATION_MUTATION
 		: ADD_JUSTIFICATION_MUTATION;
@@ -260,7 +260,7 @@ export default function JustificacionModal(props) {
 								type='button'
 								className='btn degradado text-white'
 								data-dismiss='modal'
-								onClick={() =>
+								onClick={() =>{
 									execute({
 										variables: {
 											input: {
@@ -272,9 +272,15 @@ export default function JustificacionModal(props) {
 											},
 										},
 										refetchQueries: [
-											{ query: JUSTIFICATIONS_QUERY },
+											{ 	query: JUSTIFICATIONS_QUERY,
+												variables: {},
+											},
 										],
-									})
+										awaitRefetchQueries: true,
+									});
+									window.location.reload(true);
+									}
+									
 								}
 							>
 								{justification.id ? 'Modificar' : 'Registrar'}

@@ -106,15 +106,18 @@ export default function PermissionCard(props) {
 						type='button'
 						title='Eliminar'
 						className='degradado btn '
-						onClick={() =>
-							deletePermission({
-								variables: { permissionId: parseInt(data.id) },
-								refetchQueries: [
-									{
-										query: LIST_PERMISSION,
-									},
-								],
-							})
+						onClick={() =>{
+								deletePermission({
+									variables: { permissionId: parseInt(data.id) },
+									refetchQueries: [
+										{
+											query: LIST_PERMISSION,
+										},
+									],
+								});
+								window.location.reload(true);
+							}
+							
 						}
 					>
 						<i className='fa fa-trash-alt text-white'></i>

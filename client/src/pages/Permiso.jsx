@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
 import ErrorIcon from '../components/ErrorIcon';
-import LoadingPermission from '../components/LoadingPermission';
+import LoadingPage from '../components/LoadingPage';
 
 
 export const LIST_PERMISSION = gql`
@@ -49,9 +49,9 @@ export default function Permissions() {
 	const { loading, error, data, refetch} = useQuery(LIST_PERMISSION, {
         variables:  {employeeCardId},
 	});
-	var condition;
+
 	if (loading){
-		return <LoadingPermission employeeCardId={employeeCardId}/>
+		return <LoadingPage employeeCardId={employeeCardId} title="Permisos"/>
 	};
 	if (error) return <ErrorIcon error={error} />;
 	

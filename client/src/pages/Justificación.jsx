@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import JustificacionCard from '../components/JustificacionCard';
 import JustificacionModal from '../components/JustifcicacionModal';
-import Loader from '../components/Loader';
+import LoadingPage from '../components/LoadingPage';
 import ErrorIcon from '../components/ErrorIcon';
 
 export const JUSTIFICATIONS_QUERY = gql`
@@ -56,7 +56,9 @@ export default function Justificación() {
         variables:  {employeeCardId},
 	});
 
-	if (loading) return <Loader />;
+	if (loading){
+		return <LoadingPage employeeCardId={employeeCardId} title="Justificación"/>
+	};
 	if (error) return <ErrorIcon error={error} />;
 	let listJustifications = initialState;
 

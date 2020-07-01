@@ -117,17 +117,20 @@ export default function JustificationCard(props) {
 								type='button'
 								title='Eliminar'
 								className='degradado btn p-1'
-								onClick={() =>
-									deleteJustification({
-										variables: {
-											justificationId: parseInt(data.id),
-										},
-										refetchQueries: [
-											{
-												query: JUSTIFICATIONS_QUERY,
+								onClick={() =>{
+										deleteJustification({
+											variables: {
+												justificationId: parseInt(data.id),
 											},
-										],
-									})
+											refetchQueries: [
+												{
+													query: JUSTIFICATIONS_QUERY,
+												},
+											],
+										});
+										window.location.reload(true);
+									}
+									
 								}
 							>
 								<i className='fa fa-trash-alt text-white'></i>

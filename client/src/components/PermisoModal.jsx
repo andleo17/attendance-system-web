@@ -199,29 +199,32 @@ export default function PermissioneModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							onClick={() =>
-								execute({
-									variables: {
-										input: {
-											date: document.getElementById(
-												'txtDate'
-											).value,
-											employeeCardId: document.getElementById(
-												'txtDocument'
-											).value,
-											id: parseInt(item.id),
-											motive: document.getElementById(
-												'txtMotive'
-											).value,
-											state: document.getElementById(
-												'txtState'
-											).checked,
+							onClick={() =>{
+									execute({
+										variables: {
+											input: {
+												date: document.getElementById(
+													'txtDate'
+												).value,
+												employeeCardId: document.getElementById(
+													'txtDocument'
+												).value,
+												id: parseInt(item.id),
+												motive: document.getElementById(
+													'txtMotive'
+												).value,
+												state: document.getElementById(
+													'txtState'
+												).checked,
+											},
 										},
-									},
-									refetchQueries: [
-										{ query: LIST_PERMISSION },
-									],
-								})
+										refetchQueries: [
+											{ query: LIST_PERMISSION },
+										],
+									});
+									window.location.reload(true);
+								}
+								
 							}
 							data-dismiss='modal'
 						>

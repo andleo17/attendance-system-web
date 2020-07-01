@@ -1,7 +1,7 @@
 import React from 'react';
 
-const LoadingPermission = (props)=>{
-	const {employeeCardId} = props;
+const LoadingPage = (props)=>{
+	const {employeeCardId, title} = props;
 	return(
 		<div className='page-content'>
 			<div
@@ -9,7 +9,7 @@ const LoadingPermission = (props)=>{
 				style={{ background: '#D5691E' }}
 			>
 				<h1 htmlFor='' className=''>
-					Permisos
+					{title}
 				</h1>
 			</div>
 			<div className='  bg-dark p-3 ml-3 mr-3'>
@@ -47,4 +47,4 @@ const LoadingPermission = (props)=>{
 }
 
 
-export default LoadingPermission;
+export default LoadingPage;
