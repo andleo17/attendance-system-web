@@ -312,7 +312,7 @@ namespace Server.Schema
 		{
 			try
 			{
-				var justification = await dBAttendanceContext.Justification.FindAsync(input);
+				var justification = await dBAttendanceContext.Justification.FindAsync(input.Id);
 				if (justification != null)
 				{
 					justification.Date = input.Date;
@@ -712,6 +712,38 @@ namespace Server.Schema
 				permission.State = false;
 				await dBAttendanceContext.SaveChangesAsync();
 				return permission;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+
+		public async Task<Justification> DownJustification([Service] DBAttendanceContext dBAttendanceContext, int justificationId)
+		{
+			try
+			{
+				var justification = await dBAttendanceContext.Justification.FindAsync(justificationId);
+				justification.State = false;
+				await dBAttendanceContext.SaveChangesAsync();
+				return justification;
+			}
+			catch (System.Exception e)
+			{
+				throw new QueryException(e.Message);
+			}
+		}
+
+
+		public async Task<License> DownLicense([Service] DBAttendanceContext dBAttendanceContext, int licenseId)
+		{
+			try
+			{
+				var license = await dBAttendanceContext.License.FindAsync(licenseId);
+				license.State = false;
+				await dBAttendanceContext.SaveChangesAsync();
+				return license;
 			}
 			catch (System.Exception e)
 			{
