@@ -14,6 +14,7 @@ export const LICENSES_QUERY = gql`
 			finishDate
 			state
 			document
+			documentName
 			employeeCardId
 			licenseType {
 				description
@@ -33,6 +34,7 @@ const initialState = {
 	finishDate: '',
 	state: '',
 	document: '',
+	documentName: '',
 	employeeCardId: '',
 	licenseType: {
 		__typename: 'LicenseType',

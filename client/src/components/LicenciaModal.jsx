@@ -32,6 +32,7 @@ const MODIFY_LICENSE_MUTATION = gql`
 			finishDate
 			state
 			document
+			documentName
 			employeeCardId
 			licenseType {
 				description
@@ -114,12 +115,12 @@ export default function LicenseModal(props) {
 									class='btn'
 									className='form-control btn btn-outline-sistema '
 									style={{ width: '100%' }}
-									// value={nombreLi}
+								// value={nombreLi}
 								>
 									{/* <option disabled selected>
 										SELECCIONAR
 									</option> */}
-									<option value={nombreLi} 
+									<option value={nombreLi}
 									>{nombreLi} </option>
 
 								</select>
@@ -158,14 +159,15 @@ export default function LicenseModal(props) {
 							</div>
 							<div className='form-group'>
 								<i className='fa fa-exclamation-triangle pl-2'></i>
-								<label htmlFor='txtFile'>Documento</label>
+								<label htmlFor='txtFile'>Documento</label> <br />
 								<input
-									id='txtFile'
 									type='file'
 									name=''
-									className='form-control'
-									// value={item.document}
-								/>
+									className='border-0' style={{ width: '50%' }}
+								/> <input value={item.documentName} id='txtFile' type="text" className='' /> 
+								<button className='p-1 degradado border-0 ml-2'>
+									 <i className='fa fa-eye m-0 '></i>
+									 </button>
 							</div>
 
 							<div className='form-group'>
@@ -216,7 +218,7 @@ export default function LicenseModal(props) {
 											state: document.getElementById(
 												'txtState'
 											).checked,
-											document: document.getElementById(
+											documentName: document.getElementById(
 												'txtFile'
 											).value
 

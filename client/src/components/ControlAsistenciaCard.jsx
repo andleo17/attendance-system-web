@@ -4,15 +4,6 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import { ATTENDANCES_QUERY } from '../pages/ControlAsistencia';
 
-const DELETE_LICENSE_TYPE_MUTATION = gql`
-	mutation DeleteLicenseType($licenseTypeId: Byte!) {
-		deleteLicenseType(licenseTypeId: $licenseTypeId) {
-			id
-			description
-			maximumDays
-		}
-	}
-`;
 
 export default function ControlAsistenciaCard(props) {
 	const { data, showData } = props;
