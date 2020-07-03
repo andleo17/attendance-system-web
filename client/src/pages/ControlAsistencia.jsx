@@ -31,7 +31,9 @@ export default function ControlAsistencia() {
 	};
 	const [setSelectedItem] = useState(initialState);
 	const { loading, data, error } = useQuery(ATTENDANCES_QUERY,  {
-        variables:  null,});
+		variables:  null,
+		pollInterval: 500,
+	});
 	if (loading) return <Loader />;
 	if (error) return <ErrorIcon error={error} />;
 

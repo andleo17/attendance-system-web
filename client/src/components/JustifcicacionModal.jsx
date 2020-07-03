@@ -278,7 +278,7 @@ export default function JustificacionModal(props) {
 										],
 										awaitRefetchQueries: true,
 									});
-									window.location.reload(true);
+									// window.location.reload(true);
 									}
 									
 								}

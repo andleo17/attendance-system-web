@@ -128,7 +128,7 @@ export default function JustificationCard(props) {
 												},
 											],
 										});
-										window.location.reload(true);
+										// window.location.reload(true);
 									}
 									
 								}

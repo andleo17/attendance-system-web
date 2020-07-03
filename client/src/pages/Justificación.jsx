@@ -53,7 +53,8 @@ export default function Justificación() {
 	);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
 	const { loading, error, data, refetch} = useQuery(JUSTIFICATIONS_QUERY, {
-        variables:  {employeeCardId},
+		variables:  {employeeCardId},
+		pollInterval: 500,
 	});
 
 	if (loading){

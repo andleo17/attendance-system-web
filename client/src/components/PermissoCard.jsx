@@ -115,7 +115,7 @@ export default function PermissionCard(props) {
 										},
 									],
 								});
-								window.location.reload(true);
+								// window.location.reload(true);
 							}
 							
 						}

@@ -47,7 +47,8 @@ export default function Permissions() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
 	const { loading, error, data, refetch} = useQuery(LIST_PERMISSION, {
-        variables:  {employeeCardId},
+		variables:  {employeeCardId},
+		pollInterval: 500,
 	});
 
 	if (loading){

@@ -222,7 +222,7 @@ export default function PermissioneModal(props) {
 											{ query: LIST_PERMISSION },
 										],
 									});
-									window.location.reload(true);
+									// window.location.reload(true);
 								}
 								
 							}
