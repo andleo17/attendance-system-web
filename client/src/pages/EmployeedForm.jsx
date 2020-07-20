@@ -719,8 +719,6 @@ export default function EmployeedForm(props) {
 					type='button'
 					id='float-button'
 					onClick={() => {
-						const c = employee.contract[0];
-						const s = employee.schedule[0];
 						execute({
 							variables: {
 								input: {

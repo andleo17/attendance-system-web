@@ -19,7 +19,6 @@ import ReporteAsistencias from '../pages/ReporteAsistencias';
 import ReporteTardanzas from '../pages/ReporteTardanzas';
 import ReporteJustificaciones from '../pages/ReporteJustificaciones';
 import ReporteLicencias from '../pages/ReporteLicencias';
-import Mantenimiento from '../pages/Mantenimiento';
 
 export default class App extends React.Component {
 	constructor(props) {

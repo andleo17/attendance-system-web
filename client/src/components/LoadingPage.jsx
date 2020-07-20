@@ -1,8 +1,8 @@
 import React from 'react';
 
-const LoadingPage = (props)=>{
-	const {employeeCardId, title} = props;
-	return(
+const LoadingPage = (props) => {
+	const { employeeCardId, title } = props;
+	return (
 		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
@@ -38,13 +38,12 @@ const LoadingPage = (props)=>{
 						</div>
 					</div>
 				</form>
-				<div className='row' className='row badge-dark pl-4 mt-4'>
+				<div className='row badge-dark pl-4 mt-4'>
 					<h2>Cargando...</h2>
 				</div>
 			</div>
 		</div>
 	);
-}
-
+};
 
 export default LoadingPage;

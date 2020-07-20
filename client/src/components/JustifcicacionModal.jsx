@@ -5,28 +5,27 @@ import { JUSTIFICATIONS_QUERY } from '../pages/Justificación';
 import moment from 'moment';
 
 const ADD_JUSTIFICATION_MUTATION = gql`
-	mutation AddJustification($input: JustificationInput!){
-		addJustification(input: $input){
+	mutation AddJustification($input: JustificationInput!) {
+		addJustification(input: $input) {
 			id
 		}
 	}
 `;
 
 const MODIFY_JUSTIFICATION_MUTATION = gql`
-	mutation ModifyJustification($input: JustificationInput!){
-		modifyJustification(input: $input){
+	mutation ModifyJustification($input: JustificationInput!) {
+		modifyJustification(input: $input) {
 			id
 		}
 	}
 `;
 
-
 const FIND_DELAY = gql`
 	query Delay($cardId: String!, $date: Date!) {
-		attendancesDate(employeeCardId: $cardId, dateAttendance: $date){
+		attendancesDate(employeeCardId: $cardId, dateAttendance: $date) {
 			id
 			date
-			employee{
+			employee {
 				name
 				lastname
 			}
@@ -35,7 +34,7 @@ const FIND_DELAY = gql`
 `;
 
 export default function JustificacionModal(props) {
-	const { justification, update, refetch } = props;
+	const { justification, update } = props;
 	const mutation = justification.id
 		? MODIFY_JUSTIFICATION_MUTATION
 		: ADD_JUSTIFICATION_MUTATION;
@@ -90,7 +89,9 @@ export default function JustificacionModal(props) {
 											findDelay({
 												variables: {
 													cardId: e.target.value,
-													date: document.getElementById('txtAttendanceDate').value,
+													date: document.getElementById(
+														'txtAttendanceDate'
+													).value,
 												},
 											});
 										}
@@ -113,27 +114,33 @@ export default function JustificacionModal(props) {
 									id='txtAttendanceDate'
 									type='date'
 									className='form-control'
-									onChange={(e) =>{
-											update({
-												...justification,
-												attendance: {
-													date: e.target.value,
-													employee: {
-														cardId: justification.attendance.employee.cardId,
-														name: justification.attendance.employee.name,
-														lastname: justification.attendance.employee.lastname,
-													},
+									onChange={(e) => {
+										update({
+											...justification,
+											attendance: {
+												date: e.target.value,
+												employee: {
+													cardId:
+														justification.attendance
+															.employee.cardId,
+													name:
+														justification.attendance
+															.employee.name,
+													lastname:
+														justification.attendance
+															.employee.lastname,
 												},
-											});
-											findDelay({
-												variables: {
-													cardId: justification.attendance.employee.cardId,
-													date: e.target.value,
-												},
-											});
-										}
-										
-									}
+											},
+										});
+										findDelay({
+											variables: {
+												cardId:
+													justification.attendance
+														.employee.cardId,
+												date: e.target.value,
+											},
+										});
+									}}
 									value={
 										justification.attendance.date &&
 										moment(
@@ -260,28 +267,35 @@ export default function JustificacionModal(props) {
 								type='button'
 								className='btn degradado text-white'
 								data-dismiss='modal'
-								onClick={() =>{
+								onClick={() => {
 									execute({
 										variables: {
 											input: {
-												attendanceId: document.getElementById('txtAttendanceId').value,
-												date: document.getElementById('txtDate').value,
+												attendanceId: document.getElementById(
+													'txtAttendanceId'
+												).value,
+												date: document.getElementById(
+													'txtDate'
+												).value,
 												id: parseInt(justification.id),
-												motive: document.getElementById('txtMotive').value,
-												state: document.getElementById('chkState').checked,
+												motive: document.getElementById(
+													'txtMotive'
+												).value,
+												state: document.getElementById(
+													'chkState'
+												).checked,
 											},
 										},
 										refetchQueries: [
-											{ 	query: JUSTIFICATIONS_QUERY,
+											{
+												query: JUSTIFICATIONS_QUERY,
 												variables: {},
 											},
 										],
 										awaitRefetchQueries: true,
 									});
 									// window.location.reload(true);
-									}
-									
-								}
+								}}
 							>
 								{justification.id ? 'Modificar' : 'Registrar'}
 							</button>

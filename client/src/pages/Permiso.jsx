@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { gql, from } from 'apollo-boost';
+import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import PermisoCard from '../components/PermissoCard';
 import PermisoModal from '../components/PermisoModal';
 import ErrorIcon from '../components/ErrorIcon';
 import LoadingPage from '../components/LoadingPage';
-
 
 export const LIST_PERMISSION = gql`
 	query ListPermission($employeeCardId: String) {
@@ -25,40 +24,34 @@ export const LIST_PERMISSION = gql`
 `;
 
 export const initialState = {
-			__typename: 'Permission',
-			date: '',
-			id: '',
-			motive: '',
-			presentationDate: '',
-			state: '',
-			employeeCardId: '',
-			employee: {
-				__typename: 'Employee',
-				name: '',
-				lastname: '',
-			},
+	__typename: 'Permission',
+	date: '',
+	id: '',
+	motive: '',
+	presentationDate: '',
+	state: '',
+	employeeCardId: '',
+	employee: {
+		__typename: 'Employee',
+		name: '',
+		lastname: '',
+	},
 };
-
-
-
-
 
 export default function Permissions() {
 	const [selectedItem, setSelectedItem] = useState(initialState);
 	const [employeeCardId, setEmployeeCardId] = useState(null);
-	const { loading, error, data, refetch} = useQuery(LIST_PERMISSION, {
-		variables:  {employeeCardId},
+	const { loading, error, data, refetch } = useQuery(LIST_PERMISSION, {
+		variables: { employeeCardId },
 		pollInterval: 500,
 	});
 
-	if (loading){
-		return <LoadingPage employeeCardId={employeeCardId} title="Permisos"/>
-	};
+	if (loading) {
+		return <LoadingPage employeeCardId={employeeCardId} title='Permisos' />;
+	}
 	if (error) return <ErrorIcon error={error} />;
-	
 
 	return (
-	
 		<div className='page-content'>
 			<div
 				className='row badge-dark pl-4 '
@@ -80,14 +73,12 @@ export default function Permissions() {
 								maxLength='8'
 								placeholder='Ingrese DNI y presione ENTER para buscar'
 								defaultValue={employeeCardId}
-                                onChange={(e) =>
-									{
-                                        if (e.target.value === '') {
-                                            setEmployeeCardId(null)
-                                            refetch();
-										}
-                                    }
-								}
+								onChange={(e) => {
+									if (e.target.value === '') {
+										setEmployeeCardId(null);
+										refetch();
+									}
+								}}
 								onKeyDown={(e) => {
 									if (e.keyCode === 13 && !e.shiftKey) {
 										e.preventDefault();
@@ -111,9 +102,7 @@ export default function Permissions() {
 								type='button'
 								data-toggle='modal'
 								data-target='#frmPermiso'
-								onClick={() =>
-									setSelectedItem(initialState)
-								}
+								onClick={() => setSelectedItem(initialState)}
 								className='degradado d-flex h-100 align-items-center border-0 justify-content-center text-decoration-none'
 							>
 								<i className='fa fa-arrow-circle-up mr-1'></i>

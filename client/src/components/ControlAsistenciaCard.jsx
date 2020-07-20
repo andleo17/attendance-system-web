@@ -1,13 +1,8 @@
 import React from 'react';
 import foto from '../recursos/perfil.jpg';
-import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
-import { ATTENDANCES_QUERY } from '../pages/ControlAsistencia';
-
-
 
 export default function ControlAsistenciaCard(props) {
-	const { data, showData } = props;
+	const { data } = props;
 
 	// const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
 
@@ -29,7 +24,7 @@ export default function ControlAsistenciaCard(props) {
 						</div>
 						<div className='card-body col-6 p-0 pl-2 pt-1 '>
 							<div className='font-italic  mb-1'>
-							{`${data.schedule.employee.name} ${data.schedule.employee.lastname}`}
+								{`${data.schedule.employee.name} ${data.schedule.employee.lastname}`}
 							</div>
 
 							<div className='mb-2'>
@@ -67,7 +62,6 @@ export default function ControlAsistenciaCard(props) {
 								type='button'
 								className='degradado btn p-1'
 								title='Marca entrada'
-								
 							>
 								<i className='fa fa-outdent text-white'></i>
 							</button>

@@ -1,12 +1,6 @@
 import React from 'react';
-import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
-import { LIST_LICENSETYPE } from '../pages/LicenseType';
 
-
-
-export default function HorarioModal(props) {
-	
+export default function HorarioModal() {
 	return (
 		<div
 			id='frmHorarioDetalle'
@@ -203,9 +197,7 @@ export default function HorarioModal(props) {
 						<button
 							type='button'
 							className='btn degradado text-white'
-							
-						>
-						</button>
+						></button>
 					</div>
 				</div>
 			</div>
