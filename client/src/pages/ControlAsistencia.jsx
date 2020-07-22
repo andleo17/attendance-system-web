@@ -22,6 +22,7 @@ query ListAttendancesDay($employeeCardId: String) {
 	}
 `;
 
+
 export default function ControlAsistencia() {
 	const initialState = {
 		__typename: 'Contract',

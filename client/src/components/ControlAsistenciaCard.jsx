@@ -7,14 +7,47 @@ const ADD_ATTENDANCE = gql`
 	mutation AddAttendance($cardId: ID!) {
 		addAttendance(employeeCardId: $cardId) {
 			id
+			employeeCardId
+			inHour
+			outHour
 		}
 	}
 `;
 
+
+const OUT_ATTENDANCE = gql`
+	mutation OutAttendance($attendanceId: ID!) {
+		outAttendance(attendanceId: $attendanceId) {
+			id
+			employeeCardId
+			inHour
+			outHour
+		}
+	}
+`;
+
+export const ATTENDANCE_QUERY = gql`
+	query Attendances($id: Int!) {
+		attendanceId(id: $id){
+			inHour
+			outHour
+		}
+	}
+`;
+
+const initialState = {
+	__typename: 'Attendance',
+	inHour: null,
+	id: null,
+	maximumDays: null,
+	mode: 0,
+};
+
 export default function ControlAsistenciaCard(props) {
 	const { data } = props;
 
-	const [addAttendance] = useMutation(ADD_ATTENDANCE);
+	const [addAttendance, { data: dataInAttendance }] = useMutation(ADD_ATTENDANCE);
+	const [outAttendance, { data: dataOutAttendance }] = useMutation(OUT_ATTENDANCE);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -47,7 +80,7 @@ export default function ControlAsistenciaCard(props) {
 									</label>{' '}
 									-
 									<label htmlFor='' className='ml-2'>
-										....
+										 
 									</label>
 								</div>
 							</div>
@@ -89,6 +122,15 @@ export default function ControlAsistenciaCard(props) {
 								type='button'
 								className='degradado btn  p-1'
 								title='Marca salida'
+								onClick={
+									()=>{
+										outAttendance({
+											variables: {
+												attendanceId: dataInAttendance.outAttendance.id,
+											}
+										})
+									}
+								}
 							>
 								<i className='fa fa-indent text-white'></i>
 							</button>

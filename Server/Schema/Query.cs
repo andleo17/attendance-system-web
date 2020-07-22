@@ -50,6 +50,18 @@ namespace Server.Schema
 			}
 		}
 
+		public async Task<IReadOnlyList<Attendance>> GetAttendanceId([Service] DBAttendanceContext dBAttendanceContext, int id)
+		{
+			
+			if(id != null){
+				return await (from a in dBAttendanceContext.Attendance where a.Id == id select a).ToListAsync();
+			}else{
+				return null;
+			}
+			
+			
+		}
+
 		public async Task<IReadOnlyList<Contract>> GetContracts([Service] DBAttendanceContext dBAttendanceContext, string employeeCardId)
 		{
 			if (employeeCardId != null)
