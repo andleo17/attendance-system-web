@@ -1,6 +1,7 @@
 {
 	"name": "client",
 	"version": "0.1.0",
+	"homepage": "https://andleo17.github.io/attendance-system-web/",
 	"private": true,
 	"dependencies": {
 		"@apollo/react-hooks": "^3.1.5",
