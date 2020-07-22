@@ -15,16 +15,13 @@ namespace Server.Schema
 		{
 			try
 			{
-				var currentDayOfWeek = (byte)DateTime.Today.DayOfWeek;
-				var currentToday = DateTime.Today;
-				var currentSchedule = await (from s in dBAttendanceContext.Schedule where s.EmployeeCardId == employeeCardId && s.State==true select s ).SingleOrDefaultAsync();
-				// await dBAttendanceContext.Schedule.SingleOrDefaultAsync(s => s.EmployeeCardId == employeeCardId && s.State==true);
+				var currentSchedule = await dBAttendanceContext.Schedule.SingleOrDefaultAsync(s => s.EmployeeCardId == employeeCardId && s.State);
 				if (currentSchedule != null)
 				{
-					var currentDay = currentSchedule.ScheduleDetail.FirstOrDefault(sd => (currentDayOfWeek == 0 ? 7 : currentDayOfWeek) == sd.Day);
+					var currentDay = currentSchedule.ScheduleDetail.FirstOrDefault(sd => ((byte)DateTime.Today.DayOfWeek == 0 ? 7 : (byte)DateTime.Today.DayOfWeek) == sd.Day);
 					if (currentDay != null)
 					{
-						var existingAttendance = await dBAttendanceContext.Attendance.FirstAsync(a => a.Date == currentToday && a.EmployeeCardId == employeeCardId);
+						var existingAttendance = await dBAttendanceContext.Attendance.FirstAsync(a => a.Date == DateTime.Today && a.EmployeeCardId == employeeCardId);
 						if (existingAttendance == null)
 						{
 							var attendance = new Attendance
