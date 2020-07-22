@@ -13,8 +13,9 @@ query ListAttendancesDay($employeeCardId: String) {
 			outHour
 			schedule{
 	  			employee{
+					cardId  
 					name
-				lastname
+					lastname
 	  			}
 			}
   		}

@@ -1,10 +1,20 @@
 import React from 'react';
 import foto from '../recursos/perfil.jpg';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
+
+const ADD_ATTENDANCE = gql`
+	mutation AddAttendance($cardId: ID!) {
+		addAttendance(employeeCardId: $cardId) {
+			id
+		}
+	}
+`;
 
 export default function ControlAsistenciaCard(props) {
 	const { data } = props;
 
-	// const [mutation] = useMutation(DELETE_LICENSE_TYPE_MUTATION);
+	const [addAttendance] = useMutation(ADD_ATTENDANCE);
 
 	return (
 		<div className='col-lg-4 pt-3 pl-1 pr-1'>
@@ -62,6 +72,15 @@ export default function ControlAsistenciaCard(props) {
 								type='button'
 								className='degradado btn p-1'
 								title='Marca entrada'
+								onClick={
+									()=>{
+										addAttendance({
+											variables: {
+												cardId: data.schedule.employee.cardId,
+											}
+										})
+									}
+								}
 							>
 								<i className='fa fa-outdent text-white'></i>
 							</button>
