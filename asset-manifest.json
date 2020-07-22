@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/static/js/main.164a9cbc.chunk.js",
-    "main.js.map": "/static/js/main.164a9cbc.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.09b85ec0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.09b85ec0.js.map",
-    "static/js/2.dddfa57c.chunk.js": "/static/js/2.dddfa57c.chunk.js",
-    "static/js/2.dddfa57c.chunk.js.map": "/static/js/2.dddfa57c.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.ba4729691c23937a899182d91b31d1fc.js": "/precache-manifest.ba4729691c23937a899182d91b31d1fc.js",
-    "service-worker.js": "/service-worker.js",
-    "static/js/2.dddfa57c.chunk.js.LICENSE.txt": "/static/js/2.dddfa57c.chunk.js.LICENSE.txt"
+    "main.js": "/attendance-system-web/static/js/main.164a9cbc.chunk.js",
+    "main.js.map": "/attendance-system-web/static/js/main.164a9cbc.chunk.js.map",
+    "runtime-main.js": "/attendance-system-web/static/js/runtime-main.c08421ab.js",
+    "runtime-main.js.map": "/attendance-system-web/static/js/runtime-main.c08421ab.js.map",
+    "static/js/2.dddfa57c.chunk.js": "/attendance-system-web/static/js/2.dddfa57c.chunk.js",
+    "static/js/2.dddfa57c.chunk.js.map": "/attendance-system-web/static/js/2.dddfa57c.chunk.js.map",
+    "index.html": "/attendance-system-web/index.html",
+    "precache-manifest.9dfdbb1e5b6a8e31d701364130fe71d7.js": "/attendance-system-web/precache-manifest.9dfdbb1e5b6a8e31d701364130fe71d7.js",
+    "service-worker.js": "/attendance-system-web/service-worker.js",
+    "static/js/2.dddfa57c.chunk.js.LICENSE.txt": "/attendance-system-web/static/js/2.dddfa57c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.09b85ec0.js",
+    "static/js/runtime-main.c08421ab.js",
     "static/js/2.dddfa57c.chunk.js",
     "static/js/main.164a9cbc.chunk.js"
   ]
